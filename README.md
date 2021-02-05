@@ -1,1 +1,1 @@
-# ros2-i_training
+# ros2_i_training
