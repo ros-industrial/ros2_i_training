@@ -7,11 +7,3 @@ sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
-
-
-   Exercise 1.0 - ROS2 filesystem <_source/ROS2-Filesystem.md>
-   Exercise 1.1 - ROS2-Simple-Publisher-Subscriber <_source/ROS2-Simple-Publisher-Subscriber.md>
-   Exercise 1.2 - ROS2-Turtlebot <_source/ROS2-Turtlebot.md>
-   Exercise 1.3 - ROS2-TF2 <_source/ROS2-TF2.md>
-   Exercise 1.4 - ROS2-Cartographer <_source/ROS2-Cartographer.md>
-   Exercise 1.5 - ROS2-Navigation <_source/ROS2-Navigation.md>
