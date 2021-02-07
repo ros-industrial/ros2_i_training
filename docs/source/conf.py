@@ -68,7 +68,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# Github part
+""" # Github part
 import git
 curr_path = os.path.abspath('.')
 try:
@@ -88,4 +88,4 @@ html_context = {
     "css_files": ['_static/override.css'],
 }
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ROS2 workshop'
+htmlhelp_basename = 'ROS2 workshop' """
