@@ -1,6 +1,6 @@
 [![Documentation Status](https://readthedocs.org/projects/ros2-workshop/badge/?version=latest)](https://ros2-workshop.readthedocs.io/en/latest/?badge=latest)
 
-[ROS2-foxy-workshop](ros2-workshop.readthedocs.io)
+[ROS2-foxy-workshop](https://ros2-workshop.readthedocs.io/)
 ## To add new content
 - Markup(.md) files should reside in the `_source` folder
 - Images should be inside `_static`
