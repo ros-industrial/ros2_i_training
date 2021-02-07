@@ -28,5 +28,6 @@ sphinx-quickstart
 ![docs](/demo.png)
 
 ## Reference
+- [Dashboard](https://readthedocs.org/dashboard/)
 - For syntax of the `index.rst` file refer to this [link](https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html)
 - Setting up [Sphinx](https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html?)
