@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ROS2 TF2</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
+  </head>
+<body>
+<textarea id="source">
+
+layout: true
+<div class="header"><img src="https://rosin-project.eu/wp-content/uploads/rosin_ack_logo_wide.png" style="background-color:transparent"/></div>
+<div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
+<div class="triangle"></div>
+
+---
+class: center, middle
+name: main_title
+
+# TF2 - TRANSFORMS IN ROS2
+
+---
+
+## TF2 - Overview
+
+* TF2 is the second generation of the TF (TransForm) library. In truth, TF in ROS1 currently calls TF2 under the hood. ROS2 uses exclusively TF2.   
+
+* TF2 keeps track of all the coordinate frames in a tree structure.
+
+* Like most things in ROS2, the TF2 API is still under development, but basic features are already usable.
+
+* TF2 vs TF - Faster, more efficient, new features and easier to extend.
+
+---
+## TF2 - Overview
+   
+
+<img src="../static/1_tf_rviz_2.png" alt="TF Rviz" style="width:350px" class="image-left"/> 
+<img src="../static/2.tf_tree_2.png" alt="TF Tree" style="height:500px"/>
+---
+## TF2 - Design
+
+TF2 core is independent of ROS & `BufferCore` class provides APIs
+
+<img src="../static/4_design.png" alt="Design" style="width:800px" class="image-center"/> 
+
+
+---
+
+## TF2 - Time Sync
+
+* Users can query for the transform between any 2 frames in a tree for any given point of time - even in the past!
+    * Essential for an asynchronous/distributed system
+
+<img src="../static/3_time_sync.png" alt="Time Sync" style="width:800px" class="image-center"/> 
+---
+
+## TF2 - Broadcasters
+
+Supply the transforms between frames (Dynamic/Static).
+   * e.g : `robot_state_publisher` provides TF data based on URDF
+   * e.g : User-written nodes with dedicated broadcasters
+
+<img src="../static/5_broadcaster.png" alt="Broadcaster" style="width:800px" class="image-center"/> 
+
+---
+
+## TF2 - Listeners
+
+Can access the transform tree and lookup a specific transform between 2 frames (Blocking/Non-Blocking).    
+
+```python
+buffer = tf2_ros.Buffer()
+transform = buffer.lookup_transform("base_link","camera_link", rclpy.time.Time()) # Blocking
+transform = await buffer.lookup_transform_async("base_link","camera_link",rclpy.time.Time())  #Non-Blocking
+```
+Function prototype : `lookup_transform(target_frame,source_frame,time)`
+
+Using `rclpy.time.Time()` gives the latest available transform.
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+  var slideshow = remark.create({ratio: "16:9"});
+</script>
+</body>
+</html>

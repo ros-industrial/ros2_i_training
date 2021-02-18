@@ -1,0 +1,16 @@
+export:
+  - Day: 1
+    slides:
+      1: slides/Basics/source/basics.html
+      2: slides/Basics/source/ROS_communication_annex.html
+      3: slides/Basics/source/filesystem.html     
+  - Day: 2
+    slides:
+      1: slides/Basics/source/CLI.html
+      2: slides/Basics/source/Extended_Concepts.html
+      3: slides/Navigation/source/TF.html
+  - Day: 3
+    slides:
+      1: slides/Navigation/source/Basics.html
+      2: slides/Navigation/source/SLAM.html
+      3: slides/Navigation/source/Navigation2.html
