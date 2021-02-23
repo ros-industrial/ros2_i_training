@@ -8,10 +8,10 @@ from pathlib import Path
 
 chromepath="/usr/bin/chromium-browser"
 home= str(Path.home())
-npm_bin = home + '/node_modules/.bin'
-
 root_dir = os.path.dirname(os.path.abspath(__file__))
 export_dir = os.path.join(root_dir, 'export')
+npm_bin = os.path.join(root_dir, 'node_modules/.bin')
+
 if os.path.exists(export_dir):
     print("Clearing export dir")
     shutil.rmtree(export_dir)
