@@ -1,7 +1,6 @@
-.. ROS2 workshop documentation master file, created by
+.. ROS2 workshop index page, created by
    sphinx-quickstart on Fri Feb  5 13:33:39 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+   Each new `Session` should contain the root [toctree](https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-toctree) directive.
 
 Welcome to ROS2 workshop!
 =========================
