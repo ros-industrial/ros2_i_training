@@ -7,7 +7,6 @@ import shlex
 from pathlib import Path
 
 chromepath="/usr/bin/chromium-browser"
-home= str(Path.home())
 root_dir = os.path.dirname(os.path.abspath(__file__))
 export_dir = os.path.join(root_dir, 'export')
 npm_bin = os.path.join(root_dir, 'node_modules/.bin')
