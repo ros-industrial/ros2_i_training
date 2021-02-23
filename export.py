@@ -60,21 +60,3 @@ def export_pdf(config_yaml):
 
 export_pdf(os.path.join(root_dir, "export_list.yaml"))
 
-
-
-'''
-oc = owncloud.Client('https://owncloud.fraunhofer.de/')
-oc.login("lud81546", "TOKEN") 
-target = os.environ.get('UPLOAD_FOLDER',"ROS-I Training")
-for l_path in list_path:
-    local = os.path.join(os.path.dirname(os.path.realpath(__file__)), l_path)
-    for (dirpath, dirnames, filenames) in os.walk(local):
-        for file_ in filenames:
-            if file_.endswith(".pdf"):
-                print(local)
-                t_file = os.path.join(target,file_)
-                l_file = os.path.join(local,file_)
-                print("Uploading: "+file_)
-                oc.put_file(t_file, l_file)
-                print("Uploaded: "+file_+" in "+t_file)
-'''
