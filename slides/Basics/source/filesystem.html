@@ -34,7 +34,7 @@ name: main_title
 
 - How does the structure of workspace look like?
 
-![img](../resources/workspace_structure.png)
+![img](../static/workspace_structure.png)
 
 - How to create workspace and packages?
 
@@ -141,7 +141,7 @@ name: two_columns
     $ ros2 pkg create --build-type ament_python --dependencies [deps] --node-name my_node my_package 
     ```
 
-<!-- ![img](../resources/python_package_2.png)  -->
+<!-- ![img](../static/python_package_2.png)  -->
 <!-- setup.cfg https://docs.python.org/3/distutils/configfile.html tell setuptools to put your executables in lib  ros2 run can find it-->
 <!-- it’s not possible to write down everything needed to build a distribution a priori: 
 you may need to get some information from the user, or from the user’s system, in order to proceed.
@@ -153,7 +153,7 @@ It tells setuptools about your package (such as the name and version) as well as
 .cols[
 .fifty[
 
-<img src="../resources/python_package_2.png" alt="python_package_2" style="width:500px" class="image-center"/>
+<img src="../static/python_package_2.png" alt="python_package_2" style="width:500px" class="image-center"/>
 
   ]
 
@@ -173,11 +173,11 @@ It tells setuptools about your package (such as the name and version) as well as
 
 `$ ros2 pkg create --build-type ament_cmake --dependencies [deps] --node-name my_node my_package `
 
-![img](../resources/cmake_package.png)
+![img](../static/cmake_package.png)
 
 ---
 ### Package content - `package.xml`
-![image](../resources/packagexml.png)
+![image](../static/packagexml.png)
 
 ---
 
@@ -185,7 +185,7 @@ It tells setuptools about your package (such as the name and version) as well as
 - Meta information about the package
 - Lists dependencies of a package
 
-![image](../resources/package_detial.png)
+![image](../static/package_detial.png)
 
 
 
@@ -234,7 +234,7 @@ Only for *CMake packages*:
 Example (**turtlebot_teleop** package): 
 package path: ~/devel_src/src/turtlebot/turtlebot_teleop
 
-![image](../resources/setupcfg.png)
+![image](../static/setupcfg.png)
 -->
 <!--
 
@@ -265,7 +265,7 @@ package path: ~/devel_src/src/turtlebot/turtlebot_teleop
 
 .cols[
   .fifty[
-  ![image](../resources/setuppy.png)
+  ![image](../static/setuppy.png)
   ]
   
   .fifty[
@@ -301,7 +301,7 @@ teleop_keyboard` -->
 
 ### Package content - CMakeLists.txt (CMake package)
 Example:
-![image](../resources/cmakefile.png)
+![image](../static/cmakefile.png)
 
 - Defines build rules. For example:
 
@@ -313,7 +313,7 @@ Example:
 ---
 CMakeLists.txt Example:
 
-![image](../resources/cmakefile_detail.png)
+![image](../static/cmakefile_detail.png)
 
 
 <!-- - Template:
@@ -401,7 +401,7 @@ ament_cmake User Documentation https://index.ros.org/doc/ros2/Tutorials/Ament-CM
 - Build system: Operates on a single package 
 - Build tool: Operates on a set of packages
 
-<img src=../resources/colcon.png alt="drawing" width="500"/>
+<img src=../static/colcon.png alt="drawing" width="500"/>
 
 
 Example:
@@ -468,7 +468,7 @@ https://index.ros.org/doc/ros2/Tutorials/Ament-CMake-Documentation/#linting -->
 
 - Structure 
 
-![img](../resources/workspace_structure.png)
+![img](../static/workspace_structure.png)
 
 *__Colcon__* creats __build/__ __install/__ __log/__ as peers of the src/
     
@@ -659,7 +659,7 @@ https://index.ros.org/doc/ros2/Tutorials/Creating-A-ROS2-Package/#what-is-a-ros-
 ---
 
 ## Any Questions?
-![img](../resources/questions.jpeg)
+![img](../static/questions.jpeg)
 
 
 </textarea>
