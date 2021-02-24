@@ -3,3 +3,4 @@ workshop/build/*
 logs
 *.pdf
 export
+node_modules/*
