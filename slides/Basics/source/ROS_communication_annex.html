@@ -35,12 +35,12 @@ class: center, middle
 ---
 name: contents
 
-## Contents
+# Contents
 
--   ROS2 Services
--   ROS2 Actions
--   ROS2 Params
--   ROS2 Launch files
+-   ## ROS2 Services
+-   ## ROS2 Actions
+-   ## ROS2 Params
+-   ## ROS2 Launch files
 ---
 class: center, middle
 # ROS2 Services
@@ -48,7 +48,7 @@ class: center, middle
 name: services 
 
 ## Services in ROS2
--   A mechanism for a node to send a request to another node and receive a response in return 
+-   Services are based on a call and response model 
 -   Similar to remote procedural calls that terminates quickly
     -   Example: spawning a robot into an environment
 
@@ -87,7 +87,7 @@ name: service_file
 
 ## Service Server and Clients
 
-- There can be only one service server for a ROS2 service.
+- There can be only one service server for a service.
 - Multiple server clients can use the same service server.
 - Server decides how goals from multiple clients will be handled simultaneously.
 
@@ -108,9 +108,9 @@ name: actions
     - <b>Longer execution time</b>
     - <b>Requires preemption</b> 
     - <b>Requires regular feedback</b> 
--   Example. Path planning in navigation
--   Actions are a combination of services and topics
--   Action interface Definition
+        -   Example. Path planning in navigation
+-   Actions are implemented as a combination of services and topics
+-   Action interface has
     -   <b>Goal</b>: What action to achieve and how to.
     -   <b>Feedback</b>: Progress towards completing the action
     -   <b>Preempt</b>: To preempt the action that is being executed
@@ -197,7 +197,7 @@ class: center, middle
 name: parameter
 ### ROS2 params(1/5)
 
-- A nice way to set parameters at run time, without having to recompile the code for the node.
+- Used to externally configure the nodes at run-time and during run-time, without having to recompile the code for the node.
 - These parameters can be dynamically reconfigured using ROS2 services.
 - Note: ROS2 uses a decentralized parameter system.
 
@@ -229,6 +229,7 @@ name: parameter
 - Managing parameters when number of params increases becomes complex.
 - Adding them in command line is not an option 
 - **YAML** is more human readable and Great for loading a configuration file at run time
+- Each parameter consists of a key and a value, where the key is a string
 
 <pre><code class="language-yaml">
 # Package architecture 
@@ -312,7 +313,7 @@ name: parameter
 ...
 </code>
 </pre>
-[References for ROS2 Params](https://roboticsbackend.com/rclpy-params-tutorial-get-set-ros2-params-with-python/)
+[References for ROS2 Params](https://docs.ros.org/en/foxy/Concepts/About-ROS-2-Parameters.html)
 
 ---
 class: center, middle
@@ -324,9 +325,9 @@ class: center, middle
 
     -  Describing the configuration of the system and execute as described
     -  Configuration of the system includes
-        -   What program to run
+        -   Which program to run
         -   Where to run them
-        -   What arguments to pass to them
+        -   Which arguments to pass to them
     -  Loading of parameters
     -  Remapping topic names, parameters, etc.
 ---
