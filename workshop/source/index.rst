@@ -12,7 +12,7 @@ Session 1 - ROS2 Concepts and Fundamentals
 
    Exercise 1.0 - ROS2 filesystem <_source/basics/ROS2-Filesystem.md>
    Exercise 1.1 - ROS2-Simple-Publisher-Subscriber <_source/basics/ROS2-Simple-Publisher-Subscriber.md>
-   Exercise 1.2 - ROS2-Turtlebot <_source/basics/ROS2-Turtlebot.md>
+   Exercise 1.2 - ROS2-Turtlesim <_source/basics/ROS2-Turtlesim.md>
 
 Session 2 - ROS2 Navigation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,8 +20,9 @@ Session 2 - ROS2 Navigation
    :maxdepth: 1
 
    Exercise 2.1 - ROS2-TF2 <_source/navigation/ROS2-TF2.md>
-   Exercise 2.2 - ROS2-Cartographer <_source/navigation/ROS2-Cartographer.md>
-   Exercise 2.3 - ROS2-Navigation <_source/navigation/ROS2-Navigation.md>
+   Exercise 2.2 - ROS2-Turtlebot <_source/navigation/ROS2-Turtlebot.md>
+   Exercise 2.3 - ROS2-Cartographer <_source/navigation/ROS2-Cartographer.md>
+   Exercise 2.4 - ROS2-Navigation <_source/navigation/ROS2-Navigation.md>
 
 Session 3 - ROS2 Manipulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
