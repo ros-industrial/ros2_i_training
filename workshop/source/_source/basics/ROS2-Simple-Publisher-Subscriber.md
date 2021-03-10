@@ -14,7 +14,7 @@ We will be using the 3rd method, though it is the more complex, so as to get bet
 
 We start by writing two separate simple nodes, one that includes only publisher and another that includes only a subscriber. Finally, we will write a third node that includes both within the same program and are managed through an executor.
 
-The first step is to create a python package package to house all our nodes. You can do so using the command
+The first step is to create a python package to house all our nodes. You can do so using the command
 ```bash
 $ ros2 pkg create --build-type ament_python <package_name>
 ```
