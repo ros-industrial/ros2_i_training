@@ -155,7 +155,7 @@ The buildtool we use by default is `ament_python` and you can see that this has 
 <exec_depend>std_msgs</exec_depend>
 ```
 
-We already know from section **1.1** what these dependancies are. We jsut need to declare that these two libraries need to be included during execution time. (Buildtime dependencies are not required for Python)
+We already know from section **1.1** what these dependancies are. We just need to declare that these two libraries need to be included during execution time. (Buildtime dependencies are not required for Python)
 
 ### 1.3 Declaring the executable
 
