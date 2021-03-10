@@ -267,7 +267,7 @@ entry_points={
 
 Before building, it is always good to check if all dependencies have been installed. We execute the following from the **base workspace folder** (i.e. just above the src folder of your **workspace**):
 
-`sudo rosdep install -i --from-path src --rosdistro <distro> -y`   
+`rosdep install --from-paths src --ignore-src -r --rosdistro <distro> -y`   
 Substitute <distro> with the current version of ROS2 you are running on. Ex: `foxy`
 
 From the same location, build the workspace:
