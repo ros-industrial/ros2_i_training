@@ -91,7 +91,7 @@ nav_ws/
   `[Remote PC]`
 
     ```bash
-    $ ros2 run nav2_map_server map_server --ros-args \ --params-file maps/map_server_params.yaml"
+    $ ros2 run nav2_map_server map_server \ --ros-args --params-file maps/map_server_params.yaml
     ```
   **map_server** is  a lifecycle node and needs to be transitioned to the active state.
     
