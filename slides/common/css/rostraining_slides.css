@@ -1,14 +1,42 @@
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-body { font-family: 'Droid Serif'; color: black;}
-
-h1, h2, h3 {
-  font-family: 'Yanone Kaffeesatz';
-  font-weight: normal;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body { 
+    font-family: 'Montserrat'; 
+    color:black;
+    font-weight: 400;
 }
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+h1{
+  font-family: 'Montserrat';
+  font-weight: bolder;
+  color:  #000000;
+}
+h2{
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: large;
+  color: black;
+}
+h3 {
+  font-family: 'Montserrat';
+  /*font-family: 'Yanone Kaffeesatz'; 
+  set by LED for h1, h2 and h3*/
+  font-weight: 300;
+  color: black;
+}
+.remark-code{ 
+  font-family: 'Source Code Pro'; 
+  font-size: small; 
+}
+
+.remark-inline-code { 
+  font-family: 'Source Code Pro'; 
+  font-size: medium; 
+  font-weight: 600; 
+  color: #C2232B; }
 
 .cols {
   display: flex;
@@ -46,7 +74,7 @@ div.header img{
 }
 
 div.footer {
-  border-top: 1px solid blue;
+  border-top: 2px solid  #0D355F;
   font-size: 10pt;
   text-align: center;
   position: fixed;
