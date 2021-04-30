@@ -14,8 +14,19 @@ layout: true
 <div class="triangle"></div>
 
 ---
+class: center, middle
 
-# ROS Basics
+<h1> 
+  <center>  
+    ROS2 Basics
+  </center> 
+</h1> 
+<h2> 
+  <center>  
+    Introduction to ROS2
+  </center> 
+</h2> 
+
 ---
 
 ## Overview  
@@ -51,7 +62,7 @@ name: computation graph
     ]
 ]
 ---
-### Node
+## Node
 - Serves a single, modular purpose in a robotics system  
   e.g. camera driver, path planning  
     
@@ -69,7 +80,8 @@ name: computation graph
 - No master required to discover other nodes!
 
 ---
-### Node Composition (Unified API)  
+## Node Composition
+### Unified API  
   
 - Aggregation of nodes in a single process
 
@@ -86,9 +98,8 @@ Defers process layout decisions to deploy-time
   - Allow for optimizations
 
 ---
-### Node Composition (Unified API)  
-
-#### Writing Node as a component
+## Node Composition 
+### Writing Node as a component
 
 - Subclass of `rclpy.Node`
 
@@ -106,9 +117,10 @@ class Talker(Node):
         ...
 ```
 ---
-### Node Composition (Unified API)
 
-#### Deploying a component
+## Node Composition 
+### Deploying a component
+
 - Use ROS 2 Service APIs:  Load components via
   - service calls
   - command line tools
@@ -118,14 +130,12 @@ class Talker(Node):
   - Manual composition
   - Run standalone executables
 ---
-### Automatic discovery
-
+## Automatic discovery
 .center[![width:10;height:10](../static/master.png)]
 
 ---
-name: discovery
 
-### Automatic discovery
+## Automatic discovery
 
 .cols[
   .fifty[
@@ -136,41 +146,39 @@ name: discovery
   ![width:10;height:10](../static/discovery2.png)
     ]
 ]
-
-No central point of failure!
----
-## Communication 
-
-- Anonymous publish / subscribe message passing
-
-- Request / response remote procedure  
-
-- Pre-emptable request / response remote procedure 
+<h4> 
+  <center>  
+    No central point of failure!
+  </center> 
+</h4> 
 
 ---
-### Topics 
 
-- Asynchronous communication
-  
+## Communications Infrastructure
+#### The ROS middleware provides these facilities: 
+- Anonymous publish/subscribe message passing
+- Recording and playback of messages
+- Request/response remote procedure calls
+- Pre-emptable request/response remote procedure calls
+- Distributed parameter system 
+---
+
+## Topics 
+- Asynchronous communication 
 - Multiple concurrent publishers and subscribers for one topic
-  
 - A single node can publish and subscribe to multiple topics
-  
 - Works like a “chat room”
   - Not to a specific recipient
-  - E.g. laser scan data, images, robot position, ...
-    
+  - E.g. laser scan data, images, robot position, ...  
 - Every topic has a dedicated message type
 
-???
-- Communication is possible ONLY when
-  - receive messages with matching message type
-  - compatible Quality of Service settings
+### Communication is possible ONLY when
+  - Receiving messages with matching message type
+  - Compatible Quality of Service settings
 
 ---
-name: message
 
-### Message
+## Message
 
 - data structure to exchange information between components  
 - `*.msg` are simple text files with field type and name   
@@ -188,7 +196,7 @@ name: message
 
 
 ---
-### Message
+## Message
 #### Supported field types
 - `int8`, `int16`, `int32`, `int64`, 
   
@@ -196,15 +204,15 @@ name: message
   
 - `string`,
   
-- variable-length array[],   
-  fixed-length array[`C`],   
-  bounded-length array[`<=C`],  
+- variable-length `array[]`,   
+  fixed-length `array[C]`,   
+  bounded-length `array[<=C]`,  
     
 - Constructed from primitive data types  
   or other ROS msgs
 
 ---
-### Executor
+## Executor
 
 - Responsible for the actual execution of callbacks
   - round-robin fashion
@@ -217,14 +225,13 @@ name: message
   - received client responses
 
 ---
-### Executor
+## Executor
 
 .center[![width:10;height:10](../static/exec_spin.png)]
 
 Granularity: one executor per node
 ---
-### Executor 
-
+## Executor 
 #### Default Executor
   
 ```python
@@ -251,7 +258,7 @@ Can create custom executors as well!
  - scheduling of callbacks
  - distribution of callbacks to certain threads ...
 ---
-### Executor
+## Executor
 
 #### Callback Group
 
@@ -260,7 +267,7 @@ Can create custom executors as well!
 .center[![width:10px](../static/callbackgroup.png)]
 ---
 
-### Parameters
+## Parameters
 - Configuration value of a node
 
 - `integer`, `float`, `boolean`, `string` and `list`
@@ -273,9 +280,9 @@ Can create custom executors as well!
 - `Parameter` class to store an arbitrary parameter
 ---
 
-# Thank you!
-
-### Questions?
+class: center, middle
+# End of Presentation
+##  Questions ?
 ---
 </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js">
