@@ -1,0 +1,6 @@
+workshop/build/*
+.vscode
+logs
+*.pdf
+export
+node_modules/*

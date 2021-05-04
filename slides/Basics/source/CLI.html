@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ROS2 CLI basics</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
+  </head>
+<body>
+<textarea id="source">
+
+layout: true
+<div class="header"><img src="https://rosin-project.eu/wp-content/uploads/rosin_ack_logo_wide.png" style="background-color:transparent"/></div>
+<div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
+<div class="triangle"></div>
+---
+class: center, middle
+name: main_title
+
+# ROS 2 CLI BASICS
+A quick dive into ROS 2 Command Line Interface
+
+---
+
+
+# AGENDA
+1. Installation and sourcing
+2. Basic command structure
+3. Publishers and Subscribers
+4. Services
+5. Actions and Parameters
+6. Tools
+
+---
+class: center, middle
+name: main_title
+
+ # 1. Installation and sourcing
+---
+
+## 1.1 Installing and Sourcing ROS2
+* Two types of installation - [Binary](https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Install-Debians/) (recommended) or [Source](https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Development-Setup/). 
+* Live USB has ROS2 Foxy Binary - Verify :   
+ `ll /opt/ros/foxy`. 
+* Source ROS2 to use commands, libraries, packages etc..:   
+`source /opt/ros/foxy/setup.bash`   
+* Source your local workspace as needed (which source ROS as well):   
+`source /path/to/ws/install/local_setup.bash`
+
+---
+  
+## 1.2 Aliasing
+* Aliases are custom defined abbreviations for commands. 
+* Simply type 
+`source_foxy` (or any string you wish) 
+instead of 
+`source /opt/ros/foxy/setup.bash`  (or any command you wish)
+* See cheat sheet for syntax.
+
+.center[!!ADVICE!!: Source ros2 manually everytime on Day 1 to get used to the concept. Use aliases from Day 2.]
+
+---
+
+## 1.3 ROS_DOMAIN_ID
+
+* Environment variable 
+* Unique identifier number for each machine
+* Physically separates network
+* Stop ROS2 node interference
+* Set and forget : `echo "export ROS_DOMAIN_ID=<your_id>" >> ~/.bashrc`
+
+
+.center[100% discount sale! - Ask for your very own domain ID today!!]
+
+### Building ROS2 (Recap)
+
+* `colcon build --symlink-install`
+
+---
+class: center, middle
+name: main_title
+
+ # 2. Basic command structure
+
+---
+
+## 2.1 Basic command structure
+  
+
+We only explore default packages that come with the binary for simplicity.
+
+* All ROS2 commands follow this syntax :
+`ros2 <main_command> <sub_command> <<arguments>>`   
+
+* Examples :  
+`ros2 pkg list`   
+`ros2 pkg executables`
+
+Use tab completion to either complete a command, or to see a list of available options. 
+* Example: `ros2 ` *tab* *tab* - List all ROS2 commands.
+* `ros2 pkg ` *tab* *tab* - List of sub-commands for `pkg`.   
+* `-h` at almost any point to get a brief help description. 
+`ros2 -h`   
+`ros2 pkg -h`     
+`ros2 pkg executable -h`   
+
+---
+class: center, middle
+name: main_title
+
+ # 3. Publishers and Subscribers
+---
+
+##  3.1 Publisher
+  
+
+The most basic example of ROS - a *Publisher/Subscriber* pair 
+
+* Remember to source ROS2 
+* Command `run` to run an executable within a package (C++ compiled object/Python script):    
+
+`ros2 run <package_name> <executable_name> <<optional_command_line_arguments>>`   
+
+* Try the example publisher node packaged with ROS2. 
+* We first need to find out what the name of the package is.   
+* Run the package listing command  with a filter:    
+`ros2 pkg list | grep demo`   
+* Next find the available executables we could use by running  :      
+`ros2 pkg executables demo_nodes_cpp`   
+* Run one of these executables - the publisher:   
+`ros2 run demo_nodes_cpp talker`   
+
+Observe the state of the ROS 2 runtime system so far...    
+
+---
+
+## 3.2 Introspection - Publisher
+
+### Nodes
+* To look at what nodes are currently running:   
+`ros2 node list`   
+* To see more info about a node:   
+`ros2 node info <node_name>`   
+
+### Topics
+* To see currently running topics and their message types:   
+`ros2 topic list -t`   
+* To get more info about a topic (Foxy: Verbose output):   
+`ros2 topic info -v <topic_name>`<!-- Thanks AWS!!-->
+* To see what is being published on a topic:   
+`ros2 topic echo <topic_name>`
+
+---
+
+## 3.3 Subscriber
+
+* Start a subscriber that listens to this topic:   
+`ros2 run demo_nodes_cpp listener`   
+
+* The subscriber echoes on the terminal what it hears over the topic.
+
+* Check the running nodes and topics again to see the update.
+
+---
+  
+## 3.4 Introspection - Terminal Publisher
+
+* Publishers can also be created from the terminal.   
+`ros2 topic pub <topic_nam> <msg_type> "{<field1_key>: <field1_value>,  <field2_key>: <field2_value>, ...}"`   
+* The message type must be properly understood first.   
+`ros2 topic list -t`  
+* The message type of `/topic` is `std_msgs/msg/String` 
+* For more info: `ros2 interface show std_msgs/msg/String`   
+* It has only one field - `data` - of the type `string`.
+* The message body is a dictionary type, with key-value pairs for the message fields. 
+* Use `ros2 interface proto std_msgs/msg/String` to get an example of the dictionary to use.   
+> NOTE THAT SPACING IS VERY IMPORTANT!!   
+* To spawn a publisher over `/topic` with a rate of 10 Hz:
+`ros2 topic pub -r10 /topic std_msgs/msg/String "data: "Hello""`
+
+---
+
+## 3.5 Launch files
+
+* A way to start many nodes from a single starting point:   
+
+`ros2 launch <package_name> <launch_file_name.launch> <<optional_command_line_arguments>>`   
+
+* To run both the Subscriber and Publisher from one point:   
+`ros2 launch demo_nodes_cpp talker_listener.launch.py`   
+
+* Use introspection to verify results and compare.   
+
+---
+class: center, middle
+name: main_title
+
+ # 4. Services
+
+---
+
+## 4.1 Introduction - Services
+
+* Useful for making short but guaranteed transfer of messages between nodes. 
+* It involves two entities - a Server that provides the service and a Client that consumes this service.
+* Start these just just like a typical node:   
+`ros2 run demo_nodes_cpp add_two_ints_server`   
+`ros2 run demo_nodes_cpp add_two_ints_client`   
+
+* A Topic streams data whereas a Service makes one exchange per call.
+
+---
+
+## 4.2 Introspection - Services
+
+* List the services offered by servers:   
+`ros2 service list -t`
+* Service offered by the demo server - *add_two_ints* 
+* We invoked this service by running a client node
+* You can also do this via the CLI. 
+
+Syntax: `ros2 service call <service_name> <service_type_name> "{<field1_key>: <field1_value>,  <field2_key>: <field2_value>, ...}"`
+
+* To understand the service type:   
+`ros2 interface list -s`   (-s for services. Also, -m, -a)   
+`ros2 interface show <service_type_name>`
+
+Example: `ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts "{a: 5, b: 6}"`
+> NOTE THAT SPACING IS VERY IMPORTANT!!
+
+ 
+---
+class: center, middle
+name: main_title
+
+ # 5. Actions and Parameters
+
+
+---
+
+## 5.1 Actions
+
+* Useful for longer tasks that need a feedback & involves an action server and an action client.
+* Interface has 3 parts - goal, feedback and result.
+* Typical sequence - Publish a goal, observe feedback & receive result  when execution is completed/aborted
+* Use the `ros2 action [..]` commands to interact. (New in ROS2)  
+    * Similar to `ros2 topic [..]`
+
+
+###### More in workshop
+
+##  5.2 Parameters
+
+* Key-value pairs to store runtime configuration information.
+    * Ex: laser scan field, camera calibration, navigation obstacle layer thickness etc...
+* Parameters are stored per each node and can be accessed via services
+    * As opposed to ROS1 which had a dedicated parameter server managed by rosmaster.
+* Use `ros2 param [..]` commands to interact from the CLI.
+
+###### More in workshop
+---
+class: center, middle
+name: main_title
+
+ # 6. Tools 
+
+---
+
+## 6.1 Tools - RQT 
+
+* QT Based ROS GUI tool.
+* Offers plugins for many purposes:   
+    * Node graph monitor, 
+    * Service caller/type viewer, 
+    * Topic publisher/listener/type viewer, 
+    * Image view, 
+    * Plot  etc....
+* Similar to ROS1, but few plugins still missing
+* `rqt &` to launch default main window (`&` ->detached process)
+or 
+`ros2 run rqt_<plugin> rqt_<plugin>` to launch a specific plugin
+* Load a plugin : `Plugins -> <Library> -> <Plugin>`
+    * Example to monitor node graph `Plugins -> Introspection -> Node Graph`
+* Explore and use all tools as necessary.
+
+---
+
+## 6.2 Tools - ros2doctor
+##### The doctor is in the house!
+
+* Identify issues in the system (similar to roswtf, can use wtf as an alias)
+* Analyse ROS2 installation as well as running systems, show reports
+* `ros2 doctor` - Shows warnings and errors about the current state
+    * Dangling topics, incorrect configurations, missing system files etc...
+* `ros2 doctor -r` - Full technical report of the installation
+* `ros2 doctor hello` - Check network connectivity betwwen multiple hosts
+
+---
+
+## 6.3 Tools - ros2bag
+
+* Same function and similar API as rosbag from ROS1
+    * Now installed as part of >Foxy core
+* Record the messages being published on topics for a duration into a file. Replay later with nearly the same time characteristics.
+* Stored as *.db3 + metadata.yaml* instead of a single *.bag file.
+
+---
+
+## 6.4 Tools - ros1_bridge
+
+* A "dual homed" package - simultaneously ROS1 AND ROS2.
+* ROS1 <=topics/services=> `ros1_bridge` <=topics/services=> ROS2
+* Binary installation supports default msg/srv types, source installation can be extended with custom types.
+
+```
+Shell 1 $  Source ROS1, Run ROS1 stuff
+Shell 2 $  Source ROS1, Source ROS2, Run bridge
+Shell 3 $  Source ROS2, Run ROS2 stuff
+```
+>                                        MAGIC!
+
+---
+class: center, middle
+name: main_title
+
+# QUESTIONS?
+
+<image src="https://maxbrainfunction.com/wp-content/uploads/2017/09/robot-with-question-mark.jpg" class="image-center" style="height:490px"/>
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+  var slideshow = remark.create({ratio: "16:9"});
+</script>
+</body>
+</html>
