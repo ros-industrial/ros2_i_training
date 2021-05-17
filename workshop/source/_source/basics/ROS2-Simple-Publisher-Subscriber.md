@@ -14,7 +14,7 @@ We will be using the 3rd method, though it is the more complex, so as to get bet
 
 We start by writing two separate simple nodes, one that includes only publisher and another that includes only a subscriber. Finally, we will write a third node that includes both within the same program and are managed through an executor.
 
-The first step is to create a python package package to house all our nodes. You can do so using the command
+The first step is to create a python package to house all our nodes. You can do so using the command
 ```bash
 $ ros2 pkg create --build-type ament_python <package_name>
 ```
@@ -155,7 +155,7 @@ The buildtool we use by default is `ament_python` and you can see that this has 
 <exec_depend>std_msgs</exec_depend>
 ```
 
-We already know from section **1.1** what these dependancies are. We jsut need to declare that these two libraries need to be included during execution time. (Buildtime dependencies are not required for Python)
+We already know from section **1.1** what these dependancies are. We just need to declare that these two libraries need to be included during execution time. (Buildtime dependencies are not required for Python)
 
 ### 1.3 Declaring the executable
 
@@ -267,7 +267,7 @@ entry_points={
 
 Before building, it is always good to check if all dependencies have been installed. We execute the following from the **base workspace folder** (i.e. just above the src folder of your **workspace**):
 
-`sudo rosdep install -i --from-path src --rosdistro <distro> -y`   
+`rosdep install --from-paths src --ignore-src -r --rosdistro <distro> -y`   
 Substitute <distro> with the current version of ROS2 you are running on. Ex: `foxy`
 
 From the same location, build the workspace:
