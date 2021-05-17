@@ -8,24 +8,35 @@ body {
     font-family: 'Montserrat'; 
     color:black;
     font-weight: 400;
+    font-size: 14px;
 }
 h1{
   font-family: 'Montserrat';
   font-weight: bolder;
-  color:  #000000;
+  color:  black;
+  font-size: 30px;
+
 }
 h2{
   font-family: 'Montserrat';
   font-weight: bold;
-  font-size: large;
-  color: black;
+  font-size: 22px;
+  color: #0D355F ;
 }
 h3 {
   font-family: 'Montserrat';
   /*font-family: 'Yanone Kaffeesatz'; 
   set by LED for h1, h2 and h3*/
   font-weight: 300;
-  color: black;
+  font-size: 16px;
+  color: #C2232B;
+}
+h4{
+  font-family: 'Montserrat';
+  /*font-family: 'Yanone Kaffeesatz'; 
+  set by LED for h1, h2 and h3*/
+  font-weight: 300;
+  color: #C2232B;
 }
 .remark-code{ 
   font-family: 'Source Code Pro'; 

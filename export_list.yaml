@@ -1,9 +1,8 @@
 export:
   - Day: 1
     slides:
-      1: slides/Basics/source/basics.html
-      2: slides/Basics/source/ROS_communication_annex.html
-      3: slides/Basics/source/filesystem.html     
+      1: slides/Basics/source/Core_concepts.html
+      2: slides/Basics/source/filesystem.html  
   - Day: 2
     slides:
       1: slides/Basics/source/CLI.html
