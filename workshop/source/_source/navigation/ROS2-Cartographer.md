@@ -31,7 +31,7 @@ For ground-based robots, it is often sufficient to use 2D SLAM to navigate throu
 
 
 ## 3. Start Cartographer
-### 3.1 Technical Overview
+### 3.1. Technical Overview
 ![Technical Overview](../../_static/high_level_system_overview.png)
 
 Figure 1: Technical Overview
@@ -40,25 +40,30 @@ source: [cartographer](https://google-cartographer.readthedocs.io/en/latest/)
 
 
 
-### 3.2 Install cartographer
+### 3.2. Check packages 
 
-Install cartographer by performing the following:
+#### 3.2.1. Check if there are cartographer packages
 
-**Before installing package, you need to make sure which ROS  Distro you are using.**
+    ```bash
+    # source ROS2
+    $ source /opt/ros/foxy/setup.bash
 
-After sourcing ROS2, you will get $ROS_DISTRO in evironment values.
+    $ ros2 pkg list |grep cartographer
+
+    # You will get 
+    # cartographer_ros
+    # cartographer_ros_msgs
+    ```
+
+If you don't have "cartographer_ros" and "cartographer_ros_msgs", you can install cartographer by performing the following:
+
+**Before installing package, you need to make sure which ROS distribution you are using.**
 
 ```bash
-# source ROS2
-$ source /opt/ros/foxy/setup.bash
-$ echo $ROS_DISTRO
-You will get "foxy"
+$ sudo apt install ros-$ROS_DISTRO-cartographer 
 ```
 
-```bash
-$ sudo apt install ros-$ROS_DISTRO-cartographer ros-$ROS_DISTRO-cartographer-ros  
-```
-#### Check if there is turtlebot3* package
+#### 3.2.2. Check if there are turtlebot3* packages
 
 ```bash
 $ ros2 pkg list | grep turtlebot3
@@ -95,43 +100,31 @@ $ source install/setup.bash
 ```
 
 
-### 3.3 Startup system of turtleBot and teleoperation
+### 3.3. Startup system of turtleBot and teleoperation
 
-**Please try simulation first**
+#### 3.3.1. Simulation in gazebo
 
-#### 3.3.1 Simulation
-
-a. Simulation in gazebo
-
-Here we use 11 as ROS Domain ID
-
-1. Set up ROS_DOMAIN_ID
-
-    ```bash
-    $ export ROS_DOMAIN_ID=11
-    ```
-
-2. Set up turtlebot model
+1. Set up turtlebot model
 
     ```bash
     $ export TURTLEBOT3_MODEL=burger
     ```
 
-3. Set up Gazebo model path
+2. Set up Gazebo model path
 
     ```bash
     $ export GAZEBO_MODEL_PATH=`ros2 pkg \
     prefix turtlebot3_gazebo`/share/turtlebot3_gazebo/models/
     ```
 
-4. Launch Gazebo with a simulation world
+3. Launch Gazebo with a simulation world
 
     ```bash
     $ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
     ```
 
 
-#### 3.3.2 Real robot
+#### 3.3.2. Physical robot
 
 [TurtleBot3]
 
@@ -140,55 +133,66 @@ a. open a terminal and use `ssh` connect to Turtlebot3.
 b. bring up basic packages to start its applications.
 ```bash
 $ source .bashrc
+
 $ cd turtlebot3_ws
+
+#Set up ROS_DOMAIN_ID
+$ export ROS_DOMAIN_ID=Your Number
+
 $ source install/setup.bash
+
 $ ros2 launch turtlebot3_bringup robot.launch.py
 ```
 
-#### 3.3.3 Run teleoperation node
+#### 3.3.3. Run teleoperation node
 
 [Remote PC]
 
 1. Open a new terminal
 
-2. Make sure you are in the workspace which you created at the beginning.
-
-3. Then source your workspace.
+2. Set up ROS environment
 
     ```bash
-    $ source install/setup.bash
+    $ source /opt/ros/foxy/setup.bash
     ```
-
-4. Set up ROS_DOMAIN_ID
+3. (Set up ROS_DOMAIN_ID)
+   
+   If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.
 
     ```bash
-    $ export ROS_DOMAIN_ID=11
+    $ export ROS_DOMAIN_ID=Your Numbers
     ```
 
-5. Set up turlebot model
+4. Set up turtlebot model
 
     ```bash
     $ export TURTLEBOT3_MODEL=burger
     ```
-6. Run teleoperation node
+5. Run teleoperation node
 
     ```bash
     $ ros2 run turtlebot3_teleop teleop_keyboard
     ```
 
 
-### 3.4 Run SLAM nodes
+### 3.4. Run SLAM nodes
 
-1. open a new terminal on Remote PC and enter your workspace
+1. open a new terminal on Remote PC
+   
+2. Set up ROS environment
+   
+    ```bash
+    $ source /opt/ros/foxy/setup.bash
+    ```
 
-2. source your workspace
-
-3. export ROS domain id which is same as the one for TurtleBot
+3. (Set up ROS_DOMAIN_ID)
+   
+   If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.
 
     `[Remote PC]`
 
     ```bash
-    $ export ROS_DOMAIN_ID=11
+    $ export ROS_DOMAIN_ID=sYour Numbers
     ```
 
 4. run the SLAM nodes
@@ -218,16 +222,15 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     install/turtlebot3_cartographer/share/turtlebot3_cartographer\
     /config -configuration_basename turtlebot3_lds_2d.lua
     ```
-
-
- 1. create a map
+    
+ 5. create a map
     
     ***Hint: Make sure that the Fixed Frame (in Global Options) in RViz is set to “map”.*** 
 
     In this way the map is fixed and the robot will move relative to it.
     The scanner of the Turtlebot3 covers 360 degrees of its surroundings. Thus, if objects are close by to the robot it will start to generate the map. 
 
-    Teleoperate the robot through the physical world until the enclosed environment is completely covered in the virtual map.
+    Teleoperating the robot through the physical world until the enclosed environment is completely covered in the virtual map.
 
     The following hints help you to create **a nice map**:
 
@@ -249,23 +252,30 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
 
 ## 4. Save the Map
 
-If you are satisfied with your map you can store it. Open a new terminal and run the map saver node.
+If you are satisfied with your map you can store it. You can save the map.
 
 `[Remote PC]`
 
-First you need to source workspace and set up ROS Domain ID that is same as before.
-```
-$ ros2 run nav2_map_server map_saver_cli 
-```
-You also can define a name of the map by
-```
-ros2 run nav2_map_server map_saver_cli -f my_map
-```
-If the terminal’s path is "your workspace" they can be found in "your workspace" directory. An example of the map.pgm image is given in the following.
+0. Open a new terminal and enter your workspace
 
-![Map](../../_static/map.jpg)
+1. (Set up ROS Domain ID ) 
+   Only if you did set up ROS Domain ID before, you need to set up ROS Domain ID here.
+
+2. run the map saver node.
+
+    ```
+    $ ros2 run nav2_map_server map_saver_cli 
+    ```
+
+    You also can define a name of the map by
+    ```
+    ros2 run nav2_map_server map_saver_cli -f my_map
+    ```
+    If the terminal’s path is "your workspace" they can be found in "your workspace" directory. An example of the map.pgm image is given in the following.
+
+    ![Map](../../_static/map.jpg)
 
 
-The node will create a map.pgm and a map.yaml files in the current directory, which is in this case the home directory.
+The node will create a map.pgm and a map.yaml files in the current directory, which is your workspace directory in this case.
 
 ***Hint: The signs “~/” is a direct path to the home directory which works from every relative path.***

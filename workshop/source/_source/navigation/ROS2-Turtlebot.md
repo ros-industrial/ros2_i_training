@@ -1,25 +1,30 @@
 # TurtleBot in ROS2
 
-
-
 ## 1. Introduction
 
 - The goal for this tutorial: 
     - Simulate TurtleBot in gazebo  
-    - Get ideas about how to control physical TurtleBot
+    - Get ideas about how to control physical/simulated TurtleBot
     - Control Turtlebot from keyboard
 - The packages that you need for this tutorial:
   - turtlebot3_gazebo
   - turtlebot3_teleop
   - turtlebot3_bringup(on TurtleBot)
 
+* Lines beginning with `$` indicates the syntax of these commands.
+Commands are executed in a terminal:
+    * Open a new terminal → use the shortcut ctrl+alt+t.
+Open a new tab inside an existing terminal → use the shortcut ctrl+shift+t.
 
+* Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either `[TurtleBot]` or `[Remote PC]`.
+  
 Please try simulation first and use keyboard to control it. 
 
 
 
 ## 2. Preparation
-### 2.1 check packages
+
+### 2.1. Check packages
 Before start, check if there are turtlrbot3* packages
 
 ```
@@ -30,65 +35,85 @@ $ source /opt/ros/foxy/setup.bash
 ```
 $ ros2 pkg list | grep turtlebot3
 ```
-if not you can install these package by performing the following:
+If you don't have turtlebot3 packages, you can install these package by performing the following commands:
 
-#### Step 1: Download turtlebot3.repos
+* Step 1: Download turtlebot3.repos
 
-```
-First entering your workspace
-(If you don't have workspace yet, you need to create one with an src folder in it)
+    ```
+    First entering your workspace
+    (If you don't have workspace yet, you need to create one with an src folder in it)
 
-$ wget https://raw.githubusercontent.com/ipa-rwu/\
-turtlebot3/foxy-devel/turtlebot3.repos
-```
-#### Step 2: Using vcstools get packages
-Make sure you have "src" folder in you workspace, then run this command to get source code for turtlebot3
-If you didn't install vcstools, you can install it as followed:
-```
-sudo sh -c 'echo \
-"deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"\
-> /etc/apt/sources.list.d/ros-latest.list'
-```
-```
-sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net \
---recv-key 0xAB17C654
-```
-```
-sudo apt update && sudo apt install python3-vcstool
-```
-```
-$ vcs import src<turtlebot3.repos
-```
-#### Step 3: Using rosdep get dependencies
-```
-$ rosdep update
-$ rosdep install --from-paths src --ignore-src  -y
-```
-#### Step 4: Install packages
-```
-$ colcon build --symlink-install
-```
-#### Step 5: Source your workspace
-```
-$ source install/setup.bash
-```
+    $ wget https://raw.githubusercontent.com/ipa-rwu/\
+    turtlebot3/foxy-devel/turtlebot3.repos
+    ```
+*  Step 2: Using vcstools get packages
+  
+    Make sure you have "src" folder in you workspace, then run this command to get source code for turtlebot3.
+    ```
+    $ vcs import src<turtlebot3.repos
+    ```
+
+    If you didn't install vcstools, you can install it as followed:
+
+    ```
+    sudo sh -c 'echo \
+    "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"\
+    > /etc/apt/sources.list.d/ros-latest.list'
+    ```
+
+    ```
+    sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net \
+    --recv-key 0xAB17C654
+    ```
+
+    ```
+    sudo apt update && sudo apt install python3-vcstool
+    ```
+
+* Step 3: Using rosdep get dependencies
+    ```
+    $ rosdep update
+    $ rosdep install --from-paths src --ignore-src  -y
+    ```
+
+* Step 4: Install packages
+    ```
+    $ colcon build --symlink-install
+    ```
+
+* Step 5: Source your workspace
+    ```
+    $ source install/setup.bash
+    ```
 
 
 ## 3. Simulation
 In this chapter you will learn how to simulate TurtleBot in gazebo 
 
-0. Source your workspace first
+0. Open a terminal
+   
+    If you don't set up ROS Domain ID, then the default ROS_DOMAIN_ID=0.
+
+    In this case, we only work with one turtlebot so we can use default ROS Domain ID. 
+
+    If you want to use different ROS Domain ID, you can perform:
+    ```
+    $ export ROS_DOMAIN_ID=11
+    ```
+
+1. Set up ROS environment arguments
+   
+   If you use debian packages, 
+    ```
+    $ source  /opt/ros/foxy/setup.bash
+    ```
+   
+   If you use packages in your workspace:
+    
     ```
     First entering your workspace
 
     $ source  install/setup.bash
-    ```
-1. Set up ROS_DOMAIN_ID
-   
-   We use "**11**" as ROS Domain ID
-
-    ```
-    $ export ROS_DOMAIN_ID=11
     ```
 
 2. Set up turtlebot model
@@ -112,27 +137,25 @@ In this chapter you will learn how to simulate TurtleBot in gazebo
     ```
     You also can start different world by replacing `empty_world.launch.py` with `turtlebot3_house.launch.py` 
 
-
+You can check ros topics and ros graph.s
 
 ## 4. Control the robot 
 In this chapter you will learn how to use keyboard or joystick to control robot.
-### 4.1. Keyboard
-Open a new terminal start another ROS2 node, which will enable to send ROS2 messages on the **/cmd_vel** topic from the keyboard.
+In general we will start a ros node that will publish to topic **/cmd_vel**
 
-1. Set up ROS_DOMAIN_ID
- 
-    We use "**11**" as ROS Domain ID, which is same 'number' as we use before
-    ```
-    $ export ROS_DOMAIN_ID=11
-    ```
+### 4.1. Keyboard
+0. Open a new terminal
+   
+    * Set up ROS environment arguments
+    * (Set up ROS_DOMAIN_ID): Only if you set up ROS_DOMAIN_ID in chapter3 
     
-2. Set up turtlebot model
+1. Set up turtlebot model
 
     ```
     $ export TURTLEBOT3_MODEL=burger
     ```
 
-3. Run teleoperation node
+2. Run a teleoperation node
 
 
     ```
@@ -156,8 +179,6 @@ space key, s : force stop
 
 CTRL-C to quit
 ```
-
-
 
 ### 4.2. PS3 Joystick
 
@@ -183,10 +204,10 @@ You can use Joystick axis and joystick angular axis to control turtlbot.
 
 
 
-## 5. Real robot
+## 5. Physical TurtleBot3
 In this chapter you will learn how to use physical TurtleBot
 
-### Step 1. Setting up to a turtlebot ROS2 Network 
+### 5.1. Setting up to a turtlebot ROS2 Network 
 Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either `[TurtleBot]` or `[Remote PC]`.
 
 As the robot you are using does not have any input devices or monitor, we have to start it in another way. Luckily we can work remotely from a local workstation using SSH. SSH provides a secure communication channel over an unsecured network in a client-server architecture. It connects an SSH client application with an SSH server.
@@ -224,7 +245,7 @@ This means you are working from the home directory of the TurtleBot. So you can 
 
 ***Hint: You can disconnect the ssh connection by typing “exit” or "Ctrl + D" in the terminal.***
 
-### Step 2. Bring up the real TurtleBot
+### 5.2. Bring up the TurtleBot
 
 Before running any ROS command, you need to source the workspace first.
 In this case, you will find environment variables are defined in the file $HOME/.bashrc. So you can run the command below to set up environment variables and source the workspace.
@@ -273,10 +294,10 @@ You can as well check all existing service of the system:
 $ ros2 service list
 ```
 
-You can as well check tf:
+You can as well check tf:s
 
 ```bash
 $ ros2 run tf2_ros tf2_monitor
 ```
 
-**Then you also can use keyboard or joystick as you control TurtleBot in simualtion to control real TurtleBot**
+**Then you also can use keyboard or joystick as you control TurtleBot in simulation to control real TurtleBot**
