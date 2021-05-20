@@ -1,6 +1,5 @@
 # ROS2 Navigation
 
-
 ## 1. Introduction
 - The goal of this tutorial is  
     - to use the ROS2 navigation capabilities to move the robot autonomously.
@@ -20,7 +19,7 @@ You can use the given links for further information.
 
 
 
-## 2. General approach
+## 2. General Approach
 
 The ROS 2 Navigation System is the control system that enables a robot to autonomously reach a goal state, such as a specific position and orientation relative to a specific map. Given a current pose, a map, and a goal, such as a destination pose, the navigation system generates a plan to reach the goal, and outputs commands to autonomously drive the robot, respecting any safety constraints and avoiding obstacles encountered along the way.
 
@@ -34,7 +33,7 @@ Figure 1: Navigation2 Architecture
 source: [navigataion](https://navigation.ros.org/_images/architectural_diagram.png)
 
 
-
+<!-- 
 ## 3. Temporary load the Map 
 * Use the map generated during the cartographer tutorial.
  
@@ -120,51 +119,86 @@ nav_ws/
   $ ros2 lifecycle set /map_server 3
   ```
 
-  Then you can see the map in rviz2
+  Then you can see the map in rviz2 -->
 
 
 <!-- pagebreak  -->
 
-## 4. Launch the navigation stack
+## 3. Launch the navigation stack
 
-Start either the simulated robot or the real robot!
+### 3.1. Check the map
 
-Before starting, you need check that you already terminate the process of rviz2 and map_server.
+1. Check the location of your map
+   
+    Once you create a map, you will have two files: "name of your map".pgm and "name of your map".yaml
 
-### 4.1 Start the simulated robot
-
-* a. Open a terminal
-
-* b. Set key environment variables
-
-    First you need to go into your workspace and source your workspace:
+    For example, a workspace has the following layout:
     ```bash
-    $ source install/setup.bash
+    nav_ws/
+      maps/
+        my_map.yaml
+        my_map.pgm
+      src/
+      build/
+      install/
+      log/
     ```
-    Set up Gazebo model path:
-    ```bash
-    $ export GAZEBO_MODEL_PATH=`ros2 pkg \
-    prefix turtlebot3_gazebo`/share/turtlebot3_gazebo/models/
+
+2. Check if the location of "name of your map".pgm in "name of your map".yaml is right
+   
+    For example, the context of "my_map.yaml" is as followed:
+    
+    ```yaml
+      # my_map.yaml
+      image: ./my_map.pgm
+      resolution: 0.050000
+      origin: [-10.000000, -10.000000, 0.000000]
+      negate: 0
+      occupied_thresh: 0.65
+      free_thresh: 0.196
     ```
-    set up the robot model that you will use:
+  
+    **Hint**: 
+    make sure that there is the right path of *my_map.pgm* in *my_map.yaml*. 
+    The path of "my_map.png" in "my_map.yaml" is relative. So if "my_map.yaml" and "my_map.png" are in the same folder, the parameter of "image" should be "image: ./my_map.pgm"
+
+### 3.2. Start the simulated robot
+
+1. Open a terminal
+
+2. Set ROS environment variables
+
+    * First you need to go into your workspace and source your workspace:
+      ```bash
+      $ source install/setup.bash
+      ```
+    
+    * Set up Gazebo model path:
+      ```bash
+      $ export GAZEBO_MODEL_PATH=`ros2 pkg \
+      prefix turtlebot3_gazebo`/share/turtlebot3_gazebo/models/
+      ```
+    
+    * set up the robot model that you will use:
+      ```bash
+      $ export TURTLEBOT3_MODEL=burger
+      ```
+
+3. Bring up Turtlebot in simulation
     ```bash
-    $ export TURTLEBOT3_MODEL=burger
-    ```
-    Here we use "11" as ROS Domain ID:
-    ```bash
-    $ export ROS_DOMAIN_ID=11
-    ```
-* c. Bring up Turtlebot in simulation
-    in the same terminal, run
-    ```bash
+    # in the same terminal, run
+
     $ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
     ```
-  d. Start navigation stack
-    open another terminal, source your workspace, set up the robot model that you will use, then 
+
+4. Start navigation stack
+    
+    Open another terminal, source your workspace, set up the robot model that you will use, then 
+
     ```bash
     $ ros2 launch turtlebot3_navigation2 \
     navigation2.launch.py \
-    use_sim_time:=true map:=maps/map.yaml
+    use_sim_time:=true map:=maps/"you map name".yaml
     ```
     The path of the map is relative to the place where you will run this command.
 
@@ -182,9 +216,7 @@ Before starting, you need check that you already terminate the process of rviz2 
 
 
 
-### 4.2 Start the real robot
-***First try on simulation and finish next chapter then try it on real robot.***
-
+### 3.3. Start with a physicals robot
 
 <!-- Before start use navigation, make sure you have `workshop_ros2_navigation` in your source folder in `/src` in your workspace. 
  -->
@@ -210,7 +242,8 @@ $ ros2 launch turtlebot3_navigation2 navigation2.launch.py\
 ```
 
 
-## 5. Navigate the robot via rviz
+## 4. Navigate the robot via rviz
+
 * **Step 1: Tell the robot where it is** 
   
     after starting, the robot initially has no idea where it is. By default, Navigation 2 waits for you to give it an approximate starting position.
