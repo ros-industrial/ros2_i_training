@@ -35,7 +35,14 @@ $ source /opt/ros/foxy/setup.bash
 ```
 $ ros2 pkg list | grep turtlebot3
 ```
-If you don't have turtlebot3 packages, you can install these package by performing the following commands:
+If you don't have turtlebot3 packages, you can install debian packages or from source code. 
+
+A. Install debian packages
+
+```bash
+sudo apt install ros-foxy-turtlebot3*
+```
+B. Install from source code
 
 * Step 1: Download turtlebot3.repos
 
@@ -294,7 +301,7 @@ You can as well check all existing service of the system:
 $ ros2 service list
 ```
 
-You can as well check tf:s
+You can as well check tf:
 
 ```bash
 $ ros2 run tf2_ros tf2_monitor

@@ -68,7 +68,15 @@ $ sudo apt install ros-$ROS_DISTRO-cartographer
 ```bash
 $ ros2 pkg list | grep turtlebot3
 ```
-if not you can install these package by performing the following:
+If you don't have turtlebot3 packages, you can install debian packages or from source code. 
+
+A. Install debian packages
+
+```bash
+sudo apt install ros-foxy-turtlebot3*
+```
+
+B. Install from source code
 
 First entering your workspace
 
@@ -137,7 +145,8 @@ $ source .bashrc
 $ cd turtlebot3_ws
 
 #Set up ROS_DOMAIN_ID
-$ export ROS_DOMAIN_ID=Your Number
+$ export ROS_DOMAIN_ID="Your Number"
+# e.g. export ROS_DOMAIN_ID=11
 
 $ source install/setup.bash
 
@@ -160,7 +169,8 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
    If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.
 
     ```bash
-    $ export ROS_DOMAIN_ID=Your Numbers
+    $ export ROS_DOMAIN_ID="Your Number"
+    # e.g. export ROS_DOMAIN_ID=11
     ```
 
 4. Set up turtlebot model
@@ -192,7 +202,8 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     `[Remote PC]`
 
     ```bash
-    $ export ROS_DOMAIN_ID=sYour Numbers
+    $ export ROS_DOMAIN_ID="Your Number"
+    # e.g. export ROS_DOMAIN_ID=11
     ```
 
 4. run the SLAM nodes
@@ -230,7 +241,7 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     In this way the map is fixed and the robot will move relative to it.
     The scanner of the Turtlebot3 covers 360 degrees of its surroundings. Thus, if objects are close by to the robot it will start to generate the map. 
 
-    Teleoperating the robot through the physical world until the enclosed environment is completely covered in the virtual map.
+    Teleoperate the robot through the physical world until the enclosed environment is completely covered in the virtual map.
 
     The following hints help you to create **a nice map**:
 
