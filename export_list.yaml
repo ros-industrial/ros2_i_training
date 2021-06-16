@@ -9,6 +9,7 @@ export:
       1: slides/Basics/source/CLI.html
       2: slides/Basics/source/Extended_Concepts.html
       3: slides/Navigation/source/TF.html
+      4: slides/Manipulation/source/moveit.html
   - Day: 3
     slides:
       1: slides/Navigation/source/Basics.html
