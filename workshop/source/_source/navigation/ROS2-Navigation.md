@@ -1,8 +1,8 @@
-# ROS2 Navigation
+# ROS 2 Navigation
 
 ## 1. Introduction
 - The goal of this tutorial is  
-    - to use the ROS2 navigation capabilities to move the robot autonomously.
+    - to use the ROS 2 navigation capabilities to move the robot autonomously.
 - The packages you will use:
     - workshop_ros2_navigation
 

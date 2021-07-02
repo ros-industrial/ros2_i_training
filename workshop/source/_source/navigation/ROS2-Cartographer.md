@@ -1,4 +1,4 @@
-# ROS2-Cartographer
+# ROS 2 Cartographer
 
 ## 1. Introduction
 - The goal of this tutorial is to
@@ -45,7 +45,7 @@ source: [cartographer](https://google-cartographer.readthedocs.io/en/latest/)
 #### 3.2.1. Check if there are cartographer packages
 
     ```bash
-    # source ROS2
+    # source ROS 2
     $ source /opt/ros/foxy/setup.bash
 
     $ ros2 pkg list |grep cartographer
@@ -89,7 +89,7 @@ Make sure you have "src" folder, then run this command to get source code for tu
 ```bash
 $ vcs import src<turtlebot3.repos
 ```
-Source your ROS2 installation workspace and install dependencies
+Source your ROS 2 installation workspace and install dependencies
 
 ```bash
 $ source /opt/ros/foxy/setup.bash

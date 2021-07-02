@@ -3,17 +3,17 @@
 ###### ROS 2 package installation syntax:   
 `sudo apt install ros-foxy-<pkg_name>`
 
-###### Basic ROS2 command structure:   
+###### Basic ROS 2 command structure:   
 `ros2 <main_command> <sub_command> [--options] <list_of_arguments>`    
 
 Remember, you can use double `[tab][tab]` completion to find list of available options and `-h` to get some help text at any point.
 
-Every ROS2 command and sub-command has a list of options that you can use to modify its behavior. The list of options can be seen with `-h` and included as desired.   
+Every ROS 2 command and sub-command has a list of options that you can use to modify its behavior. The list of options can be seen with `-h` and included as desired.   
 
 You can use `| grep <string>` to filter results using a string.   
 
 ## Commonly used commands
-Sourcing ROS2:   
+Sourcing ROS 2:   
 * `source /opt/ros/foxy/setup.bash`
 
 Alias:

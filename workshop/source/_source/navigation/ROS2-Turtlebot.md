@@ -1,4 +1,4 @@
-# TurtleBot in ROS2
+# TurtleBot in ROS 2
 
 ## 1. Introduction
 
@@ -214,7 +214,7 @@ You can use Joystick axis and joystick angular axis to control turtlbot.
 ## 5. Physical TurtleBot3
 In this chapter you will learn how to use physical TurtleBot
 
-### 5.1. Setting up to a turtlebot ROS2 Network 
+### 5.1. Setting up to a turtlebot ROS 2 Network 
 Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either `[TurtleBot]` or `[Remote PC]`.
 
 As the robot you are using does not have any input devices or monitor, we have to start it in another way. Luckily we can work remotely from a local workstation using SSH. SSH provides a secure communication channel over an unsecured network in a client-server architecture. It connects an SSH client application with an SSH server.
@@ -273,7 +273,7 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
 
 Afterwards, you can again check the nodes within a terminal of the local machine to see which applications are running within the same ROS Network.
 
-***Hint: The ROS2 DOMAIN ID of TurtleBot must be exported on every new terminal of the [Remote PC]!***
+***Hint: The ROS 2 DOMAIN ID of TurtleBot must be exported on every new terminal of the [Remote PC]!***
 
 `[Remote PC]`
 

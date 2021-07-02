@@ -2,23 +2,23 @@
 
 ## 1. Introduction
 
-Turtlesim is the Flagship example application for ROS and ROS2. It demonstrates in simple but effective ways the basic concepts.
+Turtlesim is the Flagship example application for ROS and ROS 2. It demonstrates in simple but effective ways the basic concepts.
 
 This workshop encourages you to refer to the cheat sheet for the syntax and type the commands on your own in order to learn by trial and error. Make use of the `--help` option for commands as well. However, solutions are also provided in the end. Feel free to approach this any way as you wish.      
 
 <!--## Requirements
 `sudo apt install ros-foxy-turtlesim`   
-Make sure ROS2 is sourced in every terminal you open.   -->
+Make sure ROS 2 is sourced in every terminal you open.   -->
 
 ## 2. Starting the Turtle simulator
 
 You can start the main application by simply executing two of its nodes. Refer to the cheat sheet for the syntax to execute a node. 
 
-The package name you need in this case is `turtlesim` and the nodes you need to start are `turtlesim_node` and `turtle_teleop_key`. Make sure to source ROS2 and run these nodes in two separate terminals.      
+The package name you need in this case is `turtlesim` and the nodes you need to start are `turtlesim_node` and `turtle_teleop_key`. Make sure to source ROS 2 and run these nodes in two separate terminals.      
 
 > Start the 2 nodes of the application
 
-Once you successfully start these nodes, you should see a window popup with a blue background and a random turtle in the middle (this is an RQT pane, if you are interested in knowing!). This little guy is going to help us understand ROS2. We should treat it as if it is an AGV (Automated Guided Vehicle), and we observe this scene from a top down perspective.
+Once you successfully start these nodes, you should see a window popup with a blue background and a random turtle in the middle (this is an RQT pane, if you are interested in knowing!). This little guy is going to help us understand ROS 2. We should treat it as if it is an AGV (Automated Guided Vehicle), and we observe this scene from a top down perspective.
 
 Before moving the turtle, you might find it useful to right click on the title bar of the simulator screen and select *Always on top* (undo this when you no longer need it). 
 
@@ -122,7 +122,7 @@ In a separate terminal start recording a ros2bag file with the selected topic `/
 Replay this ros2bag file, and you will notice the turtle moving in the same way as you recorded.
 
 ## 6. Advanced - Remapping and other options
-Every ROS2 command and sub-command has a list of options that you can use to modify its behavior. The list of options can be seen with `-h` and included as desired. You can experiment with these as well and see how the commands you have already executed so far change.   
+Every ROS 2 command and sub-command has a list of options that you can use to modify its behavior. The list of options can be seen with `-h` and included as desired. You can experiment with these as well and see how the commands you have already executed so far change.   
 
 For example, when you publish a velocity command from CLI, it publishes this message continuously and the turtle keeps moving until you kill the publisher. You could instead give a `-r 0.5` option to make it publish at 0.5 Hz. meaning there is a slight pause before every movement.    
 

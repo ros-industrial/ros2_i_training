@@ -1,7 +1,7 @@
 ## Introduction
 
-This repository contains source of training material for `ROS2 Foxy`. The topics covered are:
-- ROS2 basics
+This repository contains source of training material for `ROS 2 Foxy`. The topics covered are:
+- ROS 2 basics
     - Composed node, publish / subscribe, services, actions, parameters, launch system
     - Manged nodes, Quality of Service (QoS)
     - File system
