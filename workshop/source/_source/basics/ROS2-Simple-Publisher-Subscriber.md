@@ -1,6 +1,6 @@
 
 # Understanding ROS 2 nodes with a simple Publisher - Subscriber pair
-**Based on the [ROS 2 Tutorials](https://index.ros.org/doc/ros2/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber/)**
+**Based on the [ROS 2 Tutorials](https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html)**
 
 ## Introduction
 
