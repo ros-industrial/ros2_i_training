@@ -84,7 +84,6 @@ if __name__ == "__main__":
     main()
 
 ```
-Next, add this script to the 
 
 ### 1.1 Explanation
 
