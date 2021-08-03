@@ -43,7 +43,7 @@ controllers through common interfaces
 
 ---
 
-## Why ROS2 vs ROS1?  
+## Why ROS 2 vs ROS 1?  
 
 - Realtime capabilities now available
 - Designed for production - same support for R&D
@@ -53,18 +53,18 @@ controllers through common interfaces
 
 ## Milestones
 
-- M1: Straight port to ROS2
-    - Fully migrate existing packages to ROS2
-    - Leverage ROS2 features: build (ament), middleware, logging, parameters
+- M1: Straight port to ROS 2
+    - Fully migrate existing packages to ROS 2
+    - Leverage ROS 2 features: build (ament), middleware, logging, parameters
 
 - M2: Real-time support 
     - Reactive, closed-loop control to sensor input
     - Hybrid planning (global and local)
     - Zero-memory copy integration to controllers  
 
-- M3: Fully leverage ROS2
+- M3: Fully leverage ROS 2
     - Lifecycle management of MoveIt nodes
-    - Leverage ROS2 component nodes
+    - Leverage ROS 2 component nodes
 ---
 
 ## Real-time capabilities 
@@ -95,7 +95,7 @@ Direct access to core MoveIt components
 ## Architecture
 (Milestone 3)  
 
-Leverage ROS2 component nodes for better performance
+Leverage ROS 2 component nodes for better performance
 
 ![components width:200](../static/components.png)
 ---
@@ -194,7 +194,7 @@ http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/urdf_srdf/urdf_srdf_tu
 
 ```cpp
 // \brief load the robot model,
-//        configure the planning pipeline from ROS2 parameters and
+//        configure the planning pipeline from ROS 2 parameters and
 //        initialize defaults  
 moveit_cpp_ = std::make_shared<moveit::planning_interface::MoveItCpp>(node_);
 

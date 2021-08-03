@@ -5,7 +5,7 @@ This tutorial will help you understand the flexibility of transforms with the TF
 
 For this tutorial, we will use the Turtlesim again. This time, we will insert a second turtle into the simulation. As you drive the first turtle around with keyboard teleop, the second turte will follow it closely. In order to do this, the second turtle needs to know where the first one is, w.r.t. its own coordinate frames. This can be easily achieved using the TF2 library.
 
-The example code is based on [tf2_example](https://github.com/ros2/geometry2/tree/eloquent/examples_tf2_py) and is tested with ROS2 Foxy.   
+The example code is based on [tf2_example](https://github.com/ros2/geometry2/tree/eloquent/examples_tf2_py) and is tested with ROS 2 Foxy.   
 
 
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
 ### 1.1 Explanation
 
-This follows the same basic structure for a ROS2 node. The TF2 specific lines will be explained.
+This follows the same basic structure for a ROS 2 node. The TF2 specific lines will be explained.
 
 ```python
 from geometry_msgs.msg import TransformStamped
@@ -95,7 +95,7 @@ from scipy.spatial.transform import Rotation as R
 from tf2_ros.transform_broadcaster import TransformBroadcaster
 ```
 
-Imports the modules required for TF2. Scipy is used to convert from Euler angles to quaternion since the `tf_conversions` package has not been ported over to ROS2 yet.
+Imports the modules required for TF2. Scipy is used to convert from Euler angles to quaternion since the `tf_conversions` package has not been ported over to ROS 2 yet.
 
 ```python
 self.tfb_ = TransformBroadcaster(self)

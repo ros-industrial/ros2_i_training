@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ROS2 Extended Concepts</title>
+    <title>ROS 2 Extended Concepts</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
   </head>
@@ -16,7 +16,7 @@ layout: true
 class: center, middle
 name: main_title
 
-# ROS2 EXTENDED CONCEPTS
+# ROS 2 EXTENDED CONCEPTS
 
 ---
 
@@ -36,7 +36,7 @@ name: main_title
 
 ## 1. Managed Nodes
 
-* Common complaint in ROS1 - no way to control lifecycle of nodes. 
+* Common complaint in ROS 1 - no way to control lifecycle of nodes. 
   * Ex: Sensor reader starts before sensor driver!
 * ROS 2 solution - *Managed Nodes* with detailed lifecycle management
   * CPP implemented, Python pending
@@ -128,7 +128,7 @@ Meaningfully implementing the callback functions avoids malformed nodes.
 
 ## 1.5 LC Management in Launch Files
 
-ROS2 Python Launch files offer some LC API:
+ROS 2 Python Launch files offer some LC API:
 * `launch_ros.actions.LifecycleNode(..)` defines a LC node
 * `launch_ros.event_handlers.OnStateTransition(..)` performs an action when a LC node transitions from one state to another
 * `launch.actions.EmitEvent(..)` selects the desired event to trigger
@@ -172,7 +172,7 @@ which defines the quality of communication between these entities.
 | 4   | Deadline | Maximum acceptable time between messages on a topic. | duration(rmw_time_t/rclcpp::Duration)|
 | 5   | Lifespan | Maximum time that a message can sit in a publisher's out buffer. | duration(rmw_time_t/rclcpp::Duration) |
 | 6   | Liveliness | Heartbeat frequency. | duration(rmw_time_t/rclcpp::Duration) |
-| 7   | avoid_ros _namespace_conventions | Circumvent ROS2 specific naming conventions like "rt_". Suitable for native DDS communication. | True/False |
+| 7   | avoid_ros _namespace_conventions | Circumvent ROS 2 specific naming conventions like "rt_". Suitable for native DDS communication. | True/False |
 
 ---
 
@@ -180,11 +180,11 @@ which defines the quality of communication between these entities.
 
 * Combination of policies. Easier to select a profile instead of worrying about individual policies.
 * Some default profiles already available (Ex C++: [qos_profiles.h](https://github.com/ros2/rmw/blob/master/rmw/include/rmw/qos_profiles.h)):
-  * **Default** : Applied by default if not specified. Mimic ROS1.   
+  * **Default** : Applied by default if not specified. Mimic ROS 1.   
    *keep_last(10),reliable(),volatile()...*
   * **Services** : Typically services should be reliable. Volatile to avoid outdated requests.   
    *keep_last(10),reliable(),volatile()...*
-  * **Parameters** : ROS2 parameters are accessed via services. Similar profile, but longer depth to retain more parameters in buffer.   
+  * **Parameters** : ROS 2 parameters are accessed via services. Similar profile, but longer depth to retain more parameters in buffer.   
    *keep_last(1000),reliable(),volatile()...*
   * **Sensors** : Sensor data needs to have minimum latency to remain relevant, at the cost of losing some samples.    
    *keep_last(5),best_effort(),volatile()...*
@@ -220,9 +220,9 @@ Examples:
 
 ## Further reading
 
-Try the ROS2 Managed Nodes [demo](https://github.com/ros2/demos/tree/master/lifecycle) to get a better understanding.
+Try the ROS 2 Managed Nodes [demo](https://github.com/ros2/demos/tree/master/lifecycle) to get a better understanding.
 
-Try the ROS2 QoS [tutorials](https://index.ros.org/doc/ros2/Tutorials/Quality-of-Service/) to get a better understanding.
+Try the ROS 2 QoS [tutorials](https://docs.ros.org/en/foxy/Tutorials/Quality-of-Service.html) to get a better understanding.
 
 
 

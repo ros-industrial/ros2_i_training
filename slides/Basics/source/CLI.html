@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ROS2 CLI basics</title>
+    <title>ROS 2 CLI basics</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
   </head>
@@ -37,11 +37,11 @@ name: main_title
  # 1. Installation and sourcing
 ---
 
-## 1.1 Installing and Sourcing ROS2
-* Two types of installation - [Binary](https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Install-Debians/) (recommended) or [Source](https://index.ros.org/doc/ros2/Installation/Foxy/Linux-Development-Setup/). 
-* Live USB has ROS2 Foxy Binary - Verify :   
+## 1.1 Installing and Sourcing ROS 2
+* Two types of installation - [Binary](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) (recommended) or [Source](https://docs.ros.org/en/foxy/Installation/Ubuntu-Development-Setup.html). 
+* Live USB has ROS 2 Foxy Binary - Verify :   
  `ll /opt/ros/foxy`. 
-* Source ROS2 to use commands, libraries, packages etc..:   
+* Source ROS 2 to use commands, libraries, packages etc..:   
 `source /opt/ros/foxy/setup.bash`   
 * Source your local workspace as needed (which source ROS as well):   
 `source /path/to/ws/install/local_setup.bash`
@@ -56,7 +56,7 @@ instead of
 `source /opt/ros/foxy/setup.bash`  (or any command you wish)
 * See cheat sheet for syntax.
 
-.center[!!ADVICE!!: Source ros2 manually everytime on Day 1 to get used to the concept. Use aliases from Day 2.]
+.center[!!ADVICE!!: Source ROS 2 manually everytime on Day 1 to get used to the concept. Use aliases from Day 2.]
 
 ---
 
@@ -65,13 +65,13 @@ instead of
 * Environment variable 
 * Unique identifier number for each machine
 * Physically separates network
-* Stop ROS2 node interference
+* Stop ROS 2 node interference
 * Set and forget : `echo "export ROS_DOMAIN_ID=<your_id>" >> ~/.bashrc`
 
 
 .center[100% discount sale! - Ask for your very own domain ID today!!]
 
-### Building ROS2 (Recap)
+### Building ROS 2 (Recap)
 
 * `colcon build --symlink-install`
 
@@ -88,7 +88,7 @@ name: main_title
 
 We only explore default packages that come with the binary for simplicity.
 
-* All ROS2 commands follow this syntax :
+* All ROS 2 commands follow this syntax :
 `ros2 <main_command> <sub_command> <<arguments>>`   
 
 * Examples :  
@@ -96,7 +96,7 @@ We only explore default packages that come with the binary for simplicity.
 `ros2 pkg executables`
 
 Use tab completion to either complete a command, or to see a list of available options. 
-* Example: `ros2 ` *tab* *tab* - List all ROS2 commands.
+* Example: `ros2 ` *tab* *tab* - List all ROS 2 commands.
 * `ros2 pkg ` *tab* *tab* - List of sub-commands for `pkg`.   
 * `-h` at almost any point to get a brief help description. 
 `ros2 -h`   
@@ -115,12 +115,12 @@ name: main_title
 
 The most basic example of ROS - a *Publisher/Subscriber* pair 
 
-* Remember to source ROS2 
+* Remember to source ROS 2 
 * Command `run` to run an executable within a package (C++ compiled object/Python script):    
 
 `ros2 run <package_name> <executable_name> <<optional_command_line_arguments>>`   
 
-* Try the example publisher node packaged with ROS2. 
+* Try the example publisher node packaged with ROS 2. 
 * We first need to find out what the name of the package is.   
 * Run the package listing command  with a filter:    
 `ros2 pkg list | grep demo`   
@@ -242,7 +242,7 @@ name: main_title
 * Useful for longer tasks that need a feedback & involves an action server and an action client.
 * Interface has 3 parts - goal, feedback and result.
 * Typical sequence - Publish a goal, observe feedback & receive result  when execution is completed/aborted
-* Use the `ros2 action [..]` commands to interact. (New in ROS2)  
+* Use the `ros2 action [..]` commands to interact. (New in ROS 2)  
     * Similar to `ros2 topic [..]`
 
 
@@ -253,7 +253,7 @@ name: main_title
 * Key-value pairs to store runtime configuration information.
     * Ex: laser scan field, camera calibration, navigation obstacle layer thickness etc...
 * Parameters are stored per each node and can be accessed via services
-    * As opposed to ROS1 which had a dedicated parameter server managed by rosmaster.
+    * As opposed to ROS 1 which had a dedicated parameter server managed by rosmaster.
 * Use `ros2 param [..]` commands to interact from the CLI.
 
 ###### More in workshop
@@ -274,7 +274,7 @@ name: main_title
     * Topic publisher/listener/type viewer, 
     * Image view, 
     * Plot  etc....
-* Similar to ROS1, but few plugins still missing
+* Similar to ROS 1, but few plugins still missing
 * `rqt &` to launch default main window (`&` ->detached process)
 or 
 `ros2 run rqt_<plugin> rqt_<plugin>` to launch a specific plugin
@@ -288,7 +288,7 @@ or
 ##### The doctor is in the house!
 
 * Identify issues in the system (similar to roswtf, can use wtf as an alias)
-* Analyse ROS2 installation as well as running systems, show reports
+* Analyse ROS 2 installation as well as running systems, show reports
 * `ros2 doctor` - Shows warnings and errors about the current state
     * Dangling topics, incorrect configurations, missing system files etc...
 * `ros2 doctor -r` - Full technical report of the installation
@@ -298,7 +298,7 @@ or
 
 ## 6.3 Tools - ros2bag
 
-* Same function and similar API as rosbag from ROS1
+* Same function and similar API as rosbag from ROS 1
     * Now installed as part of >Foxy core
 * Record the messages being published on topics for a duration into a file. Replay later with nearly the same time characteristics.
 * Stored as *.db3 + metadata.yaml* instead of a single *.bag file.
@@ -307,14 +307,14 @@ or
 
 ## 6.4 Tools - ros1_bridge
 
-* A "dual homed" package - simultaneously ROS1 AND ROS2.
-* ROS1 <=topics/services=> `ros1_bridge` <=topics/services=> ROS2
+* A "dual homed" package - simultaneously ROS 1 AND ROS 2.
+* ROS 1 <=topics/services=> `ros1_bridge` <=topics/services=> ROS 2
 * Binary installation supports default msg/srv types, source installation can be extended with custom types.
 
 ```
-Shell 1 $  Source ROS1, Run ROS1 stuff
-Shell 2 $  Source ROS1, Source ROS2, Run bridge
-Shell 3 $  Source ROS2, Run ROS2 stuff
+Shell 1 $  Source ROS 1, Run ROS 1 stuff
+Shell 2 $  Source ROS 1, Source ROS 2, Run bridge
+Shell 3 $  Source ROS 2, Run ROS 2 stuff
 ```
 >                                        MAGIC!
 

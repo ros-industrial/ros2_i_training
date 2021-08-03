@@ -20,7 +20,7 @@ class: center, middle
 
 <h1> 
   <center>  
-    ROS2 Foundation 
+    ROS 2 Foundation 
   </center> 
 </h1> 
 <h3> 
@@ -35,12 +35,12 @@ class: center, middle
 - #### ROS computation graph
 - #### What is a node?  
 - #### Node composition 
-- #### ROS2 topics and messages
-- #### ROS2 Executor 
-- #### ROS2 Services
-- #### ROS2 Actions
-- #### ROS2 Params
-- #### ROS2 Launch files
+- #### ROS 2 topics and messages
+- #### ROS 2 Executor 
+- #### ROS 2 Services
+- #### ROS 2 Actions
+- #### ROS 2 Params
+- #### ROS 2 Launch files
  
 
 
@@ -91,7 +91,7 @@ class: center, middle
 ---
 
 ## Automatic discovery
-### ROS1 Node communication
+### ROS 1 Node communication
 <div>
   <center>
     <img src="../static/singlepointfailure.png" width="800px">
@@ -100,7 +100,7 @@ class: center, middle
 
 ---
 
-## ROS1 vs ROS2 
+## ROS 1 vs ROS 2 
 ### Node structure
 
 <center>
@@ -111,7 +111,7 @@ class: center, middle
 ---
 
 ## Automatic discovery
-### ROS2 Node communication
+### ROS 2 Node communication
 
 .cols[
   .fifty[ <img src="../static/ros2_discovery.png" width="500px">  ]
@@ -135,8 +135,8 @@ class: center, middle
 
 ---
 
-## ROS2-Unified API
-### ROS2 Client libraries
+## ROS 2-Unified API
+### ROS 2 Client libraries
 
 .cols[
 .fifty[<div>
@@ -225,7 +225,7 @@ Defers process layout decisions to deploy-time
 - Distributed parameter system 
 ---
 
-## ROS2 Topics 
+## ROS 2 Topics 
 - Asynchronous communication 
 - Multiple concurrent publishers and subscribers for one topic
 - A single node can publish and subscribe to multiple topics
@@ -240,7 +240,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## ROS2 Messages
+## ROS 2 Messages
 
 - data structure to exchange information between components  
 - `*.msg` are simple text files with field type and name   
@@ -265,7 +265,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## ROS2 Executor
+## ROS 2 Executor
 
 ### Coordinates order and timing to execute available communication tasks
 
@@ -287,7 +287,7 @@ Defers process layout decisions to deploy-time
 ]
  
 ---
-## ROS2 Executor
+## ROS 2 Executor
 
 **Default executor**
 <pre><code class="language-ruby">
@@ -313,7 +313,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## ROS2 Services
+## ROS 2 Services
 -   Services are based on a call and response model 
 -   Similar to remote procedural calls that terminates quickly
     -   Example: spawning a robot into an environment
@@ -359,7 +359,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## ROS2 Actions
+## ROS 2 Actions
 
 -   Used for tasks that  
     - <b>Longer execution time</b>
@@ -392,7 +392,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## ROS2 Actions
+## ROS 2 Actions
 ### Data structure for Actions
 
 -   Defined by a set of messages: Goal, Result and Feedback.
@@ -454,7 +454,7 @@ class: center
 
 ---
 
-## ROS2 Params
+## ROS 2 Params
 
 <div>
   <center>
@@ -465,11 +465,11 @@ class: center
 
 ---
 
-## ROS2 Params - 1
+## ROS 2 Params - 1
 
 - Used to externally configure the nodes at run-time and during run-time, without having to recompile the code for the node.
-- These parameters can be dynamically reconfigured using ROS2 services.
-- **Note**: ROS2 uses a decentralized parameter system.
+- These parameters can be dynamically reconfigured using ROS 2 services.
+- **Note**: ROS 2 uses a decentralized parameter system.
 
 <pre><code class="language-ruby">
 def __init__(self):
@@ -482,7 +482,7 @@ def __init__(self):
     self.get_logger().info("str: %s, int: %s" % (str(param_str.value), str(param_int.value)))
 </code></pre>
 
-#### Setting the ros2 params in command line.
+#### Setting the ROS 2 params in command line.
 <pre><code class="language-sh">
   ros2 run ros2_tutorials test_params_rclpy --ros-args -p my_str:="Hello world" -p my_int:=5
 </code>
@@ -490,8 +490,8 @@ def __init__(self):
 
 ---
 
-## ROS2 Params - 2
-### YAML for ROS2 params
+## ROS 2 Params - 2
+### YAML for ROS 2 params
 
 - Managing parameters when number of params increases becomes complex.
 - Adding them in command line is not an option 
@@ -508,7 +508,7 @@ def __init__(self):
 
 ---
 
-## ROS2 Params - 3
+## ROS 2 Params - 3
 ### Loading YAML config to Node
 
 <pre><code class="language-yaml">
@@ -533,7 +533,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 
 ---
 
-## ROS2 Params - 4
+## ROS 2 Params - 4
 ###  From launch file
 <pre><code class="language-python">
   def generate_launch_description():
@@ -556,7 +556,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 </pre>
 ---
 
-## ROS2 Params - 5
+## ROS 2 Params - 5
 ###  For a Python package, in “setup.py”:
 <pre><code class="language-python">
   ...
@@ -570,7 +570,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 ...
 </code>
 </pre>
-[References for ROS2 Params](https://docs.ros.org/en/foxy/Concepts/About-ROS-2-Parameters.html)
+[References for ROS 2 Params](https://docs.ros.org/en/foxy/Concepts/About-ROS-2-Parameters.html)
 
 ---
 
@@ -600,8 +600,8 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 ## Creating Launch files
 ### Location of launch file
 
--   ROS2 Launch files are coded in python
--   They are executed by ROS2 CLI tool, `ros2 launch` 
+-   ROS 2 Launch files are coded in python
+-   They are executed by ROS 2 CLI tool, `ros2 launch` 
 -   Create a `launch` directory inside your package as given below
 -   Create a launch file with `<launch_filename>.py`inside `launch` directory
 <div>
