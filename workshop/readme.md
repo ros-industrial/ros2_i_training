@@ -32,15 +32,15 @@ To install `docker` on your `Ubuntu` system, follow the instructions ([here](htt
 The docker image for the training is available on [DockerHub](https://hub.docker.com/r/ipahsd/ros2-training-foxy).
 
 ```
-docker pull ipahsd/ros2-training-foxy
+docker pull ipahsd/ros2-training-foxy:01
 ```
 To test the docker image, run:
 ```
-docker run -it --rm ipahsd/ros2-training-foxy ros2 run demo_nodes_cpp talker
+docker run -it --rm ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp talker
 ```
 In a new terminal, run:
 ```
-docker run -it --rm ipahsd/ros2-training-foxy ros2 run demo_nodes_cpp listener
+docker run -it --rm ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp listener
 ```
 To be able to use RViz and Gazebo, the docker container needs graphics support. In the terminal:
 ```
