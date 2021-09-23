@@ -34,7 +34,7 @@ name: main_title
 * SLAM: Estimate the pose of a robot and the map of the environment at the same time
     * Localization: inferring location given a map
     * Mapping: inferring a map given location
-    * SLAM: learning a map and locating the robot simultaneously 
+    * SLAM: learning a map and locating the robot simultaneously
 
 * The goal of SLAM  is to create or enhance an environment map.
 
@@ -44,7 +44,100 @@ name: main_title
 
 ---
 
-## Mapping - SLAM   
+## Mapping - SLAM
+### Algorithms
+
+* Filtering:
+  * Particle filter (Gmapping eloquent), EKF(extended Kalman filter)
+  * Model the problem as Online state estimation
+
+* Smoothing:
+  * Full trajectories are estimated using a set of measurements
+  * Graph-based SLAM, e.g. Pose graph optimization (Cartographer, SLAM toolbox, Karto SLAM)
+
+---
+
+## Mapping - SLAM
+#### Pose graph
+
+.cols[
+  .fifty[
+  <img src="../static/slam_case.png" alt="slam_case" style="height:120px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_no_error.png" alt="slam_no_error" style="height:120px" class="image-left"/>
+  ]
+]
+
+.cols[
+  .fifty[
+  Robot(yellow circle) move in a close space with an obstacle(blue circle)
+  ]
+  .fifty[
+  Ideal situation
+  ]
+]
+
+.cols[
+  .fifty[
+  <img src="../static/slam_case_error.png" alt="slam_case_error" style="height:120px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_errors.png" alt="slam_case_errors" style="height:120px" class="image-left"/>
+  ]
+]
+
+.cols[
+  .fifty[
+  Robot with an accurate Lidar, but odometry with large uncertainty (Grey circle: estimated pose)
+  ]
+  .fifty[
+  Robot continues moving around
+  ]
+]
+
+---
+
+## Mapping - SLAM
+#### Pose graph
+
+.cols[
+  .fifty[
+  <img src="../static/slam_case_error.png" alt="slam_case_error" style="height:120px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_errors.png" alt="slam_case_errors" style="height:120px" class="image-left"/>
+  ]
+]
+
+.cols[
+  .fifty[
+  <img src="../static/slam_pose_graph.png" alt="slam_pose_graph" style="height:120px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_loop_closure.png" alt="slam_loop_closure" style="height:120px" class="image-left"/>
+  ]
+]
+
+.cols[
+  .fifty[
+  Pose graph (node of graph: pose, encoded The edges between the nodes: measurement information
+  ]
+  <!-- node: environment measurement associated with robot pose -->
+  .fifty[
+  Loop closure
+  ]
+]
+
+Optimization: find the node configuration that will have the smallest error with respect to the measured data.
+<!-- Diagram-based SLAM algorithms are typically more
+effective than other approaches during the long-term
+map maintenance and as well as during the large-
+scale surroundings mapping. -->
+
+---
+
+## Mapping - SLAM
 ### Types of maps
 
 .cols[
@@ -52,80 +145,110 @@ name: main_title
   <img src="../static/grid_map.png" alt="grid_map" style="height:210px" class="image-left"/>
   ]
   .fifty[
-  <img src="../static/graph_map.jpg" alt="grid_map" style="height:210px" class="image-left"/>
+  <img src="../static/graph_map.jpg" alt="graph_map" style="height:210px" class="image-left"/>
   ]
   .fifty[
-  <img src="../static/feature_map.png" alt="feature_map" style="height:210px" class="image-left"/>
+  <img src="../static/feature_based_map.png" alt="feature_map" style="height:210px" class="image-left"/>
   ]
 ]
 .cols[
   .fifty[
-  Grid based
+  Grid based 2d map
   ]
   .fifty[
   Graph based
   ]
   .fifty[
-  Feature based
+  Feature based map (Zhang & Xie & Adams, 05).
+  <!-- Given: Observations of nearby features, Estimate: Map of features, path -->
   ]
 ]
 
 [source](http://ais.informatik.uni-freiburg.de/teaching/ss12/robotics/slides/12-slam.pdf)
 
 ---
+
 ## Mapping - SLAM
-### ROS 2 tools
+### grid-based map (2D/3D)
 
-SLAM for ROS 2 unfortunately does not have a golden standard yet. Some contenders are:
+* Binary Occupancy map
+  * Probability  is calculated for each grid cell (Bayes filter)
 
-* LaMa (2D) - IRIS Labs - New, arguably better, strong contender
+.cols[
+  .fifty[
+  <img src="../static/turtlebot_map.png" alt="grid_map" style="height:200px" class="image-center"/>
+  ]
+]
 
-* Cartographer (2D/3D) - Google - Ported from ROS 1, used often, but not maintained
+  * Cell is occupied: 1
+  * Cell is not occupied: 0
+  * No knowledge = 0.5
+
+---
+
+## Mapping - SLAM
+### Octree
+
+* Tree-based data structure
+
+* Each voxel in an octree represents the space contained in a cubic volume.
+
+* The minimum voxel size determines the resolution of the octree.
+
+
+<img src="../static/point_cloud_tree.png" alt="point_cloud_tree" style="height:150px" class="image-left"/>
+
+<img src="../static/voxel_resolutions.png" alt="point_cloud_tree" style="height:150px" class="image-left"/>
+<img src="../static/octree.png" alt="point_cloud_tree" style="height:150px" class="image-right"/>
+
+Occupied voxels are displayed in resolutions 0.08 m, 0.64 , and 1.28 m.
+
+source: [OctoMap](http://www.arminhornung.de/Research/pub/hornung13auro.pdf)
+
+---
+
+## Mapping - SLAM
+### ROS2 tools
+
+SLAM for ROS2 unfortunately does not have a golden standard yet. Some contenders are:
+
+* LaMa (2D) - IRIS Labs - efficiency, SLAM (scan matching), particle filter SLAM, scan matching base Localization
+<!-- the comparison of the scanned data, called scan
+matching with already created map or other scanned
+data. Hector SLAM -->
+<!-- The goal of scan matching is to find the relative pose (or transform) between the two robot positions where the scans were taken -->
+* Cartographer (2D/3D) - Google - Ported from ROS 1, used often
 
 * SLAM Toolbox (2D) - Steve Macenski - Currently shipped with Navigation2, needs support.
 [Help if you can!](https://discourse.ros.org/t/slam-toolbox-the-new-default-slam-implementation-for-ros2/12369)
 
-LaMa vs SLAM Toolbox  
-[https://www.youtube.com/watch?time_continue=48&v=Cgcl3LcFnEs&feature=emb_logo]
+(LaMa vs SLAM Toolbox)[https://www.youtube.com/watch?time_continue=48&v=Cgcl3LcFnEs&feature=emb_logo]
 ---
 
-## Mapping - 2D SLAM
- * Occupancy grid maps
-   * Prability is calculated for each grid cell (Bayes filter)
 
-   <img src="../static/occupency_grid_map.png" alt="grid_map" style="height:300px" class="image-center"/>
-
----
-
-## Mapping - 2D SLAM - Video
+## Mapping - SLAM
+### 2D SLAM Video
 <video src="../static/2d_mapping.mp4" style="height:300px"></video>
 
+It used a monocular camera. The system localizes the camera, builds new map and tries to close loops
+It also support for RGB-D camera and stereo camera.
+
+[Source code, ROS1](https://github.com/raulmur/ORB_SLAM2)
 ---
 
-## Mapping - 3D SLAM
-### Octotrees for 3D Occupancy Maps
-* Tree-based data structure  
 
-<img src="../static/point_cloud_tree.png" alt="point_cloud_tree" style="height:200px" class="image-left"/>   
-
-<img src="../static/octree_tree.png" alt="point_cloud_tree" style="height:200px" class="image-left"/>
-<img src="../static/octree.png" alt="point_cloud_tree" style="height:200px" class="image-right"/>   
-
-
-
-source: OctoMap : A Probabilistic , Flexible , and Compact 3 D Map Representation for Robotic Systems  
-source: http://ros-developer.com/2017/11/27/octomap-explanierend/
-
----
-## Mapping - 3D SLAM - Video  
+## Mapping - SLAM
+### 3D SLAM Video
 
  <video src="../static/3d_mapping.mp4" style="height:300px"></video>
 
- [Cartographer 3D SLAM example](https://github.com/inkyusa/cartographer_kitti_config)
+IMU + 3D Lidar
+
+[Cartographer 3D SLAM example](https://github.com/inkyusa/cartographer_kitti_config)
 
 ---
 
-## Navigation - Questions ?
+## SLAM - Questions ?
 
 </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js">
