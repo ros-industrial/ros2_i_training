@@ -27,7 +27,7 @@ Add the workshop's heading and filepath relative to `~/ros2_i_training/workshop/
 
 ### Setup Docker for the workshops
 
-To install `docker` on your `Ubuntu` system, follow the instructions ([here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04). To use `docker` without `sudo`, make sure to follow the instructions in step 2, "Executing the Docker Command Without Sudo".
+To install `docker` on your `Ubuntu` system, follow the instructions [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04). To use `docker` without `sudo`, make sure to follow the instructions in step 2, "Executing the Docker Command Without Sudo".
 
 The docker image for the training is available on [DockerHub](https://hub.docker.com/r/ipahsd/ros2-training-foxy).
 
