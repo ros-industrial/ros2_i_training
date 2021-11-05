@@ -101,9 +101,23 @@ To test `Rviz2` with docker
 ```
 
 #### Toubleshooting
-In case the errors while using graphics with docker
+In case of errors while using graphics with docker
 ```
 QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-root'
+```
+Or
+```
+[ERROR] [1636105083.324525273] [rviz2]: rviz::RenderSystem: error creating render window: RenderingAPIException: Unable to create a suitable GLXContext in GLXContext::GLXContext at /tmp/binarydeb/ros-foxy-rviz-ogre-vendor-8.2.1/obj-x86_64-linux-gnu/ogre-v1.12.1-prefix/src/ogre-v1.12.1/RenderSystems/GLSupport/src/GLX/OgreGLXContext.cpp (line 60)
+[ERROR] [1636105083.328652053] [rviz2]: Failed to create an OpenGL context. BadValue (integer parameter out of range for operation)
+[ERROR] [1636105083.328664706] [rviz2]: RenderingAPIException: Unable to create a suitable GLXContext in GLXContext::GLXContext at /tmp/binarydeb/ros-foxy-rviz-ogre-vendor-8.2.1/obj-x86_64-linux-gnu/ogre-v1.12.1-prefix/src/ogre-v1.12.1/RenderSystems/GLSupport/src/GLX/OgreGLXContext.cpp (line 60)
+[ERROR] [1636105083.328690617] [rviz2]: rviz::RenderSystem: error creating render window: RenderingAPIException: Unable to create a suitable GLXContext in GLXContext::GLXContext at /tmp/binarydeb/ros-foxy-rviz-ogre-vendor-8.2.1/obj-x86_64-linux-gnu/ogre-v1.12.1-prefix/src/ogre-v1.12.1/RenderSystems/GLSupport/src/GLX/OgreGLXContext.cpp (line 60)
+[ERROR] [1636105083.328699397] [rviz2]: Unable to create the rendering window after 100 tries
+terminate called after throwing an instance of 'std::runtime_error'
+what(): Unable to create the rendering window after 100 tries
+```
+Or
+```
+docker: Error response from daemon: invalid volume specification: '/tmp/.X11-unix: tmp/.X11-unix:rw': invalid mount config for type "bind": invalid mount path: ' tmp/.X11-unix' mount path must be absolute.
 ```
 most likely the graphics card used is NVidia.
 
@@ -115,11 +129,11 @@ or
 ```
 sudo lshw -C display
 ```
-If Nvidia graphic card is active, `nvidia-docker` or `nvidia-docker2` needs to be installed. ["How to install nvidia-docker2"](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+If NVidia graphic card is active, `nvidia-docker` or `nvidia-docker2` needs to be installed. For installation instructions, check ["How to install nvidia-docker2"](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit)
 
-After the installation
+After the installation, try running docker again
 ```
-nvidia-docker run -it  --env="DISPLAY=$DISPLAY"  --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix: tmp/.X11-unix:rw" rachelwu/ros2-training-foxy:nvidia rviz2
+./gui-docker -it ipahsd/ros2-training-foxy:01 rviz2
 ```
 
 #### Related links
