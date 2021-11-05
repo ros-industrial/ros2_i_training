@@ -87,7 +87,7 @@ d605c3f3b106   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   15 minu
 
 To be able to use RViz and Gazebo, the docker container needs graphics support. We modified [moveit/gui-docker](https://github.com/ros-planning/moveit/blob/master/.docker/gui-docker). To download the script
 ```
-wget https://raw.githubusercontent.com/ipa-rwu/ros2_i_training-1/rwu/fix/docker-with-nvidia/gui-docker
+wget https://raw.githubusercontent.com/ros-industrial/ros2_i_training/main/gui-docker
 chmod +x gui-docker
 ```
 To test `Rviz2` with docker
