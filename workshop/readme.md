@@ -66,7 +66,7 @@ The stopped container can be restarted with
 ```
 docker start test
 ```
-To execute an existing container which has been started
+To execute a new command in a running container
 ```
 docker exec -it test /bin/bash
 ```
