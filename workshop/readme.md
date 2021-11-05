@@ -40,7 +40,7 @@ docker run -it ipahsd/ros2-training-foxy:01 /bin/bash
 ---
 root@fe7b28bad402:/#
 ```
-The command creates a new container and starts it. This can be confirmed with
+The command creates a new container and starts it. This can be confirmed in a new terminal
 ```
 docker container ls
 ---
@@ -62,30 +62,55 @@ To stop a container without removing it
 ```
 docker container stop test
 ```
-To execute an existing container (container which was created with `docker run`, but later stopped with `docker stop`)
+The stopped container can be restarted with
 ```
 docker start test
+```
+To execute an existing container which has been started
+```
 docker exec -it test /bin/bash
 ```
 The command line prompt of docker (e.g. `root@fe7b28bad402:/#`) can be used like a typical Ubuntu terminal, but without graphics.
-
-The `docker run` command can be used to run `ROS` commands as well. Below is an example of [talker-listener](https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html) by creating two containers on separate terminals and communicating between them through `ROS` messages.
+Below is an example of [talker-listener](https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Cpp-Publisher-And-Subscriber.html) by creating two containers on separate terminals and communicating between them through `ROS` messages.
 ```
-docker run -it --rm ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp talker
+docker run -it --name talker ipahsd/ros2-training-foxy:01 /bin/bash
+---
+root@fe7b28bad402:/#
+---
+root@fe7b28bad402:/# ros2 run demo_nodes_cpp talker
 ```
-In a new terminal, run:
+and in a new terminal
 ```
-docker run -it --rm ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp listener
+docker run -it --name listener ipahsd/ros2-training-foxy:01 /bin/bash
+---
+root@5ab4cf0d8dac:/#
+---
+root@5ab4cf0d8dac:/# ros2 run demo_nodes_cpp listener
 ```
 Now the docker container in second terminal starts receiving messages published by the docker container in the first terminal.
-
 To list these two running containers created in the previous step:
 ```
 docker container ls
 ---
 CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS            NAMES
-ad9a8a8e4f26   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   15 minutes ago   Up 15 minutes                    goofy_tesla
-d605c3f3b106   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   15 minutes ago   Up 15 minutes                    hungry_grothendieck
+ad9a8a8e4f26   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   15 minutes ago   Up 15 minutes                    talker
+d605c3f3b106   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   15 minutes ago   Up 15 minutes                    listener
+```
+
+Another option to run `ROS` commands is
+```
+docker run -it --rm --name talker ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp talker
+```
+In a new terminal, run:
+```
+docker run -it --rm --name listener ipahsd/ros2-training-foxy:01 ros2 run demo_nodes_cpp listener
+```
+Notice `--rm` option in the above commands. With this option, the container is removed when exited.
+
+
+To exit the container
+```
+root@fe7b28bad402:/# exit
 ```
 
 ### To use docker with GUI
