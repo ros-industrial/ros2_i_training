@@ -42,6 +42,8 @@ root@fe7b28bad402:/#
 ```
 The command creates a new container and starts it. This can be confirmed with
 ```
+docker container ls
+---
 CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS          NAMES
 05100b6119b1   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   8 seconds ago    Up 7 seconds                   nostalgic_ptolemy
 ```
@@ -51,6 +53,8 @@ docker run -it --name test ipahsd/ros2-training-foxy:01 /bin/bash
 ```
 Now to confirm the name of the container
 ```
+docker container ls
+---
 CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS         NAMES
 0a52451af871   ipahsd/ros2-training-foxy:01   "/ros_entrypoint.sh …"   7 seconds ago    Up 6 seconds                  test
 ```
@@ -60,6 +64,7 @@ docker container stop test
 ```
 To execute an existing container (container which was created with `docker run`, but later stopped with `docker stop`)
 ```
+docker start test
 docker exec -it test /bin/bash
 ```
 The command line prompt of docker (e.g. `root@fe7b28bad402:/#`) can be used like a typical Ubuntu terminal, but without graphics.
