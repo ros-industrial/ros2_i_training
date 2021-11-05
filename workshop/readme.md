@@ -154,7 +154,14 @@ or
 ```
 sudo lshw -C display
 ```
-If NVidia graphic card is active, `nvidia-docker` or `nvidia-docker2` needs to be installed. For installation instructions, check ["How to install nvidia-docker2"](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit)
+If NVidia graphic card is active, `nvidia-docker` or `nvidia-docker2` needs to be installed.
+```
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+```
+For more details, check ["How to install nvidia-docker2"](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit)
+**WARNING:** Do not try additional steps for installation than listed above without full knowledge.
 
 After the installation, try running docker again
 ```
