@@ -38,117 +38,44 @@ name: main_title
 
 * The goal of SLAM  is to create or enhance an environment map.
 
+* Mathematically,
+    - Given the Robot's Controls and Observations
+    - Calculate the Map of the environment and Path of the robot.
+
 * Maps represent the environment, either 2D or 3D.
 
-* Is actually a tough problem to solve!
+* Is actually a tough problem to solve! Troubling humanity since 1985 [source](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam01-intro.pdf)
 
 ---
 
-## Mapping - SLAM
-### Algorithms
+## Mapping - Algorithms
 
-* Filtering:
-  * Particle filter (Gmapping eloquent), EKF(extended Kalman filter)
-  * Model the problem as Online state estimation
-
-* Smoothing:
-  * Full trajectories are estimated using a set of measurements
-  * Graph-based SLAM, e.g. Pose graph optimization (Cartographer, SLAM toolbox, Karto SLAM)
-
----
-
-## Mapping - SLAM
-#### Pose graph
-
-.cols[
-  .fifty[
-  <img src="../static/slam_case.png" alt="slam_case" style="height:120px" class="image-left"/>
-  ]
-  .fifty[
-  <img src="../static/slam_case_no_error.png" alt="slam_no_error" style="height:120px" class="image-left"/>
-  ]
-]
-
-.cols[
-  .fifty[
-  Robot(yellow circle) move in a close space with an obstacle(blue circle)
-  ]
-  .fifty[
-  Ideal situation
-  ]
-]
-
-.cols[
-  .fifty[
-  <img src="../static/slam_case_error.png" alt="slam_case_error" style="height:120px" class="image-left"/>
-  ]
-  .fifty[
-  <img src="../static/slam_case_errors.png" alt="slam_case_errors" style="height:120px" class="image-left"/>
-  ]
-]
-
-.cols[
-  .fifty[
-  Robot with an accurate Lidar, but odometry with large uncertainty (Grey circle: estimated pose)
-  ]
-  .fifty[
-  Robot continues moving around
-  ]
-]
+* Kalman Filters - [source](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam08-kf-wrapup.pdf)
+    - Probabilistic, Bayes filter, best for Linear Models and Gaussian distributions
+    - Further specialisations - Extended KF, Unscented KF, Extended Information Filter (EIF), Sparse efficiency
+* Particle Filters - [source](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam09-particle-filter.pdf)
+    - Probabilistic, Recursive Bayes filter, also appropriate for non-Gaussian distributions
+    - AKA Monte Carlo Localisation - most commonly used
+* Graph based - [source](http://ais.informatik.uni-freiburg.de/teaching/ws12/mapping/pdf/slam17-ls-landmarks.pdf)
+    - Deterministic, Graph of a problem with nodes for poses & edges for spatial constraints between poses
+    - Build the graph and find a node configuration that minimizes the error introduced by the constraints
 
 ---
 
-## Mapping - SLAM
-#### Pose graph
+## Mapping - Map types
 
 .cols[
   .fifty[
-  <img src="../static/slam_case_error.png" alt="slam_case_error" style="height:120px" class="image-left"/>
+  <img src="../static/grid_map.png" alt="grid_map" style="height:190px" class="image-left"/>
   ]
   .fifty[
-  <img src="../static/slam_case_errors.png" alt="slam_case_errors" style="height:120px" class="image-left"/>
-  ]
-]
-
-.cols[
-  .fifty[
-  <img src="../static/slam_pose_graph.png" alt="slam_pose_graph" style="height:120px" class="image-left"/>
+  <img src="../static/graph_map.jpg" alt="graph_map" style="height:190px" class="image-left"/>
   ]
   .fifty[
-  <img src="../static/slam_loop_closure.png" alt="slam_loop_closure" style="height:120px" class="image-left"/>
-  ]
-]
-
-.cols[
-  .fifty[
-  Pose graph (node of graph: pose, encoded The edges between the nodes: measurement information
-  ]
-  <!-- node: environment measurement associated with robot pose -->
-  .fifty[
-  Loop closure
-  ]
-]
-
-Optimization: find the node configuration that will have the smallest error with respect to the measured data.
-<!-- Diagram-based SLAM algorithms are typically more
-effective than other approaches during the long-term
-map maintenance and as well as during the large-
-scale surroundings mapping. -->
-
----
-
-## Mapping - SLAM
-### Types of maps
-
-.cols[
-  .fifty[
-  <img src="../static/grid_map.png" alt="grid_map" style="height:210px" class="image-left"/>
+  <img src="../static/feature_based_map.png" alt="feature_map" style="height:190px" class="image-left"/>
   ]
   .fifty[
-  <img src="../static/graph_map.jpg" alt="graph_map" style="height:210px" class="image-left"/>
-  ]
-  .fifty[
-  <img src="../static/feature_based_map.png" alt="feature_map" style="height:210px" class="image-left"/>
+  <img src="../static/slam_landmark.jpg" alt="feature_map" style="height:190px" class="image-left"/>
   ]
 ]
 .cols[
@@ -162,31 +89,21 @@ scale surroundings mapping. -->
   Feature based map (Zhang & Xie & Adams, 05).
   <!-- Given: Observations of nearby features, Estimate: Map of features, path -->
   ]
+  .fifty[
+  Landmark based 
+  ]
 ]
+
+*  Grid based maps 
+  * Binary Occupancy map
+  * Probability is calculated for each grid cell (Bayes filter)
+  * Occupied - 1; Not occupied - 0; No knowledge - 0.5
 
 [source](http://ais.informatik.uni-freiburg.de/teaching/ss12/robotics/slides/12-slam.pdf)
 
 ---
 
-## Mapping - SLAM
-### grid-based map (2D/3D)
-
-* Binary Occupancy map
-  * Probability  is calculated for each grid cell (Bayes filter)
-
-.cols[
-  .fifty[
-  <img src="../static/turtlebot_map.png" alt="grid_map" style="height:200px" class="image-center"/>
-  ]
-]
-
-  * Cell is occupied: 1
-  * Cell is not occupied: 0
-  * No knowledge = 0.5
-
----
-
-## Mapping - SLAM
+## Mapping - 3D Maps
 ### Octree
 
 * Tree-based data structure
@@ -207,8 +124,54 @@ source: [OctoMap](http://www.arminhornung.de/Research/pub/hornung13auro.pdf)
 
 ---
 
-## Mapping - SLAM
-### ROS2 tools
+## Mapping - Pose Inaccuracy
+
+.cols[
+  .fifty[
+  <img src="../static/slam_case.png" alt="slam_case" style="height:100px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_no_error.png" alt="slam_no_error" style="height:100px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_error.png" alt="slam_case_error" style="height:100px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_case_errors.png" alt="slam_case_errors" style="height:120px" class="image-left"/>
+  ]
+  .fifty[
+  <img src="../static/slam_loop_closure.png" alt="slam_loop_closure" style="height:120px" class="image-left"/>
+  ]
+]
+
+.cols[
+  .fifty[
+  Fig 1
+  ]
+  .fifty[
+  Fig 2
+  ]
+  .fifty[
+  Fig 3
+  ]
+  .fifty[
+  Fig 4
+  ]
+  .fifty[
+  Fig 5
+  ]
+]
+
+Fig 1: Closed environment with Robot (Yellow) and Obstacle (Blue)   
+Fig 2: When robot moves from A to B and is perfectly tracked (Perfect sensor & odometry)   
+Fig 3: When robot moves from A to B but has pose inaccuracy (Imperfect sensor &/or odom)   
+Fig 4: Mapping with pose inaccuracy (Imperfect sensor & odom)   
+Fig 5: Loop closure problem:  After one loop, Starting Pose A = Ending Pose B in real world, but not in map.   
+
+
+---
+
+## Mapping - SLAM in ROS2
 
 SLAM for ROS2 unfortunately does not have a golden standard yet. Some contenders are:
 
