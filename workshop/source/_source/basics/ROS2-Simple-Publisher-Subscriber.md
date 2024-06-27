@@ -98,7 +98,7 @@ class MinimalPublisher(Node):
         self.i = 0
 ```
 As explained above, we create a subclass of type `MinimalPublisher` using the base class `Node`.         
-In the constructor `__init__()`, we pass the name of the node that we ish to assign to the constructer of the parent class using `super()`. The parent class `Node` takes care of actually assigning this string as a name.    
+In the constructor `__init__()`, we pass the name of the node that we wish to assign to the constructer of the parent class using `super()`. The parent class `Node` takes care of actually assigning this string as a name.    
 `self.publisher_ = self.create_publisher(String, 'topic', 10)` This line actually creates a publisher, using the message type `String` that we imported, with the name `topic` that we choose and having a queue size of `10`. Queue size is the size of the output buffer. The commands used till now are typical when creating a subscriber. What follows next is only logic that is relevant to this node, and you may implement this in any way depending on your requirements.
 
 ```Python
