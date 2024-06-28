@@ -242,14 +242,14 @@ self.subscription = self.create_subscription(
 
 The first parameter to pass to the function is the msg type, the second is the name of the topic - this should be the same as declared in the publisher, the third is the callback function for the subscriber and the last is the message buffer size.
 
-The nxt part to understand is the callback function.
+The next part to understand is the callback function.
 
 ```Python
 def listener_callback(self, msg):
     self.get_logger().info('I heard: "%s"' % msg.data)
 ```
 
-The parameter that is automatically passed to this dunction is the incoming message. In this case, it is simply printed to console.
+The parameter that is automatically passed to this function is the incoming message. In this case, it is simply printed to console.
 
 ### 2.2 Declaring the executable
 
