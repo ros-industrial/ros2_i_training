@@ -30,6 +30,7 @@ jobs:
             pip install breathe
             pip install exhale
             pip install myst-parser
+            pip install sphinx_copybutton
 
       - name: Build documentation
         run: |
