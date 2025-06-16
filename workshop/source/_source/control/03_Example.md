@@ -1,4 +1,4 @@
-# Example 3: Robots with Multiple Interfaces
+# Robots with Multiple Interfaces
 
 This example demonstrates how to implement a multi-interface robot hardware, taking care of the interfaces used.
 

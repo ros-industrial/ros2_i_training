@@ -1,4 +1,4 @@
-# Example 1: RRBot
+# RRBot
 
 **RRBot**, or *Revolute-Revolute Manipulator Robot*, is a simple 3-linkage, 2-joint arm used to demonstrate various features.
 

@@ -1,4 +1,4 @@
-# Example 5: Industrial Robot with Externally Connected Sensor
+# Industrial Robot with Externally Connected Sensor
 
 This example shows how an externally connected sensor can be accessed:
 
