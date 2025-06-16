@@ -42,12 +42,10 @@ jobs:
         run: |
             git clone https://github.com/ipa-vsp/industrial_standards.git --branch gh-pages --single-branch gh-pages
             mkdir -p gh-pages/
+            cp -r ./workshop/build/html/* gh-pages/
             cd gh-pages
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
-            git pull origin gh-pages
-            rm -rf *
-            cp -r ./workshop/build/html/* gh-pages/
             git add .
             git commit -m "Update documentation" -a || true
 
