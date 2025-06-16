@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoveIt Setup Assistant &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="URDF" href="../urdf/introduction.html" />
+    <link rel="prev" title="ROS 2 Navigation" href="../navigation/ROS2-Navigation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prepare">Prepare</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#moveit-and-ros-2">MoveIt and ROS 2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-start">Step 1: Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-generate-self-collision-matrix">Step 2: Generate Self-Collision Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-add-virtual-joints">Step 3: Add Virtual Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-add-planning-groups">Step 4: Add Planning Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arm-group">Arm Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end-effector-group">End Effector Group</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-add-robot-poses">Step 5: Add Robot Poses</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ready-pose-for-arm">Ready Pose for Arm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-close-poses-for-hand">Open/Close Poses for Hand</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-6-label-end-effectors">Step 6: Label End Effectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-7-add-passive-joints">Step 7: Add Passive Joints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-8-ros2-control-urdf-modification">Step 8: ros2_control URDF Modification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-9-ros-2-controllers">Step 9: ROS 2 Controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#panda-arm-controller">Panda Arm Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hand-controller">Hand Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-10-moveit-controllers">Step 10: MoveIt Controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arm">Arm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hand">Hand</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-11-perception">Step 11: Perception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-12-launch-files">Step 12: Launch Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-13-add-author-information">Step 13: Add Author Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-14-generate-configuration-files">Step 14: Generate Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-run-the-demo">Build and Run the Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MoveIt Setup Assistant</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/manipulation/setup_assistance.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="moveit-setup-assistant">
+<h1>MoveIt Setup Assistant<a class="headerlink" href="#moveit-setup-assistant" title="Link to this heading"></a></h1>
+<section id="prepare">
+<h2>Prepare<a class="headerlink" href="#prepare" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>ws_moveit2/src
+<span class="nb">cd</span><span class="w"> </span>ws_moveit2/src
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>jazzy<span class="w"> </span>https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
+<span class="nb">cd</span><span class="w"> </span>..
+rosdep<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--iry
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Now look for <code class="docutils literal notranslate"><span class="pre">src/Universal_Robots_ROS2_Description/urdf/ur.urdf.xacro</span></code></p>
+<p><strong>Warning</strong>: This setup is using UR robots instead of the Panda robot. Therefore, please replace <strong>panda</strong> with <strong>ur</strong> in the following instructions.</p>
+<p><img alt="Setup Assistant Launch" src="../../_images/setup_assistant_launch.png" /></p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The MoveIt Setup Assistant is a GUI tool for configuring a robot for MoveIt. It generates a Semantic Robot Description Format (SRDF) file and other necessary configuration files. A URDF is required to use the Setup Assistant.</p>
+<p>Once you have a URDF, import it into the Setup Assistant to configure kinematics, planning groups, end effectors, and collision checking.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="moveit-and-ros-2">
+<h3>MoveIt and ROS 2<a class="headerlink" href="#moveit-and-ros-2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="#/doc/tutorials/getting_started/getting_started"><span class="xref myst">Install MoveIt</span></a> if you haven’t already.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">moveit_resources_panda_description</span></code> package, included in your workspace after installation.</p></li>
+</ul>
+</section>
+</section>
+<section id="step-1-start">
+<h2>Step 1: Start<a class="headerlink" href="#step-1-start" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>moveit_setup_assistant<span class="w"> </span>setup_assistant.launch.py
+</pre></div>
+</div>
+<p>Click <strong>Create New MoveIt Configuration Package</strong>.</p>
+<p><img alt="Create Package" src="../../_images/setup_assistant_create_package.png" /></p>
+<p>Browse to and load:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>~/ws_moveit2/src/moveit_resources/panda_description/urdf/panda.urdf
+</pre></div>
+</div>
+<p><img alt="Load URDF" src="../../_images/setup_assistant_load_panda_urdf.png" /></p>
+</section>
+<section id="step-2-generate-self-collision-matrix">
+<h2>Step 2: Generate Self-Collision Matrix<a class="headerlink" href="#step-2-generate-self-collision-matrix" title="Link to this heading"></a></h2>
+<p>Set the sampling density and click <strong>Generate Collision Matrix</strong>.</p>
+<p><img alt="Collision Matrix" src="../../_images/setup_assistant_panda_collision_matrix.png" /></p>
+<p>View and modify results:</p>
+<p><img alt="Collision Matrix Done" src="../../_images/setup_assistant_panda_collision_matrix_done.png" /></p>
+</section>
+<section id="step-3-add-virtual-joints">
+<h2>Step 3: Add Virtual Joints<a class="headerlink" href="#step-3-add-virtual-joints" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Joint Name: <code class="docutils literal notranslate"><span class="pre">virtual_joint</span></code></p></li>
+<li><p>Child Link: <code class="docutils literal notranslate"><span class="pre">panda_link0</span></code></p></li>
+<li><p>Parent Frame: <code class="docutils literal notranslate"><span class="pre">world</span></code></p></li>
+<li><p>Type: <code class="docutils literal notranslate"><span class="pre">fixed</span></code></p></li>
+</ul>
+<p><img alt="Virtual Joints" src="../../_images/setup_assistant_panda_virtual_joints.png" /></p>
+<blockquote>
+<div><p>For mobile robots, use planar or floating joints.</p>
+</div></blockquote>
+</section>
+<section id="step-4-add-planning-groups">
+<h2>Step 4: Add Planning Groups<a class="headerlink" href="#step-4-add-planning-groups" title="Link to this heading"></a></h2>
+<section id="arm-group">
+<h3>Arm Group<a class="headerlink" href="#arm-group" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code></p></li>
+<li><p>Solver: <code class="docutils literal notranslate"><span class="pre">kdl_kinematics_plugin/KDLKinematicsPlugin</span></code></p></li>
+</ul>
+<p><img alt="Planning Groups" src="../../_images/setup_assistant_panda_planning_groups.png" /></p>
+<p>Select joints from <code class="docutils literal notranslate"><span class="pre">virtual_joint</span></code> to <code class="docutils literal notranslate"><span class="pre">panda_joint8</span></code>:</p>
+<p><img alt="Arm Joints" src="../../_images/setup_assistant_panda_arm_group_joints.png" /></p>
+<p>Save group:</p>
+<p><img alt="Arm Group Saved" src="../../_images/setup_assistant_panda_arm_group_saved.png" /></p>
+</section>
+<section id="end-effector-group">
+<h3>End Effector Group<a class="headerlink" href="#end-effector-group" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+<li><p>Solver: <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p>Links: <code class="docutils literal notranslate"><span class="pre">panda_hand</span></code>, <code class="docutils literal notranslate"><span class="pre">panda_leftfinger</span></code>, <code class="docutils literal notranslate"><span class="pre">panda_rightfinger</span></code></p></li>
+</ul>
+<p><img alt="Hand Group" src="../../_images/setup_assistant_panda_hand_group_links.png" /></p>
+<p>Final group list:</p>
+<p><img alt="Planning Groups Done" src="../../_images/setup_assistant_panda_planning_groups_done.png" /></p>
+<blockquote>
+<div><p>Use <strong>Add Subgroup</strong> for compound groups (e.g., dual-arm systems).</p>
+</div></blockquote>
+</section>
+</section>
+<section id="step-5-add-robot-poses">
+<h2>Step 5: Add Robot Poses<a class="headerlink" href="#step-5-add-robot-poses" title="Link to this heading"></a></h2>
+<section id="ready-pose-for-arm">
+<h3>Ready Pose for Arm<a class="headerlink" href="#ready-pose-for-arm" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code></p></li>
+<li><p>Pose: <code class="docutils literal notranslate"><span class="pre">ready</span></code></p></li>
+<li><p>Values: <code class="docutils literal notranslate"><span class="pre">{0.0,</span> <span class="pre">-0.785,</span> <span class="pre">0.0,</span> <span class="pre">-2.356,</span> <span class="pre">0.0,</span> <span class="pre">1.571,</span> <span class="pre">0.785}</span></code></p></li>
+</ul>
+<p><img alt="Ready Pose" src="../../_images/setup_assistant_panda_predefined_arm_pose.png" /></p>
+</section>
+<section id="open-close-poses-for-hand">
+<h3>Open/Close Poses for Hand<a class="headerlink" href="#open-close-poses-for-hand" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open</span></code>: <code class="docutils literal notranslate"><span class="pre">0.035</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close</span></code>: <code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
+</ul>
+<p><img alt="Open Pose" src="../../_images/setup_assistant_panda_predefined_hand_open_pose.png" /></p>
+<p><img alt="Close Pose" src="../../_images/setup_assistant_panda_predefined_hand_close_pose.png" /></p>
+<blockquote>
+<div><p>Only <code class="docutils literal notranslate"><span class="pre">panda_finger_joint1</span></code> is shown as <code class="docutils literal notranslate"><span class="pre">panda_finger_joint2</span></code> mimics it.</p>
+</div></blockquote>
+<p>Final poses:</p>
+<p><img alt="Predefined Poses Done" src="../../_images/setup_assistant_panda_predefined_poses_done.png" /></p>
+</section>
+</section>
+<section id="step-6-label-end-effectors">
+<h2>Step 6: Label End Effectors<a class="headerlink" href="#step-6-label-end-effectors" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+<li><p>Parent Link: <code class="docutils literal notranslate"><span class="pre">panda_link8</span></code></p></li>
+</ul>
+<p><img alt="Add End Effector" src="../../_images/setup_assistant_panda_add_end_effector.png" /></p>
+</section>
+<section id="step-7-add-passive-joints">
+<h2>Step 7: Add Passive Joints<a class="headerlink" href="#step-7-add-passive-joints" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>Skip this step for Panda. Use if robot has unactuated joints.</p>
+</div></blockquote>
+</section>
+<section id="step-8-ros2-control-urdf-modification">
+<h2>Step 8: ros2_control URDF Modification<a class="headerlink" href="#step-8-ros2-control-urdf-modification" title="Link to this heading"></a></h2>
+<p>Define command/state interfaces (default: position command; position + velocity states).</p>
+<p><img alt="ros2control Tags" src="../../_images/setup_assistant_ros2_control_tags.png" /></p>
+</section>
+<section id="step-9-ros-2-controllers">
+<h2>Step 9: ROS 2 Controllers<a class="headerlink" href="#step-9-ros-2-controllers" title="Link to this heading"></a></h2>
+<section id="panda-arm-controller">
+<h3>Panda Arm Controller<a class="headerlink" href="#panda-arm-controller" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">panda_arm_controller</span></code></p></li>
+<li><p>Type: <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller/JointTrajectoryController</span></code></p></li>
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code></p></li>
+</ul>
+<p><img alt="Arm Controller Type" src="../../_images/setup_assistant_panda_arm_ros2_controller_type.png" /></p>
+<p><img alt="Arm Controller Group" src="../../_images/setup_assistant_panda_arm_ros2_controller_group.png" /></p>
+</section>
+<section id="hand-controller">
+<h3>Hand Controller<a class="headerlink" href="#hand-controller" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">hand_controller</span></code></p></li>
+<li><p>Type: <code class="docutils literal notranslate"><span class="pre">position_controllers/GripperActionController</span></code></p></li>
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+</ul>
+<p><img alt="Hand Controller Type" src="../../_images/setup_assistant_hand_ros2_controller_type.png" /></p>
+<p><img alt="Hand Controller Group" src="../../_images/setup_assistant_hand_ros2_controller_group.png" /></p>
+<p>Final list:</p>
+<p><img alt="Controllers Done" src="../../_images/setup_assistant_ros2_controllers_done.png" /></p>
+</section>
+</section>
+<section id="step-10-moveit-controllers">
+<h2>Step 10: MoveIt Controllers<a class="headerlink" href="#step-10-moveit-controllers" title="Link to this heading"></a></h2>
+<p>Configure MoveIt interfaces to match ROS 2 controllers.</p>
+<section id="arm">
+<h3>Arm<a class="headerlink" href="#arm" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">panda_arm_controller</span></code></p></li>
+<li><p>Type: <code class="docutils literal notranslate"><span class="pre">FollowJointTrajectory</span></code></p></li>
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code></p></li>
+</ul>
+<p><img alt="MoveIt Arm Controller" src="../../_images/setup_assistant_panda_arm_moveit_controller_type.png" /></p>
+</section>
+<section id="hand">
+<h3>Hand<a class="headerlink" href="#hand" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Name: <code class="docutils literal notranslate"><span class="pre">hand_controller</span></code></p></li>
+<li><p>Type: <code class="docutils literal notranslate"><span class="pre">Gripper</span> <span class="pre">Command</span></code></p></li>
+<li><p>Group: <code class="docutils literal notranslate"><span class="pre">hand</span></code></p></li>
+</ul>
+<p><img alt="MoveIt Hand Controller" src="../../_images/setup_assistant_hand_moveit_controller_type_gripper.png" /></p>
+<p>Final MoveIt controller list:</p>
+<p><img alt="MoveIt Controllers Done" src="../../_images/setup_assistant_moveit_controllers_done_gripper.png" /></p>
+</section>
+</section>
+<section id="step-11-perception">
+<h2>Step 11: Perception<a class="headerlink" href="#step-11-perception" title="Link to this heading"></a></h2>
+<p>Use this pane to define 3D sensors. Skip or choose <strong>None</strong> if not needed.</p>
+<p><img alt="Perception None" src="../../_images/setup_assistant_panda_3d_perception.png" /></p>
+<p>Example (for robots with cameras):</p>
+<p><img alt="Point Cloud" src="../../_images/setup_assistant_panda_3d_perception_point_cloud.png" /></p>
+<p>See <a class="reference internal" href="#/doc/examples/perception_pipeline/perception_pipeline_tutorial"><span class="xref myst">Perception Pipeline tutorial</span></a>.</p>
+</section>
+<section id="step-12-launch-files">
+<h2>Step 12: Launch Files<a class="headerlink" href="#step-12-launch-files" title="Link to this heading"></a></h2>
+<p>View generated launch files and their purposes.</p>
+<p><img alt="Launch Files" src="../../_images/setup_assistant_launch_files.png" /></p>
+</section>
+<section id="step-13-add-author-information">
+<h2>Step 13: Add Author Information<a class="headerlink" href="#step-13-add-author-information" title="Link to this heading"></a></h2>
+<p>Enter your name and email in the <strong>Author Information</strong> pane.</p>
+</section>
+<section id="step-14-generate-configuration-files">
+<h2>Step 14: Generate Configuration Files<a class="headerlink" href="#step-14-generate-configuration-files" title="Link to this heading"></a></h2>
+<p>Click <strong>Configuration Files</strong>, choose a location (e.g., <code class="docutils literal notranslate"><span class="pre">~/ws_moveit2/src/panda_moveit_config</span></code>), and click <strong>Generate Package</strong>.</p>
+<p><img alt="Done" src="../../_images/setup_assistant_done.png" /></p>
+</section>
+<section id="build-and-run-the-demo">
+<h2>Build and Run the Demo<a class="headerlink" href="#build-and-run-the-demo" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_moveit2
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>panda_moveit_config
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+
+ros2<span class="w"> </span>launch<span class="w"> </span>panda_moveit_config<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<p>Watch the <a class="reference external" href="https://youtu.be/f__udZlnTdM">YouTube demo</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../navigation/ROS2-Navigation.html" class="btn btn-neutral float-left" title="ROS 2 Navigation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../urdf/introduction.html" class="btn btn-neutral float-right" title="URDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

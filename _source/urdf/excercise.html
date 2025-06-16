@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URDF &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">URDF</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/urdf/excercise.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="urdf">
+<h1>URDF<a class="headerlink" href="#urdf" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The <strong>Unified Robot Description Format (URDF)</strong> is an XML-based format used to describe the structure, kinematics, and visual properties of a robot in ROS 2. It provides a standardized way to define robot models, including links, joints, and sensors, making it essential for simulation, visualization, and control of robot.</p>
+<p>Before starting the tutorial on URDF, here is the basics to know before we get started.</p>
+</section>
+<section id="xml-robot-description-format">
+<h2>XML Robot Description Format<a class="headerlink" href="#xml-robot-description-format" title="Link to this heading"></a></h2>
+<p>The <strong>Unified Robot Description Format</strong> is an XML specification to describe a robot. We attempt to keep this specification as general as possible, but obviously the specification cannot describe all robots. The main limitation at this point is that only tree structures can be represented, ruling out all parallel robots. Also, the specification assumes the robot consists of rigid links connected by joints; flexible elements are not supported.</p>
+<p>The specification covers:</p>
+<ul class="simple">
+<li><p>Kinematic and dynamic description of the robot</p></li>
+<li><p>Visual representation of the robot</p></li>
+<li><p>Collision model of the robot</p></li>
+</ul>
+<p><img alt="LINk" src="../../_images/link.png" /></p>
+<p>The description of a robot consists of a set of <strong>link elements</strong>, and a set of <strong>joint elements</strong> connecting the links together. So a typical robot description looks something like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;?xml<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>?&gt;
+&lt;?xml-model<span class="w"> </span><span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/ros/urdfdom/master/xsd/urdf.xsd&quot;</span><span class="w"> </span>?&gt;
+<span class="w">  </span>&lt;robot<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;pr2&quot;</span><span class="w"> </span><span class="nv">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.ros.org&quot;</span>&gt;
+<span class="w">  </span>&lt;link&gt;<span class="w"> </span>...<span class="w"> </span>&lt;/link&gt;
+<span class="w">  </span>&lt;link&gt;<span class="w"> </span>...<span class="w"> </span>&lt;/link&gt;
+<span class="w">  </span>&lt;link&gt;<span class="w"> </span>...<span class="w"> </span>&lt;/link&gt;
+<span class="w">  </span>&lt;joint&gt;<span class="w">  </span>....<span class="w">  </span>&lt;/joint&gt;
+<span class="w">  </span>&lt;joint&gt;<span class="w">  </span>....<span class="w">  </span>&lt;/joint&gt;
+<span class="w">  </span>&lt;joint&gt;<span class="w">  </span>....<span class="w">  </span>&lt;/joint&gt;
+<span class="w">  </span>&lt;/robot&gt;
+</pre></div>
+</div>
+</section>
+<section id="xml-specification">
+<h2>XML Specification<a class="headerlink" href="#xml-specification" title="Link to this heading"></a></h2>
+</section>
+<section id="robot-element">
+<h2>&lt; robot&gt; element<a class="headerlink" href="#robot-element" title="Link to this heading"></a></h2>
+<p>Theroot element in a robot description file must be a robot, with all other elements must be encapsulated within.</p>
+<p>Below is an example showing a robot with name <code class="docutils literal notranslate"><span class="pre">my_robot</span></code> and its elements(joints, links, etc ) which are defined inside the robot element.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;robot<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my_robot&quot;</span>&gt;
+<span class="w">    </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
+<span class="w">    </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;wheel&quot;</span>/&gt;
+<span class="w">    </span>
+<span class="w">    </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;wheel_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span>&gt;
+<span class="w">        </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
+<span class="w">        </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;wheel&quot;</span>/&gt;
+<span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0.1&quot;</span>/&gt;
+<span class="w">        </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span>/&gt;
+<span class="w">    </span>&lt;/joint&gt;
+&lt;/robot&gt;
+</pre></div>
+</div>
+</section>
+<section id="elements-of-robot">
+<h2>2. Elements of &lt; robot&gt;<a class="headerlink" href="#elements-of-robot" title="Link to this heading"></a></h2>
+<section id="link">
+<h3>Link<a class="headerlink" href="#link" title="Link to this heading"></a></h3>
+<p>The link element describes a rigid body with an inertia, visual features, and collision properties.</p>
+<p><img alt="LINk" src="../../_images/inertial.png" /></p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my_link&quot;</span>&gt;
+<span class="w">      </span>&lt;inertial&gt;
+<span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0.5&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+<span class="w">        </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
+<span class="w">        </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;/inertial&gt;
+<span class="w">   </span>
+<span class="w">      </span>&lt;visual&gt;
+<span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">       </span>&lt;geometry&gt;
+<span class="w">         </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;1 1 1&quot;</span><span class="w"> </span>/&gt;
+<span class="w">       </span>&lt;/geometry&gt;
+<span class="w">       </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Cyan&quot;</span>&gt;
+<span class="w">         </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 1.0 1.0 1.0&quot;</span>/&gt;
+<span class="w">       </span>&lt;/material&gt;
+<span class="w">     </span>&lt;/visual&gt;
+<span class="w">  </span>
+<span class="w">     </span>&lt;collision&gt;
+<span class="w">       </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+<span class="w">       </span>&lt;geometry&gt;
+<span class="w">         </span>&lt;cylinder<span class="w"> </span><span class="nv">radius</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="w"> </span><span class="nv">length</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span>/&gt;
+<span class="w">       </span>&lt;/geometry&gt;
+<span class="w">     </span>&lt;/collision&gt;
+<span class="w">   </span>&lt;/link&gt;
+</pre></div>
+</div>
+</section>
+<section id="attribute">
+<h3>Attribute<a class="headerlink" href="#attribute" title="Link to this heading"></a></h3>
+<section id="name-required">
+<h4>Name (required)<a class="headerlink" href="#name-required" title="Link to this heading"></a></h4>
+<p>Specifies a unique name of the joint</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">name</span></code> is an attribute and is the name of the link itself.</p>
+</section>
+</section>
+<section id="elements">
+<h3>Elements<a class="headerlink" href="#elements" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>&lt; inertial&gt;</strong> (optional) – Defines the mass, center of mass, and inertia.</p>
+<ul>
+<li><p><strong>&lt; origin&gt;</strong> (optional) – Specifies the center of mass relative to the link frame.</p></li>
+<li><p><strong>&lt; mass&gt;</strong> – Sets the link’s mass.</p></li>
+<li><p><strong>&lt; inertia&gt;</strong> – Defines moments and products of inertia.</p></li>
+</ul>
+</li>
+<li><p><strong>&lt; visual&gt;</strong> (optional) – Specifies the appearance of the link.</p>
+<ul>
+<li><p><strong>&lt; geometry&gt;</strong> (required) – Defines shape (<box>, <cylinder>, <sphere>, or <mesh>).</p></li>
+<li><p><strong>&lt; material&gt;</strong> (optional) – Defines color (<color>) and texture (<texture>).</p></li>
+<li><p><strong>&lt; origin&gt;</strong> (optional) – Sets position and orientation relative to the link.</p></li>
+</ul>
+</li>
+<li><p><strong>&lt; collision&gt;</strong> (optional) – Defines the collision model, often simpler than the visual model.</p>
+<ul>
+<li><p><strong>&lt; geometry&gt;</strong> – Uses the same shape options as <visual>.</p></li>
+<li><p><strong>&lt; origin&gt;</strong> (optional) – Sets position and orientation for collision calculations</p></li>
+</ul>
+</li>
+</ul>
+<p>For more details of each elements , refer <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">URDF Link</a>.</p>
+</section>
+<section id="joint">
+<h3>Joint<a class="headerlink" href="#joint" title="Link to this heading"></a></h3>
+<p>The joint element describes the kinematics and dynamics of the joint and also specifies the safety limits of the joint.</p>
+<p><img alt="LINk" src="../../_images/joint.png" /></p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">     </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;floating&quot;</span>&gt;
+<span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 3.1416&quot;</span>/&gt;
+<span class="w">        </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>/&gt;
+<span class="w">        </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>/&gt;
+<span class="w">    </span>
+<span class="w">        </span>&lt;calibration<span class="w"> </span><span class="nv">rising</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>/&gt;
+<span class="w">        </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>/&gt;
+<span class="w">        </span>&lt;limit<span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-2.2&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;0.7&quot;</span><span class="w"> </span>/&gt;
+<span class="w">        </span>&lt;safety_controller<span class="w"> </span><span class="nv">k_velocity</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="nv">k_position</span><span class="o">=</span><span class="s2">&quot;15&quot;</span><span class="w"> </span><span class="nv">soft_lower_limit</span><span class="o">=</span><span class="s2">&quot;-2.0&quot;</span><span class="w"> </span><span class="nv">soft_upper_limit</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;/joint&gt;
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Attribute<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="id2">
+<h4>Name (required)<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>Specifies a unique name of the joint</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">name</span></code> is an attribute and is the name of the joint itself.</p>
+</section>
+<section id="type-required">
+<h4>Type (required)<a class="headerlink" href="#type-required" title="Link to this heading"></a></h4>
+<p>Specifies the type of joint, where type can be one of the following:</p>
+<ul class="simple">
+<li><p>revolute — a hinge joint that rotates along the axis and has a limited range specified by the upper and lower limits.</p></li>
+<li><p>continuous — a continuous hinge joint that rotates around the axis and has no upper and lower limits.</p></li>
+<li><p>prismatic — a sliding joint that slides along the axis, and has a limited range specified by the upper and lower limits.</p></li>
+<li><p>fixed — this is not really a joint because it cannot move. All degrees of freedom are locked. This type of joint does not require the <axis>, <calibration>, <dynamics>, <limits> or &lt;safety_controller&gt;.</p></li>
+<li><p>floating — this joint allows motion for all 6 degrees of freedom.</p></li>
+<li><p>planar — this joint allows motion in a plane perpendicular to the axis.</p></li>
+</ul>
+</section>
+</section>
+<section id="id3">
+<h3>Elements<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>&lt; origin&gt;</strong> (optional) – Defines the joint’s position (xyz) and rotation (rpy) relative to the parent link.</p></li>
+<li><p><strong>&lt; parent&gt;</strong> (required) – Specifies the parent link in the robot structure.</p></li>
+<li><p><strong>&lt; child&gt;</strong> (required) – Specifies the child link.</p></li>
+<li><p><strong>&lt; axis&gt;</strong> (optional, default: (1,0,0)) – Defines the axis of motion for revolute and prismatic joints.</p></li>
+<li><p><strong>&lt; calibration&gt;</strong> (optional) – Sets reference positions for joint calibration.</p></li>
+<li><p><strong>&lt; dynamics&gt;</strong> (optional) – Defines damping (resistance to motion) and friction.</p></li>
+<li><p><strong>&lt; limit&gt;</strong> (required for revolute &amp; prismatic joints) – Specifies motion constraints: lower and upper limits, effort, and velocity.</p></li>
+<li><p><strong>&lt; mimic&gt;</strong> (optional) – Makes a joint replicate another joint’s movement using a multiplier and offset.</p></li>
+<li><p><strong>&lt; safety_controller&gt;</strong> (optional) – Sets safety limits (soft_lower_limit, soft_upper_limit) and safety parameters (k_position, k_velocity).</p></li>
+<li><p><strong>&lt; type&gt;</strong> (required) – Defines the joint type: revolute, continuous, prismatic, fixed, floating, or planar.</p></li>
+</ul>
+<p>For more details of each elements , read <a class="reference external" href="https://wiki.ros.org/urdf/XML/joint">URDF Joint</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

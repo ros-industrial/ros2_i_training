@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industrial Robot with Externally Connected Sensor &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Robots with Multiple Interfaces" href="03_Example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.4 - ROS2-Control-Example-4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-steps">Tutorial Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launch-rrbot-visualization">1. Launch RRBot Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch-rrbot-with-external-sensor">2. Launch RRBot with External Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verify-hardware-interfaces">3. Verify Hardware Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-running-controllers">4. Check Running Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-commands-to-rrbot">5. Send Commands to RRBot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#access-force-torque-sensor-data">6. Access Force-Torque Sensor Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#files-used-for-this-demo">Files Used for This Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controllers-in-this-demo">Controllers in This Demo</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Industrial Robot with Externally Connected Sensor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/control/04_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="industrial-robot-with-externally-connected-sensor">
+<h1>Industrial Robot with Externally Connected Sensor<a class="headerlink" href="#industrial-robot-with-externally-connected-sensor" title="Link to this heading"></a></h1>
+<p>This example shows how an externally connected sensor can be accessed:</p>
+<ul class="simple">
+<li><p>Communication is done using a proprietary API to interface with the robot control box.</p></li>
+<li><p>Joint data are exchanged simultaneously.</p></li>
+<li><p>Sensor data are exchanged independently of joint data.</p></li>
+<li><p>Examples: KUKA RSI and FTS connected to independent PC with ROS 2.</p></li>
+</ul>
+<p>A 3D Force-Torque Sensor (FTS) is simulated using a <code class="docutils literal notranslate"><span class="pre">SensorInterface</span></code> that generates random sensor readings.</p>
+<section id="tutorial-steps">
+<h2>Tutorial Steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<section id="launch-rrbot-visualization">
+<h3>1. Launch RRBot Visualization<a class="headerlink" href="#launch-rrbot-visualization" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_5<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: Warning <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span></code> is expected while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> initializes. It provides a GUI to set a random configuration for RRBot, shown in RViz.</p>
+</div></blockquote>
+</section>
+<section id="launch-rrbot-with-external-sensor">
+<h3>2. Launch RRBot with External Sensor<a class="headerlink" href="#launch-rrbot-with-external-sensor" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_5<span class="w"> </span>rrbot_system_with_external_sensor.launch.py
+</pre></div>
+</div>
+<p>This starts the robot hardware, controllers, and opens RViz. Console output will include internal state logs (for demonstration only).</p>
+<p>If RViz shows two orange and one yellow rectangles, the system has started correctly.</p>
+</section>
+<section id="verify-hardware-interfaces">
+<h3>3. Verify Hardware Interfaces<a class="headerlink" href="#verify-hardware-interfaces" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">  </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">  </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+state<span class="w"> </span>interfaces
+<span class="w">  </span>joint1/position
+<span class="w">  </span>joint2/position
+<span class="w">  </span>tcp_fts_sensor/force.x
+<span class="w">  </span>tcp_fts_sensor/force.y
+<span class="w">  </span>tcp_fts_sensor/force.z
+<span class="w">  </span>tcp_fts_sensor/torque.x
+<span class="w">  </span>tcp_fts_sensor/torque.y
+</pre></div>
+</div>
+<p>Check hardware components:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>name:<span class="w"> </span>ExternalRRBotFTSensor
+<span class="w">    </span>type:<span class="w"> </span>sensor
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_5/ExternalRRBotForceTorqueSensorHardware
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">2</span>
+<span class="w">    </span>name:<span class="w"> </span>RRBotSystemPositionOnly
+<span class="w">    </span>type:<span class="w"> </span>system
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_5/RRBotSystemPositionOnlyHardware
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">        </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">        </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="check-running-controllers">
+<h3>4. Check Running Controllers<a class="headerlink" href="#check-running-controllers" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
+fts_broadcaster<span class="o">[</span>force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster<span class="o">]</span><span class="w"> </span>active
+joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
+</pre></div>
+</div>
+</section>
+<section id="send-commands-to-rrbot">
+<h3>5. Send Commands to RRBot<a class="headerlink" href="#send-commands-to-rrbot" title="Link to this heading"></a></h3>
+<p><strong>a. Manual Control:</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<span class="s2">- 0.5</span>
+<span class="s2">- 0.5&quot;</span>
+</pre></div>
+</div>
+<p><strong>b. Using Demo Node:</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_5<span class="w"> </span>test_forward_position_controller.launch.py
+</pre></div>
+</div>
+<p>Example log output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Writing<span class="w"> </span>commands:
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint1&#39;</span>
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint2&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="access-force-torque-sensor-data">
+<h3>6. Access Force-Torque Sensor Data<a class="headerlink" href="#access-force-torque-sensor-data" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/fts_broadcaster/wrench
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">header</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">stamp</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1676444704</span>
+<span class="w">    </span><span class="nt">nanosec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">332221422</span>
+<span class="w">  </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tool_link</span>
+<span class="nt">wrench</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">force</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.21</span>
+<span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.32</span>
+<span class="w">    </span><span class="nt">z</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.43</span>
+<span class="w">  </span><span class="nt">torque</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.54</span>
+<span class="w">    </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.65</span>
+<span class="w">    </span><span class="nt">z</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.76</span>
+</pre></div>
+</div>
+<p>Sensor data is visualized in RViz:</p>
+<p><img alt="RRBot Wrench" src="../../_images/rrbot_wrench.png" /></p>
+</section>
+</section>
+<section id="files-used-for-this-demo">
+<h2>Files Used for This Demo<a class="headerlink" href="#files-used-for-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Launch file</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/bringup/launch/rrbot_system_with_external_sensor.launch.py">rrbot_system_with_external_sensor.launch.py</a></p></li>
+<li><p><strong>Controllers YAML</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/bringup/config/rrbot_with_external_sensor_controllers.yaml">rrbot_with_external_sensor_controllers.yaml</a></p></li>
+<li><p><strong>URDF</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/blob/master/example_5/description/urdf/rrbot_system_with_external_sensor.urdf.xacro">rrbot_with_external_sensor_controllers.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/rrbot/urdf/rrbot_description.urdf.xacro">rrbot_description.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/description/ros2_control/rrbot_system_position_only.ros2_control.xacro">rrbot_system_position_only.ros2_control.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/description/ros2_control/external_rrbot_force_torque_sensor.ros2_control.xacro">external_rrbot_force_torque_sensor.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p><strong>RViz Config</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/description/rviz/rrbot.rviz">rrbot.rviz</a></p></li>
+<li><p><strong>Hardware Interface Plugins</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/hardware/rrbot.cpp">rrbot.cpp (robot)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_5/hardware/external_rrbot_force_torque_sensor.cpp">external_rrbot_force_torque_sensor.cpp (sensor)</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="controllers-in-this-demo">
+<h2>Controllers in This Demo<a class="headerlink" href="#controllers-in-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Joint State Broadcaster</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">docs</a>)</p></li>
+<li><p><strong>Forward Command Controller</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/forward_command_controller">docs</a>)</p></li>
+<li><p><strong>Force Torque Sensor Broadcaster</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/force_torque_sensor_broadcaster">docs</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03_Example.html" class="btn btn-neutral float-left" title="Robots with Multiple Interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

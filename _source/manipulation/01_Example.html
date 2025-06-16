@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoveIt 2 Jazzy: Python Move Group Tutorial &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MoveIt 2 Jazzy: Python Move Group Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/manipulation/01_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="moveit-2-jazzy-python-move-group-tutorial">
+<h1>MoveIt 2 Jazzy: Python Move Group Tutorial<a class="headerlink" href="#moveit-2-jazzy-python-move-group-tutorial" title="Link to this heading"></a></h1>
+<p>This tutorial walks you through creating a Python-based MoveIt 2 interface package using ROS 2 Jazzy. You’ll learn how to:</p>
+<ol class="arabic simple">
+<li><p>Create a Python ROS 2 package.</p></li>
+<li><p>Write a script that moves a robot to a specific pose.</p></li>
+<li><p>Configure the package for MoveIt.</p></li>
+<li><p>Run the motion planning script.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="step-1-create-a-python-package-for-move-group">
+<h2>Step 1: Create a Python Package for Move Group<a class="headerlink" href="#step-1-create-a-python-package-for-move-group" title="Link to this heading"></a></h2>
+<p>Open a terminal in your ROS 2 workspace <code class="docutils literal notranslate"><span class="pre">src</span></code> directory:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_moveit2/src
+ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>moveit_python_demo<span class="w"> </span>--dependencies<span class="w"> </span>rclpy<span class="w"> </span>moveit_commander<span class="w"> </span>geometry_msgs
+</pre></div>
+</div>
+<p>This will generate the basic Python package structure.</p>
+<section id="update-setup-py">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#update-setup-py" title="Link to this heading"></a></h3>
+<p>Edit the generated <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file and update the <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> block:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;move_to_pose = moveit_python_demo.move_to_pose:main&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-2-create-script-to-move-robot-to-a-pose">
+<h2>Step 2: Create Script to Move Robot to a Pose<a class="headerlink" href="#step-2-create-script-to-move-robot-to-a-pose" title="Link to this heading"></a></h2>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">move_to_pose.py</span></code> inside the <code class="docutils literal notranslate"><span class="pre">moveit_python_demo/moveit_python_demo/</span></code> directory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moveit_commander</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoveGroupCommander</span><span class="p">,</span> <span class="n">PlanningSceneInterface</span><span class="p">,</span> <span class="n">RobotCommander</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">geometry_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">PoseStamped</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MoveToPoseDemo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;move_to_pose_demo&#39;</span><span class="p">)</span>
+        <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># ensure time is updated</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">RobotCommander</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">PlanningSceneInterface</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">MoveGroupCommander</span><span class="p">(</span><span class="s1">&#39;arm&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_reference_frame</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_velocity_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_acceleration_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_to_ready_pose</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_to_ready_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">target_pose</span> <span class="o">=</span> <span class="n">PoseStamped</span><span class="p">()</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.4</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.4</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_target</span><span class="p">(</span><span class="n">target_pose</span><span class="p">)</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">clear_pose_targets</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Motion executed successfully!&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Motion planning failed!&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">MoveToPoseDemo</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Make it executable:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>moveit_python_demo/moveit_python_demo/move_to_pose.py
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-3-configure-the-package">
+<h2>Step 3: Configure the Package<a class="headerlink" href="#step-3-configure-the-package" title="Link to this heading"></a></h2>
+<section id="add-install-requires-to-setup-py">
+<h3>Add <code class="docutils literal notranslate"><span class="pre">install_requires</span></code> to <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#add-install-requires-to-setup-py" title="Link to this heading"></a></h3>
+<p>Make sure your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> includes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+</pre></div>
+</div>
+</section>
+<section id="add-an-init-py">
+<h3>Add an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code><a class="headerlink" href="#add-an-init-py" title="Link to this heading"></a></h3>
+<p>Create an empty <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>moveit_python_demo/moveit_python_demo/__init__.py
+</pre></div>
+</div>
+</section>
+<section id="update-package-xml">
+<h3>Update <code class="docutils literal notranslate"><span class="pre">package.xml</span></code><a class="headerlink" href="#update-package-xml" title="Link to this heading"></a></h3>
+<p>Make sure your <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> includes the correct dependencies:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;exec_depend&gt;</span>moveit_commander<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>rclpy<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>geometry_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-4-build-and-run-the-package">
+<h2>Step 4: Build and Run the Package<a class="headerlink" href="#step-4-build-and-run-the-package" title="Link to this heading"></a></h2>
+<p>Build your workspace:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_moveit2
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>moveit_python_demo
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Launch the robot simulation (if not already running):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>panda_moveit_config<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<p>Run your Python move group script:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>moveit_python_demo<span class="w"> </span>move_to_pose
+</pre></div>
+</div>
+<p>You should see your robot arm move to the specified pose in RViz.</p>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>You have now:</p>
+<ul class="simple">
+<li><p>Created a Python ROS 2 package.</p></li>
+<li><p>Implemented a motion planning script using MoveIt Commander.</p></li>
+<li><p>Configured and launched a robot demo.</p></li>
+<li><p>Executed a pose target command.</p></li>
+</ul>
+<p>Feel free to expand the script to include waypoints, cartesian motions, or object collision handling!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

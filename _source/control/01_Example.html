@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RRBot &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DiffBot" href="02_Example.html" />
+    <link rel="prev" title="Cartesian Robot Tutorial" href="../urdf/cartesian_tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.1 - ROS2-Control-Example-1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-steps">Tutorial Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">0. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-rrbot-description-launch">1. Check RRBot Description Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-rrbot-launch">2. Start RRBot Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-hardware-interface">3. Check Hardware Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-running-controllers">4. Check Running Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-commands">5. Send Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#switch-to-joint-trajectory-controller">6. Switch to Joint Trajectory Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-rqt-joint-trajectory-controller-gui">7. Use rqt_joint_trajectory_controller GUI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#files-used-for-this-demo">Files Used for This Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controllers-in-this-demo">Controllers in This Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RRBot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/control/01_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rrbot">
+<h1>RRBot<a class="headerlink" href="#rrbot" title="Link to this heading"></a></h1>
+<p><strong>RRBot</strong>, or <em>Revolute-Revolute Manipulator Robot</em>, is a simple 3-linkage, 2-joint arm used to demonstrate various features.</p>
+<p>It is essentially a double inverted pendulum and demonstrates some control concepts within a simulator. It was originally introduced for Gazebo tutorials.</p>
+<p>For <em>example_1</em>, the hardware interface plugin is implemented with only one interface:</p>
+<ul class="simple">
+<li><p>Communication is done using proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+<li><p>Example: KUKA RSI</p></li>
+</ul>
+<p>The <strong>RRBot</strong> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
+<section id="tutorial-steps">
+<h2>Tutorial Steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<section id="prerequisites">
+<h3>0. Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<p>Ensure you have the following packages installed:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>colcon_ws/src
+<span class="nb">cd</span><span class="w"> </span>colcon_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos.git
+<span class="nb">cd</span><span class="w"> </span>..
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>-iry
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="check-rrbot-description-launch">
+<h3>1. Check RRBot Description Launch<a class="headerlink" href="#check-rrbot-description-launch" title="Link to this heading"></a></h3>
+<p>(Optional) To verify that RRBot descriptions are working properly, run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<p>In another terminal, launch the GUI:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>joint_state_publisher_gui<span class="w"> </span>joint_state_publisher_gui
+</pre></div>
+</div>
+<p>Start RViz:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>/setup.bash
+rviz2<span class="w"> </span>-d<span class="w"> </span>src/ros2_control_demos/ros2_control_demo_description/rrbot/rviz/rrbot.rviz
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: Warning <code class="docutils literal notranslate"><span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span> <span class="pre">passed</span> <span class="pre">to</span> <span class="pre">canTransform</span></code> is expected. It happens while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> is starting.</p>
+</div></blockquote>
+<p><img alt="RRBot" src="../../_images/rrbot.png" /></p>
+<p>Once working, stop RViz using <code class="docutils literal notranslate"><span class="pre">CTRL+C</span></code>.</p>
+</section>
+<section id="start-rrbot-launch">
+<h3>2. Start RRBot Launch<a class="headerlink" href="#start-rrbot-launch" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>rrbot.launch.py
+</pre></div>
+</div>
+<p>This starts the robot hardware, controllers, and opens RViz. If you see two orange and one yellow rectangle in RViz, it is working.</p>
+</section>
+<section id="check-hardware-interface">
+<h3>3. Check Hardware Interface<a class="headerlink" href="#check-hardware-interface" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">      </span>joint1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">      </span>joint2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+state<span class="w"> </span>interfaces
+<span class="w">      </span>joint1/position
+<span class="w">      </span>joint2/position
+</pre></div>
+</div>
+</section>
+<section id="check-running-controllers">
+<h3>4. Check Running Controllers<a class="headerlink" href="#check-running-controllers" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
+forward_position_controller<span class="o">[</span>forward_command_controller/ForwardCommandController<span class="o">]</span><span class="w"> </span>active
+</pre></div>
+</div>
+</section>
+<section id="send-commands">
+<h3>5. Send Commands<a class="headerlink" href="#send-commands" title="Link to this heading"></a></h3>
+<p><strong>a. Using CLI:</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<span class="s2">- 0.5</span>
+<span class="s2">- 0.5&quot;</span>
+</pre></div>
+</div>
+<p><strong>b. Using Demo Node:</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_forward_position_controller.launch.py
+</pre></div>
+</div>
+<p>You should see motion in RViz and terminal logs like:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Writing<span class="w"> </span>commands:
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint2/position&#39;</span>
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint1/position&#39;</span>
+</pre></div>
+</div>
+<p>To verify joint state outputs:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/joint_states
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/dynamic_joint_states
+</pre></div>
+</div>
+</section>
+<section id="switch-to-joint-trajectory-controller">
+<h3>6. Switch to Joint Trajectory Controller<a class="headerlink" href="#switch-to-joint-trajectory-controller" title="Link to this heading"></a></h3>
+<p>Load controller:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>--share<span class="k">)</span>/config/rrbot_jtc.yaml
+</pre></div>
+</div>
+<p>List controllers:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>active
+forward_position_controller<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>active
+joint_trajectory_position_controller<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>unconfigured
+</pre></div>
+</div>
+<p>Configure controller:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>inactive
+</pre></div>
+</div>
+<p>Alternatively:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>--set-state<span class="w"> </span>inactive<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>--share<span class="k">)</span>/config/rrbot_jtc.yaml
+</pre></div>
+</div>
+<p>Activate controller:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--deactivate<span class="w"> </span>forward_position_controller
+</pre></div>
+</div>
+<p>Verify:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Should return:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>joint_state_broadcaster<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>active
+forward_position_controller<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>inactive
+joint_trajectory_position_controller<span class="o">[</span>...<span class="o">]</span><span class="w"> </span>active
+</pre></div>
+</div>
+<p>Launch demo node:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>test_joint_trajectory_controller.launch.py
+</pre></div>
+</div>
+</section>
+<section id="use-rqt-joint-trajectory-controller-gui">
+<h3>7. Use rqt_joint_trajectory_controller GUI<a class="headerlink" href="#use-rqt-joint-trajectory-controller-gui" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>ros2_control_demo_example_1<span class="w"> </span>--share<span class="k">)</span>/config/rrbot_jtc.yaml<span class="w"> </span>--set-state<span class="w"> </span>inactive<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>joint_trajectory_position_controller<span class="w"> </span>--deactivate<span class="w"> </span>forward_position_controller
+</pre></div>
+</div>
+<p>Launch GUI:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>rqt_joint_trajectory_controller<span class="w"> </span>rqt_joint_trajectory_controller
+</pre></div>
+</div>
+<p>Features:</p>
+<ul class="simple">
+<li><p>Dropdown to select controller</p></li>
+<li><p>Sliders to set joint positions</p></li>
+<li><p>Control execution time</p></li>
+<li><p>Send trajectory commands</p></li>
+</ul>
+</section>
+</section>
+<section id="files-used-for-this-demo">
+<h2>Files Used for This Demo<a class="headerlink" href="#files-used-for-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Launch file</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/launch/rrbot.launch.py">rrbot.launch.py</a></p></li>
+<li><p><strong>Controllers YAML</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_controllers.yaml">rrbot_controllers.yaml</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_jtc.yaml">rrbot_jtc.yaml</a></p></li>
+</ul>
+</li>
+<li><p><strong>URDF files</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/description/urdf/rrbot.urdf.xacro">rrbot.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/rrbot/urdf/rrbot_description.urdf.xacro">rrbot_description.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/description/ros2_control/rrbot.ros2_control.xacro">rrbot.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p><strong>RViz config</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/rrbot/rviz/rrbot.rviz">rrbot.rviz</a></p></li>
+<li><p><strong>Test configs</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_forward_position_publisher.yaml">rrbot_forward_position_publisher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/bringup/config/rrbot_joint_trajectory_publisher.yaml">rrbot_joint_trajectory_publisher</a></p></li>
+</ul>
+</li>
+<li><p><strong>Hardware interface</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_1/hardware/rrbot.cpp">rrbot.cpp</a></p></li>
+</ul>
+</section>
+<section id="controllers-in-this-demo">
+<h2>Controllers in This Demo<a class="headerlink" href="#controllers-in-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Joint State Broadcaster</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">docs</a>)</p></li>
+<li><p><strong>Forward Command Controller</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/forward_command_controller">docs</a>)</p></li>
+<li><p><strong>Joint Trajectory Controller</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_trajectory_controller">docs</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../urdf/cartesian_tutorial.html" class="btn btn-neutral float-left" title="Cartesian Robot Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="02_Example.html" class="btn btn-neutral float-right" title="DiffBot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

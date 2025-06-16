@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiffBot &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Robots with Multiple Interfaces" href="03_Example.html" />
+    <link rel="prev" title="RRBot" href="01_Example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.2 - ROS2-Control-Example-2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-steps">Tutorial Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#check-diffbot-description-launch">1. Check DiffBot Description Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-diffbot-launch">2. Start DiffBot Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-hardware-interface">3. Check Hardware Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-controllers">4. Check Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#send-commands-to-diff-drive-controller">5. Send Commands to Diff Drive Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#introspect-hardware-component">6. Introspect Hardware Component</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#files-used-for-this-demo">Files Used for This Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controllers-in-this-demo">Controllers in This Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DiffBot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/control/02_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="diffbot">
+<h1>DiffBot<a class="headerlink" href="#diffbot" title="Link to this heading"></a></h1>
+<p><strong>DiffBot</strong>, or <em>Differential Mobile Robot</em>, is a simple mobile base with differential drive. It is essentially a box that moves according to differential drive kinematics.</p>
+<p>For <em>example_2</em>, the hardware interface plugin is implemented with only one interface:</p>
+<ul class="simple">
+<li><p>Communication is done using a proprietary API to communicate with the robot control box.</p></li>
+<li><p>Data for all joints is exchanged at once.</p></li>
+</ul>
+<p>The <strong>DiffBot</strong> URDF files can be found in the <code class="docutils literal notranslate"><span class="pre">description/urdf</span></code> folder.</p>
+<section id="tutorial-steps">
+<h2>Tutorial Steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<section id="check-diffbot-description-launch">
+<h3>1. Check DiffBot Description Launch<a class="headerlink" href="#check-diffbot-description-launch" title="Link to this heading"></a></h3>
+<p>To verify that DiffBot descriptions are working properly, run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Warning</strong>: Output like <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">Invalid</span> <span class="pre">frame</span> <span class="pre">ID</span> <span class="pre">&quot;odom&quot;</span> <span class="pre">passed</span> <span class="pre">to</span> <span class="pre">canTransform</span></code> is expected. It happens while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> is starting.</p>
+</div></blockquote>
+<p><img alt="DiffBot" src="../../_images/diffbot.png" /></p>
+</section>
+<section id="start-diffbot-launch">
+<h3>2. Start DiffBot Launch<a class="headerlink" href="#start-diffbot-launch" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py
+</pre></div>
+</div>
+<p>This starts the robot hardware, controllers, and opens RViz. You will see internal state logs in the terminal—these are for demonstration only and should be avoided in production code.</p>
+<p>If you see an orange box in RViz, everything has started properly.</p>
+</section>
+<section id="check-hardware-interface">
+<h3>3. Check Hardware Interface<a class="headerlink" href="#check-hardware-interface" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">      </span>left_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">      </span>right_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+state<span class="w"> </span>interfaces
+<span class="w">      </span>left_wheel_joint/position
+<span class="w">      </span>left_wheel_joint/velocity
+<span class="w">      </span>right_wheel_joint/position
+<span class="w">      </span>right_wheel_joint/velocity
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[claimed]</span></code> marker means a controller has access to command <strong>DiffBot</strong>. The interface type is <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, typical for differential drive.</p>
+</section>
+<section id="check-controllers">
+<h3>4. Check Controllers<a class="headerlink" href="#check-controllers" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>diffbot_base_controller<span class="o">[</span>diff_drive_controller/DiffDriveController<span class="o">]</span><span class="w"> </span>active
+joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStateBroadcaster<span class="o">]</span><span class="w"> </span>active
+</pre></div>
+</div>
+</section>
+<section id="send-commands-to-diff-drive-controller">
+<h3>5. Send Commands to Diff Drive Controller<a class="headerlink" href="#send-commands-to-diff-drive-controller" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span><span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">  header: auto</span>
+<span class="s2">  twist:</span>
+<span class="s2">    linear:</span>
+<span class="s2">      x: 0.7</span>
+<span class="s2">      y: 0.0</span>
+<span class="s2">      z: 0.0</span>
+<span class="s2">    angular:</span>
+<span class="s2">      x: 0.0</span>
+<span class="s2">      y: 0.0</span>
+<span class="s2">      z: 1.0&quot;</span>
+</pre></div>
+</div>
+<p>You should now see an orange box circling in RViz and terminal logs like:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Writing<span class="w"> </span>commands:
+<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">43</span>.33<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;left_wheel_joint&#39;</span>!
+<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">50</span>.00<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;right_wheel_joint&#39;</span>!
+</pre></div>
+</div>
+</section>
+<section id="introspect-hardware-component">
+<h3>6. Introspect Hardware Component<a class="headerlink" href="#introspect-hardware-component" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>name:<span class="w"> </span>DiffBot
+<span class="w">        </span>type:<span class="w"> </span>system
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>ros2_control_demo_example_2/DiffBotSystemHardware
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>left_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>right_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+<p>To test with mock hardware (useful if simulator is unavailable), restart with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_2<span class="w"> </span>diffbot.launch.py<span class="w"> </span>use_mock_hardware:<span class="o">=</span>True
+</pre></div>
+</div>
+<p>Then run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>name:<span class="w"> </span>DiffBot
+<span class="w">    </span>type:<span class="w"> </span>system
+<span class="w">    </span>plugin<span class="w"> </span>name:<span class="w"> </span>mock_components/GenericSystem
+<span class="w">    </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">            </span>left_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">            </span>right_wheel_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+</pre></div>
+</div>
+<p>This shows a different plugin was loaded. Check <code class="docutils literal notranslate"><span class="pre">diffbot.ros2_control.xacro</span></code> to see:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/hardware&gt;</span>
+</pre></div>
+</div>
+<p>This enables integration of velocity commands into position state, visible in <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>. Position should increase over time while moving.</p>
+</section>
+</section>
+<section id="files-used-for-this-demo">
+<h2>Files Used for This Demo<a class="headerlink" href="#files-used-for-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Launch file</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_2/bringup/launch/diffbot.launch.py">diffbot.launch.py</a></p></li>
+<li><p><strong>Controllers YAML</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_2/bringup/config/diffbot_controllers.yaml">diffbot_controllers.yaml</a></p></li>
+<li><p><strong>URDF files</strong>:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_2/description/urdf/diffbot.urdf.xacro">diffbot.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/diffbot/urdf/diffbot_description.urdf.xacro">diffbot_description.urdf.xacro</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_2/description/ros2_control/diffbot.ros2_control.xacro">diffbot.ros2_control.xacro</a></p></li>
+</ul>
+</li>
+<li><p><strong>RViz config</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/ros2_control_demo_description/diffbot/rviz/diffbot.rviz">diffbot.rviz</a></p></li>
+<li><p><strong>Hardware interface plugin</strong>: <a class="reference external" href="https://github.com/ros-controls/ros2_control_demos/tree/master/example_2/hardware/diffbot_system.cpp">diffbot_system.cpp</a></p></li>
+</ul>
+</section>
+<section id="controllers-in-this-demo">
+<h2>Controllers in This Demo<a class="headerlink" href="#controllers-in-this-demo" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Joint State Broadcaster</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/joint_state_broadcaster">docs</a>)</p></li>
+<li><p><strong>Diff Drive Controller</strong> (<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/tree/master/diff_drive_controller">docs</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_Example.html" class="btn btn-neutral float-left" title="RRBot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03_Example.html" class="btn btn-neutral float-right" title="Robots with Multiple Interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Cartographer &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROS 2 Navigation" href="ROS2-Navigation.html" />
+    <link rel="prev" title="TurtleBot in ROS 2" href="ROS2-Turtlebot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 3.3 - ROS2-Cartographer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-approach">2. General approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-cartographer">3. Start Cartographer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#technical-overview">3.1. Technical Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-packages">3.2. Check packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#check-if-there-are-cartographer-packages">3.2.1. Check if there are cartographer packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#check-if-there-are-turtlebot3-packages">3.2.2. Check if there are turtlebot3* packages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#startup-system-of-turtlebot-and-teleoperation">3.3. Startup system of turtleBot and teleoperation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-in-gazebo">3.3.1. Simulation in gazebo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#physical-robot">3.3.2. Physical robot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-teleoperation-node">3.3.3. Run teleoperation node</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#run-slam-nodes">3.4. Run SLAM nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#save-the-map">4. Save the Map</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS 2 Cartographer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/navigation/ROS2-Cartographer.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-cartographer">
+<h1>ROS 2 Cartographer<a class="headerlink" href="#ros-2-cartographer" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The goal of this tutorial is to</p>
+<ul>
+<li><p>use Cartographer to create a map of environment</p></li>
+</ul>
+</li>
+<li><p>The packages that will be used:</p>
+<ul>
+<li><p>cartographer</p></li>
+<li><p>cartographer-ros</p></li>
+<li><p>turtlebot3_cartographer</p></li>
+<li><p>turtlebot3_teleop</p></li>
+<li><p>turtlebot3_gazebo</p></li>
+</ul>
+</li>
+</ul>
+<p>This tutorial explains how to use the Cartographer for mapping and localization.</p>
+<ul class="simple">
+<li><p>Lines beginning with <code class="docutils literal notranslate"><span class="pre">$</span></code> indicates the syntax of these commands.
+Commands are executed in a terminal:</p>
+<ul>
+<li><p>Open a new terminal → use the shortcut ctrl+alt+t.
+Open a new tab inside an existing terminal → use the shortcut ctrl+shift+t.</p></li>
+</ul>
+</li>
+<li><p>Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either <code class="docutils literal notranslate"><span class="pre">[TurtleBot]</span></code> or <code class="docutils literal notranslate"><span class="pre">[Remote</span> <span class="pre">PC]</span></code>.</p></li>
+</ul>
+</section>
+<section id="general-approach">
+<h2>2. General approach<a class="headerlink" href="#general-approach" title="Link to this heading"></a></h2>
+<p>The main problem in mobile robotics is localization and mapping. To estimate the position of the robot in an environment, you need some kind of map from this environment to determine the actual position in this environment. On the other hand, you need the actual position of robots to create a map related to its position. Therefore you can use SLAM – Simultaneous Localization and Mapping. ROS provides different
+packages to solve this problem:</p>
+<ul class="simple">
+<li><p><strong>2D</strong>: gmapping, hector_slam, cartographer, ohm_tsd_slam…</p></li>
+<li><p><strong>3D</strong>: rgbdslam, ccny_rgbd, lsd_slam, rtabmap…</p></li>
+</ul>
+<p>For ground-based robots, it is often sufficient to use 2D SLAM to navigate through the environment. In the following tutorial, cartographer will be used. Cartographer SLAM builds a map of the environment and simultaneously estimates the platform’s 2D pose. The localization is based on a laser scan and the odometry of the robot.</p>
+</section>
+<section id="start-cartographer">
+<h2>3. Start Cartographer<a class="headerlink" href="#start-cartographer" title="Link to this heading"></a></h2>
+<section id="technical-overview">
+<h3>3.1. Technical Overview<a class="headerlink" href="#technical-overview" title="Link to this heading"></a></h3>
+<p><img alt="Technical Overview" src="../../_images/high_level_system_overview.png" /></p>
+<p>Figure 1: Technical Overview</p>
+<p>source: <a class="reference external" href="https://google-cartographer.readthedocs.io/en/latest/">cartographer</a></p>
+</section>
+<section id="check-packages">
+<h3>3.2. Check packages<a class="headerlink" href="#check-packages" title="Link to this heading"></a></h3>
+<section id="check-if-there-are-cartographer-packages">
+<h4>3.2.1. Check if there are cartographer packages<a class="headerlink" href="#check-if-there-are-cartographer-packages" title="Link to this heading"></a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```bash
+# source ROS 2
+$ source /opt/ros/foxy/setup.bash
+
+$ ros2 pkg list |grep cartographer
+
+# You will get 
+# cartographer_ros
+# cartographer_ros_msgs
+```
+</pre></div>
+</div>
+<p>If you don’t have “cartographer_ros” and “cartographer_ros_msgs”, you can install cartographer by performing the following:</p>
+<p><strong>Before installing package, you need to make sure which ROS distribution you are using.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-cartographer<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="check-if-there-are-turtlebot3-packages">
+<h4>3.2.2. Check if there are turtlebot3* packages<a class="headerlink" href="#check-if-there-are-turtlebot3-packages" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>pkg<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>turtlebot3
+</pre></div>
+</div>
+<p>If you don’t have turtlebot3 packages, you can install debian packages or from source code.</p>
+<p>A. Install debian packages</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-foxy-turtlebot3*
+</pre></div>
+</div>
+<p>B. Install from source code</p>
+<p>First entering your workspace</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>wget<span class="w"> </span>https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/foxy-devel/turtlebot3.repos
+</pre></div>
+</div>
+<p>Make sure you have “src” folder, then run this command to get source code for turtlebot3</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>vcs<span class="w"> </span>import<span class="w"> </span>src&lt;turtlebot3.repos
+</pre></div>
+</div>
+<p>Source your ROS 2 installation workspace and install dependencies</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/setup.bash
+$<span class="w"> </span>rosdep<span class="w"> </span>update
+$<span class="w"> </span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span>
+<span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y
+</pre></div>
+</div>
+<p>Compile codes</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>colcon<span class="w"> </span>build
+</pre></div>
+</div>
+<p>Source your workspace</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+</section>
+<section id="startup-system-of-turtlebot-and-teleoperation">
+<h3>3.3. Startup system of turtleBot and teleoperation<a class="headerlink" href="#startup-system-of-turtlebot-and-teleoperation" title="Link to this heading"></a></h3>
+<section id="simulation-in-gazebo">
+<h4>3.3.1. Simulation in gazebo<a class="headerlink" href="#simulation-in-gazebo" title="Link to this heading"></a></h4>
+<ol class="arabic">
+<li><p>Set up turtlebot model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">TURTLEBOT3_MODEL</span><span class="o">=</span>burger
+</pre></div>
+</div>
+</li>
+<li><p>Set up Gazebo model path</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">GAZEBO_MODEL_PATH</span><span class="o">=</span><span class="sb">`</span>ros2<span class="w"> </span>pkg<span class="w"> </span><span class="se">\</span>
+prefix<span class="w"> </span>turtlebot3_gazebo<span class="sb">`</span>/share/turtlebot3_gazebo/models/
+</pre></div>
+</div>
+</li>
+<li><p>Launch Gazebo with a simulation world</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>turtlebot3_gazebo<span class="w"> </span>turtlebot3_world.launch.py
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="physical-robot">
+<h4>3.3.2. Physical robot<a class="headerlink" href="#physical-robot" title="Link to this heading"></a></h4>
+<p>[TurtleBot3]</p>
+<p>a. open a terminal and use <code class="docutils literal notranslate"><span class="pre">ssh</span></code> connect to Turtlebot3.</p>
+<p>b. bring up basic packages to start its applications.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>.bashrc
+
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>turtlebot3_ws
+
+<span class="c1">#Set up ROS_DOMAIN_ID</span>
+$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="s2">&quot;Your Number&quot;</span>
+<span class="c1"># e.g. export ROS_DOMAIN_ID=11</span>
+
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+
+$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>turtlebot3_bringup<span class="w"> </span>robot.launch.py
+</pre></div>
+</div>
+</section>
+<section id="run-teleoperation-node">
+<h4>3.3.3. Run teleoperation node<a class="headerlink" href="#run-teleoperation-node" title="Link to this heading"></a></h4>
+<p>[Remote PC]</p>
+<ol class="arabic">
+<li><p>Open a new terminal</p></li>
+<li><p>Set up ROS environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/setup.bash
+</pre></div>
+</div>
+</li>
+<li><p>(Set up ROS_DOMAIN_ID)</p>
+<p>If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="s2">&quot;Your Number&quot;</span>
+<span class="c1"># e.g. export ROS_DOMAIN_ID=11</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set up turtlebot model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">TURTLEBOT3_MODEL</span><span class="o">=</span>burger
+</pre></div>
+</div>
+</li>
+<li><p>Run teleoperation node</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>turtlebot3_teleop<span class="w"> </span>teleop_keyboard
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="run-slam-nodes">
+<h3>3.4. Run SLAM nodes<a class="headerlink" href="#run-slam-nodes" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>open a new terminal on Remote PC</p></li>
+<li><p>Set up ROS environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/foxy/setup.bash
+</pre></div>
+</div>
+</li>
+<li><p>(Set up ROS_DOMAIN_ID)</p>
+<p>If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[Remote</span> <span class="pre">PC]</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="s2">&quot;Your Number&quot;</span>
+<span class="c1"># e.g. export ROS_DOMAIN_ID=11</span>
+</pre></div>
+</div>
+</li>
+<li><p>run the SLAM nodes</p>
+<p>If you are using simulation, you need to use simulation time. You can set <code class="docutils literal notranslate"><span class="pre">use_sim_time</span></code> to True.</p>
+<p><strong>a. Simulation</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[Remote</span> <span class="pre">PC]</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>launch<span class="w"> </span>turtlebot3_cartographer<span class="w"> </span><span class="se">\</span>
+cartographer.launch.py<span class="w"> </span><span class="se">\</span>
+use_sim_time:<span class="o">=</span>True
+</pre></div>
+</div>
+<p><strong>b. For a real robot</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[Remote</span> <span class="pre">PC]</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>cartographer_ros<span class="w"> </span>occupancy_grid_node<span class="w"> </span>-resolution<span class="w"> </span><span class="m">0</span>.05<span class="se">\</span>
+-publish_period_sec<span class="w"> </span><span class="m">1</span>.0
+
+$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>cartographer_ros<span class="w"> </span>cartographer_node<span class="se">\</span>
+-configuration_directory<span class="o">]</span><span class="se">\ </span>
+install/turtlebot3_cartographer/share/turtlebot3_cartographer<span class="se">\</span>
+/config<span class="w"> </span>-configuration_basename<span class="w"> </span>turtlebot3_lds_2d.lua
+</pre></div>
+</div>
+</li>
+<li><p>create a map</p>
+<p><em><strong>Hint: Make sure that the Fixed Frame (in Global Options) in RViz is set to “map”.</strong></em></p>
+<p>In this way the map is fixed and the robot will move relative to it.
+The scanner of the Turtlebot3 covers 360 degrees of its surroundings. Thus, if objects are close by to the robot it will start to generate the map.</p>
+<p>Teleoperate the robot through the physical world until the enclosed environment is completely covered in the virtual map.</p>
+<p>The following hints help you to create <strong>a nice map</strong>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* Try to drive as slow as possible
+* Avoid to drive linear and rotate at the same time
+* Do not drive too close to the obstacles
+</pre></div>
+</div>
+<p>In the left menu of RViz you can see several display modules. There is e.g. the RobotModel which is virtual visualization of the robot.</p>
+<p>Furthermore, you can visualize the transforms of the available frames by checking the box of tf. Make yourself familiar with the available modules.</p>
+<p><img alt="Map at startup" src="../../_images/beforemap.png" />
+Figure 2: A incomplete map at beginning in the real work setup</p>
+<p><img alt="Final Map" src="../../_images/aftermap2.png" />
+Figure 3: A complete map at beginning in the real work setup</p>
+</li>
+</ol>
+</section>
+</section>
+<section id="save-the-map">
+<h2>4. Save the Map<a class="headerlink" href="#save-the-map" title="Link to this heading"></a></h2>
+<p>If you are satisfied with your map you can store it. You can save the map.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[Remote</span> <span class="pre">PC]</span></code></p>
+<ol class="arabic" start="0">
+<li><p>Open a new terminal and enter your workspace</p></li>
+<li><p>(Set up ROS Domain ID )
+Only if you did set up ROS Domain ID before, you need to set up ROS Domain ID here.</p></li>
+<li><p>run the map saver node.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ros2 run nav2_map_server map_saver_cli 
+</pre></div>
+</div>
+<p>You also can define a name of the map by</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">run</span> <span class="n">nav2_map_server</span> <span class="n">map_saver_cli</span> <span class="o">-</span><span class="n">f</span> <span class="n">my_map</span>
+</pre></div>
+</div>
+<p>If the terminal’s path is “your workspace” they can be found in “your workspace” directory. An example of the map.pgm image is given in the following.</p>
+<p><img alt="Map" src="../../_images/map.jpg" /></p>
+</li>
+</ol>
+<p>The node will create a map.pgm and a map.yaml files in the current directory, which is your workspace directory in this case.</p>
+<p><em><strong>Hint: The signs “~/” is a direct path to the home directory which works from every relative path.</strong></em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ROS2-Turtlebot.html" class="btn btn-neutral float-left" title="TurtleBot in ROS 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-Navigation.html" class="btn btn-neutral float-right" title="ROS 2 Navigation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

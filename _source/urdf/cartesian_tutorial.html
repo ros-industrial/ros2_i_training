@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartesian Robot Tutorial &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RRBot" href="../control/01_Example.html" />
+    <link rel="prev" title="URDF" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 5 - Ros2-Cartesian Robot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-you-ll-learn">What You’ll Learn:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#task">Task</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-package">1. Create Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-cmakelists-txt-and-package-xml">2. Update <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-launch-file">3. Creating the launch file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-creating-the-launch-file">Step 1: Creating the launch file.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-add-the-required-modules">Step 2: Add the Required Modules.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-define-the-launch-description-function">Step 3: Define the Launch Description function.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-locate-and-process-the-urdf-file-using-xacro">Step 4: Locate and process the URDF file using xacro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-launch-the-joint-state-publisher-gui">Step 5: Launch the joint state publisher GUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-launch-the-robot-state-publisher">Step 6: Launch the robot state publisher</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-7-delay-and-launch-rviz">Step 7: Delay and launch RViz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-8-return-all-nodes-and-actions-in-the-launch-description">Step 8: Return all nodes and actions in the launch description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#build-the-package">4. Build the package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-urdf-file">5. Creating URDF file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-creating-the-xacro-file">Step 1: Creating the Xacro file.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-defining-colours-materials">Step 2: Defining colours(Materials)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-add-configurable-parameters">Step 3: Add Configurable parameters.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-add-the-base-link">Step 4: Add the Base Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-defining-a-link">Step 5: Defining a link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-add-joints">Step 6: Add Joints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-7-close-the-robot-tag">Step 7: Close the Robot tag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualising-the-robot-in-rviz">6. Visualising the robot in rviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cartesian Robot Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/urdf/cartesian_tutorial.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cartesian-robot-tutorial">
+<h1>Cartesian Robot Tutorial<a class="headerlink" href="#cartesian-robot-tutorial" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This tutorial is designed to guide you through the process of building a simple Cartesian robot model using URDF (Unified Robot Description Format) and xacro within the ROS 2 Jazzy environment. The aim is to understand how to describe a robot’s physical structure and behavior in simulation using ROS tools, and how to visualize it using RViz2.</p>
+<p>A Cartesian robot moves linearly along the X, Y, and Z axes. It is widely used in applications like 3D printing, CNC machines, and pick-and-place systems. Among other advantages, this mechanical arrangement simplifies the robot control arm solution. It has high reliability and precision when operating in three-dimensional spac.  Because of its straightforward design, it’s a great choice for beginners to learn the basics of robot modeling.</p>
+<p>This tutorial focuses on creating a robot with prismatic joint, where the link length can be customized through a xacro parameter. This teaches how to build modular, adaptable robot descriptions suitable for more advanced scenarios later.</p>
+<section id="what-you-ll-learn">
+<h3>What You’ll Learn:<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>How to structure a robot model using URDF.</p></li>
+<li><p>How to use xacro to create reusable and configurable URDF files.</p></li>
+<li><p>How to launch and visualize your robot model in RViz2.</p></li>
+<li><p>How to parameterize robot features like link lengths for flexibility.</p></li>
+</ul>
+<p><em><strong>Note: This tutorial is written for ROS2 Jazzy, so make sure your development environment is set up with this version</strong></em></p>
+</section>
+</section>
+<section id="task">
+<h2>Task<a class="headerlink" href="#task" title="Link to this heading"></a></h2>
+<section id="create-package">
+<h3>1. Create Package<a class="headerlink" href="#create-package" title="Link to this heading"></a></h3>
+<p>Create the directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>urdf_tutorials/src
+</pre></div>
+</div>
+<p>then create the package</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>urdf_tutorials/src
+ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>cartesian_robot<span class="w"> </span>--build-type<span class="w"> </span>ament_cmake<span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>cartesian_robot
+</pre></div>
+</div>
+</section>
+<section id="update-cmakelists-txt-and-package-xml">
+<h3>2. Update <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">package.xml</span></code><a class="headerlink" href="#update-cmakelists-txt-and-package-xml" title="Link to this heading"></a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> make sure to add this to access the urdf and launch file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>install<span class="o">(</span>DIRECTORY<span class="w"> </span>launch
+<span class="w">  </span>DESTINATION<span class="w"> </span>share/<span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/
+<span class="o">)</span>
+
+install<span class="o">(</span>DIRECTORY<span class="w"> </span>urdf
+<span class="w">  </span>DESTINATION<span class="w"> </span>share/<span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/
+<span class="o">)</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">package.xml</span></code>, make sure you declare dependencies on:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;exec_depend&gt;xacro&lt;/exec_depend&gt;
+<span class="w">  </span>&lt;exec_depend&gt;robot_state_publisher&lt;/exec_depend&gt;
+<span class="w">  </span>&lt;exec_depend&gt;rviz2&lt;/exec_depend&gt;
+</pre></div>
+</div>
+</section>
+<section id="creating-the-launch-file">
+<h3>3. Creating the launch file<a class="headerlink" href="#creating-the-launch-file" title="Link to this heading"></a></h3>
+<section id="step-1-creating-the-launch-file">
+<h4>Step 1: Creating the launch file.<a class="headerlink" href="#step-1-creating-the-launch-file" title="Link to this heading"></a></h4>
+<p>Inside the package <code class="docutils literal notranslate"><span class="pre">cartesian_robot</span></code> create the <code class="docutils literal notranslate"><span class="pre">launch</span></code>folder to keep the launch file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>launch
+<span class="nb">cd</span><span class="w"> </span>launch
+</pre></div>
+</div>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">launch</span></code> folder now create the file <code class="docutils literal notranslate"><span class="pre">cartesian_display.launch.py</span></code>.</p>
+</section>
+<section id="step-2-add-the-required-modules">
+<h4>Step 2: Add the Required Modules.<a class="headerlink" href="#step-2-add-the-required-modules" title="Link to this heading"></a></h4>
+<p>Iside the launch file start with adding the required modules:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>launch<span class="w"> </span>import<span class="w"> </span>LaunchDescription
+from<span class="w"> </span>launch.actions<span class="w"> </span>import<span class="w"> </span>DeclareLaunchArgument,<span class="w"> </span>TimerAction
+from<span class="w"> </span>launch.substitutions<span class="w"> </span>import<span class="w"> </span>LaunchConfiguration,<span class="w"> </span>Command<span class="w"> </span>PathJoinSubstitution
+from<span class="w"> </span>launch_ros.actions<span class="w"> </span>import<span class="w"> </span>Node
+from<span class="w"> </span>launch_ros.substitutions<span class="w"> </span>import<span class="w"> </span>FindPackageShare
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>These modules let you define launch arguments, time delays and ROS2 nodes dynamically.</p></li>
+</ul>
+</section>
+<section id="step-3-define-the-launch-description-function">
+<h4>Step 3: Define the Launch Description function.<a class="headerlink" href="#step-3-define-the-launch-description-function" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>def<span class="w"> </span>generate_launch_description<span class="o">()</span>:
+</pre></div>
+</div>
+<p>This is the function the launch system will call when the file is executed.</p>
+</section>
+<section id="step-4-locate-and-process-the-urdf-file-using-xacro">
+<h4>Step 4: Locate and process the URDF file using xacro<a class="headerlink" href="#step-4-locate-and-process-the-urdf-file-using-xacro" title="Link to this heading"></a></h4>
+<p>Use <code class="docutils literal notranslate"><span class="pre">PathJoinSubstitution</span></code> to build the path to the <code class="docutils literal notranslate"><span class="pre">cartesian_urdf.xacro</span></code> file inside the urdf folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nv">urdf_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PathJoinSubstitution<span class="o">([</span>
+<span class="w">        </span>FindPackageShare<span class="o">(</span><span class="s1">&#39;cartesian_robot&#39;</span><span class="o">)</span>,
+<span class="w">        </span><span class="s1">&#39;urdf&#39;</span>,
+<span class="w">        </span><span class="s1">&#39;cartesian_urdf.xacro&#39;</span>
+<span class="w">    </span><span class="o">])</span>
+</pre></div>
+</div>
+<p>Then use the <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command to convert it to a proper URDF string at launch time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nv">robot_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Command<span class="o">([</span>
+<span class="w">        </span><span class="s1">&#39;xacro&#39;</span>,<span class="w"> </span><span class="s1">&#39; &#39;</span>,<span class="w"> </span>urdf_path
+<span class="w">    </span><span class="o">])</span>
+</pre></div>
+</div>
+<p>This enables parameter substitution and reusability, and ensures that xacro is executed when the robot launches.</p>
+</section>
+<section id="step-5-launch-the-joint-state-publisher-gui">
+<h4>Step 5: Launch the joint state publisher GUI<a class="headerlink" href="#step-5-launch-the-joint-state-publisher-gui" title="Link to this heading"></a></h4>
+<p>This node provides sliders to simulate joint positions interactively.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>Node<span class="o">(</span>
+<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+<span class="w">        </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">    </span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-6-launch-the-robot-state-publisher">
+<h4>Step 6: Launch the robot state publisher<a class="headerlink" href="#step-6-launch-the-robot-state-publisher" title="Link to this heading"></a></h4>
+<p>This node takes the joint states and URDF and publishes the full robot state to TF.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>Node<span class="o">(</span>
+<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
+<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
+<span class="w">        </span><span class="nv">parameters</span><span class="o">=[{</span><span class="s1">&#39;robot_description&#39;</span>:<span class="w"> </span>robot_description<span class="o">}]</span>,
+<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">    </span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-7-delay-and-launch-rviz">
+<h4>Step 7: Delay and launch RViz<a class="headerlink" href="#step-7-delay-and-launch-rviz" title="Link to this heading"></a></h4>
+<p>We delay RViz launch by 1 second using TimerAction to ensure everything is ready before visualizing.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>TimerAction<span class="o">(</span>
+<span class="w">        </span><span class="nv">period</span><span class="o">=</span><span class="m">1</span>.0,
+<span class="w">        </span><span class="nv">actions</span><span class="o">=[</span>
+<span class="w">            </span>Node<span class="o">(</span>
+<span class="w">                </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+<span class="w">                </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+<span class="w">                </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+<span class="w">                </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">            </span><span class="o">)</span>
+<span class="w">        </span><span class="o">]</span>
+<span class="w">    </span><span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-8-return-all-nodes-and-actions-in-the-launch-description">
+<h4>Step 8: Return all nodes and actions in the launch description<a class="headerlink" href="#step-8-return-all-nodes-and-actions-in-the-launch-description" title="Link to this heading"></a></h4>
+<p>Finally, all defined nodes and actions are put together as part of the launch description.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="k">return</span><span class="w"> </span>LaunchDescription<span class="o">([</span>
+<span class="w">        </span>...<span class="w"> </span>all<span class="w"> </span>nodes/actions<span class="w"> </span>...
+<span class="w">    </span><span class="o">])</span>
+</pre></div>
+</div>
+<p>The complete launch file can be found here: <a class="reference external" href="https://github.com/VSP-AR/urdf_tutorials/blob/main/cartesian_robot/launch/cartesian_display.launch.py">Cartesian_display.launch.py</a>.</p>
+</section>
+</section>
+<section id="build-the-package">
+<h3>4. Build the package<a class="headerlink" href="#build-the-package" title="Link to this heading"></a></h3>
+<p>Return to your workspace root and build your package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/urdf_tutorials
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="creating-urdf-file">
+<h3>5. Creating URDF file<a class="headerlink" href="#creating-urdf-file" title="Link to this heading"></a></h3>
+<section id="step-1-creating-the-xacro-file">
+<h4>Step 1: Creating the Xacro file.<a class="headerlink" href="#step-1-creating-the-xacro-file" title="Link to this heading"></a></h4>
+<p>Inside the package <code class="docutils literal notranslate"><span class="pre">cartesian_robot</span></code> create the urdf folder keep the urdf of the robot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>urdf
+<span class="nb">cd</span><span class="w"> </span>urdf
+</pre></div>
+</div>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder now create the file <code class="docutils literal notranslate"><span class="pre">cartesian_urdf.xacro</span></code> which will define all the joints and links and which contains all the parameters that can be changed as required.</p>
+<p>Add the following line to the top of the code.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;?xml<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>?&gt;
+&lt;robot<span class="w"> </span>xmlns:xacro<span class="o">=</span><span class="s2">&quot;http://ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;cartesian_robot&quot;</span>&gt;
+</pre></div>
+</div>
+<p>This declares the robot and enables Xacro macros.</p>
+</section>
+<section id="step-2-defining-colours-materials">
+<h4>Step 2: Defining colours(Materials)<a class="headerlink" href="#step-2-defining-colours-materials" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 0 1 1&quot;</span><span class="w"> </span>/&gt;
+&lt;/material&gt;
+
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;1 0 0 1&quot;</span><span class="w"> </span>/&gt;
+&lt;/material&gt;
+
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;green&quot;</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 1 0 1&quot;</span><span class="w"> </span>/&gt;
+&lt;/material&gt;
+</pre></div>
+</div>
+<p>These materials will help to visualise the robot parts in RViz.</p>
+</section>
+<section id="step-3-add-configurable-parameters">
+<h4>Step 3: Add Configurable parameters.<a class="headerlink" href="#step-3-add-configurable-parameters" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;z_offset&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;4.0&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2.4&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l3&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l4&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;width&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>These values define:</p>
+<ul class="simple">
+<li><p>A z-offset to lift the robot off the ground.</p></li>
+<li><p>Link Lenghts (l1,l2,l3..).</p></li>
+<li><p>width parameter to set a varying width of link if required.</p></li>
+</ul>
+<p>These parameters can be modified as required and also they make the model reconfigurable.</p>
+</section>
+<section id="step-4-add-the-base-link">
+<h4>Step 4: Add the Base Link<a class="headerlink" href="#step-4-add-the-base-link" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span><span class="w"> </span>/&gt;
+</pre></div>
+</div>
+<p>This is the root of the robot, a fixed reference point.</p>
+</section>
+<section id="step-5-defining-a-link">
+<h4>Step 5: Defining a link<a class="headerlink" href="#step-5-defining-a-link" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>&gt;
+<span class="w">    </span>&lt;inertial&gt;
+<span class="w">     </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+<span class="w">     </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
+<span class="w">     </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span>/&gt;<span class="w">          </span>
+<span class="w">    </span>&lt;/inertial&gt;
+<span class="w">    </span>&lt;visual&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;geometry&gt;
+<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;/geometry&gt;
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;/visual&gt;
+<span class="w">  </span>&lt;/link&gt;
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>&gt;
+<span class="w">    </span>&lt;inertial&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+<span class="w">      </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
+<span class="w">      </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w"> </span>/&gt;<span class="w">          </span>
+<span class="w">     </span>&lt;/inertial&gt;
+<span class="w">    </span>&lt;visual&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 </span><span class="si">${</span><span class="nv">l2</span><span class="p">/2</span><span class="si">}</span><span class="s2"> 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;geometry&gt;
+<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">l2</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;/geometry&gt;
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;/visual&gt;
+<span class="w">  </span>&lt;/link&gt;
+</pre></div>
+</div>
+<p>After creating each link it can be viewed in RViz by reffering <code class="docutils literal notranslate"><span class="pre">6.</span> <span class="pre">Visualising</span> <span class="pre">the</span> <span class="pre">robot</span> <span class="pre">in</span> <span class="pre">RViz</span></code>.</p>
+<p>Rviz visualisation after the link1 will look like:
+<img alt="LINk" src="../../_images/link1.jpg" /></p>
+<p>Repeat this structure for define other links ,adjusting visual geometry and colors to match their function. After each link, it can be visualised in Rviz for better understanding.</p>
+<p>The complete URDF with all links defined can be viewed in <a class="reference external" href="https://github.com/VSP-AR/urdf_tutorials/blob/main/cartesian_robot/urdf/cartesian_urdf.xacro">Cartesian_urdf.xacro</a>.</p>
+</section>
+<section id="step-6-add-joints">
+<h4>Step 6: Add Joints<a class="headerlink" href="#step-6-add-joints" title="Link to this heading"></a></h4>
+<p>Fixed joint example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;fixed_link_1&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span>&gt;
+<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 </span><span class="si">${</span><span class="nv">z_offset</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">  </span>&lt;/joint&gt;
+</pre></div>
+</div>
+<p>This attaches link1 to the base with an offset.</p>
+<p>Prismatic Joint Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;prismatic_joint_1&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;prismatic&quot;</span>&gt;
+<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="p">-l1/2</span><span class="si">}</span><span class="s2"> 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;1 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">  </span>&lt;/joint&gt;
+</pre></div>
+</div>
+<p>This joint allows linear motion in the x-direction.</p>
+<p>Similarly other joints can be defined. Complete urdf can be found here <a class="reference external" href="https://github.com/VSP-AR/urdf_tutorials/blob/main/cartesian_robot/urdf/cartesian_urdf.xacro">Cartesian_urdf.xacro</a>.</p>
+</section>
+<section id="step-7-close-the-robot-tag">
+<h4>Step 7: Close the Robot tag<a class="headerlink" href="#step-7-close-the-robot-tag" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;/robot&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualising-the-robot-in-rviz">
+<h3>6. Visualising the robot in rviz<a class="headerlink" href="#visualising-the-robot-in-rviz" title="Link to this heading"></a></h3>
+<p><em><strong>Note: Before running any launch files, make sure you source your workspace</strong></em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/urdf_tutorials/install/setup.bash
+</pre></div>
+</div>
+<p>After completing all the above steps, Run your launch file to start the robot_state_publisher and open RViz2:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>urdf_tutorials<span class="w"> </span>cartesian_display.launch.py
+</pre></div>
+</div>
+<p><img alt="LINk" src="../../_images/cartesian_screen.jpg" /></p>
+<p>This will launch rviz and the joint state publisher and this allows to interact with different joints.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="URDF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../control/01_Example.html" class="btn btn-neutral float-right" title="RRBot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

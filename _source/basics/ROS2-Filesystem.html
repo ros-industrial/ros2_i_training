@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 File System &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Understanding ROS 2 nodes with a simple Publisher - Subscriber pair" href="ROS2-Simple-Publisher-Subscriber.html" />
+    <link rel="prev" title="Welcome to ROS 2 workshop!" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 1.0 - ROS-2-Filesystem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros-file-system">2. ROS File System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workspace">3. Workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros-packages">4. ROS packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros-nodes">5. ROS nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROS 2 File System</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/basics/ROS2-Filesystem.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-file-system">
+<h1>ROS 2 File System<a class="headerlink" href="#ros-2-file-system" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>During this tutorial, you will learn how to navigate through your ROS 2 system. In addition, you will start your first ROS 2 nodes and create your own ROS workspace for further tutorials. You can use the given links in the documentation for further information.</p>
+<ul class="simple">
+<li><p>Below are some useful shortcuts:</p>
+<ul>
+<li><p>To open a new terminal → use the shortcut ctrl+alt+t.</p></li>
+<li><p>To open a new tab inside an existing terminal → use the shortcut ctrl+shift+t.</p></li>
+<li><p>To kill a process in a terminal → use the shortcut crtl+c.</p></li>
+</ul>
+</li>
+<li><p>Lines beginning with # indicate the syntax of the commands.</p></li>
+</ul>
+</section>
+<section id="ros-file-system">
+<h2>2. ROS File System<a class="headerlink" href="#ros-file-system" title="Link to this heading"></a></h2>
+<p>Before starting make sure that your system is aware of the latest ROS 2 packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+rosdep<span class="w"> </span>update
+</pre></div>
+</div>
+<p>If you just installed <strong>rosdep</strong>, please run this commands first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>rosdep<span class="w"> </span>init
+</pre></div>
+</div>
+<p>The ROS 2 File System consists of ROS 2 packages – the smallest build part in ROS 2.</p>
+<p>Usually, a ROS File System consists of hundreds of different packages. To navigate efficiently through your ROS system, ROS provides different management tools. The most common tools are described in the example of the ROS package turtlesim.</p>
+<p>First of all, you have to source the ROS installation and its install workspace!</p>
+<p><em><strong>Note: This has to be done for every new terminal window.</strong></em></p>
+<p>We are using <strong>jazzy</strong> as ROS Distro</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+</pre></div>
+</div>
+<p>or</p>
+<p>in your workspace</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="workspace">
+<h2>3. Workspace<a class="headerlink" href="#workspace" title="Link to this heading"></a></h2>
+<p>Colcon is a build tool for ROS 2. A  workspace is a folder, where you can modify, build, and install packages. It is the place to create your packages and nodes or modify existing ones to fit your application. In the further tutorials, you will
+work in your workspace.</p>
+<ul>
+<li><p>Create workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/dev_ws/src
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="ros-packages">
+<h2>4. ROS packages<a class="headerlink" href="#ros-packages" title="Link to this heading"></a></h2>
+<p>Two types of ROS 2 packages exist: binary packages and build-from-source packages.</p>
+<p>ROS binary packages are in Ubuntu provided as debian packages, which can be managed via apt commands.</p>
+<ul>
+<li><p>Install a binary package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-rosbag2*
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">ros-&lt;distribution&gt;-&lt;package-name&gt;</span></code></p>
+<p>ros-jazzy-rosbag2* means all packages which start from “ros-jazzy-rosbag2”</p>
+<p class="rubric" id="locate-a-ros-package">Locate a ROS package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>rosbag2
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">prefix</span> <span class="pre">&lt;package_name&gt;</span></code></p>
+<p class="rubric" id="list-executables">List executables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>executables<span class="w"> </span>action_tutorials_py
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">executables</span> <span class="pre">&lt;package_name&gt;</span></code></p>
+</li>
+</ul>
+<p>Build-from-source packages can be divided into packages provided by ROS 2 and your developments. Both have to be placed into the src folder of a ROS 2 workspace.</p>
+<ul>
+<li><p>Install an available build-from-source package:</p>
+<p><em><strong>Note: Ensure you’re still in the dev_ws/src directory before you clone.</strong></em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/dev_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros/ros_tutorials.git<span class="w"> </span>-b<span class="w"> </span>jazzy-devel
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">git</span> <span class="pre">clone</span> <span class="pre">-b</span> <span class="pre">&lt;branch&gt;</span> <span class="pre">&lt;address&gt;</span></code></p>
+<p>Notice the “Branch” drop-down list to the left above the directories list. When you clone this repo, add the -b argument followed by the branch that corresponds with your ROS 2 distro.</p>
+<p>To see the packages inside ros_tutorials, enter the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>ros_tutorials
+</pre></div>
+</div>
+<p>You will find you have four packages: <code class="docutils literal notranslate"><span class="pre">roscpp_tutorials</span>&#160; <span class="pre">rospy_tutorials</span>&#160; <span class="pre">ros_tutorials</span>&#160; <span class="pre">turtlesim</span></code></p>
+<p>Only <strong>turtlesim</strong> is ROS 2 package</p>
+</li>
+<li><p>Resolve dependencies:</p>
+<p>Before building the workspace, you need to resolve package dependencies. You may have all the dependencies already, but best practice is to check for dependencies every time you clone. You wouldn’t want a build to fail after a long wait because of missing dependencies.</p>
+<p><em><strong>Hint: Ensure you’re in the workspace root (~/dev_ws) directory before you run rosdep.</strong></em></p>
+<p>If it is your first time to run <code class="docutils literal notranslate"><span class="pre">rosdep</span></code>, you need to run <code class="docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">init</span></code> first.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>..
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>This command magically installs all the packages that the packages in your workspace depend upon but are missing on your computer.
+http://wiki.ros.org/rosdep</p>
+</li>
+<li><p>Build the workspace with colcon</p>
+<p><em><strong>Note: Don’t forget to source the ROS installation before build and make sure you are in the root of workspace(~/dev_ws).</strong></em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+
+$<span class="w"> </span>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+</pre></div>
+</div>
+</li>
+<li><p>Source the overlay
+When you build this workspace, your main ROS 2 environment is the “underlay”. Now you can source overlay “on the top of” “underlay”.</p>
+<p><em><strong>Note: If you open a new terminal, set up ROS2 environment first.</strong></em></p>
+<ul class="simple">
+<li><p>you can start a new terminal window by   <code class="docutils literal notranslate"><span class="pre">ctl</span> <span class="pre">+</span> <span class="pre">alt</span> <span class="pre">+t</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>dev_ws
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="ros-nodes">
+<h2>5. ROS nodes<a class="headerlink" href="#ros-nodes" title="Link to this heading"></a></h2>
+<p>A ROS node is an executable in the ROS environment. A node is always a part of a ROS package. How to start ROS nodes and how to display runtime information is explained in the example of the turtlesim package.</p>
+<ul>
+<li><p>Start a ROS node:</p>
+<p><em><strong>Note: You have to start each process in a separate terminal. Don’t forget to source the ROS installation.</strong></em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">&lt;package_name&gt;</span> <span class="pre">&lt;executable_node_name&gt;</span></code></p>
+<p>A new window should pop up, displaying a turtle.</p>
+</li>
+<li><p>Start another node to control the turtle:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtle_teleop_key
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">&lt;package_name&gt;</span> <span class="pre">&lt;executable_node_name&gt;</span></code></p>
+<p>You can control the turtle with the arrow keys of the keyboard, if the current terminal running the turtle_teleop_node is selected.</p>
+</li>
+</ul>
+<p>The two nodes turtlesim_node and turtle_teleop_key are currently active on your ROS 2 system. Since systems that are more complex will consist of many nodes, ROS offers introspection tools to display information about active nodes.</p>
+<ul>
+<li><p>Display all active nodes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
+</pre></div>
+</div>
+</li>
+<li><p>Display information about a node:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>info<span class="w"> </span>/turtlesim
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ros2</span> <span class="pre">node</span> <span class="pre">info</span> <span class="pre">&lt;active_node_name&gt;</span></code></p>
+</li>
+</ul>
+<p>The given information comprises topics that are subscribed and published by this node.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to ROS 2 workshop!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-Simple-Publisher-Subscriber.html" class="btn btn-neutral float-right" title="Understanding ROS 2 nodes with a simple Publisher - Subscriber pair" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
