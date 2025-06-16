@@ -29,6 +29,7 @@ jobs:
             pip install sphinx-mdinclude
             pip install breathe
             pip install exhale
+            pip install myst-parser
 
       - name: Build documentation
         run: |
