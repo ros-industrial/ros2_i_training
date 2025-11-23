@@ -2,7 +2,7 @@
 
 Bring up and control the WBot differential-drive base and 6-DoF arm with `ros2_control`. This example covers setup, launch, teleop, controller introspection, and mixing real base hardware with a mock arm.
 
-![WBot Teleop](mobile_manipulator/wbot_teleop.gif)
+![WBot Teleop](wbot_teleop.gif)
 
 ## 0. Setup (one time)
 
@@ -296,7 +296,7 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 }" -1
 ```
 
-![WBot Manipulator Move](mobile_manipulator/wbot_manipulator_move.gif)
+![WBot Manipulator Move](wbot_manipulator_move.gif)
 
 ### Gripper (GripperActionController)
 
@@ -305,7 +305,7 @@ ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/Parall
 ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}"
 ```
 
-![WBot Gripper](mobile_manipulator/wbot_gripper.gif)
+![WBot Gripper](wbot_gripper.gif)
 
 ### References
 - [ROSCon 2025 Control Workshop](https://github.com/ros-controls/roscon2025_control_workshop)
