@@ -113,7 +113,7 @@
   <section id="wbot-mobile-manipulator-example">
 <h1>WBot Mobile Manipulator Example<a class="headerlink" href="#wbot-mobile-manipulator-example" title="Link to this heading"></a></h1>
 <p>Bring up and control the WBot differential-drive base and 6-DoF arm with <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. This example covers setup, launch, teleop, controller introspection, and mixing real base hardware with a mock arm.</p>
-<p><img alt="WBot Teleop" src="_source/control/mobile_manipulator/wbot_teleop.gif" /></p>
+<p><img alt="WBot Teleop" src="../../_images/wbot_teleop.gif" /></p>
 <section id="setup-one-time">
 <h2>0. Setup (one time)<a class="headerlink" href="#setup-one-time" title="Link to this heading"></a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git-lfs
@@ -386,7 +386,7 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 <span class="s2">}&quot;</span><span class="w"> </span>-1
 </pre></div>
 </div>
-<p><img alt="WBot Manipulator Move" src="_source/control/mobile_manipulator/wbot_manipulator_move.gif" /></p>
+<p><img alt="WBot Manipulator Move" src="../../_images/wbot_manipulator_move.gif" /></p>
 </section>
 <section id="gripper-gripperactioncontroller">
 <h3>Gripper (GripperActionController)<a class="headerlink" href="#gripper-gripperactioncontroller" title="Link to this heading"></a></h3>
@@ -394,7 +394,7 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}&quot;</span>
 </pre></div>
 </div>
-<p><img alt="WBot Gripper" src="_source/control/mobile_manipulator/wbot_gripper.gif" /></p>
+<p><img alt="WBot Gripper" src="../../_images/wbot_gripper.gif" /></p>
 </section>
 <section id="references">
 <h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
