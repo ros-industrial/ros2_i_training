@@ -306,3 +306,6 @@ ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/Parall
 ```
 
 ![WBot Gripper](mobile_manipulator/wbot_gripper.gif)
+
+### References
+- [ROSCon 2025 Control Workshop](https://github.com/ros-controls/roscon2025_control_workshop)
