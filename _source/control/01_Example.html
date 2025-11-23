@@ -83,6 +83,7 @@
 <li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
 </ul>
 
         </div>
@@ -111,6 +112,7 @@
              
   <section id="rrbot">
 <h1>RRBot<a class="headerlink" href="#rrbot" title="Link to this heading"></a></h1>
+<p><strong><img alt="Reference from ros2_control_demos" src="https://control.ros.org/rolling/doc/ros2_control_demos/doc/index.html#" /></strong></p>
 <p><strong>RRBot</strong>, or <em>Revolute-Revolute Manipulator Robot</em>, is a simple 3-linkage, 2-joint arm used to demonstrate various features.</p>
 <p>It is essentially a double inverted pendulum and demonstrates some control concepts within a simulator. It was originally introduced for Gazebo tutorials.</p>
 <p>For <em>example_1</em>, the hardware interface plugin is implemented with only one interface:</p>
@@ -126,9 +128,9 @@
 <h3>0. Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
 <p>Ensure you have the following packages installed:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>
-mkdir<span class="w"> </span>-p<span class="w"> </span>colcon_ws/src
-<span class="nb">cd</span><span class="w"> </span>colcon_ws/src
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-controls/ros2_control_demos.git
+mkdir<span class="w"> </span>-p<span class="w"> </span>colcon_control_ws/src
+<span class="nb">cd</span><span class="w"> </span>colcon_control_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>demo/tricycle<span class="w"> </span>https://github.com/ipa-vsp/ros2_control_demos.git
 <span class="nb">cd</span><span class="w"> </span>..
 rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>-iry
 colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install

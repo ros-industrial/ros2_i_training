@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WBot Mobile Manipulator Example &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Industrial Robot with Externally Connected Sensor" href="04_Example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.5 - ROS2-Control-Example-5</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-one-time">0. Setup (one time)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-the-robot">1. Launch the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#teleop-the-base">2. Teleop the base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspect-ros2-control-state">3. Inspect ros2_control state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualize-introspection-values-in-plotjuggler">4. Visualize introspection values in PlotJuggler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ros2-control-configuration-reference">5. ros2_control configuration reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mobile-manipulator-with-mixed-hardware">6. Mobile manipulator with mixed hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#move-the-robot">7. Move the robot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-diffdrivecontroller">Base (DiffDriveController)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arm-jointtrajectorycontroller">Arm (JointTrajectoryController)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gripper-gripperactioncontroller">Gripper (GripperActionController)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">WBot Mobile Manipulator Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/control/05_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wbot-mobile-manipulator-example">
+<h1>WBot Mobile Manipulator Example<a class="headerlink" href="#wbot-mobile-manipulator-example" title="Link to this heading"></a></h1>
+<p>Bring up and control the WBot differential-drive base and 6-DoF arm with <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>. This example covers setup, launch, teleop, controller introspection, and mixing real base hardware with a mock arm.</p>
+<p><img alt="WBot Teleop" src="_source/control/mobile_manipulator/wbot_teleop.gif" /></p>
+<section id="setup-one-time">
+<h2>0. Setup (one time)<a class="headerlink" href="#setup-one-time" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git-lfs
+git<span class="w"> </span>lfs<span class="w"> </span>install
+
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/colcon_control_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/colcon_control_ws/src
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ROSI-IPA/wbot.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/MarqRazz/piper_ros2.git
+<span class="nb">cd</span><span class="w"> </span>..
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>-iry
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="launch-the-robot">
+<h2>1. Launch the robot<a class="headerlink" href="#launch-the-robot" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>wbot_bringup<span class="w"> </span>wbot.launch.xml
+</pre></div>
+</div>
+<p>This starts the base, arm, controllers, and RViz. In another terminal, open <code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code> if you want to inspect nodes.</p>
+</section>
+<section id="teleop-the-base">
+<h2>2. Teleop the base<a class="headerlink" href="#teleop-the-base" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>stamped:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>Drive around and watch RViz to see odometry and the footprint moving.</p>
+</section>
+<section id="inspect-ros2-control-state">
+<h2>3. Inspect ros2_control state<a class="headerlink" href="#inspect-ros2-control-state" title="Link to this heading"></a></h2>
+<p>While the launch is running, query the control stack:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+ros2<span class="w"> </span>control<span class="w"> </span>list_controller_types
+ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components<span class="w"> </span>-v
+ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>For full controller manager introspection:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/controller_manager/introspection_data/full
+</pre></div>
+</div>
+<p>Focus on <code class="docutils literal notranslate"><span class="pre">wbot_base_control.nonlimited</span></code> and <code class="docutils literal notranslate"><span class="pre">wbot_base_control.limited</span></code> as you drive to see command limiting in action.</p>
+</section>
+<section id="visualize-introspection-values-in-plotjuggler">
+<h2>4. Visualize introspection values in PlotJuggler<a class="headerlink" href="#visualize-introspection-values-in-plotjuggler" title="Link to this heading"></a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w"> </span>plotjuggler
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Start the ROS 2 subscriber.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> as a topic.</p></li>
+<li><p>Plot <code class="docutils literal notranslate"><span class="pre">wbot_base_control.nonlimited</span></code> and <code class="docutils literal notranslate"><span class="pre">wbot_base_control.limited</span></code>; they publish at 100 Hz.</p></li>
+</ol>
+</section>
+<section id="ros2-control-configuration-reference">
+<h2>5. ros2_control configuration reference<a class="headerlink" href="#ros2-control-configuration-reference" title="Link to this heading"></a></h2>
+<p>Hardware macro snippet:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_ros2_control&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;</span>
+<span class="s">  name</span>
+<span class="s">  mock_hardware:=false</span>
+<span class="s">  enable_command_limiting:=false</span>
+<span class="s">  joint_command_topic:=/joint_command_topic</span>
+<span class="s">  joint_states_topic:=/joint_states_topic&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">      </span><span class="nt">&lt;xacro:if</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${mock_hardware}&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fake_sensor_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;state_following_offset&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/xacro:if&gt;</span>
+<span class="w">      </span><span class="nt">&lt;xacro:unless</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${mock_hardware}&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>joint_state_topic_hardware_interface/JointStateTopicSystem<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_commands_topic&quot;</span><span class="nt">&gt;</span>${joint_command_topic}<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_states_topic&quot;</span><span class="nt">&gt;</span>${joint_states_topic}<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sum_wrapped_joint_states&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;trigger_joint_command_threshold&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;enable_command_limiting&quot;</span><span class="nt">&gt;</span>${enable_command_limiting}<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/xacro:unless&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_wheel_left_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_wheel_right_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>13.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/command_interface&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/ros2_control&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+<p>Controller YAML (base, arm, gripper):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>
+<span class="w">    </span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_broadcaster/JointStateBroadcaster</span>
+<span class="w">    </span><span class="nt">diff_drive_base_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">diff_drive_controller/DiffDriveController</span>
+<span class="w">    </span><span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_trajectory_controller/JointTrajectoryController</span>
+<span class="w">    </span><span class="nt">gripper_controller</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parallel_gripper_action_controller/GripperActionController</span>
+
+<span class="nt">diff_drive_base_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">left_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;wbot_wheel_left_joint&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;wbot_wheel_right_joint&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">wheel_separation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.287</span>
+<span class="w">    </span><span class="nt">wheel_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.033</span>
+<span class="w">    </span><span class="nt">wheel_separation_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">left_wheel_radius_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">right_wheel_radius_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
+<span class="w">    </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odom</span>
+<span class="w">    </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_base_footprint</span>
+<span class="w">    </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">open_loop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">position_feedback</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">cmd_vel_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">    </span><span class="nt">linear.x.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">linear.x.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">linear.x.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">linear.x.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">linear.x.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
+<span class="w">    </span><span class="nt">linear.x.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.5</span>
+<span class="w">    </span><span class="nt">linear.x.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">linear.x.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">angular.z.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">angular.z.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">angular.z.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">    </span><span class="nt">angular.z.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-2.0</span>
+<span class="w">    </span><span class="nt">angular.z.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.2</span>
+<span class="w">    </span><span class="nt">angular.z.min_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-6.2</span>
+<span class="w">    </span><span class="nt">angular.z.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">angular.z.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+
+<span class="nt">joint_trajectory_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">joints</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_4</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_5</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_joint_6</span>
+<span class="w">    </span><span class="nt">command_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">    </span><span class="nt">state_interfaces</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">position</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
+<span class="w">    </span><span class="nt">state_publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="w">    </span><span class="nt">allow_partial_joints_goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">open_loop_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
+<span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">      </span><span class="nt">joint_1</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">      </span><span class="nt">joint_2</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">      </span><span class="nt">joint_3</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">      </span><span class="nt">joint_4</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">      </span><span class="nt">joint_5</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">      </span><span class="nt">joint_6</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+
+<span class="nt">gripper_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="w">    </span><span class="nt">allow_stalling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">goal_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">joint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_arm_gripper_joint</span>
+<span class="w">    </span><span class="nt">stall_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">stall_velocity_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.002</span>
+</pre></div>
+</div>
+</section>
+<section id="mobile-manipulator-with-mixed-hardware">
+<h2>6. Mobile manipulator with mixed hardware<a class="headerlink" href="#mobile-manipulator-with-mixed-hardware" title="Link to this heading"></a></h2>
+<p>If you have the base hardware but no arm, run the arm with mock hardware:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>wbot_bringup<span class="w"> </span>wbot_manipulator.launch.xml<span class="w"> </span>mock_hardware:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>List hardware components:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hardware Component 1
+        name: wbot_arm_piper_control
+        type: system
+        plugin name: mock_components/GenericSystem
+        state: id=3 label=active
+        read/write rate: 100 Hz
+        is_async: False
+        command interfaces
+                wbot_arm_joint_5/position [available] [claimed]
+                wbot_arm_joint_6/position [available] [claimed]
+                wbot_arm_joint_4/position [available] [claimed]
+                wbot_arm_gripper_joint/position [available] [claimed]
+                wbot_arm_joint_3/position [available] [claimed]
+                wbot_arm_joint_2/position [available] [claimed]
+                wbot_arm_joint_1/position [available] [claimed]
+Hardware Component 2
+        name: wbot_base_control
+        type: system
+        plugin name: mock_components/GenericSystem
+        state: id=3 label=active
+        read/write rate: 100 Hz
+        is_async: False
+        command interfaces
+                wbot_wheel_right_joint/velocity [available] [claimed]
+                wbot_wheel_left_joint/velocity [available] [claimed]
+</pre></div>
+</div>
+</section>
+<section id="move-the-robot">
+<h2>7. Move the robot<a class="headerlink" href="#move-the-robot" title="Link to this heading"></a></h2>
+<section id="base-diffdrivecontroller">
+<h3>Base (DiffDriveController)<a class="headerlink" href="#base-diffdrivecontroller" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>--ros-args<span class="w"> </span>-p<span class="w"> </span>stamped:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>The diff-drive controller computes wheel velocities and sends them to the embedded board while streaming state back.</p>
+</section>
+<section id="arm-jointtrajectorycontroller">
+<h3>Arm (JointTrajectoryController)<a class="headerlink" href="#arm-jointtrajectorycontroller" title="Link to this heading"></a></h3>
+<p>The joint trajectory controller supports both an action and a topic:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>info<span class="w"> </span>/joint_trajectory_controller/follow_joint_trajectory
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>-v<span class="w"> </span>/joint_trajectory_controller/joint_trajectory
+</pre></div>
+</div>
+<p>Send a pose:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">&quot;{</span>
+<span class="s2">  joint_names: [wbot_arm_joint_1, wbot_arm_joint_2, wbot_arm_joint_3, wbot_arm_joint_4, wbot_arm_joint_5, wbot_arm_joint_6],</span>
+<span class="s2">  points: [</span>
+<span class="s2">    { positions: [0.0, 0.85, -0.75, 0.0, 0.5, 0.0], time_from_start: { sec: 2 } }</span>
+<span class="s2">  ]</span>
+<span class="s2">}&quot;</span><span class="w"> </span>-1
+</pre></div>
+</div>
+<p>Return home:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">&quot;{</span>
+<span class="s2">  joint_names: [wbot_arm_joint_1, wbot_arm_joint_2, wbot_arm_joint_3, wbot_arm_joint_4, wbot_arm_joint_5, wbot_arm_joint_6],</span>
+<span class="s2">  points: [</span>
+<span class="s2">    { positions: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], time_from_start: { sec: 1 } }</span>
+<span class="s2">  ]</span>
+<span class="s2">}&quot;</span><span class="w"> </span>-1
+</pre></div>
+</div>
+<p><img alt="WBot Manipulator Move" src="_source/control/mobile_manipulator/wbot_manipulator_move.gif" /></p>
+</section>
+<section id="gripper-gripperactioncontroller">
+<h3>Gripper (GripperActionController)<a class="headerlink" href="#gripper-gripperactioncontroller" title="Link to this heading"></a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}&quot;</span>
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}&quot;</span>
+</pre></div>
+</div>
+<p><img alt="WBot Gripper" src="_source/control/mobile_manipulator/wbot_gripper.gif" /></p>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ros-controls/roscon2025_control_workshop">ROSCon 2025 Control Workshop</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="04_Example.html" class="btn btn-neutral float-left" title="Industrial Robot with Externally Connected Sensor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
