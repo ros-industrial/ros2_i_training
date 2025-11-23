@@ -22,9 +22,9 @@ Ensure you have the following packages installed:
 
 ```sh
 cd 
-mkdir -p colcon_ws/src
-cd colcon_ws/src
-git clone https://github.com/ros-controls/ros2_control_demos.git
+mkdir -p colcon_control_ws/src
+cd colcon_control_ws/src
+git clone -b demo/tricycle https://github.com/ipa-vsp/ros2_control_demos.git
 cd ..
 rosdep install --from-paths src -iry
 colcon build --symlink-install
