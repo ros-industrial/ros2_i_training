@@ -34,7 +34,7 @@ Session 4 - ROS2 Manipulation
 .. toctree::
    :maxdepth: 1
 
-   Exercise 4 - ROS2-Moveit2 <_source/manipulation/readme.md>
+   Exercise 4 - ROS2-Moveit2-Setup-Assisitance <_source/manipulation/setup_assistance.md>
 
 Session 5 - ROS2 URDF
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -43,4 +43,14 @@ Session 5 - ROS2 URDF
 
    ROS2 URDF_Introduction <_source/urdf/introduction.md>
    Exercise 5 - Ros2-Cartesian Robot <_source/urdf/cartesian_tutorial.md>
+
+Session 6 - ROS2 Control
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. toctree::
+   :maxdepth: 1
+
+   Exercise 6.1 - ROS2-Control-Example-1 <_source/control/01_Example.md>
+   Exercise 6.2 - ROS2-Control-Example-2 <_source/control/02_Example.md>
+   Exercise 6.3 - ROS2-Control-Example-3 <_source/control/03_Example.md>
+   Exercise 6.4 - ROS2-Control-Example-4 <_source/control/04_Example.md>
    
