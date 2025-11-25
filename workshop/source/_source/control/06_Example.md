@@ -98,13 +98,13 @@ The hardware components realize communication to physical hardware and represent
 
 There are three basic types of components:
 
-System
+**System:**
 Complex (multi-DOF) robotic hardware like industrial robots. The main difference between the Actuator component is the possibility to use complex transmissions like needed for humanoid robot’s hands. This component has reading and writing capabilities. It is used when there is only one logical communication channel to the hardware (e.g., KUKA-RSI).
 
-Sensor
+**Sensor:**
 Robotic hardware is used for sensing its environment. A sensor component is related to a joint (e.g., encoder) or a link (e.g., force-torque sensor). This component type has only reading capabilities.
 
-Actuator
+**Actuator:**
 Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator implementation is related to only one joint. This component type has reading and writing capabilities. Reading is not mandatory if not possible (e.g., DC motor control with Arduino board). The actuator type can also be used with a multi-DOF robot if its hardware enables modular design, e.g., CAN-communication with each motor independently.
 
 referece: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
