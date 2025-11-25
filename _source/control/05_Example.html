@@ -161,14 +161,26 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfa
 </section>
 <section id="visualize-introspection-values-in-plotjuggler">
 <h2>4. Visualize introspection values in PlotJuggler<a class="headerlink" href="#visualize-introspection-values-in-plotjuggler" title="Link to this heading"></a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w"> </span>plotjuggler
+<p>Introspection of the ros2_control setup
+With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the ~/introspection_data topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.</p>
+<p>What gets published (message types):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/full</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsValues</span></code>): publishes the full introspection data, so names and values travel together for quick CLI inspection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/names</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsNames</span></code>): publishes the names of the registered variables whenever interfaces are registered or removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsValues</span></code>): publishes only the changing values every update cycle when a subscriber is present (ideal for PlotJuggler).</p></li>
+</ul>
+<p>All the registered variables are still published over the 3 topics: ~/introspection_data/full, ~/introspection_data/names, and ~/introspection_data/values. The topics ~/introspection_data/full and ~/introspection_data/values are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.</p>
+<p>You can wire these directly into a visualization:</p>
+<ul class="simple">
+<li><p>The topic ~/introspection_data/full can be used to integrate with your custom visualization tools or to track the variables from the command line.</p></li>
+<li><p>The topic ~/introspection_data/names and ~/introspection_data/values are to be used for visualization tools like PlotJuggler or RQT plot to visualize the data.</p></li>
+<li><p>In PlotJuggler, add the <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> stream and expand the interface names to plot wheel commands, joint states, or controller timings in real time.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-plotjuggler
+ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w"> </span>plotjuggler
 </pre></div>
 </div>
-<ol class="arabic simple">
-<li><p>Start the ROS 2 subscriber.</p></li>
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> as a topic.</p></li>
-<li><p>Plot <code class="docutils literal notranslate"><span class="pre">wbot_base_control.nonlimited</span></code> and <code class="docutils literal notranslate"><span class="pre">wbot_base_control.limited</span></code>; they publish at 100 Hz.</p></li>
-</ol>
+<p><img alt="Plotjuggler" src="../../_images/plotjuggler_select_topics.png" /></p>
 </section>
 <section id="ros2-control-configuration-reference">
 <h2>5. ros2_control configuration reference<a class="headerlink" href="#ros2-control-configuration-reference" title="Link to this heading"></a></h2>
@@ -188,14 +200,6 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfa
 <span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;state_following_offset&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;/xacro:if&gt;</span>
-<span class="w">      </span><span class="nt">&lt;xacro:unless</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${mock_hardware}&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>joint_state_topic_hardware_interface/JointStateTopicSystem<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_commands_topic&quot;</span><span class="nt">&gt;</span>${joint_command_topic}<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_states_topic&quot;</span><span class="nt">&gt;</span>${joint_states_topic}<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sum_wrapped_joint_states&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;trigger_joint_command_threshold&quot;</span><span class="nt">&gt;</span>-1<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;enable_command_limiting&quot;</span><span class="nt">&gt;</span>${enable_command_limiting}<span class="nt">&lt;/param&gt;</span>
-<span class="w">      </span><span class="nt">&lt;/xacro:unless&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/hardware&gt;</span>
 <span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_wheel_left_joint&quot;</span><span class="nt">&gt;</span>
 <span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
@@ -244,27 +248,7 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfa
 <span class="w">    </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbot_base_footprint</span>
 <span class="w">    </span><span class="nt">pose_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">twist_covariance_diagonal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.001</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.01</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">open_loop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">position_feedback</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">cmd_vel_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<span class="w">    </span><span class="nt">linear.x.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">linear.x.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">linear.x.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">linear.x.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
-<span class="w">    </span><span class="nt">linear.x.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1.0</span>
-<span class="w">    </span><span class="nt">linear.x.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.5</span>
-<span class="w">    </span><span class="nt">linear.x.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">    </span><span class="nt">linear.x.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">    </span><span class="nt">angular.z.has_velocity_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">angular.z.has_acceleration_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">angular.z.has_jerk_limits</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">angular.z.max_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<span class="w">    </span><span class="nt">angular.z.min_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-2.0</span>
-<span class="w">    </span><span class="nt">angular.z.max_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.2</span>
-<span class="w">    </span><span class="nt">angular.z.min_acceleration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-6.2</span>
-<span class="w">    </span><span class="nt">angular.z.max_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">    </span><span class="nt">angular.z.min_jerk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 
 <span class="nt">joint_trajectory_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
@@ -282,25 +266,7 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfa
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity</span>
 <span class="w">    </span><span class="nt">state_publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 <span class="w">    </span><span class="nt">action_monitor_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
-<span class="w">    </span><span class="nt">allow_partial_joints_goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">open_loop_control</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="w">    </span><span class="nt">allow_nonzero_velocity_at_trajectory_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">interpolation_method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">splines</span>
-<span class="w">    </span><span class="nt">constraints</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">stopped_velocity_tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
-<span class="w">      </span><span class="nt">goal_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<span class="w">      </span><span class="nt">joint_1</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="w">      </span><span class="nt">joint_2</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="w">      </span><span class="nt">joint_3</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="w">      </span><span class="nt">joint_4</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="w">      </span><span class="nt">joint_5</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
-<span class="w">      </span><span class="nt">joint_6</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 
 <span class="nt">gripper_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
@@ -390,7 +356,9 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 </section>
 <section id="gripper-gripperactioncontroller">
 <h3>Gripper (GripperActionController)<a class="headerlink" href="#gripper-gripperactioncontroller" title="Link to this heading"></a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># open</span>
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}&quot;</span>
+<span class="c1">#close</span>
 ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}&quot;</span>
 </pre></div>
 </div>

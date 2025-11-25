@@ -56,14 +56,26 @@ ros2 topic echo /controller_manager/introspection_data/full
 Focus on `wbot_base_control.nonlimited` and `wbot_base_control.limited` as you drive to see command limiting in action.
 
 ## 4. Visualize introspection values in PlotJuggler
+Introspection of the ros2_control setup
+With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the ~/introspection_data topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.
 
-```sh
+What gets published (message types):
+- `/controller_manager/introspection_data/full` (`pal_statistics_msgs/msg/StatisticsValues`): publishes the full introspection data, so names and values travel together for quick CLI inspection.
+- `/controller_manager/introspection_data/names` (`pal_statistics_msgs/msg/StatisticsNames`): publishes the names of the registered variables whenever interfaces are registered or removed.
+- `/controller_manager/introspection_data/values` (`pal_statistics_msgs/msg/StatisticsValues`): publishes only the changing values every update cycle when a subscriber is present (ideal for PlotJuggler).
+
+All the registered variables are still published over the 3 topics: ~/introspection_data/full, ~/introspection_data/names, and ~/introspection_data/values. The topics ~/introspection_data/full and ~/introspection_data/values are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.
+
+You can wire these directly into a visualization:
+- The topic ~/introspection_data/full can be used to integrate with your custom visualization tools or to track the variables from the command line.
+- The topic ~/introspection_data/names and ~/introspection_data/values are to be used for visualization tools like PlotJuggler or RQT plot to visualize the data.
+- In PlotJuggler, add the `/controller_manager/introspection_data/values` stream and expand the interface names to plot wheel commands, joint states, or controller timings in real time.
+
+```bash
+sudo apt install ros-jazzy-plotjuggler
 ros2 run plotjuggler plotjuggler
 ```
-
-1. Start the ROS 2 subscriber.
-2. Add `/controller_manager/introspection_data/values` as a topic.
-3. Plot `wbot_base_control.nonlimited` and `wbot_base_control.limited`; they publish at 100 Hz.
+![Plotjuggler](plotjuggler_select_topics.png)
 
 ## 5. ros2_control configuration reference
 
@@ -85,14 +97,6 @@ Hardware macro snippet:
         <param name="state_following_offset">0.0</param>
         <param name="calculate_dynamics">true</param>
       </xacro:if>
-      <xacro:unless value="${mock_hardware}">
-        <plugin>joint_state_topic_hardware_interface/JointStateTopicSystem</plugin>
-        <param name="joint_commands_topic">${joint_command_topic}</param>
-        <param name="joint_states_topic">${joint_states_topic}</param>
-        <param name="sum_wrapped_joint_states">true</param>
-        <param name="trigger_joint_command_threshold">-1</param>
-        <param name="enable_command_limiting">${enable_command_limiting}</param>
-      </xacro:unless>
     </hardware>
     <joint name="wbot_wheel_left_joint">
       <command_interface name="velocity">
@@ -143,27 +147,7 @@ diff_drive_base_controller:
     base_frame_id: wbot_base_footprint
     pose_covariance_diagonal: [0.001, 0.001, 0.0, 0.0, 0.0, 0.01]
     twist_covariance_diagonal: [0.001, 0.0, 0.0, 0.0, 0.0, 0.01]
-    open_loop: false
-    position_feedback: true
-    enable_odom_tf: true
-    cmd_vel_timeout: 0.5
-    linear.x.has_velocity_limits: true
-    linear.x.has_acceleration_limits: true
-    linear.x.has_jerk_limits: false
-    linear.x.max_velocity: 1.0
-    linear.x.min_velocity: -1.0
-    linear.x.max_acceleration: 2.5
-    linear.x.max_jerk: 0.0
-    linear.x.min_jerk: 0.0
-    angular.z.has_velocity_limits: true
-    angular.z.has_acceleration_limits: true
-    angular.z.has_jerk_limits: false
-    angular.z.max_velocity: 2.0
-    angular.z.min_velocity: -2.0
-    angular.z.max_acceleration: 6.2
-    angular.z.min_acceleration: -6.2
-    angular.z.max_jerk: 0.0
-    angular.z.min_jerk: 0.0
+    ...
 
 joint_trajectory_controller:
   ros__parameters:
@@ -181,25 +165,7 @@ joint_trajectory_controller:
       - velocity
     state_publish_rate: 0.0
     action_monitor_rate: 20.0
-    allow_partial_joints_goal: false
-    open_loop_control: false
-    allow_nonzero_velocity_at_trajectory_end: true
-    interpolation_method: splines
-    constraints:
-      stopped_velocity_tolerance: 0.01
-      goal_time: 0.0
-      joint_1:
-        goal: 0.001
-      joint_2:
-        goal: 0.001
-      joint_3:
-        goal: 0.001
-      joint_4:
-        goal: 0.001
-      joint_5:
-        goal: 0.001
-      joint_6:
-        goal: 0.001
+    ...
 
 gripper_controller:
   ros__parameters:
@@ -301,7 +267,9 @@ ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/Joi
 ### Gripper (GripperActionController)
 
 ```sh
+# open
 ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}"
+#close
 ros2 action send_goal /gripper_controller/gripper_cmd control_msgs/action/ParallelGripperCommand "{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}"
 ```
 

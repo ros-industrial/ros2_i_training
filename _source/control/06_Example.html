@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Setup Tricycle Robot &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to Setup Tricycle Robot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/control/06_Example.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-setup-tricycle-robot">
+<h1>How to Setup Tricycle Robot<a class="headerlink" href="#how-to-setup-tricycle-robot" title="Link to this heading"></a></h1>
+<section id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>First you need to have a working URDF with all the joint types properly assigned.</p></li>
+<li><p>The resource manager will pick up the joints which are either “revolute”, “continuous”, or prismatic types</p></li>
+<li><p>Fixed joints will not be used by ros2_control because they are not actuated</p></li>
+</ul>
+<p>This example is aim: follow the sequence URDF → hardware plugin → controller config → launch so you can reproduce it for your own robot.</p>
+<p>The reference file <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/tricyclebot/urdf/tricyclebot_description.urdf.xacro</span></code></p>
+</section>
+<section id="robot-description-xacro">
+<h2>Robot description xacro<a class="headerlink" href="#robot-description-xacro" title="Link to this heading"></a></h2>
+<p>Start from a clean URDF/xacro description so you know exactly which joints ros2_control will expose.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tricyclebot&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;prefix&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Root --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}base_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Chassis --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}chassis_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}base_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 ${base_height/2 + wheel_radius + body_clearance}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 1&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Rear right wheel --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}rear_right_wheel&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;origin</span>
+<span class="w">        </span><span class="na">xyz=</span><span class="s">&quot;-${wheelbase/2} ${base_width/2} -${base_height/2 + wheel_radius + wheel_clearance}&quot;</span>
+<span class="w">        </span><span class="na">rpy=</span><span class="s">&quot;0 0 ${PI/2}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;1 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;100.0&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;100.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Rear left wheel --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">     </span>...
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}rear_left_wheel&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Front steering link and wheel --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;revolute&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">     </span>...
+<span class="w">    </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_wheel&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span>...
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;/xacro:macro&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<section id="why-these-joint-types-matter">
+<h3>Why these joint types matter<a class="headerlink" href="#why-these-joint-types-matter" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rear_left_wheel_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">rear_right_wheel_joint</span></code> are <code class="docutils literal notranslate"><span class="pre">continuous</span></code>, so ros2_control treats them as driven wheels that can spin forever.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">front_steering_joint</span></code> is <code class="docutils literal notranslate"><span class="pre">revolute</span></code>, so the steering actuator expects a bounded angle command.</p></li>
+<li><p>If a joint should move in your own robot, make sure it is <code class="docutils literal notranslate"><span class="pre">revolute</span></code>, <code class="docutils literal notranslate"><span class="pre">continuous</span></code>, or <code class="docutils literal notranslate"><span class="pre">prismatic</span></code> before you hook it to controllers.</p></li>
+</ul>
+</section>
+</section>
+<section id="writing-my-own-plugin-for-hardware-components">
+<h2>Writing my own plugin for hardware components<a class="headerlink" href="#writing-my-own-plugin-for-hardware-components" title="Link to this heading"></a></h2>
+<p>The hardware components realize communication to physical hardware and represent its abstraction in the ros2_control framework. The components have to be exported as plugins using pluginlib-library. The Resource Manager dynamically loads those plugins and manages their lifecycle.</p>
+<p>There are three basic types of components:</p>
+<p>System
+Complex (multi-DOF) robotic hardware like industrial robots. The main difference between the Actuator component is the possibility to use complex transmissions like needed for humanoid robot’s hands. This component has reading and writing capabilities. It is used when there is only one logical communication channel to the hardware (e.g., KUKA-RSI).</p>
+<p>Sensor
+Robotic hardware is used for sensing its environment. A sensor component is related to a joint (e.g., encoder) or a link (e.g., force-torque sensor). This component type has only reading capabilities.</p>
+<p>Actuator
+Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator implementation is related to only one joint. This component type has reading and writing capabilities. Reading is not mandatory if not possible (e.g., DC motor control with Arduino board). The actuator type can also be used with a multi-DOF robot if its hardware enables modular design, e.g., CAN-communication with each motor independently.</p>
+<p>referece: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md</p>
+<section id="lifecycle-of-a-hardware-component">
+<h3>Lifecycle of a Hardware Component<a class="headerlink" href="#lifecycle-of-a-hardware-component" title="Link to this heading"></a></h3>
+<p>Methods return <code class="docutils literal notranslate"><span class="pre">hardware_interface::CallbackReturn</span></code> with these meanings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SUCCESS</span></code>: execution was successful</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FAILURE</span></code>: execution failed; lifecycle transition is unsuccessful</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code>: critical error occurred; managed in <code class="docutils literal notranslate"><span class="pre">on_error</span></code> method</p></li>
+</ul>
+<p>Hardware transitions through these states:</p>
+<p><strong>UNCONFIGURED</strong> (<code class="docutils literal notranslate"><span class="pre">on_init</span></code>, <code class="docutils literal notranslate"><span class="pre">on_cleanup</span></code>): Hardware initialized but communication not started; interfaces not imported.</p>
+<p><strong>INACTIVE</strong> (<code class="docutils literal notranslate"><span class="pre">on_configure</span></code>, <code class="docutils literal notranslate"><span class="pre">on_deactivate</span></code>): Communication established and hardware configured. States readable; command interfaces unavailable (System and Actuator only). Controllers should validate or clamp received commands.</p>
+<p><strong>ACTIVE</strong> (<code class="docutils literal notranslate"><span class="pre">on_activate</span></code>): States readable and writable. Commands sent to hardware.</p>
+<p><strong>FINALIZED</strong> (<code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code>): Hardware ready for unloading; memory cleaned up.</p>
+<p>See the lifecycle state diagram for transitions.</p>
+<p><img alt="Lifecycle State Diagram" src="../../_images/life_cycle_sm.png" /></p>
+<p>Use a hardware plugin to connect ros2_control to your real or simulated tricycle base. The reference implementation in <code class="docutils literal notranslate"><span class="pre">example_18/hardware/include/ros2_control_demo_example_18/tricycle_steering_system.hpp</span></code> shows all the moving parts you need to copy for your own robot.</p>
+<p>Here is the core class definition used in the example:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef ROS2_CONTROL_DEMO_EXAMPLE_18__TRICYCLE_STEERING_SYSTEM_HPP_</span>
+<span class="cp">#define ROS2_CONTROL_DEMO_EXAMPLE_18__TRICYCLE_STEERING_SYSTEM_HPP_</span>
+
+<span class="p">...</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hardware_interface/hardware_info.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hardware_interface/system_interface.hpp&quot;</span>
+<span class="p">...</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">ros2_control_demo_example_18</span>
+<span class="p">{</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TricycleSteeringSystemHardware</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">SystemInterface</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">  </span><span class="n">RCLCPP_SHARED_PTR_DEFINITIONS</span><span class="p">(</span><span class="n">TricycleSteeringSystemHardware</span><span class="p">)</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="n">on_init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">HardwareComponentInterfaceParams</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_configure</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">previous_state</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_activate</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">previous_state</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">CallbackReturn</span><span class="w"> </span><span class="nf">on_deactivate</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp_lifecycle</span><span class="o">::</span><span class="n">State</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">previous_state</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">hardware_interface</span><span class="o">::</span><span class="n">return_type</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Time</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace ros2_control_demo_example_18</span>
+
+<span class="cp">#endif  </span><span class="c1">// ROS2_CONTROL_DEMO_EXAMPLE_18__TRICYCLE_STEERING_SYSTEM_HPP_</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">hardware_interface::(Actuator|Sensor|System)Interface</span></code> defines the base class for your hardware plugin. Override the lifecycle methods to manage initialization, configuration, activation, and deactivation of your hardware. Implement the <code class="docutils literal notranslate"><span class="pre">read</span></code> and <code class="docutils literal notranslate"><span class="pre">write</span></code> methods to handle data exchange between ros2_control and your hardware.</p>
+</section>
+</section>
+<section id="export-the-plugin">
+<h2>Export the Plugin<a class="headerlink" href="#export-the-plugin" title="Link to this heading"></a></h2>
+<p>To export the plugin, create the file <code class="docutils literal notranslate"><span class="pre">example_18/ros2_control_demo_example_18.xml</span></code> with the following content:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;ros2_control_demo_example_18&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ros2_control_demo_example_18/TricycleSteeringSystemHardware&quot;</span>
+<span class="w">                 </span><span class="na">type=</span><span class="s">&quot;ros2_control_demo_example_18::TricycleSteeringSystemHardware&quot;</span>
+<span class="w">                 </span><span class="na">base_class_type=</span><span class="s">&quot;hardware_interface::SystemInterface&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;description&gt;</span>
+<span class="w">            </span>Tricycle<span class="w"> </span>steering<span class="w"> </span>hardware<span class="w"> </span>system<span class="w"> </span>interface<span class="w"> </span>for<span class="w"> </span>the<span class="w"> </span>ros2_control_demos<span class="w"> </span>example<span class="w"> </span>18.
+<span class="w">        </span><span class="nt">&lt;/description&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/class&gt;</span>
+<span class="nt">&lt;/library&gt;</span>
+</pre></div>
+</div>
+<p>This XML file is required by <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> so that <code class="docutils literal notranslate"><span class="pre">controller_manager</span></code> can construct your class by name at runtime. During the build process, the macro <code class="docutils literal notranslate"><span class="pre">pluginlib_export_plugin_description_file(hardware_interface</span> <span class="pre">ros2_control_demo_example_18.xml)</span></code> will export it.</p>
+</section>
+<section id="load-the-plugin-in-the-robot-xacro">
+<h2>Load the plugin in the robot xacro<a class="headerlink" href="#load-the-plugin-in-the-robot-xacro" title="Link to this heading"></a></h2>
+<p>During the build, the plugin is exported with <code class="docutils literal notranslate"><span class="pre">pluginlib_export_plugin_description_file(hardware_interface</span> <span class="pre">ros2_control_demo_example_18.xml)</span></code> and then loaded into <code class="docutils literal notranslate"><span class="pre">ros2_control.xacro</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tricyclebot_ros2_control&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;name prefix&quot;</span><span class="nt">&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;hardware&gt;</span>
+<span class="w">                </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_example_18/TricycleSteeringSystemHardware<span class="nt">&lt;/plugin&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/hardware&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_joint&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/ros2_control&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;/xacro:macro&gt;</span>
+
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> tag defines the hardware interface and joints controlled by ros2_control. The custom hardware plugin <code class="docutils literal notranslate"><span class="pre">TricycleSteeringSystemHardware</span></code> manages tricycle control, with individual joints specifying their command and state interfaces.</p>
+<p><strong>Key points:</strong></p>
+<ul class="simple">
+<li><p>Match <code class="docutils literal notranslate"><span class="pre">&lt;joint&gt;</span></code> names exactly to your URDF or the controller will fail to start.</p></li>
+<li><p>Command and state interfaces support <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, and <code class="docutils literal notranslate"><span class="pre">effort</span></code>—select what your actuator provides.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&lt;gpio&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;sensor&gt;</span></code> tags for additional non-actuated interfaces.</p></li>
+</ul>
+<p>Reference: <a class="reference external" href="https://control.ros.org/rolling/doc/ros2_control/hardware_interface/doc/hardware_interface_types_userdoc.html">Hardware Interface Types</a></p>
+</section>
+<section id="controller-integration">
+<h2>Controller integration<a class="headerlink" href="#controller-integration" title="Link to this heading"></a></h2>
+<p>The controller configuration file <code class="docutils literal notranslate"><span class="pre">example_18/bringup/config/tricyclebot_controllers.yaml</span></code> defines which controllers to load and encodes the tricycle base geometry. Adjust <code class="docutils literal notranslate"><span class="pre">wheelbase</span></code>, <code class="docutils literal notranslate"><span class="pre">traction_track_width</span></code>, and <code class="docutils literal notranslate"><span class="pre">traction_wheels_radius</span></code> to match your URDF:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">  </span><span class="c1"># Hz</span>
+
+<span class="w">        </span><span class="nt">joint_state_broadcaster</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_state_broadcaster/JointStateBroadcaster</span>
+
+<span class="nt">tricycle_steering_controller</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tricycle_steering_controller/TricycleSteeringController</span>
+<span class="w">        </span><span class="nt">traction_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;rear_right_wheel_joint&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;rear_left_wheel_joint&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">steering_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;front_steering_joint&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">wheelbase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.45</span>
+<span class="w">        </span><span class="nt">traction_track_width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.30</span>
+<span class="w">        </span><span class="nt">traction_wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="w">        </span><span class="nt">reference_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">        </span><span class="nt">open_loop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">position_feedback</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">        </span><span class="nt">velocity_rolling_window_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">base_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">base_link</span>
+<span class="w">        </span><span class="nt">odom_frame_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odom</span>
+<span class="w">        </span><span class="nt">enable_odom_tf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p><strong>Key parameters:</strong></p>
+<ul class="simple">
+<li><p>Joint names must match your URDF exactly or the controller will fail.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_rate</span></code> controls command frequency to hardware.</p></li>
+</ul>
+</section>
+<section id="how-to-launch">
+<h2>How to launch<a class="headerlink" href="#how-to-launch" title="Link to this heading"></a></h2>
+<p>The launch file in <code class="docutils literal notranslate"><span class="pre">example_18/bringup/launch</span></code> starts <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code>, brings up the joint state broadcaster, and loads the tricycle steering controller with an optional TF remap flag to match your tf tree in RViz.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_description</span><span class="p">,</span> <span class="n">robot_controllers</span><span class="p">],</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">joint_state_broadcaster_spawner</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;joint_state_broadcaster&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">tricycle_controller_spawner_remapped</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;tricycle_steering_controller&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--param-file&quot;</span><span class="p">,</span>
+        <span class="n">robot_controllers</span><span class="p">,</span>
+        <span class="s2">&quot;--controller-ros-args&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-r /tricycle_steering_controller/tf_odometry:=/tf&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">condition</span><span class="o">=</span><span class="n">IfCondition</span><span class="p">(</span><span class="n">remap_odometry_tf</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Each component:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code> loads your URDF and controller configuration so the hardware plugin runs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_state_broadcaster</span></code> publishes <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/JointState</span></code> for RViz visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tricycle_steering_controller</span></code> spawns with the same parameters file; <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> remaps <code class="docutils literal notranslate"><span class="pre">/tf</span></code> if needed for your frame tree.</p></li>
+</ul>
+</section>
+</section>
+<section id="example-18-tricyclebot-steering">
+<h1>Example 18: TricycleBot (steering)<a class="headerlink" href="#example-18-tricyclebot-steering" title="Link to this heading"></a></h1>
+<p><em>TricycleBot</em> is a simple mobile base with two driven rear wheels and a single steerable front wheel. This example demonstrates using the <code class="docutils literal notranslate"><span class="pre">tricycle_steering_controller</span></code> from <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> to command a vehicle with two traction joints and one steering joint.</p>
+<p>URDF files: <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/tricyclebot/urdf</span></code></p>
+<section id="tutorial-steps">
+<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify the robot description</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_18<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<p>Note: At startup you may see the warning
+“Warning: Invalid frame ID ‘odom’ passed to canTransform argument target_frame” — this is expected while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> starts.</p>
+<ol class="arabic simple" start="2">
+<li><p>Start the example</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_18<span class="w"> </span>tricyclebot.launch.py
+</pre></div>
+</div>
+<p>This loads and starts the hardware, controllers, and RViz. The hardware implementation prints its internal states to the launching terminal.</p>
+<ol class="arabic simple" start="3">
+<li><p>Inspect hardware interfaces</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>Expected output (examples):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="n">interfaces</span>
+    <span class="n">front_steering_joint</span><span class="o">/</span><span class="n">position</span> <span class="p">[</span><span class="n">available</span><span class="p">]</span> <span class="p">[</span><span class="n">claimed</span><span class="p">]</span>
+    <span class="n">rear_left_wheel_joint</span><span class="o">/</span><span class="n">velocity</span> <span class="p">[</span><span class="n">available</span><span class="p">]</span> <span class="p">[</span><span class="n">claimed</span><span class="p">]</span>
+    <span class="n">rear_right_wheel_joint</span><span class="o">/</span><span class="n">velocity</span> <span class="p">[</span><span class="n">available</span><span class="p">]</span> <span class="p">[</span><span class="n">claimed</span><span class="p">]</span>
+<span class="n">state</span> <span class="n">interfaces</span>
+    <span class="n">front_steering_joint</span><span class="o">/</span><span class="n">position</span>
+    <span class="n">rear_left_wheel_joint</span><span class="o">/</span><span class="n">position</span>
+    <span class="n">rear_left_wheel_joint</span><span class="o">/</span><span class="n">velocity</span>
+    <span class="n">rear_right_wheel_joint</span><span class="o">/</span><span class="n">position</span>
+    <span class="n">rear_right_wheel_joint</span><span class="o">/</span><span class="n">velocity</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Check controllers</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint_state_broadcaster</span><span class="p">[</span><span class="n">joint_state_broadcaster</span><span class="o">/</span><span class="n">JointStateBroadcaster</span><span class="p">]</span> <span class="n">active</span>
+<span class="n">tricycle_steering_controller</span><span class="p">[</span><span class="n">tricycle_steering_controller</span><span class="o">/</span><span class="n">TricycleSteeringController</span><span class="p">]</span> <span class="n">active</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Send a reference command</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_steering_controller/reference<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">  header: auto</span>
+<span class="s2">  twist:</span>
+<span class="s2">     linear:</span>
+<span class="s2">        x: 1.0</span>
+<span class="s2">        y: 0.0</span>
+<span class="s2">        z: 0.0</span>
+<span class="s2">     angular:</span>
+<span class="s2">        x: 0.0</span>
+<span class="s2">        y: 0.0</span>
+<span class="s2">        z: 0.5&quot;</span>
+</pre></div>
+</div>
+<p>You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.</p>
+<p>Reference: https://github.com/ipa-vsp/ros2_control_demos (example_18 / tricycle demo)</p>
+</section>
+</section>
+<section id="example-19-tricyclebot-drive">
+<h1>Example 19: TricycleBot (drive)<a class="headerlink" href="#example-19-tricyclebot-drive" title="Link to this heading"></a></h1>
+<p><em>TricycleBot</em> is a mobile base with a single front wheel that is both driven and steered plus two trailing rear wheels. This example demonstrates using the <code class="docutils literal notranslate"><span class="pre">tricycle_controller</span></code> from <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> to command translational and rotational velocity on a steer-drive wheel.</p>
+<p>URDF files: <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/tricyclebot/urdf</span></code></p>
+<section id="id1">
+<h2>Tutorial steps<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify the robot description</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_19<span class="w"> </span>view_robot.launch.py
+</pre></div>
+</div>
+<p>Note: At startup you may see the warning “Warning: Invalid frame ID ‘odom’ passed to canTransform argument target_frame” — this is expected while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> starts.</p>
+<ol class="arabic simple" start="2">
+<li><p>Start the example</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_19<span class="w"> </span>tricyclebot.launch.py
+</pre></div>
+</div>
+<p>This loads and starts the hardware, controllers, and RViz. The hardware implementation prints its internal states to the launching terminal.</p>
+<ol class="arabic simple" start="3">
+<li><p>Inspect hardware interfaces</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="n">interfaces</span>
+    <span class="n">front_steering_joint</span><span class="o">/</span><span class="n">position</span> <span class="p">[</span><span class="n">available</span><span class="p">]</span> <span class="p">[</span><span class="n">claimed</span><span class="p">]</span>
+    <span class="n">front_wheel_joint</span><span class="o">/</span><span class="n">velocity</span> <span class="p">[</span><span class="n">available</span><span class="p">]</span> <span class="p">[</span><span class="n">claimed</span><span class="p">]</span>
+<span class="n">state</span> <span class="n">interfaces</span>
+    <span class="n">front_steering_joint</span><span class="o">/</span><span class="n">position</span>
+    <span class="n">front_wheel_joint</span><span class="o">/</span><span class="n">position</span>
+    <span class="n">front_wheel_joint</span><span class="o">/</span><span class="n">velocity</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Check controllers</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+</pre></div>
+</div>
+<p>Expected:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">joint_state_broadcaster</span><span class="p">[</span><span class="n">joint_state_broadcaster</span><span class="o">/</span><span class="n">JointStateBroadcaster</span><span class="p">]</span> <span class="n">active</span>
+<span class="n">tricycle_controller</span><span class="p">[</span><span class="n">tricycle_controller</span><span class="o">/</span><span class="n">TricycleController</span><span class="p">]</span> <span class="n">active</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Send a velocity command</p></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_controller/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">  header: auto</span>
+<span class="s2">  twist:</span>
+<span class="s2">     linear:</span>
+<span class="s2">        x: 0.5</span>
+<span class="s2">        y: 0.0</span>
+<span class="s2">        z: 0.0</span>
+<span class="s2">     angular:</span>
+<span class="s2">        x: 0.0</span>
+<span class="s2">        y: 0.0</span>
+<span class="s2">        z: 0.4&quot;</span>
+</pre></div>
+</div>
+<p>You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.</p>
+<section id="controllers-from-this-demo">
+<h3>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Joint State Broadcaster: <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a></p></li>
+<li><p>Tricycle Controller: <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
