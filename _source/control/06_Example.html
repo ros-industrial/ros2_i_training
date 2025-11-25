@@ -21,7 +21,8 @@
       <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="WBot Mobile Manipulator Example" href="05_Example.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -61,12 +62,39 @@
 <li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Setup Tricycle Robot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-ll-need">What you’ll need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#robot-description-xacro">Robot description xacro</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-these-joint-types-matter">Why these joint types matter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-my-own-plugin-for-hardware-components">Writing my own plugin for hardware components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lifecycle-of-a-hardware-component">Lifecycle of a Hardware Component</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#export-the-plugin">Export the Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-the-plugin-in-the-robot-xacro">Load the plugin in the robot xacro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controller-integration">Controller integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-launch">How to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#example-18-tricyclebot-steering">Example 18: TricycleBot (steering)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#example-19-tricyclebot-drive">Example 19: TricycleBot (drive)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Tutorial steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -543,7 +571,9 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_Example.html" class="btn btn-neutral float-left" title="WBot Mobile Manipulator Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
