@@ -1,4 +1,4 @@
-# How to Setup Tricycle Robot 
+# How to Setup Tricycle Robot
 
 ## What you'll need
 - First you need to have a working URDF with all the joint types properly assigned.
@@ -107,7 +107,7 @@ Robotic hardware is used for sensing its environment. A sensor component is rela
 Actuator
 Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator implementation is related to only one joint. This component type has reading and writing capabilities. Reading is not mandatory if not possible (e.g., DC motor control with Arduino board). The actuator type can also be used with a multi-DOF robot if its hardware enables modular design, e.g., CAN-communication with each motor independently.
 
-referece: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md 
+referece: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
 
 
 ### Lifecycle of a Hardware Component
@@ -179,7 +179,7 @@ private:
 #endif  // ROS2_CONTROL_DEMO_EXAMPLE_18__TRICYCLE_STEERING_SYSTEM_HPP_
 ```
 
-`hardware_interface::(Actuator|Sensor|System)Interface` defines the base class for your hardware plugin. Override the lifecycle methods to manage initialization, configuration, activation, and deactivation of your hardware. Implement the `read` and `write` methods to handle data exchange between ros2_control and your hardware. 
+`hardware_interface::(Actuator|Sensor|System)Interface` defines the base class for your hardware plugin. Override the lifecycle methods to manage initialization, configuration, activation, and deactivation of your hardware. Implement the `read` and `write` methods to handle data exchange between ros2_control and your hardware.
 
 ## Export the Plugin
 

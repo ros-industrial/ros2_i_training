@@ -13,27 +13,27 @@ layout: true
 <div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
 <div class="triangle"></div>
 ---
- 
+
 # MOVEIT
 
 ---
 
-## MoveIt Capabilities  
+## MoveIt Capabilities
 
-- Motion Planning  
-    - Generate high-degree of freedom trajectories through  
-      cluttered environments and avoid local minima  
-- Manipulation  
-    - Analyze and interact with the environment with grasp generation  
-- Inverse Kinematics  
-    - Solve for joint positions for a given pose, even in over-actuated arms  
-- Control  
-    - Execute time-parameterized joint trajectories to low level hardware  
-controllers through common interfaces  
-- 3D Perception  
-    - Connect to depth sensors and point clouds with Octomaps  
-- Collision Checking  
-    - Avoid obstacles using geometric primitives, meshes, or point clouds  
+- Motion Planning
+    - Generate high-degree of freedom trajectories through
+      cluttered environments and avoid local minima
+- Manipulation
+    - Analyze and interact with the environment with grasp generation
+- Inverse Kinematics
+    - Solve for joint positions for a given pose, even in over-actuated arms
+- Control
+    - Execute time-parameterized joint trajectories to low level hardware
+controllers through common interfaces
+- 3D Perception
+    - Connect to depth sensors and point clouds with Octomaps
+- Collision Checking
+    - Avoid obstacles using geometric primitives, meshes, or point clouds
 
 ---
 
@@ -43,7 +43,7 @@ controllers through common interfaces
 
 ---
 
-## Why ROS 2 vs ROS 1?  
+## Why ROS 2 vs ROS 1?
 
 - Realtime capabilities now available
 - Designed for production - same support for R&D
@@ -57,17 +57,17 @@ controllers through common interfaces
     - Fully migrate existing packages to ROS 2
     - Leverage ROS 2 features: build (ament), middleware, logging, parameters
 
-- M2: Real-time support 
+- M2: Real-time support
     - Reactive, closed-loop control to sensor input
     - Hybrid planning (global and local)
-    - Zero-memory copy integration to controllers  
+    - Zero-memory copy integration to controllers
 
 - M3: Fully leverage ROS 2
     - Lifecycle management of MoveIt nodes
     - Leverage ROS 2 component nodes
 ---
 
-## Real-time capabilities 
+## Real-time capabilities
 (Milestone 2)
 
 Realtime-safety is required for online robot manipulations:
@@ -89,11 +89,11 @@ Direct access to core MoveIt components
     - More flexible configuration
 
 
-![architecture width:900](../static/arch.png)  
+![architecture width:900](../static/arch.png)
 ---
 
 ## Architecture
-(Milestone 3)  
+(Milestone 3)
 
 Leverage ROS 2 component nodes for better performance
 
@@ -102,7 +102,7 @@ Leverage ROS 2 component nodes for better performance
 
 ## Hybrid Planning
 
-<img src="../static/hybrid_planning.png" alt="Hybrid Planning" style="width:800px"/>  
+<img src="../static/hybrid_planning.png" alt="Hybrid Planning" style="width:800px"/>
 
 https://github.com/ros-planning/moveit2/issues/300
 
@@ -137,7 +137,7 @@ https://github.com/ros-planning/moveit2/issues/300
 
 ---
 
-## Key Concepts 
+## Key Concepts
 
 ![width:400px](../static/plan_scene1.jpg) ![width:400px](../static/plan_scene2.png)
 
@@ -149,13 +149,13 @@ https://github.com/ros-planning/moveit2/issues/300
 - contains geometry information and joint values
 
 #### Current State Monitor
-- update robot state by subscribing to `/joint_states` (provided by driver)  
+- update robot state by subscribing to `/joint_states` (provided by driver)
 
 #### Planning Scene
-- collision checking and constraints checking  
+- collision checking and constraints checking
 
 #### Planning Scene Monitor
-- updates planning scene through ROS interfaces  
+- updates planning scene through ROS interfaces
 
 #### Controller Interface
 - planning trajectories published using [`FollowJointTrajectory`](http://docs.ros.org/api/control_msgs/html/action/FollowJointTrajectory.html) (consumed by driver)
@@ -173,12 +173,12 @@ https://ros-planning.github.io/moveit_tutorials/doc/planning_scene_monitor/plann
 - meshes used for collision checking
 - [UR5 description](https://github.com/ros-industrial/universal_robot/blob/kinetic-devel/ur_description/urdf/ur5.urdf.xacro)
 
-#### SRDF - Semantic Robot Description Format 
+#### SRDF - Semantic Robot Description Format
 - Joint group (collection of joints and links)
     - as joints, links or serial chain
 - Virtual and passive joints
 - Robot poses
-- Self-collision 
+- Self-collision
 - [UR5 SRDF](https://github.com/ros-industrial/universal_robot/blob/kinetic-devel/ur5_moveit_config/config/ur5.srdf)
 
 #### Other configurations
@@ -186,7 +186,7 @@ https://ros-planning.github.io/moveit_tutorials/doc/planning_scene_monitor/plann
 
 <!--
 http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/urdf_srdf/urdf_srdf_tutorial.html
--->  
+-->
 
 ---
 
@@ -195,12 +195,12 @@ http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/urdf_srdf/urdf_srdf_tu
 ```cpp
 // \brief load the robot model,
 //        configure the planning pipeline from ROS 2 parameters and
-//        initialize defaults  
+//        initialize defaults
 moveit_cpp_ = std::make_shared<moveit::planning_interface::MoveItCpp>(node_);
 
-// \brief associated to a planning group  
-//          used to setup the motion plan request and  
-//          call the low-level planner  
+// \brief associated to a planning group
+//          used to setup the motion plan request and
+//          call the low-level planner
 moveit::planning_interface::PlanningComponent arm("ur5_arm", moveit_cpp_);
 
 /** \brief Set the goal constraints generated from target pose and robot link */
@@ -219,7 +219,7 @@ arm->setGoal("ready");
 
 ## Constraint planning
 
-Used to 
+Used to
 - constrain robot motion
 - define planning goals
 
@@ -308,13 +308,13 @@ https://github.com/ros-planning/moveit2
 
 ---
 
-# Thank you! 
+# Thank you!
 
-### Main maintainers:  
-PickNik Robotics  
-picknik.ai  
-Boulder, Colorado 80302  
-@picknikrobotics  
+### Main maintainers:
+PickNik Robotics
+picknik.ai
+Boulder, Colorado 80302
+@picknikrobotics
 
 </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js">
@@ -324,4 +324,3 @@ Boulder, Colorado 80302
 </script>
 </body>
 </html>
-

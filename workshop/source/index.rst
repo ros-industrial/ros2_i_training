@@ -17,7 +17,7 @@ Session 1 - ROS 2 Concepts and Fundamentals
 Session 2 - Ros2 Concepts and Fundementals Advanced(Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. toctree::
-   :maxdepth: 1   
+   :maxdepth: 1
 
 Session 3 - ROS2 Navigation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,4 +54,3 @@ Session 6 - ROS2 Control
    Exercise 6.3 - ROS2-Control-Example-3 <_source/control/03_Example.md>
    Exercise 6.4 - ROS2-Control-Example-4 <_source/control/04_Example.md>
    Exercise 6.5 - ROS2-Control-Example-5 <_source/control/05_Example.md>
-   

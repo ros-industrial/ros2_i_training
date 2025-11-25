@@ -52,7 +52,7 @@ Using a Behavior Tree XML as a control flow for navigation
 * Read an XML description of the Behavior Tree
 * Allows to easily implement behavior to select the behavior of your robot
 * Communicate with Planners, Controllers and Recovery server
-* The parameter of **BtNavigator** node: 
+* The parameter of **BtNavigator** node:
 
 <img src="../static/bt_navigation_param.png" alt="bt_navigation_param" style="width:500px" class="image-center"/>
 
@@ -64,7 +64,7 @@ name: two_columns
 
 * A Behavior Tree is a representation of a flow of decision and execution. [BehaviorTreeCpp](https://github.com/BehaviorTree/BehaviorTree.CPP)
 * Types of nodes:
-  * ControlNodes: have 1 to N children, e.g. SequenceNode, FallbackNode ... 
+  * ControlNodes: have 1 to N children, e.g. SequenceNode, FallbackNode ...
   * DecoratorNodes: similar to the ControlNode, but can only have a single child.
   * ActionNodes: leaves and do not have any children.
   * ConditionNodes are equivalent to ActionNodes, but they should not alter the state of the system.
@@ -77,7 +77,7 @@ name: two_columns
   <img src="../static/decoratorenterroom.png" alt="bt_example" style="width:380px" class="image-center"/>
 
     ]
-  
+
   .fifty[
 
   Including: FallbackNode,SequenceNode, ConditionNodes
@@ -125,7 +125,7 @@ Example: Navigate with recovery
 * map_server: loading the map, serving a static map on the "/map" topic.
 * map_saver: saving the map into a file (`ros2 run nav2_map_server map_saver_cli -f my_map`)
 
-Step 1: Create a parameter file with the name of the map yaml OR Set the same params in the launch file 
+Step 1: Create a parameter file with the name of the map yaml OR Set the same params in the launch file
 ```yaml
 # map_server_params.yaml
 map_server:
@@ -136,7 +136,7 @@ map_server:
         yaml_filename: maps/map.yaml
 ```
 
-Step 2: Run map server with this file passed as a param  
+Step 2: Run map server with this file passed as a param
 ```bash
 ros2 run nav2_map_server map_server --ros-args --params-file map_server_params.yaml
 ```
@@ -179,16 +179,16 @@ name: two_columns
   subscribes to:
 
   * Laser scans : /scan (sensor_msgs/LaserScan)
-  
+
   * (Listen to) transform odom to base_link
-  
+
   * Initial pose : /initialpose
   (geometry_msgs/PoseWithCovarianceStamped)
-  
+
   * Map : /map (nav_msgs/OccupancyGrid)
 
     ]
-  
+
   .fifty[
 
   publishes:
@@ -258,12 +258,12 @@ Some important to set:
 ---
 
 ## Navigation 2 - Planning Overview
-  
+
   <img src="../static/navigation_bt_plan.png" alt="navigation_complete" style="width:900px" class="image-center"/>
 ---
 
 ## Navigation 2 - Planning Overview
-  
+
   <img src="../static/process_plan.png" alt="navigation_complete" style="width:900px" class="image-center"/>
 ---
 
@@ -296,12 +296,12 @@ The costmap computes the cost around obstacles and represents places that are sa
 <img src="../static/costmap.png" alt="costmap" style="width:750px" class="image-center"/>
 
 
-<!-- 
-  the red cells represent obstacles in the costmap, 
-the blue cells represent obstacles inflated by the inscribed radius of the robot, 
-the red polygon represents the footprint of the robot. For the robot to avoid collision, 
+<!--
+  the red cells represent obstacles in the costmap,
+the blue cells represent obstacles inflated by the inscribed radius of the robot,
+the red polygon represents the footprint of the robot. For the robot to avoid collision,
 the footprint of the robot should never intersect a red cell
-the center point of the robot should never cross a blue cell. 
+the center point of the robot should never cross a blue cell.
 -->
 ---
 
@@ -310,11 +310,11 @@ the center point of the robot should never cross a blue cell.
 
 <img src="../static/Inflatwalls.png" alt="Inflatwalls" style="width:800px" class="image-center"/>
 
-Figure 1:  Workspace to Configuration Space transformation   
-(a) Circular Robot & Obstacle in W-Space (b) Transformation based on Robot Footprint (c) Point Robot & Inflated Obstacle in C-Space   
+Figure 1:  Workspace to Configuration Space transformation
+(a) Circular Robot & Obstacle in W-Space (b) Transformation based on Robot Footprint (c) Point Robot & Inflated Obstacle in C-Space
 
-Figure 2: Obstacle inflation for    
-(a) Point Robot (no inflation) (b) Small Circular Robot (c) Large Circular Robot   
+Figure 2: Obstacle inflation for
+(a) Point Robot (no inflation) (b) Small Circular Robot (c) Large Circular Robot
 
 [Source: Configuration Space, Prof. Jaebyung Park, Chonbuk National University](https://slideplayer.com/slide/4239324/)
 
@@ -329,19 +329,19 @@ name: two_columns
   .fifty[
   Layer Specification:
 
-    - Static Map Layer: unchanging data from an 
+    - Static Map Layer: unchanging data from an
       external source (static map)
 
-    - Obstacle Layer: tracks the obstacles as read 
+    - Obstacle Layer: tracks the obstacles as read
       by the sensor data (2D, LaserScan)
 
-    - Voxel Layer: tracks the obstacles using 
+    - Voxel Layer: tracks the obstacles using
       PointCloud2 (3D)
 
-    - Inflation Layer: inflates the obstacles to 
-      represent the configuration space of the robot 
+    - Inflation Layer: inflates the obstacles to
+      represent the configuration space of the robot
     ]
-  
+
   .fifty[
   Can be configured with a yaml file like this one:
   <img src="../static/costmap_yaml.png" alt="costmap_yaml" style="width:600px" class="image-right"/>
@@ -383,7 +383,7 @@ source: http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html
   <!-- Specifies whether or not to allow the planner to create plans that traverse unknown space. -->
 * ~tolerance (double, default: 0.0)
 
-<!-- tolerance: on the goal point for the planner. The planner will attempt to create a plan 
+<!-- tolerance: on the goal point for the planner. The planner will attempt to create a plan
 that is as close to the specified goal as possible but no further than default_tolerance away.
 
 Grid based: create a path that follows the grid boundaries
@@ -394,7 +394,7 @@ Specifies whether or not to allow navfn to create plans that traverse unknown sp
 ---
 
 ## Navigation 2 - Controller Overview
-  
+
   <img src="../static/navigation_bt_control.png" alt="navigation_complete" style="width:900px" class="image-center"/>
 
 ---
@@ -443,7 +443,7 @@ Currently there is two plugins (only one can be loaded at a time):
 ## Navigation 2 - DWB Controller
 ### Critic Plugins
 
-Scores the trajectory generated by the trajectory generator. 
+Scores the trajectory generated by the trajectory generator.
 Multiple plugins can be loaded and will added their score to the final score of each trajectory.
 
 Examples:
@@ -480,7 +480,7 @@ goal_checker:
 ---
 
 ## Navigation 2 - Recovery Overview
-  
+
   <img src="../static/navigation_bt_recovery.png" alt="navigation_bt_recovery" style="width:900px" class="image-center"/>
 
 ---
@@ -500,7 +500,7 @@ goal_checker:
 
 ## Navigation 2 - Recovery Server
 
-Define the recovery actions that the robot can perform. 
+Define the recovery actions that the robot can perform.
 
 [[nav2_costmap_2d]](https://github.com/ros-planning/navigation2/tree/master/nav2_costmap_2d)
 * Clear the costmaps

@@ -58,4 +58,3 @@ def export_pdf(config_yaml):
             export_slides(day_dir, id, slides)
 
 export_pdf(os.path.join(root_dir, "export_list.yaml"))
-

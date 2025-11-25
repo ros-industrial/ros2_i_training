@@ -4,8 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-body { 
-    font-family: 'Montserrat'; 
+body {
+    font-family: 'Montserrat';
     color:black;
     font-weight: 400;
     font-size: 14px;
@@ -24,7 +24,7 @@ h2{
 }
 h3 {
   font-family: 'Montserrat';
-  /*font-family: 'Yanone Kaffeesatz'; 
+  /*font-family: 'Yanone Kaffeesatz';
   set by LED for h1, h2 and h3*/
   font-weight: 300;
   font-size: 16px;
@@ -32,21 +32,21 @@ h3 {
 }
 h4{
   font-family: 'Montserrat';
-  /*font-family: 'Yanone Kaffeesatz'; 
+  /*font-family: 'Yanone Kaffeesatz';
   set by LED for h1, h2 and h3*/
   font-weight: 300;
   color: #C2232B;
 
 }
-.remark-code{ 
-  font-family: 'Source Code Pro'; 
-  font-size: small; 
+.remark-code{
+  font-family: 'Source Code Pro';
+  font-size: small;
 }
 
-.remark-inline-code { 
-  font-family: 'Source Code Pro'; 
-  font-size: medium; 
-  font-weight: 600; 
+.remark-inline-code {
+  font-family: 'Source Code Pro';
+  font-size: medium;
+  font-weight: 600;
   color: #C2232B; }
 
 .cols {

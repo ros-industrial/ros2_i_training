@@ -23,7 +23,7 @@ Now look for `src/Universal_Robots_ROS2_Description/urdf/ur.urdf.xacro`
 
 The MoveIt Setup Assistant is a GUI tool for configuring a robot for MoveIt. It generates a Semantic Robot Description Format (SRDF) file and other necessary configuration files. A URDF is required to use the Setup Assistant.
 
-Once you have a URDF, import it into the Setup Assistant to configure kinematics, planning groups, end effectors, and collision checking. 
+Once you have a URDF, import it into the Setup Assistant to configure kinematics, planning groups, end effectors, and collision checking.
 
 ## Getting Started
 

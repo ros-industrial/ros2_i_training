@@ -17,7 +17,7 @@ layout: true
 class: center, middle
 name: main_title
 
-# Navigation using ROS 2 
+# Navigation using ROS 2
 ## Introduction
 
 <img src="../static/intro.png" alt="Intro" style="height:300px"/>
@@ -45,9 +45,9 @@ name: main_title
 * How did I move ?
   * Use **proprioceptive** sensors (Encoder on wheels, IMU)
     => **Relative** robot displacement
-  
+
 * What can I see ?
-  * Use **exteroceptive** sensors (Lidar, Camera, GPS) 
+  * Use **exteroceptive** sensors (Lidar, Camera, GPS)
   => **Absolute** robot pose estimation
 
 ---
@@ -74,10 +74,10 @@ name: main_title
   "map" -
     Origin of the world (fixed frame)
 
-  "odom" - 
+  "odom" -
     **Parent** of the odometry
 
-  "base_footprint" - 
+  "base_footprint" -
     Projection of the robot center in the map (no height)
 
   "base_stabilized" -
@@ -90,7 +90,7 @@ name: main_title
   *REP 105 - Coordinate Frames Naming* [https://www.ros.org/reps/rep-0105.html]
 
   ]
-  
+
   .sixty[
     <img src="../static/tf_picture_robot.png" alt="tf_robot" style="height:400px" class="image-right"/>
 

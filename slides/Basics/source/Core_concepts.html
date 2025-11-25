@@ -18,30 +18,30 @@ layout: true
 ---
 class: center, middle
 
-<h1> 
-  <center>  
-    ROS 2 Foundation 
-  </center> 
-</h1> 
-<h3> 
-  <center>  
+<h1>
+  <center>
+    ROS 2 Foundation
+  </center>
+</h1>
+<h3>
+  <center>
     An introduction to core concepts
-  </center> 
-</h3> 
+  </center>
+</h3>
 
 ---
 
-## Overview  
+## Overview
 - #### ROS computation graph
-- #### What is a node?  
-- #### Node composition 
+- #### What is a node?
+- #### Node composition
 - #### ROS 2 topics and messages
-- #### ROS 2 Executor 
+- #### ROS 2 Executor
 - #### ROS 2 Services
 - #### ROS 2 Actions
 - #### ROS 2 Params
 - #### ROS 2 Launch files
- 
+
 
 
 ---
@@ -54,11 +54,11 @@ class: center, middle
   .fifty[
   <img src="../static/computation_graph.png" width="500px">
   ]
-  
+
   .fifty[
-  
-- Reflects the communication in ROS system  
-  
+
+- Reflects the communication in ROS system
+
 - Participants of the graph are called *Nodes*
 
 - Nodes can typically
@@ -74,8 +74,8 @@ class: center, middle
   - Camera driver
   - Controlling wheel motors
   - Perception unit
-    
-- Used to create publishers, subscribers, services, etc 
+
+- Used to create publishers, subscribers, services, etc
 
 - Most common ROS client libraries
   - `rclcpp`: Binaries of C++ files
@@ -85,7 +85,7 @@ class: center, middle
 ```bash
   ros2 run <package_name> <executable_name> [arguments]
 ```
-  
+
 - No master required to discover other nodes!
 
 ---
@@ -100,7 +100,7 @@ class: center, middle
 
 ---
 
-## ROS 1 vs ROS 2 
+## ROS 1 vs ROS 2
 ### Node structure
 
 <center>
@@ -115,14 +115,14 @@ class: center, middle
 
 .cols[
   .fifty[ <img src="../static/ros2_discovery.png" width="500px">  ]
-  
+
   .fifty[ <img src="../static/ros2_discovery_2.png" width="500px"> ]
 ]
-<h4> 
-  <center>  
+<h4>
+  <center>
     No central point of failure!
-  </center> 
-</h4> 
+  </center>
+</h4>
 
 ---
 
@@ -154,8 +154,8 @@ class: center, middle
 ---
 
 ## Node Composition
-### Unified API  
-  
+### Unified API
+
 - Aggregation of nodes in a single process
 
 - Simplifies code reuse
@@ -166,7 +166,7 @@ Defers process layout decisions to deploy-time
 .fifty[
 - Nodes in different processes
   - Allow for fault isolation
-  - Are easier to debug  
+  - Are easier to debug
 ]
 .fifty[
 - Nodes in the same process
@@ -177,7 +177,7 @@ Defers process layout decisions to deploy-time
 
 ---
 
-## Node Composition 
+## Node Composition
 ### Writing Node as a component
 - Inherits from the Node class
   - Allows to be imported and used by other scripts
@@ -202,7 +202,7 @@ Defers process layout decisions to deploy-time
 ]
 ---
 
-## Node Composition 
+## Node Composition
 ### Deploying a component
 
 - Use ROS 2 Service APIs:  Load components via
@@ -217,21 +217,21 @@ Defers process layout decisions to deploy-time
 ---
 
 ## Communications Infrastructure
-### The ROS middleware provides these facilities: 
+### The ROS middleware provides these facilities:
 - Anonymous publish/subscribe message passing
 - Recording and playback of messages
 - Request/response remote procedure calls
 - Pre-emptable request/response remote procedure calls
-- Distributed parameter system 
+- Distributed parameter system
 ---
 
-## ROS 2 Topics 
-- Asynchronous communication 
+## ROS 2 Topics
+- Asynchronous communication
 - Multiple concurrent publishers and subscribers for one topic
 - A single node can publish and subscribe to multiple topics
 - Works like a “chat room”
   - Not to a specific recipient
-  - E.g. laser scan data, images, robot position, ...  
+  - E.g. laser scan data, images, robot position, ...
 - Every topic has a dedicated message type
 
 ### Communication is possible ONLY when
@@ -242,9 +242,9 @@ Defers process layout decisions to deploy-time
 
 ## ROS 2 Messages
 
-- data structure to exchange information between components  
-- `*.msg` are simple text files with field type and name   
-- defined in programming language agnostic way  
+- data structure to exchange information between components
+- `*.msg` are simple text files with field type and name
+- defined in programming language agnostic way
 
 <center>
   <img src="../static/ros2_messages.png" height="300px" >
@@ -261,7 +261,7 @@ Defers process layout decisions to deploy-time
 </center>
 
 - Constructed from primitive data types or other ROS msgs
-<center><table style="border-collapse:collapse;border-spacing:0" class="tg"><thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Point.msg</span></th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Quaternion.msg</span></th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Pose.msg</span></th></tr></thead><tbody><tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">float64 x<br>float64 y<br>float64 z <br></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">float64 x<br>float64 y<br>float64 z <br>float64 w</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">geometry_msgs/Point&nbsp;&nbsp;position<br>geometry_msgs/Quaternion orientation</td></tr></tbody></table></center> 
+<center><table style="border-collapse:collapse;border-spacing:0" class="tg"><thead><tr><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Point.msg</span></th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Quaternion.msg</span></th><th style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal"><span style="font-weight:bold">geometry_msgs/Pose.msg</span></th></tr></thead><tbody><tr><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">float64 x<br>float64 y<br>float64 z <br></td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">float64 x<br>float64 y<br>float64 z <br>float64 w</td><td style="border-color:inherit;border-style:solid;border-width:1px;font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">geometry_msgs/Point&nbsp;&nbsp;position<br>geometry_msgs/Quaternion orientation</td></tr></tbody></table></center>
 
 ---
 
@@ -279,21 +279,21 @@ Defers process layout decisions to deploy-time
   - Service callback
   - Client responses
 
-- Coordination based on threading/concurrency scheme in implementation 
+- Coordination based on threading/concurrency scheme in implementation
 ]
 .thirty[
 <img src="../static/exec_spin.png" width="400px" >
 ]
 ]
- 
+
 ---
 ## ROS 2 Executor
 
 **Default executor**
 <pre><code class="language-ruby">
-  rclpy.init(args=args) 
-  talker = Talker()  
-  rclpy.spin(talker)   
+  rclpy.init(args=args)
+  talker = Talker()
+  rclpy.spin(talker)
 </code></pre>
 
 **Built-in executors**
@@ -301,20 +301,20 @@ Defers process layout decisions to deploy-time
 - `MultiThreadedExecutor - Runs callbacks in a pool of threads`
 
 <pre><code class="language-ruby">
-  executor = SingleThreadedExecutor()  
+  executor = SingleThreadedExecutor()
   talker = Talker()
   listener = Listener()
 
-  executor.add_node(talker)  
-  executor.add_node(listener)  
+  executor.add_node(talker)
+  executor.add_node(listener)
   executor.spin()
-   
+
 </code></pre>
 
 ---
 
 ## ROS 2 Services
--   Services are based on a call and response model 
+-   Services are based on a call and response model
 -   Similar to remote procedural calls that terminates quickly
     -   Example: spawning a robot into an environment
 
@@ -330,7 +330,7 @@ Defers process layout decisions to deploy-time
 
 -   Data structure for services
 -   Defined by a pair of messages: Request and Reply.
--   \*.srv is a file with field type and name 
+-   \*.srv is a file with field type and name
 -   Request and Response are separated by `---`
 -   Use `ros2 interface show <type_name>.srv` to know the service file structure
 
@@ -339,8 +339,8 @@ Defers process layout decisions to deploy-time
   int8 a
   int8 b
   ---
-  #response 
-  int8 sum 
+  #response
+  int8 sum
 </code></pre>
 
 ---
@@ -361,10 +361,10 @@ Defers process layout decisions to deploy-time
 
 ## ROS 2 Actions
 
--   Used for tasks that  
+-   Used for tasks that
     - <b>Longer execution time</b>
-    - <b>Requires preemption</b> 
-    - <b>Requires regular feedback</b> 
+    - <b>Requires preemption</b>
+    - <b>Requires regular feedback</b>
         -   Example. Path planning in navigation
 -   Actions are implemented as a combination of services and topics
 -   Action interface has
@@ -410,7 +410,7 @@ Defers process layout decisions to deploy-time
   uint32 number_dishes_cleaned
 
 </code></pre>
-    
+
 ---
 
 class: center
@@ -494,7 +494,7 @@ def __init__(self):
 ### YAML for ROS 2 params
 
 - Managing parameters when number of params increases becomes complex.
-- Adding them in command line is not an option 
+- Adding them in command line is not an option
 - **YAML** is more human readable and Great for loading a configuration file at run time
 - Each parameter consists of a key and a value, where the key is a string
 
@@ -543,7 +543,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
       'config',
       'params.yaml'
       )
-      
+
   node=Node(
       package = 'ros2_tutorials',
       name = 'Node_A',
@@ -585,7 +585,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 
 ## Launch files
 
-#### Launch files are used for: 
+#### Launch files are used for:
 
 -  Describing the configuration of the system and execute as described
 -  Configuration of the system includes
@@ -601,7 +601,7 @@ ros2 run pkg_name node_name --ros-args --params-file .~/locate_pkg/config/params
 ### Location of launch file
 
 -   ROS 2 Launch files are coded in python
--   They are executed by ROS 2 CLI tool, `ros2 launch` 
+-   They are executed by ROS 2 CLI tool, `ros2 launch`
 -   Create a `launch` directory inside your package as given below
 -   Create a launch file with `<launch_filename>.py`inside `launch` directory
 <div>

@@ -25,18 +25,18 @@ name: main_title
 
 ---
 
-## 1. Managed Nodes     
-### 1.1 State Machine   
-### 1.2 States 
-### 1.3 Standard Interfaces   
-### 1.4 Command Line Interface (CLI)   
-### 1.5 Launch Files   
+## 1. Managed Nodes
+### 1.1 State Machine
+### 1.2 States
+### 1.3 Standard Interfaces
+### 1.4 Command Line Interface (CLI)
+### 1.5 Launch Files
 
 ---
 
 ## 1. Managed Nodes
 
-* Common complaint in ROS 1 - no way to control lifecycle of nodes. 
+* Common complaint in ROS 1 - no way to control lifecycle of nodes.
   * Ex: Sensor reader starts before sensor driver!
 * ROS 2 solution - *Managed Nodes* with detailed lifecycle management
   * CPP implemented, Python pending
@@ -61,7 +61,7 @@ name: main_title
 
 ## 1.2.1 Primary States
 
-* `Unconfigured` - First state that a node starts with, and ends up in after an error. No execution. Main purpose is error recovery. 
+* `Unconfigured` - First state that a node starts with, and ends up in after an error. No execution. Main purpose is error recovery.
 
 * `Inactive` - The node holds resources (publishers, listeners etc..) and configuration (params, internal variables), but does nothing. No execution, no transmissions, incoming data could be held in buffer, but not read. Main purpose is to allow reconfiguration.
 
@@ -115,7 +115,7 @@ Meaningfully implementing the callback functions avoids malformed nodes.
 
 ---
 
-## 1.4 Lifecycle CLI  
+## 1.4 Lifecycle CLI
 
 * Lifecycle nodes can be controlled via services, but also via the `ros2 lifecycle` command.
 
@@ -145,14 +145,14 @@ ROS 2 Python Launch files offer some LC API:
 
 ## 2. QoS
 
-* ROS 1 communication protocol: 
+* ROS 1 communication protocol:
   * TCP by default. Lossless transmission. High Latency. Reliable.
   * UDP possible. Lossy transmission. Low latency. Unreliable. Not as richly implemented as TCP.
 * ROS 2 communication protocol:
   * Default UDP only. (But DDS dependent). Light weight, permits real-time communication.
   * Apply QoS policies to flexibly vary anywhere between TCP and UDP.
 
-* QoS: A combination of *policies*, called a *profile*, applied to publishers, subscribers, service servers and clients, 
+* QoS: A combination of *policies*, called a *profile*, applied to publishers, subscribers, service servers and clients,
 which defines the quality of communication between these entities.
 * Implemented for C++ and Python.
   * C++: [qos.h](http://docs.ros2.org/eloquent/api/rclcpp/qos_8hpp_source.html) comes included with `<rclcpp.h>`.
@@ -180,17 +180,17 @@ which defines the quality of communication between these entities.
 
 * Combination of policies. Easier to select a profile instead of worrying about individual policies.
 * Some default profiles already available (Ex C++: [qos_profiles.h](https://github.com/ros2/rmw/blob/master/rmw/include/rmw/qos_profiles.h)):
-  * **Default** : Applied by default if not specified. Mimic ROS 1.   
+  * **Default** : Applied by default if not specified. Mimic ROS 1.
    *keep_last(10),reliable(),volatile()...*
-  * **Services** : Typically services should be reliable. Volatile to avoid outdated requests.   
+  * **Services** : Typically services should be reliable. Volatile to avoid outdated requests.
    *keep_last(10),reliable(),volatile()...*
-  * **Parameters** : ROS 2 parameters are accessed via services. Similar profile, but longer depth to retain more parameters in buffer.   
+  * **Parameters** : ROS 2 parameters are accessed via services. Similar profile, but longer depth to retain more parameters in buffer.
    *keep_last(1000),reliable(),volatile()...*
-  * **Sensors** : Sensor data needs to have minimum latency to remain relevant, at the cost of losing some samples.    
+  * **Sensors** : Sensor data needs to have minimum latency to remain relevant, at the cost of losing some samples.
    *keep_last(5),best_effort(),volatile()...*
-* You can create a custom profile as well. For example, to make a latched publisher :      
+* You can create a custom profile as well. For example, to make a latched publisher :
 `rclcpp::QoS qos_profile(10); qos_profile.reliable().transient_local();`
-   
+
 ---
 
 ## 2.3 QoS Compatibility
@@ -205,15 +205,15 @@ which defines the quality of communication between these entities.
   * Durability strictness  : transient_local > volatile
   * Reliability strictness : reliable > best best_effort
 
-Examples:   
+Examples:
 
 
- PUBLISHER   | SUBSCRIBER  | PAIR? | RESULT      
+ PUBLISHER   | SUBSCRIBER  | PAIR? | RESULT
 -------------|-------------|-------|-------------
- best_effort | reliable    |  No   | .           
- reliable    | best_effort |  Yes  | best_effort 
- best_effort | best_effort |  Yes  | best_effort 
- reliable    | reliable    |  Yes  | reliable    
+ best_effort | reliable    |  No   | .
+ reliable    | best_effort |  Yes  | best_effort
+ best_effort | best_effort |  Yes  | best_effort
+ reliable    | reliable    |  Yes  | reliable
 
 
 ---

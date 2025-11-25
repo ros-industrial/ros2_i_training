@@ -23,7 +23,7 @@ name: main_title
 
 ## TF2 - Overview
 
-* TF2 is the second generation of the TF (TransForm) library. In truth, TF in ROS 1 currently calls TF2 under the hood. ROS 2 uses exclusively TF2.   
+* TF2 is the second generation of the TF (TransForm) library. In truth, TF in ROS 1 currently calls TF2 under the hood. ROS 2 uses exclusively TF2.
 
 * TF2 keeps track of all the coordinate frames in a tree structure.
 
@@ -33,16 +33,16 @@ name: main_title
 
 ---
 ## TF2 - Overview
-   
 
-<img src="../static/1_tf_rviz_2.png" alt="TF Rviz" style="width:350px" class="image-left"/> 
+
+<img src="../static/1_tf_rviz_2.png" alt="TF Rviz" style="width:350px" class="image-left"/>
 <img src="../static/2.tf_tree_2.png" alt="TF Tree" style="height:500px"/>
 ---
 ## TF2 - Design
 
 TF2 core is independent of ROS & `BufferCore` class provides APIs
 
-<img src="../static/4_design.png" alt="Design" style="width:800px" class="image-center"/> 
+<img src="../static/4_design.png" alt="Design" style="width:800px" class="image-center"/>
 
 
 ---
@@ -52,7 +52,7 @@ TF2 core is independent of ROS & `BufferCore` class provides APIs
 * Users can query for the transform between any 2 frames in a tree for any given point of time - even in the past!
     * Essential for an asynchronous/distributed system
 
-<img src="../static/3_time_sync.png" alt="Time Sync" style="width:800px" class="image-center"/> 
+<img src="../static/3_time_sync.png" alt="Time Sync" style="width:800px" class="image-center"/>
 ---
 
 ## TF2 - Broadcasters
@@ -61,13 +61,13 @@ Supply the transforms between frames (Dynamic/Static).
    * e.g : `robot_state_publisher` provides TF data based on URDF
    * e.g : User-written nodes with dedicated broadcasters
 
-<img src="../static/5_broadcaster.png" alt="Broadcaster" style="width:800px" class="image-center"/> 
+<img src="../static/5_broadcaster.png" alt="Broadcaster" style="width:800px" class="image-center"/>
 
 ---
 
 ## TF2 - Listeners
 
-Can access the transform tree and lookup a specific transform between 2 frames (Blocking/Non-Blocking).    
+Can access the transform tree and lookup a specific transform between 2 frames (Blocking/Non-Blocking).
 
 ```python
 buffer = tf2_ros.Buffer()

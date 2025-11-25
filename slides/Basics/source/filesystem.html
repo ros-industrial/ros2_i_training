@@ -57,7 +57,7 @@ name: main_title
   - references one or more related packages
   - only contain execution dependencies
   - beneficial for release and version control
-  
+
   <!-- Metapackages can still exist as regular packages that only contain runtime dependencies. When migrating metapackages from ROS 1, simply remove the <metapackage /> tag in your package manifest. -->
 
 ---
@@ -82,7 +82,7 @@ name: main_title
     ```
 
     example: ``$ sudo apt install ros-foxy-nav2-core``
-    
+
     **!** package_name: **nav2_core** --> install:ros-foxy-**nav2-core**
 - Automatic installation
   - Location : /opt/ros/`<distro>`/...
@@ -93,15 +93,15 @@ name: main_title
 
 ## Package installation (Source)
 
-- Download from source (usually git):   
-  - Do it in your source space (e.g. ~/devel_ws/src):    
-   `$ git clone github_link`     
-  
+- Download from source (usually git):
+  - Do it in your source space (e.g. ~/devel_ws/src):
+   `$ git clone github_link`
+
    - example: `$ git clone https://github.com/ros/ros_tutorials.git -b foxy-devel `
 
 - Install all dependencies of package(s)
-    
-  - **rosdep** :  download and install dependencies required by ROS packages. 
+
+  - **rosdep** :  download and install dependencies required by ROS packages.
 
     ```bash
     $ rosdep install --from-paths src --ignore-src --rosdistro foxy -y
@@ -109,12 +109,12 @@ name: main_title
 
 - Manage multiple version-control packages: vcstool
     - A version control system (VCS) tool
-    - A command-line tool to make working with multiple repositories easier. 
+    - A command-line tool to make working with multiple repositories easier.
     For example: in your workspace(e.g. ~/devel_ws):
 
     ```bash
     $ wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/foxy-devel/turtlebot3.repos
-    
+
     $ vcs import src < turtlebot3.repos
     ```
 <!-- - Manual compilation via __colcon__ (explain later) -->
@@ -138,12 +138,12 @@ name: two_columns
 
 - Python package
     ```
-    $ ros2 pkg create --build-type ament_python --dependencies [deps] --node-name my_node my_package 
+    $ ros2 pkg create --build-type ament_python --dependencies [deps] --node-name my_node my_package
     ```
 
 <!-- ![img](../static/python_package_2.png)  -->
 <!-- setup.cfg https://docs.python.org/3/distutils/configfile.html tell setuptools to put your executables in lib  ros2 run can find it-->
-<!-- it’s not possible to write down everything needed to build a distribution a priori: 
+<!-- it’s not possible to write down everything needed to build a distribution a priori:
 you may need to get some information from the user, or from the user’s system, in order to proceed.
  As long as that information is fairly simple—a list of directories to search for C header files or libraries, f
  or example—then providing a configuration file, setup.cfg, for users to edit is a cheap and easy way to solicit it. -->
@@ -197,26 +197,26 @@ It tells setuptools about your package (such as the name and version) as well as
 
 - Dependencies can be __Other ROS packages__ and __System libraries__ (e.g. `Boost`)
 
-- Dependencies: 
+- Dependencies:
   - `<buildtool_depend>`: Required for build tools
 
   - `<exec_depend>`: Required at execution-time (e.g. Python script)
 
   - `<build_depend>`: Required for building (e.g. rclcpp, ament_cmake)
 
-  - `<test_depend>` : Required for running unit tests 
+  - `<test_depend>` : Required for running unit tests
 
   - `<build_export_depend>` : If exported header dependes on other ones
-    
+
   - `<depend>` : All-in-one (`<build_depend>`, `<build_export_depend>` and `<exec_depend>`)
 
-<!-- *Common parts* for Python and CMake packages    
-- `<exec_depend>`: Required at execution-time     
+<!-- *Common parts* for Python and CMake packages
+- `<exec_depend>`: Required at execution-time
 (e.g. Python: rclpy, CMake: rclcpp, both: launch, launch_ros)
 
 format 3 https://www.ros.org/reps/rep-0149.html
 Declares a rosdep key or ROS package name
-- `<test_depend>` : Required for running unit tests 
+- `<test_depend>` : Required for running unit tests
 (e.g. Python: ament_copyright, ament_flake8, python3-pytest, ament_pep257,  CMake: ament_lint_auto, ament_lint_common)
 - `<depend>` : All-in-one (if all are required)
 - `<export>` : Additional meta-data in the manifest for other tools that work with packages
@@ -231,7 +231,7 @@ Only for *CMake packages*:
 
 <!--
  ## Package content - `setup.cfg` (Python package)
-Example (**turtlebot_teleop** package): 
+Example (**turtlebot_teleop** package):
 package path: ~/devel_src/src/turtlebot/turtlebot_teleop
 
 ![image](../static/setupcfg.png)
@@ -252,13 +252,13 @@ In general:
   script-dir=$base/lib/turtlebot3_teleop
   [install]
   install-scripts=$base/lib/turtlebot3_teleop
-  ``` 
+  ```
 -->
 
 ---
 
-### Package content - `setup.py` (Python) 
-Example (**turtlebot_teleop** package): 
+### Package content - `setup.py` (Python)
+Example (**turtlebot_teleop** package):
 package path: ~/devel_src/src/turtlebot/turtlebot_teleop
 
 
@@ -267,7 +267,7 @@ package path: ~/devel_src/src/turtlebot/turtlebot_teleop
   .fifty[
   ![image](../static/setuppy.png)
   ]
-  
+
   .fifty[
     ```
     setup(
@@ -275,16 +275,16 @@ package path: ~/devel_src/src/turtlebot/turtlebot_teleop
 
       entry_points={
           'console_scripts': [
-              'teleop_keyboard = 
+              'teleop_keyboard =
               turtlebot3_teleop.script.teleop_keyboard:main'
           ],
       },
     )
     ```
-  - install the executable **teleop_keyboard** to 
+  - install the executable **teleop_keyboard** to
 `devel_ws/install/turtlebot3_teleop/lib/
 turtlebot3_teleop/`
-<!-- 
+<!--
 So you can find **teleop_keyboard** here :
 `devel_ws/install/turtlebot3_teleop/lib/turtlebot3_teleop/
 teleop_keyboard` -->
@@ -354,12 +354,12 @@ CMakeLists.txt Example:
 
     ```
     Adds an executable target called **my_node_cplusplus** to be built from the source file **src/my_node_cplusplus.cpp**
-    
+
     * Step 4:
 
     ```
     target_include_directories(my_node_cplusplus PUBLIC
-                            # defined in "add_executable" 
+                            # defined in "add_executable"
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
     ```
@@ -382,7 +382,7 @@ CMakeLists.txt Example:
 - Template:
 
     * Step 6
-   
+
     ```
     ament_package()
     ```
@@ -398,7 +398,7 @@ ament_cmake User Documentation https://docs.ros.org/en/foxy/Guides/Ament-CMake-D
 
 ### Colcon - a universal build tool
 
-- Build system: Operates on a single package 
+- Build system: Operates on a single package
 - Build tool: Operates on a set of packages
 
 <img src=../static/colcon.png alt="drawing" width="500"/>
@@ -413,10 +413,10 @@ $ colcon build --symlink-install
 $ colcon build --packages-up-to  <name-of-pkg>
 ```
 **Helpful documentation: https://colcon.readthedocs.io/en/released/user/quick-start.html**
-<!-- --symlink-install. 
-This allows the installed files to be changed by changing the files in the source space 
+<!-- --symlink-install.
+This allows the installed files to be changed by changing the files in the source space
 (e.g. Python files or other not compiled resourced) for faster iteration.  -->
-<!-- In the root of the workspace, run colcon build. Since build types such as ament_cmake do not 
+<!-- In the root of the workspace, run colcon build. Since build types such as ament_cmake do not
 support the concept of the devel space and require the package to be installed, colcon supports the option -->
 
 <!--
@@ -441,7 +441,7 @@ Lint tools : Static checking of Python or C++ source code for errors and standar
  <test_depend>ament_flake8</test_depend>
  <test_depend>ament_pep257</test_depend>
  ```
-<!--https://github.com/ament/ament_lint 
+<!--https://github.com/ament/ament_lint
 https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
 
 - For CMake package
@@ -451,10 +451,10 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
  <test_depend>ament_lint_common</test_depend>
  ```
 
-`ament_lint_auto`: ament_cmake_copyright, ament_cmake_cppcheck,ament_cmake_flake8, ament_cmake_lint_cmake, ament_cmake_pep257, ament_xmllint   
-`ament_lint_common`: ament_clang_format, ament_clang_tidy, ament_cmake_clang_format, ament_cmake_clang_tidy   
+`ament_lint_auto`: ament_cmake_copyright, ament_cmake_cppcheck,ament_cmake_flake8, ament_cmake_lint_cmake, ament_cmake_pep257, ament_xmllint
+`ament_lint_common`: ament_clang_format, ament_clang_tidy, ament_cmake_clang_format, ament_cmake_clang_tidy
 
-<!-- 
+<!--
  - CMakeList.txt
     ```
     find_package(ament_lint_auto REQUIRED)
@@ -462,19 +462,19 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
     ```-->
 ---
 
-## Workspace 
+## Workspace
 
 - A directory containing ROS 2 packages with a particular structure
 
-- Structure 
+- Structure
 
 ![img](../static/workspace_structure.png)
 
 *__Colcon__* creats __build/__ __install/__ __log/__ as peers of the src/
-    
+
 ---
 
-## Workspace 
+## Workspace
 
 #### Used for Development
 
@@ -495,13 +495,13 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
 
 - Setup file generated at initialization of a workspace: setup.bash, setup.zsh ...
 
-- Source your ROS 2 installation workspace before using ROS 2 
+- Source your ROS 2 installation workspace before using ROS 2
 
     ``$ source /opt/ros/<distro>/setup.bash ``
 
     <!-- Why? ROS relies on the notion of combining spaces using the shell environment. -->
 
-- Source your workspace: 
+- Source your workspace:
     ``$ source <ws-path>/install/setup.bash ``
 
 ** ---> ROS can find and use any resource inside the ROS environment**
@@ -514,7 +514,7 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
 *   Source ROS 2 installation workspace
     `$ source /opt/ros/foxy/setup.bash `
 * Install all dependencies of package(s)
-    `rosdep` :  download and install dependencies required by ROS packages. 
+    `rosdep` :  download and install dependencies required by ROS packages.
     - For the first time, you need to run:
         ```bash
         $ sudo rosdep init
@@ -522,16 +522,16 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
         ```
 * Install all dependencies of package(s)
     * Then you can use:
-```bash 
+```bash
 $ rosdep install --from-paths src --ignore-src --rosdistro foxy -y
 ```
-    
+
 * Compile the workspace
 ```bash
-$ colcon build --symlink-install 
+$ colcon build --symlink-install
 ```
 
-- After `colcon build` in your workspace, source ROS env : 
+- After `colcon build` in your workspace, source ROS env :
 `$ source <ws-path>/install/setup.bash`
 (including /opt/ros/`<distro>`/setup.bash)
 
@@ -542,7 +542,7 @@ $ colcon build --symlink-install
   ROS relies on the notion of combining spaces using the shell environment
 -->
 
-<!--  --skip-keys "console_bridge fastcdr fastrtps libopensplice67 rti-connext-dds-5.3.1 urdfdom_headers" -->  
+<!--  --skip-keys "console_bridge fastcdr fastrtps libopensplice67 rti-connext-dds-5.3.1 urdfdom_headers" -->
 
 <!-- ## Let's Try
 
@@ -557,7 +557,7 @@ $ cd  ~/dev_ws/
 #### 2. Get packages from github
 ```
 $ cd src
-# check which folder you are in 
+# check which folder you are in
 $ pwd
 $ git clone https://github.com/ros2/examples -b eloquent
 # check your folder structure

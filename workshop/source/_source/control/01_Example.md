@@ -21,7 +21,7 @@ The **RRBot** URDF files can be found in the `description/urdf` folder.
 Ensure you have the following packages installed:
 
 ```sh
-cd 
+cd
 mkdir -p colcon_control_ws/src
 cd colcon_control_ws/src
 git clone -b demo/tricycle https://github.com/ipa-vsp/ros2_control_demos.git
