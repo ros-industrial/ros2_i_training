@@ -139,16 +139,16 @@
 <p><img alt="navigation_overview" src="../../_images/navigation_overview.png" /></p>
 <p>Figure 1: Navigation2 Architecture</p>
 <p>source: <a class="reference external" href="https://navigation.ros.org/_images/architectural_diagram.png">navigataion</a></p>
-<!-- 
-## 3. Temporary load the Map 
+<!--
+## 3. Temporary load the Map
 * Use the map generated during the cartographer tutorial.
- 
- **A. Once your map is saved, check:** 
+
+ **A. Once your map is saved, check:**
 
  **1.** all processes on your robot are shutdown.
- 
+
  You can check it using:
- 
+
   ```bash
   $ ros2 node list
   ```
@@ -187,10 +187,10 @@ nav_ws/
           use_sim_time: false
           yaml_filename: maps/map.yaml
   ```
-  **Hint**: 
+  **Hint**:
   * make sure there is right path of *map.pgm* in *map.yaml*. The path of map.png in map.yaml is relative. So if "map.yaml" and "map.png" are in the same folder, the parameter of "image:" should be "image: map.pgm"
-  * in "map_server_params.yaml", the path of "yaml_filename" is also relative.  So if "map_server_params.yaml" and "map.yaml" are in the same folder, the parameter of "image:" should be "yaml_filename: map.yaml". 
-    
+  * in "map_server_params.yaml", the path of "yaml_filename" is also relative.  So if "map_server_params.yaml" and "map.yaml" are in the same folder, the parameter of "image:" should be "yaml_filename: map.yaml".
+
   **C. Start map_server**
 
   `[Remote PC]`
@@ -199,19 +199,19 @@ nav_ws/
     $ ros2 run nav2_map_server map_server \ --ros-args --params-file maps/map_server_params.yaml
     ```
   **map_server** is  a lifecycle node and needs to be transitioned to the active state.
-    
+
   In other terminal:
-  Run this command to check that state transition.    
+  Run this command to check that state transition.
 
   `[Remote PC]`
   ```bash
   $ ros2 lifecycle list /map_server
   ```
-  Run this command to trigger **map_server**. 
+  Run this command to trigger **map_server**.
   ```bash
   $ ros2 lifecycle set /map_server 1
-  ``` 
-    
+  ```
+
 
   **D. Start **rviz2** to view the map**
   Start a new terminal, source ros foxy workspace:
@@ -316,7 +316,7 @@ use_sim_time:<span class="o">=</span><span class="nb">true</span><span class="w"
 </section>
 <section id="start-with-a-physicals-robot">
 <h3>3.3. Start with a physicals robot<a class="headerlink" href="#start-with-a-physicals-robot" title="Link to this heading"></a></h3>
-<!-- Before start use navigation, make sure you have `workshop_ros2_navigation` in your source folder in `/src` in your workspace. 
+<!-- Before start use navigation, make sure you have `workshop_ros2_navigation` in your source folder in `/src` in your workspace.
  -->
 <p>Open a terminal on TurtleBot3.</p>
 <p>Bring up basic packages to start TurtleBot3 applications.</p>
@@ -366,7 +366,7 @@ of the virtual map (Illustrated in the following two pictures! The left one is t
 <p><em><strong>Hint: If you wish to stop the robot before it reaches to the goal position, set the current position of TurtleBot3 as a goal position.</strong></em></p>
 <p>The swarm of the green small arrows is the visualization of the <strong>adaptive Monte Carlo localization (AMCL)</strong>. Every green arrow stands for a possible position and orientation of the TurtleBot3. Notice that in the beginning its distribution is spread over the whole map. As soon as the robot moves the arrows get updated because the algorithm incorporates new measurements. During the movement the distribution of arrows becomes less chaotic and settles more and more to the robot’s location, which finally means that the algorithm becomes more and more certain about the pose of the robot in the map.</p>
 </li>
-<li><p><strong>Step 3: Play around</strong><br />
+<li><p><strong>Step 3: Play around</strong>
 When the robot is on the way to the goal, you can put an obstacle in Gazebo:
 <img alt="nav_goal_ob_1" src="../../_images/nav_goal_ob_1.png" /></p>
 <p>You can see how the robot reacts to this kind of situation:

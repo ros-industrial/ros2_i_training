@@ -25,17 +25,17 @@ This tutorial focuses on creating a robot with prismatic joint, where the link l
 
 ### 1. Create Package
 
-Create the directory: 
+Create the directory:
 
 
-```bash 
+```bash
 mkdir urdf_tutorials/src
 ```
 
 then create the package
-```bash 
+```bash
 cd urdf_tutorials/src
-ros2 pkg create cartesian_robot --build-type ament_cmake 
+ros2 pkg create cartesian_robot --build-type ament_cmake
 cd cartesian_robot
 ```
 
@@ -133,7 +133,7 @@ This node provides sliders to simulate joint positions interactively.
         name='joint_state_publisher_gui',
         output='screen'
     )
- ```   
+ ```
 
 #### Step 6: Launch the robot state publisher
 
@@ -146,7 +146,7 @@ This node takes the joint states and URDF and publishes the full robot state to 
         parameters=[{'robot_description': robot_description}],
         output='screen'
     )
-```    
+```
 
 #### Step 7: Delay and launch RViz
 
@@ -263,7 +263,7 @@ This is the root of the robot, a fixed reference point.
     <inertial>
      <origin xyz="0 0 0" rpy="0 0 0"/>
      <mass value="1"/>
-     <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />          
+     <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
@@ -280,7 +280,7 @@ This is the root of the robot, a fixed reference point.
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="1"/>
-      <inertia ixx="1000"  ixy="0"  ixz="0" iyy="1000" iyz="0" izz="1000" />          
+      <inertia ixx="1000"  ixy="0"  ixz="0" iyy="1000" iyz="0" izz="1000" />
      </inertial>
     <visual>
       <origin xyz="0 ${l2/2} 0" rpy="0 0 0" />

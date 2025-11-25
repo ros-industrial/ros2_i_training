@@ -2,8 +2,8 @@
 
 ## 1. Introduction
 
-- The goal for this tutorial: 
-    - Simulate TurtleBot in gazebo  
+- The goal for this tutorial:
+    - Simulate TurtleBot in gazebo
     - Get ideas about how to control physical/simulated TurtleBot
     - Control Turtlebot from keyboard
 - The packages that you need for this tutorial:
@@ -17,8 +17,8 @@ Commands are executed in a terminal:
 Open a new tab inside an existing terminal → use the shortcut ctrl+shift+t.
 
 * Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either `[TurtleBot]` or `[Remote PC]`.
-  
-Please try simulation first and use keyboard to control it. 
+
+Please try simulation first and use keyboard to control it.
 
 
 
@@ -35,7 +35,7 @@ $ source /opt/ros/foxy/setup.bash
 ```
 $ ros2 pkg list | grep turtlebot3
 ```
-If you don't have turtlebot3 packages, you can install debian packages or from source code. 
+If you don't have turtlebot3 packages, you can install debian packages or from source code.
 
 A. Install debian packages
 
@@ -54,7 +54,7 @@ B. Install from source code
     turtlebot3/foxy-devel/turtlebot3.repos
     ```
 *  Step 2: Using vcstools get packages
-  
+
     Make sure you have "src" folder in you workspace, then run this command to get source code for turtlebot3.
     ```
     $ vcs import src<turtlebot3.repos
@@ -95,13 +95,13 @@ B. Install from source code
 
 
 ## 3. Simulation
-In this chapter you will learn how to simulate TurtleBot in gazebo 
+In this chapter you will learn how to simulate TurtleBot in gazebo
 
 0. Open a terminal
-   
+
     If you don't set up ROS Domain ID, then the default ROS_DOMAIN_ID=0.
 
-    In this case, we only work with one turtlebot so we can use default ROS Domain ID. 
+    In this case, we only work with one turtlebot so we can use default ROS Domain ID.
 
     If you want to use different ROS Domain ID, you can perform:
     ```
@@ -109,14 +109,14 @@ In this chapter you will learn how to simulate TurtleBot in gazebo
     ```
 
 1. Set up ROS environment arguments
-   
-   If you use debian packages, 
+
+   If you use debian packages,
     ```
     $ source  /opt/ros/foxy/setup.bash
     ```
-   
+
    If you use packages in your workspace:
-    
+
     ```
     First entering your workspace
 
@@ -142,20 +142,20 @@ In this chapter you will learn how to simulate TurtleBot in gazebo
     ```
     $ ros2 launch turtlebot3_gazebo empty_world.launch.py
     ```
-    You also can start different world by replacing `empty_world.launch.py` with `turtlebot3_house.launch.py` 
+    You also can start different world by replacing `empty_world.launch.py` with `turtlebot3_house.launch.py`
 
 You can check ros topics and ros graph.s
 
-## 4. Control the robot 
+## 4. Control the robot
 In this chapter you will learn how to use keyboard or joystick to control robot.
 In general we will start a ros node that will publish to topic **/cmd_vel**
 
 ### 4.1. Keyboard
 0. Open a new terminal
-   
+
     * Set up ROS environment arguments
-    * (Set up ROS_DOMAIN_ID): Only if you set up ROS_DOMAIN_ID in chapter3 
-    
+    * (Set up ROS_DOMAIN_ID): Only if you set up ROS_DOMAIN_ID in chapter3
+
 1. Set up turtlebot model
 
     ```
@@ -214,7 +214,7 @@ You can use Joystick axis and joystick angular axis to control turtlbot.
 ## 5. Physical TurtleBot3
 In this chapter you will learn how to use physical TurtleBot
 
-### 5.1. Setting up to a turtlebot ROS 2 Network 
+### 5.1. Setting up to a turtlebot ROS 2 Network
 Info: The computer of the real robot will be accessed from your local computer remotely. For every further command, a tag will inform which computer has to be used. It can be either `[TurtleBot]` or `[Remote PC]`.
 
 As the robot you are using does not have any input devices or monitor, we have to start it in another way. Luckily we can work remotely from a local workstation using SSH. SSH provides a secure communication channel over an unsecured network in a client-server architecture. It connects an SSH client application with an SSH server.

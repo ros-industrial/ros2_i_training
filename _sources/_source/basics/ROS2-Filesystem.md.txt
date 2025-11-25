@@ -58,7 +58,7 @@ work in your workspace.
 
 Two types of ROS 2 packages exist: binary packages and build-from-source packages.
 
-ROS binary packages are in Ubuntu provided as debian packages, which can be managed via apt commands. 
+ROS binary packages are in Ubuntu provided as debian packages, which can be managed via apt commands.
 
 * Install a binary package:
 
@@ -66,7 +66,7 @@ ROS binary packages are in Ubuntu provided as debian packages, which can be mana
     sudo apt install ros-jazzy-rosbag2*
     ```
     `# sudo apt install ros-<distribution>-<package-name>`
-    
+
     ros-jazzy-rosbag2* means all packages which start from "ros-jazzy-rosbag2"
 
     #### Locate a ROS package:
@@ -95,16 +95,16 @@ Build-from-source packages can be divided into packages provided by ROS 2 and yo
     `# git clone -b <branch> <address>`
 
     Notice the “Branch” drop-down list to the left above the directories list. When you clone this repo, add the -b argument followed by the branch that corresponds with your ROS 2 distro.
-    
+
     To see the packages inside ros_tutorials, enter the command:
     ```bash
     ls ros_tutorials
     ```
-    You will find you have four packages: `roscpp_tutorials  rospy_tutorials  ros_tutorials  turtlesim` 
+    You will find you have four packages: `roscpp_tutorials  rospy_tutorials  ros_tutorials  turtlesim`
 
     Only **turtlesim** is ROS 2 package
 
-* Resolve dependencies: 
+* Resolve dependencies:
 
     Before building the workspace, you need to resolve package dependencies. You may have all the dependencies already, but best practice is to check for dependencies every time you clone. You wouldn’t want a build to fail after a long wait because of missing dependencies.
 
@@ -117,7 +117,7 @@ Build-from-source packages can be divided into packages provided by ROS 2 and yo
     ```
     This command magically installs all the packages that the packages in your workspace depend upon but are missing on your computer.
     http://wiki.ros.org/rosdep
-    
+
 *  Build the workspace with colcon
 
     ***Note: Don’t forget to source the ROS installation before build and make sure you are in the root of workspace(~/dev_ws).***
@@ -129,15 +129,15 @@ Build-from-source packages can be divided into packages provided by ROS 2 and yo
 
 * Source the overlay
     When you build this workspace, your main ROS 2 environment is the “underlay”. Now you can source overlay "on the top of" "underlay".
-    
+
     ***Note: If you open a new terminal, set up ROS2 environment first.***
-    
+
     - you can start a new terminal window by   `ctl + alt +t`
 
     ```bash
     $ cd dev_ws
     $ source install/setup.bash
-    ``` 
+    ```
 
 ## 5. ROS nodes
 A ROS node is an executable in the ROS environment. A node is always a part of a ROS package. How to start ROS nodes and how to display runtime information is explained in the example of the turtlesim package.
@@ -147,7 +147,7 @@ A ROS node is an executable in the ROS environment. A node is always a part of a
     ***Note: You have to start each process in a separate terminal. Don’t forget to source the ROS installation.***
     ```bash
     ros2 run turtlesim turtlesim_node
-    
+
     ```
 
     `# ros2 run <package_name> <executable_node_name>`
@@ -175,4 +175,3 @@ The two nodes turtlesim_node and turtle_teleop_key are currently active on your 
     `# ros2 node info <active_node_name>`
 
 The given information comprises topics that are subscribed and published by this node.
-

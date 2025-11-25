@@ -4,11 +4,11 @@
 
 ## Introduction
 
-As we understood from the lectures, nodes are the fundamental units in ROS2 which are usually written to perform a specific task. They can be created in a few different ways, some of them are: 
+As we understood from the lectures, nodes are the fundamental units in ROS2 which are usually written to perform a specific task. They can be created in a few different ways, some of them are:
 
 1. As simple in-line code in a script,
 2. As local functions, and
-3. As class objects   
+3. As class objects
 
 
 We will be using the 3rd method, though it is the more complex, so as to get better used to this concept.
@@ -22,7 +22,7 @@ ros2 pkg create --build-type ament_python <package_name>
 
 ***Note: Ensure first that ROS2 is sourced in every new terminal***
 
-- Make sure you run this command in the *src* directory of your workspace. You can use any package name you want, but for reference in this document, we call it `wshop_nodes`. 
+- Make sure you run this command in the *src* directory of your workspace. You can use any package name you want, but for reference in this document, we call it `wshop_nodes`.
 
 
 ## 1. Publisher Node
@@ -85,9 +85,9 @@ from rclpy.node import Node
 from std_msgs.msg import String
 ```
 
-`rclpy` is the *ROS 2 Client Library* that provides the API for invoking ROS 2 through Python.   
-`Node` is the main class which will be inherited here to instantiate our own node.   
-`std_msgs.msg` is the library for standard messages that includes the `String` message type which we use in this node. This has to be declared as a dependency in `package.xml`, which we do next.   
+`rclpy` is the *ROS 2 Client Library* that provides the API for invoking ROS 2 through Python.
+`Node` is the main class which will be inherited here to instantiate our own node.
+`std_msgs.msg` is the library for standard messages that includes the `String` message type which we use in this node. This has to be declared as a dependency in `package.xml`, which we do next.
 
 ```Python
 class MinimalPublisher(Node):
@@ -99,8 +99,8 @@ class MinimalPublisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
 ```
-As explained above, we create a subclass of type `MinimalPublisher` using the base class `Node`.         
-In the constructor `__init__()`, we pass the name of the node that we wish to assign to the constructer of the parent class using `super()`. The parent class `Node` takes care of actually assigning this string as a name.    
+As explained above, we create a subclass of type `MinimalPublisher` using the base class `Node`.
+In the constructor `__init__()`, we pass the name of the node that we wish to assign to the constructer of the parent class using `super()`. The parent class `Node` takes care of actually assigning this string as a name.
 `self.publisher_ = self.create_publisher(String, 'topic', 10)` This line actually creates a publisher, using the message type `String` that we imported, with the name `topic` that we choose and having a queue size of `10`. Queue size is the size of the output buffer. The commands used till now are typical when creating a subscriber. What follows next is only logic that is relevant to this node, and you may implement this in any way depending on your requirements.
 
 ```Python
@@ -118,11 +118,11 @@ def timer_callback(self):
     self.get_logger().info('Publishing: "%s"' % msg.data)
     self.i += 1
 ```
-In the callback, we create an object `msg` of the type of the message we wish to publish, i.e `String`.   
-We then populate the message with information we wish to publish. Looking at the description of the msg type using `ros2 interface show std_msgs/msg/String`, we see that it has only one field, which is `string data`. So we add a string into this field. Depending on the type of message used, you can populate it with relevant data.   
-Once the data msg object is done, we simply publish it using the `publish()` method of the `publisher_` object.    
-We also display this same message on the console for our verification using the `get_logger().info()` method of our `Node` class object.   
-Publishing from within this timer callback ensures we have a consistent publishing rate of 2Hz. You could publish this in any way you want, using the proper message type and publish call.  
+In the callback, we create an object `msg` of the type of the message we wish to publish, i.e `String`.
+We then populate the message with information we wish to publish. Looking at the description of the msg type using `ros2 interface show std_msgs/msg/String`, we see that it has only one field, which is `string data`. So we add a string into this field. Depending on the type of message used, you can populate it with relevant data.
+Once the data msg object is done, we simply publish it using the `publish()` method of the `publisher_` object.
+We also display this same message on the console for our verification using the `get_logger().info()` method of our `Node` class object.
+Publishing from within this timer callback ensures we have a consistent publishing rate of 2Hz. You could publish this in any way you want, using the proper message type and publish call.
 
 ```Python
 def main(args=None):
@@ -139,9 +139,9 @@ def main(args=None):
     rclpy.shutdown()
 ```
 
-In the main method, we first declare that this Python script uses the rclpy library by invoking `init()` and passing any command line arguments provided (in this case none).   
-We instantiate an object of the class we just created. Since the contructor already spawns the timer which publishes messages, no further action is needed to setup our node.   
-The `spin()` method ensures that all the items of work, such as callbacks, are continuously executed until a `shutdown()` is called. This is quintessential to ensure that your node actually does its job!   
+In the main method, we first declare that this Python script uses the rclpy library by invoking `init()` and passing any command line arguments provided (in this case none).
+We instantiate an object of the class we just created. Since the contructor already spawns the timer which publishes messages, no further action is needed to setup our node.
+The `spin()` method ensures that all the items of work, such as callbacks, are continuously executed until a `shutdown()` is called. This is quintessential to ensure that your node actually does its job!
 Finally, we destroy the node and manually call shutdown.
 
 ### 1.2 Add dependencies
@@ -150,7 +150,7 @@ In the base root folder of this package, you will find the `package.xml` which i
 
 The `description`, `maintainer` and `license` tage should be appropriately filled out. For license, use any valid open source license like `Apache License 2.0`.
 
-The buildtool we use by default is `ament_python` and you can see that this has already been assigned when we used the `ros2 pkg create` command. Below this, add the following two lines : 
+The buildtool we use by default is `ament_python` and you can see that this has already been assigned when we used the `ros2 pkg create` command. Below this, add the following two lines :
 
 ```XML
 <exec_depend>rclpy</exec_depend>
@@ -161,7 +161,7 @@ We already know from section **1.1** what these dependancies are. We just need t
 
 ### 1.3 Declaring the executable
 
-Now that we have our code written and dependencies setup, we need to tell our build system that the script we created should be treated as an executable. We do this in `setup.py`. 
+Now that we have our code written and dependencies setup, we need to tell our build system that the script we created should be treated as an executable. We do this in `setup.py`.
 
 Here, edit the `maintainer`, `maintainer_email`, `description` and `license` fields to assign exactly the same values as you did in `package.xml`.
 
@@ -227,12 +227,12 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-``` 
+```
 ### 2.1 Explanation
 
 The subscriber code has many similarities to the publisher code, and in this section we review what differs.
 
-The part that is immediately relevant is creating the subscriber 
+The part that is immediately relevant is creating the subscriber
 
 ```Python
 self.subscription = self.create_subscription(
@@ -261,22 +261,22 @@ We need to declare a new executable for this subscriber node. We add another lin
 entry_points={
         'console_scripts': [
                 'talker = wshop_nodes.minimal_publisher:main',
-                'listener = wshop_nodes.minimal_subscriber:main' 
+                'listener = wshop_nodes.minimal_subscriber:main'
         ],
 },
-``` 
+```
 ## 3 Build and run
 
 Before building, it is always good to check if all dependencies have been installed. We execute the following from the **base workspace folder** (i.e. just above the src folder of your **workspace**):
 
 ```bash
-rosdep install --from-paths src --ignore-src -r --rosdistro <distro> -y   
+rosdep install --from-paths src --ignore-src -r --rosdistro <distro> -y
 ```
 Substitute <distro> with the current version of ROS2 you are running on. Ex: `jazzy`
 
 
 From the same location, build the workspace:
- 
+
 colcon build --symlink-install
 ```
 Now we need to source this workspace in order to be able to discover the executable that we just built:
@@ -284,7 +284,7 @@ Now we need to source this workspace in order to be able to discover the executa
 ```bash
 source install/local_setup.bash
 ```
-Finally, we are ready to run an executable. Recalling from section **1.3**, the name we assigned to the executable with the publisher is `talker`. So we run this: 
+Finally, we are ready to run an executable. Recalling from section **1.3**, the name we assigned to the executable with the publisher is `talker`. So we run this:
 
 ```bash
 ros2 run wshop_nodes talker
@@ -342,7 +342,7 @@ from wshop_nodes.minimal_subscriber import MinimalSubscriber
 
 from rclpy.executors import SingleThreadedExecutor
 ```
-We import the previous two node classes that we created into this executable.   
+We import the previous two node classes that we created into this executable.
 We also import the single threaded executor that we will be using to compose the nodes.
 
 
@@ -367,7 +367,7 @@ finally:
     minimal_publisher.destroy_node()
     minimal_subscriber.destroy_node()
 ```
-Instead of spinning the main executable directly, we instead spin the executor that contains our two nodes. 
+Instead of spinning the main executable directly, we instead spin the executor that contains our two nodes.
 
 In this case, we have added a publisher and a subscriber within the same executor to simply demonstrate how multiple nodes can be added. In a practical scenario, this may not make much sense, and requires separate executors. This, however, is a more advanced topic and out of scope for this workshop.
 
@@ -389,6 +389,5 @@ Similarly as the previous two cases, we need to declare a third executor that po
 
 ### 4.3 Build and run
 
-Build the workspace and run this new executable, whose name in this case is `composed`.    
+Build the workspace and run this new executable, whose name in this case is `composed`.
 You will observe that indeed both the publisher and subscriber are running from within the same executable.
-

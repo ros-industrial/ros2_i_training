@@ -155,14 +155,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sub_pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="n">Pose</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/pose&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_pose</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">handle_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-        
+
         <span class="n">tfs</span> <span class="o">=</span> <span class="n">TransformStamped</span><span class="p">()</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">()</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;world&quot;</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">_child_frame_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">x</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">y</span>
-        <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.0</span>  
+        <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.0</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">msg</span><span class="o">.</span><span class="n">theta</span><span class="p">])</span>
 
@@ -171,7 +171,7 @@
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_quat</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_quat</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tfb_</span><span class="o">.</span><span class="n">sendTransform</span><span class="p">(</span><span class="n">tfs</span><span class="p">)</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">tfb_</span><span class="o">.</span><span class="n">sendTransform</span><span class="p">(</span><span class="n">tfs</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span>
@@ -210,7 +210,7 @@
 <p>The name of the turtle for which we are broadcasting comes from the CLI as an argument.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tfs</span> <span class="o">=</span> <span class="n">TransformStamped</span><span class="p">()</span>
 <span class="o">...</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">tfb_</span><span class="o">.</span><span class="n">sendTransform</span><span class="p">(</span><span class="n">tfs</span><span class="p">)</span> 
+<span class="bp">self</span><span class="o">.</span><span class="n">tfb_</span><span class="o">.</span><span class="n">sendTransform</span><span class="p">(</span><span class="n">tfs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Create a transform datatype with a header and populate it with meaningful data.
@@ -253,7 +253,7 @@ transform can change over time to generate a dynamic motion.)</p></li>
 </pre></div>
 </div>
 <p>Then start the broadcaster, with your chosen name for the turtle as the only argument. Here we assume <code class="docutils literal notranslate"><span class="pre">turtle1</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">run</span> <span class="n">tf2_workshop</span> <span class="n">broadcaster</span> <span class="n">turtle1</span>  
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">run</span> <span class="n">tf2_workshop</span> <span class="n">broadcaster</span> <span class="n">turtle1</span>
 </pre></div>
 </div>
 <p>If all works well, the broadcaster is now sending the TF data for turtle1. This can be verified with:</p>
@@ -327,7 +327,7 @@ transform can change over time to generate a dynamic motion.)</p></li>
 <section id="id1">
 <h3>2.1 Explanation<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>The new lines are explained here.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tf2_ros.transform_listener</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformListener</span>   
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tf2_ros.transform_listener</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformListener</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tf2_ros.buffer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Buffer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tf2_ros</span><span class="w"> </span><span class="kn">import</span> <span class="n">LookupException</span>
 </pre></div>

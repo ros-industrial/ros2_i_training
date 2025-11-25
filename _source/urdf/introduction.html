@@ -159,7 +159,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;robot<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;my_robot&quot;</span>&gt;
 <span class="w">    </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
 <span class="w">    </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;wheel&quot;</span>/&gt;
-<span class="w">    </span>
+
 <span class="w">    </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;wheel_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;continuous&quot;</span>&gt;
 <span class="w">        </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
 <span class="w">        </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;wheel&quot;</span>/&gt;
@@ -183,7 +183,7 @@
 <span class="w">        </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
 <span class="w">        </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span>/&gt;
 <span class="w">      </span>&lt;/inertial&gt;
-<span class="w">   </span>
+
 <span class="w">      </span>&lt;visual&gt;
 <span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
 <span class="w">       </span>&lt;geometry&gt;
@@ -193,7 +193,7 @@
 <span class="w">         </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 1.0 1.0 1.0&quot;</span>/&gt;
 <span class="w">       </span>&lt;/material&gt;
 <span class="w">     </span>&lt;/visual&gt;
-<span class="w">  </span>
+
 <span class="w">     </span>&lt;collision&gt;
 <span class="w">       </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
 <span class="w">       </span>&lt;geometry&gt;
@@ -247,7 +247,7 @@
 <span class="w">        </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 3.1416&quot;</span>/&gt;
 <span class="w">        </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>/&gt;
 <span class="w">        </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>/&gt;
-<span class="w">    </span>
+
 <span class="w">        </span>&lt;calibration<span class="w"> </span><span class="nv">rising</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>/&gt;
 <span class="w">        </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>/&gt;
 <span class="w">        </span>&lt;limit<span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-2.2&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;0.7&quot;</span><span class="w"> </span>/&gt;

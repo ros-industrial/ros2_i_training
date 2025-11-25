@@ -3,13 +3,13 @@
 
 ## Introduction
 
-The **Unified Robot Description Format (URDF)** is an XML-based format used to describe the structure, kinematics, and visual properties of a robot in ROS 2. It provides a standardized way to define robot models, including links, joints, and sensors, making it essential for simulation, visualization, and control of robot. 
+The **Unified Robot Description Format (URDF)** is an XML-based format used to describe the structure, kinematics, and visual properties of a robot in ROS 2. It provides a standardized way to define robot models, including links, joints, and sensors, making it essential for simulation, visualization, and control of robot.
 
 Before starting the tutorial on URDF, here is the basics to know before we get started.
 
 ## XML Robot Description Format
 
-The **Unified Robot Description Format** is an XML specification to describe a robot. We attempt to keep this specification as general as possible, but obviously the specification cannot describe all robots. The main limitation at this point is that only tree structures can be represented, ruling out all parallel robots. Also, the specification assumes the robot consists of rigid links connected by joints; flexible elements are not supported. 
+The **Unified Robot Description Format** is an XML specification to describe a robot. We attempt to keep this specification as general as possible, but obviously the specification cannot describe all robots. The main limitation at this point is that only tree structures can be represented, ruling out all parallel robots. Also, the specification assumes the robot consists of rigid links connected by joints; flexible elements are not supported.
 
 The specification covers:
 
@@ -43,7 +43,7 @@ Below is an example showing a robot with name `my_robot` and its elements(joints
 <robot name="my_robot">
     <link name="base_link"/>
     <link name="wheel"/>
-    
+
     <joint name="wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="wheel"/>
@@ -71,7 +71,7 @@ Below is an example showing a robot with name `my_robot` and its elements(joints
          <mass value="1"/>
          <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
        </inertial>
-    
+
        <visual>
          <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -81,7 +81,7 @@ Below is an example showing a robot with name `my_robot` and its elements(joints
           <color rgba="0 1.0 1.0 1.0"/>
         </material>
       </visual>
-   
+
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
@@ -96,7 +96,7 @@ Below is an example showing a robot with name `my_robot` and its elements(joints
 
 Specifies a unique name of the joint
 
-Here `name` is an attribute and is the name of the link itself. 
+Here `name` is an attribute and is the name of the link itself.
 
 ### Elements
 - **< inertial>** (optional) – Defines the mass, center of mass, and inertia.
@@ -119,8 +119,8 @@ Here `name` is an attribute and is the name of the link itself.
 
   - **< geometry>** – Uses the same shape options as <visual>.
 
-  - **< origin>** (optional) – Sets position and orientation for collision calculations  
- 
+  - **< origin>** (optional) – Sets position and orientation for collision calculations
+
 For more details of each elements , refer [URDF Link](https://wiki.ros.org/urdf/XML/joint).
 ### Joint
 
@@ -134,7 +134,7 @@ Example:
         <origin xyz="0 0 1" rpy="0 0 3.1416"/>
         <parent link="link1"/>
         <child link="link2"/>
-    
+
         <calibration rising="0.0"/>
         <dynamics damping="0.0" friction="0.0"/>
         <limit effort="30" velocity="1.0" lower="-2.2" upper="0.7" />
@@ -147,7 +147,7 @@ Example:
 
 Specifies a unique name of the joint
 
-Here `name` is an attribute and is the name of the joint itself. 
+Here `name` is an attribute and is the name of the joint itself.
 
 #### Type (required)
 
@@ -188,4 +188,3 @@ Specifies the type of joint, where type can be one of the following:
 
 
 For more details of each elements , read [URDF Joint](https://wiki.ros.org/urdf/XML/joint).
-

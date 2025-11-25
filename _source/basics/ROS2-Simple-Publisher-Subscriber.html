@@ -193,8 +193,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">std_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">String</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">rclpy</span></code> is the <em>ROS 2 Client Library</em> that provides the API for invoking ROS 2 through Python.<br />
-<code class="docutils literal notranslate"><span class="pre">Node</span></code> is the main class which will be inherited here to instantiate our own node.<br />
+<p><code class="docutils literal notranslate"><span class="pre">rclpy</span></code> is the <em>ROS 2 Client Library</em> that provides the API for invoking ROS 2 through Python.
+<code class="docutils literal notranslate"><span class="pre">Node</span></code> is the main class which will be inherited here to instantiate our own node.
 <code class="docutils literal notranslate"><span class="pre">std_msgs.msg</span></code> is the library for standard messages that includes the <code class="docutils literal notranslate"><span class="pre">String</span></code> message type which we use in this node. This has to be declared as a dependency in <code class="docutils literal notranslate"><span class="pre">package.xml</span></code>, which we do next.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
@@ -206,8 +206,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-<p>As explained above, we create a subclass of type <code class="docutils literal notranslate"><span class="pre">MinimalPublisher</span></code> using the base class <code class="docutils literal notranslate"><span class="pre">Node</span></code>.<br />
-In the constructor <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>, we pass the name of the node that we wish to assign to the constructer of the parent class using <code class="docutils literal notranslate"><span class="pre">super()</span></code>. The parent class <code class="docutils literal notranslate"><span class="pre">Node</span></code> takes care of actually assigning this string as a name.<br />
+<p>As explained above, we create a subclass of type <code class="docutils literal notranslate"><span class="pre">MinimalPublisher</span></code> using the base class <code class="docutils literal notranslate"><span class="pre">Node</span></code>.
+In the constructor <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>, we pass the name of the node that we wish to assign to the constructer of the parent class using <code class="docutils literal notranslate"><span class="pre">super()</span></code>. The parent class <code class="docutils literal notranslate"><span class="pre">Node</span></code> takes care of actually assigning this string as a name.
 <code class="docutils literal notranslate"><span class="pre">self.publisher_</span> <span class="pre">=</span> <span class="pre">self.create_publisher(String,</span> <span class="pre">'topic',</span> <span class="pre">10)</span></code> This line actually creates a publisher, using the message type <code class="docutils literal notranslate"><span class="pre">String</span></code> that we imported, with the name <code class="docutils literal notranslate"><span class="pre">topic</span></code> that we choose and having a queue size of <code class="docutils literal notranslate"><span class="pre">10</span></code>. Queue size is the size of the output buffer. The commands used till now are typical when creating a subscriber. What follows next is only logic that is relevant to this node, and you may implement this in any way depending on your requirements.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">timer_period</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># seconds</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="n">timer_period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_callback</span><span class="p">)</span>
@@ -223,10 +223,10 @@ In the constructor <code class="docutils literal notranslate"><span class="pre">
     <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>In the callback, we create an object <code class="docutils literal notranslate"><span class="pre">msg</span></code> of the type of the message we wish to publish, i.e <code class="docutils literal notranslate"><span class="pre">String</span></code>.<br />
-We then populate the message with information we wish to publish. Looking at the description of the msg type using <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">std_msgs/msg/String</span></code>, we see that it has only one field, which is <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">data</span></code>. So we add a string into this field. Depending on the type of message used, you can populate it with relevant data.<br />
-Once the data msg object is done, we simply publish it using the <code class="docutils literal notranslate"><span class="pre">publish()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">publisher_</span></code> object.<br />
-We also display this same message on the console for our verification using the <code class="docutils literal notranslate"><span class="pre">get_logger().info()</span></code> method of our <code class="docutils literal notranslate"><span class="pre">Node</span></code> class object.<br />
+<p>In the callback, we create an object <code class="docutils literal notranslate"><span class="pre">msg</span></code> of the type of the message we wish to publish, i.e <code class="docutils literal notranslate"><span class="pre">String</span></code>.
+We then populate the message with information we wish to publish. Looking at the description of the msg type using <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">std_msgs/msg/String</span></code>, we see that it has only one field, which is <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">data</span></code>. So we add a string into this field. Depending on the type of message used, you can populate it with relevant data.
+Once the data msg object is done, we simply publish it using the <code class="docutils literal notranslate"><span class="pre">publish()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">publisher_</span></code> object.
+We also display this same message on the console for our verification using the <code class="docutils literal notranslate"><span class="pre">get_logger().info()</span></code> method of our <code class="docutils literal notranslate"><span class="pre">Node</span></code> class object.
 Publishing from within this timer callback ensures we have a consistent publishing rate of 2Hz. You could publish this in any way you want, using the proper message type and publish call.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
@@ -242,9 +242,9 @@ Publishing from within this timer callback ensures we have a consistent publishi
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>In the main method, we first declare that this Python script uses the rclpy library by invoking <code class="docutils literal notranslate"><span class="pre">init()</span></code> and passing any command line arguments provided (in this case none).<br />
-We instantiate an object of the class we just created. Since the contructor already spawns the timer which publishes messages, no further action is needed to setup our node.<br />
-The <code class="docutils literal notranslate"><span class="pre">spin()</span></code> method ensures that all the items of work, such as callbacks, are continuously executed until a <code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> is called. This is quintessential to ensure that your node actually does its job!<br />
+<p>In the main method, we first declare that this Python script uses the rclpy library by invoking <code class="docutils literal notranslate"><span class="pre">init()</span></code> and passing any command line arguments provided (in this case none).
+We instantiate an object of the class we just created. Since the contructor already spawns the timer which publishes messages, no further action is needed to setup our node.
+The <code class="docutils literal notranslate"><span class="pre">spin()</span></code> method ensures that all the items of work, such as callbacks, are continuously executed until a <code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> is called. This is quintessential to ensure that your node actually does its job!
 Finally, we destroy the node and manually call shutdown.</p>
 </section>
 <section id="add-dependencies">
@@ -346,7 +346,7 @@ Finally, we destroy the node and manually call shutdown.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
         <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="s1">&#39;talker = wshop_nodes.minimal_publisher:main&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;listener = wshop_nodes.minimal_subscriber:main&#39;</span> 
+                <span class="s1">&#39;listener = wshop_nodes.minimal_subscriber:main&#39;</span>
         <span class="p">],</span>
 <span class="p">},</span>
 </pre></div>
@@ -356,7 +356,7 @@ Finally, we destroy the node and manually call shutdown.</p>
 <section id="build-and-run">
 <h2>3 Build and run<a class="headerlink" href="#build-and-run" title="Link to this heading"></a></h2>
 <p>Before building, it is always good to check if all dependencies have been installed. We execute the following from the <strong>base workspace folder</strong> (i.e. just above the src folder of your <strong>workspace</strong>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>--rosdistro<span class="w"> </span>&lt;distro&gt;<span class="w"> </span>-y<span class="w">   </span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>--rosdistro<span class="w"> </span>&lt;distro&gt;<span class="w"> </span>-y
 </pre></div>
 </div>
 <p>Substitute <distro> with the current version of ROS2 you are running on. Ex: <code class="docutils literal notranslate"><span class="pre">jazzy</span></code></p>
@@ -421,7 +421,7 @@ source install/local_setup.bash
 <span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.executors</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleThreadedExecutor</span>
 </pre></div>
 </div>
-<p>We import the previous two node classes that we created into this executable.<br />
+<p>We import the previous two node classes that we created into this executable.
 We also import the single threaded executor that we will be using to compose the nodes.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">minimal_publisher</span> <span class="o">=</span> <span class="n">MinimalPublisher</span><span class="p">()</span>
 <span class="n">minimal_subscriber</span> <span class="o">=</span> <span class="n">MinimalSubscriber</span><span class="p">()</span>
@@ -460,7 +460,7 @@ We also import the single threaded executor that we will be using to compose the
 </section>
 <section id="id5">
 <h3>4.3 Build and run<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<p>Build the workspace and run this new executable, whose name in this case is <code class="docutils literal notranslate"><span class="pre">composed</span></code>.<br />
+<p>Build the workspace and run this new executable, whose name in this case is <code class="docutils literal notranslate"><span class="pre">composed</span></code>.
 You will observe that indeed both the publisher and subscriber are running from within the same executable.</p>
 </section>
 </section>

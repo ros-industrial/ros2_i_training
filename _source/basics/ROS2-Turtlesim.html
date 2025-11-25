@@ -128,7 +128,7 @@
 <p>This workshop encourages you to refer to the cheat sheet for the syntax and type the commands on your own in order to learn by trial and error. Make use of the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option for commands as well. However, solutions are also provided in the end. Feel free to approach this any way as you wish.</p>
 <!--## Requirements
 
-`sudo apt install ros-jazzy-turtlesim`   
+`sudo apt install ros-jazzy-turtlesim`
 Make sure ROS2 is sourced in every terminal you open.   -->
 </section>
 <section id="starting-the-turtle-simulator">
@@ -175,15 +175,15 @@ Make sure ROS2 is sourced in every terminal you open.   -->
 <p>You might notice some extra topics with the word <code class="docutils literal notranslate"><span class="pre">action</span></code> in the name when you use RQT Node Graph, which you do not see when you list the topics in CLI. You can safely ignore these for now, as they will be addressed in a later lecture.</p>
 <section id="description-of-topics">
 <h3>3.1 Description of topics<a class="headerlink" href="#description-of-topics" title="Link to this heading"></a></h3>
-<p>The topic <code class="docutils literal notranslate"><span class="pre">/turtle1/color_sensor</span></code> tells you the RGB values of the color of the trail left behind when the turtle moves.<br />
-The topic <code class="docutils literal notranslate"><span class="pre">/turtle1/cmd_vel</span></code> is used to instruct the turtle to move. Echo this topic in a separate terminal and then use the teleop node to move the turtle to observe how velocity commands are given to it.<br />
+<p>The topic <code class="docutils literal notranslate"><span class="pre">/turtle1/color_sensor</span></code> tells you the RGB values of the color of the trail left behind when the turtle moves.
+The topic <code class="docutils literal notranslate"><span class="pre">/turtle1/cmd_vel</span></code> is used to instruct the turtle to move. Echo this topic in a separate terminal and then use the teleop node to move the turtle to observe how velocity commands are given to it.
 The topic <code class="docutils literal notranslate"><span class="pre">/turtle1/pose</span></code> publishes the current pose of the turtle. Echo this topic to see how the pose of the turtle changes as you move it.</p>
 </section>
 <section id="description-of-services">
 <h3>3.2 Description of services<a class="headerlink" href="#description-of-services" title="Link to this heading"></a></h3>
-<p>The services <code class="docutils literal notranslate"><span class="pre">/kill</span></code> and <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> are used to kill and spawn turtles respectively.<br />
-The service <code class="docutils literal notranslate"><span class="pre">/clear</span></code> clears the background of trail lines and <code class="docutils literal notranslate"><span class="pre">/reset</span></code> resets the position of the turtle.<br />
-The service <code class="docutils literal notranslate"><span class="pre">/turtle1/set_pen</span></code> sets the color and thickness of the trail line.<br />
+<p>The services <code class="docutils literal notranslate"><span class="pre">/kill</span></code> and <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> are used to kill and spawn turtles respectively.
+The service <code class="docutils literal notranslate"><span class="pre">/clear</span></code> clears the background of trail lines and <code class="docutils literal notranslate"><span class="pre">/reset</span></code> resets the position of the turtle.
+The service <code class="docutils literal notranslate"><span class="pre">/turtle1/set_pen</span></code> sets the color and thickness of the trail line.
 The services <code class="docutils literal notranslate"><span class="pre">/turtle1/teleport_xx</span></code> move the turtle instantly.</p>
 <p>You can ignore the services with the word <code class="docutils literal notranslate"><span class="pre">parameter</span></code> in the names for now.</p>
 </section>
@@ -251,22 +251,22 @@ The services <code class="docutils literal notranslate"><span class="pre">/turtl
 <h2>7. Solutions<a class="headerlink" href="#solutions" title="Link to this heading"></a></h2>
 <section id="id1">
 <h3>7.1 Starting the Turtle simulator<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">turtlesim</span> <span class="pre">turtlesim_node</span></code><br />
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">turtlesim</span> <span class="pre">turtlesim_node</span></code>
 <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">turtlesim</span> <span class="pre">turtle_teleop_key</span></code></p>
 </section>
 <section id="id2">
 <h3>7.2 Observing<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">node</span> <span class="pre">list</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">list</span> <span class="pre">-t</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">info</span> <span class="pre">/turtle1/cmd_vel</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">turtlesim/msg/Pose</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">list</span></code><br />
-<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">turtlesim/srv/Spawn</span></code><br />
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">node</span> <span class="pre">list</span></code>
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">list</span> <span class="pre">-t</span></code>
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">info</span> <span class="pre">/turtle1/cmd_vel</span></code>
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">turtlesim/msg/Pose</span></code>
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">list</span></code>
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span> <span class="pre">turtlesim/srv/Spawn</span></code>
 <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">proto</span> <span class="pre">turtlesim/srv/Spawn</span></code></p>
 </section>
 <section id="id3">
 <h3>7.3 Interacting<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/spawn</span> <span class="pre">turtlesim/srv/Spawn</span> <span class="pre">&quot;{x:</span> <span class="pre">5,y:</span> <span class="pre">5,theta:</span> <span class="pre">0}&quot;</span></code><br />
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/spawn</span> <span class="pre">turtlesim/srv/Spawn</span> <span class="pre">&quot;{x:</span> <span class="pre">5,y:</span> <span class="pre">5,theta:</span> <span class="pre">0}&quot;</span></code>
 <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/reset</span> <span class="pre">std_srvs/srv/Empty</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">topic</span> <span class="n">pub</span> <span class="o">/</span><span class="n">turtle1</span><span class="o">/</span><span class="n">cmd_vel</span> <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">msg</span><span class="o">/</span><span class="n">Twist</span> <span class="s2">&quot;linear:</span>
   <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span>
