@@ -54,3 +54,4 @@ Session 6 - ROS2 Control
    Exercise 6.3 - ROS2-Control-Example-3 <_source/control/03_Example.md>
    Exercise 6.4 - ROS2-Control-Example-4 <_source/control/04_Example.md>
    Exercise 6.5 - ROS2-Control-Example-5 <_source/control/05_Example.md>
+   Exercise 6.6 - ROS2-Control-Example-6 <_source/control/06_Example.md>
