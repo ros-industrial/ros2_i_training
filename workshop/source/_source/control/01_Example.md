@@ -1,6 +1,6 @@
 # RRBot
 
-**![Reference from ros2_control_demos](https://control.ros.org/rolling/doc/ros2_control_demos/doc/index.html#)**
+**![Reference from ros2_control_demos](https://control.ros.org/jazzy/doc/ros2_control_demos/doc/index.html#)**
 
 **RRBot**, or *Revolute-Revolute Manipulator Robot*, is a simple 3-linkage, 2-joint arm used to demonstrate various features.
 
