@@ -85,9 +85,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="06_Example.html">How to Setup Tricycle Robot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_Example.html#example-18-tricyclebot-steering">Example 18: TricycleBot (steering)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_Example.html#example-19-tricyclebot-drive">Example 19: TricycleBot (drive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_Example.html">Exercise 6.6 - ROS2-Control-Example-6</a></li>
 </ul>
 
         </div>
@@ -157,30 +155,29 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_compone
 ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
 </pre></div>
 </div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list_controllers</span></code> shows active controllers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_controller_types</span></code> shows available controller plugins.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_hardware_components</span></code> shows hardware components and their interfaces.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list_hardware_interfaces</span></code> shows all registered interfaces.</p></li>
+</ul>
 <p>For full controller manager introspection:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/controller_manager/introspection_data/full
 </pre></div>
 </div>
-<p>Focus on <code class="docutils literal notranslate"><span class="pre">wbot_base_control.nonlimited</span></code> and <code class="docutils literal notranslate"><span class="pre">wbot_base_control.limited</span></code> as you drive to see command limiting in action.</p>
 </section>
 <section id="visualize-introspection-values-in-plotjuggler">
 <h2>4. Visualize introspection values in PlotJuggler<a class="headerlink" href="#visualize-introspection-values-in-plotjuggler" title="Link to this heading"></a></h2>
-<p>Introspection of the ros2_control setup
-With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the ~/introspection_data topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.</p>
+<p>With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the <code class="docutils literal notranslate"><span class="pre">~/introspection_data</span></code> topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.</p>
 <p>What gets published (message types):</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/full</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsValues</span></code>): publishes the full introspection data, so names and values travel together for quick CLI inspection.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/names</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsNames</span></code>): publishes the names of the registered variables whenever interfaces are registered or removed.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> (<code class="docutils literal notranslate"><span class="pre">pal_statistics_msgs/msg/StatisticsValues</span></code>): publishes only the changing values every update cycle when a subscriber is present (ideal for PlotJuggler).</p></li>
 </ul>
-<p>All the registered variables are still published over the 3 topics: ~/introspection_data/full, ~/introspection_data/names, and ~/introspection_data/values. The topics ~/introspection_data/full and ~/introspection_data/values are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.</p>
-<p>You can wire these directly into a visualization:</p>
-<ul class="simple">
-<li><p>The topic ~/introspection_data/full can be used to integrate with your custom visualization tools or to track the variables from the command line.</p></li>
-<li><p>The topic ~/introspection_data/names and ~/introspection_data/values are to be used for visualization tools like PlotJuggler or RQT plot to visualize the data.</p></li>
-<li><p>In PlotJuggler, add the <code class="docutils literal notranslate"><span class="pre">/controller_manager/introspection_data/values</span></code> stream and expand the interface names to plot wheel commands, joint states, or controller timings in real time.</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-plotjuggler
+<p>All the registered variables are still published over the 3 topics: <code class="docutils literal notranslate"><span class="pre">~/introspection_data/full</span></code>, <code class="docutils literal notranslate"><span class="pre">~/introspection_data/names</span></code>, and <code class="docutils literal notranslate"><span class="pre">~/introspection_data/values</span></code>. The topics <code class="docutils literal notranslate"><span class="pre">~/introspection_data/full</span></code> and <code class="docutils literal notranslate"><span class="pre">~/introspection_data/values</span></code> are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.</p>
+<p>To visualize the data in PlotJuggler, install the <code class="docutils literal notranslate"><span class="pre">plotjuggler-ros</span></code> package and run PlotJuggler:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-plotjuggler-ros
 ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w"> </span>plotjuggler
 </pre></div>
 </div>
@@ -294,31 +291,31 @@ ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w
 </pre></div>
 </div>
 <p>Example output:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hardware Component 1
-        name: wbot_arm_piper_control
-        type: system
-        plugin name: mock_components/GenericSystem
-        state: id=3 label=active
-        read/write rate: 100 Hz
-        is_async: False
-        command interfaces
-                wbot_arm_joint_5/position [available] [claimed]
-                wbot_arm_joint_6/position [available] [claimed]
-                wbot_arm_joint_4/position [available] [claimed]
-                wbot_arm_gripper_joint/position [available] [claimed]
-                wbot_arm_joint_3/position [available] [claimed]
-                wbot_arm_joint_2/position [available] [claimed]
-                wbot_arm_joint_1/position [available] [claimed]
-Hardware Component 2
-        name: wbot_base_control
-        type: system
-        plugin name: mock_components/GenericSystem
-        state: id=3 label=active
-        read/write rate: 100 Hz
-        is_async: False
-        command interfaces
-                wbot_wheel_right_joint/velocity [available] [claimed]
-                wbot_wheel_left_joint/velocity [available] [claimed]
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>name:<span class="w"> </span>wbot_arm_piper_control
+<span class="w">        </span>type:<span class="w"> </span>system
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>mock_components/GenericSystem
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span>read/write<span class="w"> </span>rate:<span class="w"> </span><span class="m">100</span><span class="w"> </span>Hz
+<span class="w">        </span>is_async:<span class="w"> </span>False
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>wbot_arm_joint_5/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_joint_6/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_joint_4/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_gripper_joint/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_joint_3/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_joint_2/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_arm_joint_1/position<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+Hardware<span class="w"> </span>Component<span class="w"> </span><span class="m">2</span>
+<span class="w">        </span>name:<span class="w"> </span>wbot_base_control
+<span class="w">        </span>type:<span class="w"> </span>system
+<span class="w">        </span>plugin<span class="w"> </span>name:<span class="w"> </span>mock_components/GenericSystem
+<span class="w">        </span>state:<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">label</span><span class="o">=</span>active
+<span class="w">        </span>read/write<span class="w"> </span>rate:<span class="w"> </span><span class="m">100</span><span class="w"> </span>Hz
+<span class="w">        </span>is_async:<span class="w"> </span>False
+<span class="w">        </span><span class="nb">command</span><span class="w"> </span>interfaces
+<span class="w">                </span>wbot_wheel_right_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
+<span class="w">                </span>wbot_wheel_left_joint/velocity<span class="w"> </span><span class="o">[</span>available<span class="o">]</span><span class="w"> </span><span class="o">[</span>claimed<span class="o">]</span>
 </pre></div>
 </div>
 </section>

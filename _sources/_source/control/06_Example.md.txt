@@ -1,6 +1,6 @@
 # How to Setup Tricycle Robot
 
-## What you'll need
+### What you'll need
 - First you need to have a working URDF with all the joint types properly assigned.
 - The resource manager will pick up the joints which are either "revolute", "continuous", or prismatic types
 - Fixed joints will not be used by ros2_control because they are not actuated
@@ -9,7 +9,7 @@ This example is aim: follow the sequence URDF → hardware plugin → controller
 
 The reference file `ros2_control_demo_description/tricyclebot/urdf/tricyclebot_description.urdf.xacro`
 
-## Robot description xacro
+### Robot description xacro
 Start from a clean URDF/xacro description so you know exactly which joints ros2_control will expose.
 
 ```xml
@@ -87,12 +87,12 @@ Start from a clean URDF/xacro description so you know exactly which joints ros2_
 </robot>
 
 ```
-### Why these joint types matter
+#### Why these joint types matter
 - `rear_left_wheel_joint` and `rear_right_wheel_joint` are `continuous`, so ros2_control treats them as driven wheels that can spin forever.
 - `front_steering_joint` is `revolute`, so the steering actuator expects a bounded angle command.
 - If a joint should move in your own robot, make sure it is `revolute`, `continuous`, or `prismatic` before you hook it to controllers.
 
-## Writing my own plugin for hardware components
+### Writing my own plugin for hardware components
 
 The hardware components realize communication to physical hardware and represent its abstraction in the ros2_control framework. The components have to be exported as plugins using pluginlib-library. The Resource Manager dynamically loads those plugins and manages their lifecycle.
 
@@ -110,7 +110,7 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 referece: https://github.com/ros-controls/roadmap/blob/master/design_drafts/hardware_access.md
 
 
-### Lifecycle of a Hardware Component
+#### Lifecycle of a Hardware Component
 
 Methods return `hardware_interface::CallbackReturn` with these meanings:
 
@@ -181,7 +181,7 @@ private:
 
 `hardware_interface::(Actuator|Sensor|System)Interface` defines the base class for your hardware plugin. Override the lifecycle methods to manage initialization, configuration, activation, and deactivation of your hardware. Implement the `read` and `write` methods to handle data exchange between ros2_control and your hardware.
 
-## Export the Plugin
+### Export the Plugin
 
 To export the plugin, create the file `example_18/ros2_control_demo_example_18.xml` with the following content:
 
@@ -198,7 +198,7 @@ To export the plugin, create the file `example_18/ros2_control_demo_example_18.x
 ```
 
 This XML file is required by `pluginlib` so that `controller_manager` can construct your class by name at runtime. During the build process, the macro `pluginlib_export_plugin_description_file(hardware_interface ros2_control_demo_example_18.xml)` will export it.
-## Load the plugin in the robot xacro
+### Load the plugin in the robot xacro
 
 During the build, the plugin is exported with `pluginlib_export_plugin_description_file(hardware_interface ros2_control_demo_example_18.xml)` and then loaded into `ros2_control.xacro`:
 
@@ -244,7 +244,7 @@ The `<ros2_control>` tag defines the hardware interface and joints controlled by
 
 Reference: [Hardware Interface Types](https://control.ros.org/rolling/doc/ros2_control/hardware_interface/doc/hardware_interface_types_userdoc.html)
 
-## Controller integration
+### Controller integration
 
 The controller configuration file `example_18/bringup/config/tricyclebot_controllers.yaml` defines which controllers to load and encodes the tricycle base geometry. Adjust `wheelbase`, `traction_track_width`, and `traction_wheels_radius` to match your URDF:
 
@@ -277,7 +277,7 @@ tricycle_steering_controller:
 - Joint names must match your URDF exactly or the controller will fail.
 - `update_rate` controls command frequency to hardware.
 
-## How to launch
+### How to launch
 
 The launch file in `example_18/bringup/launch` starts `ros2_control_node`, brings up the joint state broadcaster, and loads the tricycle steering controller with an optional TF remap flag to match your tf tree in RViz.
 
@@ -314,13 +314,13 @@ Each component:
 - `joint_state_broadcaster` publishes `sensor_msgs/msg/JointState` for RViz visualization.
 - `tricycle_steering_controller` spawns with the same parameters file; `--controller-ros-args` remaps `/tf` if needed for your frame tree.
 
-# Example 18: TricycleBot (steering)
+## Example 18: TricycleBot (steering)
 
 *TricycleBot* is a simple mobile base with two driven rear wheels and a single steerable front wheel. This example demonstrates using the `tricycle_steering_controller` from `ros2_controllers` to command a vehicle with two traction joints and one steering joint.
 
 URDF files: `ros2_control_demo_description/tricyclebot/urdf`
 
-## Tutorial steps
+### Tutorial steps
 
 1. Verify the robot description
 
@@ -328,8 +328,9 @@ URDF files: `ros2_control_demo_description/tricyclebot/urdf`
 ros2 launch ros2_control_demo_example_18 view_robot.launch.py
 ```
 
-Note: At startup you may see the warning
-"Warning: Invalid frame ID 'odom' passed to canTransform argument target_frame" — this is expected while `joint_state_publisher_gui` starts.
+
+> **Note**: At startup you may see the warning
+> "Warning: Invalid frame ID 'odom' passed to canTransform argument target_frame" — this is expected while `joint_state_publisher_gui` starts.
 
 2. Start the example
 
@@ -393,13 +394,13 @@ You should see the robot turning in RViz and the hardware plugin printing update
 
 Reference: https://github.com/ipa-vsp/ros2_control_demos (example_18 / tricycle demo)
 
-# Example 19: TricycleBot (drive)
+## Example 19: TricycleBot (drive)
 
 *TricycleBot* is a mobile base with a single front wheel that is both driven and steered plus two trailing rear wheels. This example demonstrates using the `tricycle_controller` from `ros2_controllers` to command translational and rotational velocity on a steer-drive wheel.
 
 URDF files: `ros2_control_demo_description/tricyclebot/urdf`
 
-## Tutorial steps
+### Tutorial steps
 
 1. Verify the robot description
 
@@ -466,7 +467,7 @@ ros2 topic pub --rate 30 /tricycle_controller/cmd_vel geometry_msgs/msg/TwistSta
 
 You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.
 
-### Controllers from this demo
+#### Controllers from this demo
 
 - Joint State Broadcaster: [ros2_controllers](https://github.com/ros-controls/ros2_controllers)
 - Tricycle Controller: [ros2_controllers](https://github.com/ros-controls/ros2_controllers)

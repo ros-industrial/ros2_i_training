@@ -68,7 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Setup Tricycle Robot</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.6 - ROS2-Control-Example-6</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-you-ll-need">What you’ll need</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#robot-description-xacro">Robot description xacro</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#why-these-joint-types-matter">Why these joint types matter</a></li>
@@ -82,15 +82,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#load-the-plugin-in-the-robot-xacro">Load the plugin in the robot xacro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#controller-integration">Controller integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-launch">How to launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-18-tricyclebot-steering">Example 18: TricycleBot (steering)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#example-18-tricyclebot-steering">Example 18: TricycleBot (steering)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-19-tricyclebot-drive">Example 19: TricycleBot (drive)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Tutorial steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#example-19-tricyclebot-drive">Example 19: TricycleBot (drive)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Tutorial steps</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
 </ul>
 </li>
 </ul>
@@ -422,21 +422,22 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <li><p><code class="docutils literal notranslate"><span class="pre">tricycle_steering_controller</span></code> spawns with the same parameters file; <code class="docutils literal notranslate"><span class="pre">--controller-ros-args</span></code> remaps <code class="docutils literal notranslate"><span class="pre">/tf</span></code> if needed for your frame tree.</p></li>
 </ul>
 </section>
-</section>
 <section id="example-18-tricyclebot-steering">
-<h1>Example 18: TricycleBot (steering)<a class="headerlink" href="#example-18-tricyclebot-steering" title="Link to this heading"></a></h1>
+<h2>Example 18: TricycleBot (steering)<a class="headerlink" href="#example-18-tricyclebot-steering" title="Link to this heading"></a></h2>
 <p><em>TricycleBot</em> is a simple mobile base with two driven rear wheels and a single steerable front wheel. This example demonstrates using the <code class="docutils literal notranslate"><span class="pre">tricycle_steering_controller</span></code> from <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> to command a vehicle with two traction joints and one steering joint.</p>
 <p>URDF files: <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/tricyclebot/urdf</span></code></p>
 <section id="tutorial-steps">
-<h2>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h2>
+<h3>Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Verify the robot description</p></li>
 </ol>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ros2_control_demo_example_18<span class="w"> </span>view_robot.launch.py
 </pre></div>
 </div>
-<p>Note: At startup you may see the warning
+<blockquote>
+<div><p><strong>Note</strong>: At startup you may see the warning
 “Warning: Invalid frame ID ‘odom’ passed to canTransform argument target_frame” — this is expected while <code class="docutils literal notranslate"><span class="pre">joint_state_publisher_gui</span></code> starts.</p>
+</div></blockquote>
 <ol class="arabic simple" start="2">
 <li><p>Start the example</p></li>
 </ol>
@@ -495,11 +496,11 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 </section>
 </section>
 <section id="example-19-tricyclebot-drive">
-<h1>Example 19: TricycleBot (drive)<a class="headerlink" href="#example-19-tricyclebot-drive" title="Link to this heading"></a></h1>
+<h2>Example 19: TricycleBot (drive)<a class="headerlink" href="#example-19-tricyclebot-drive" title="Link to this heading"></a></h2>
 <p><em>TricycleBot</em> is a mobile base with a single front wheel that is both driven and steered plus two trailing rear wheels. This example demonstrates using the <code class="docutils literal notranslate"><span class="pre">tricycle_controller</span></code> from <code class="docutils literal notranslate"><span class="pre">ros2_controllers</span></code> to command translational and rotational velocity on a steer-drive wheel.</p>
 <p>URDF files: <code class="docutils literal notranslate"><span class="pre">ros2_control_demo_description/tricyclebot/urdf</span></code></p>
 <section id="id1">
-<h2>Tutorial steps<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h3>Tutorial steps<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Verify the robot description</p></li>
 </ol>
@@ -559,11 +560,12 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 </div>
 <p>You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.</p>
 <section id="controllers-from-this-demo">
-<h3>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Link to this heading"></a></h3>
+<h4>Controllers from this demo<a class="headerlink" href="#controllers-from-this-demo" title="Link to this heading"></a></h4>
 <ul class="simple">
 <li><p>Joint State Broadcaster: <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a></p></li>
 <li><p>Tricycle Controller: <a class="reference external" href="https://github.com/ros-controls/ros2_controllers">ros2_controllers</a></p></li>
 </ul>
+</section>
 </section>
 </section>
 </section>

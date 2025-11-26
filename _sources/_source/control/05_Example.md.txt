@@ -47,32 +47,31 @@ ros2 control list_hardware_components -v
 ros2 control list_hardware_interfaces
 ```
 
+- `list_controllers` shows active controllers.
+- `list_controller_types` shows available controller plugins.
+- `list_hardware_components` shows hardware components and their interfaces.
+- `list_hardware_interfaces` shows all registered interfaces.
+
 For full controller manager introspection:
 
 ```sh
 ros2 topic echo /controller_manager/introspection_data/full
 ```
 
-Focus on `wbot_base_control.nonlimited` and `wbot_base_control.limited` as you drive to see command limiting in action.
-
 ## 4. Visualize introspection values in PlotJuggler
-Introspection of the ros2_control setup
-With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the ~/introspection_data topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.
+With the integration of the pal_statistics package, the controller_manager node publishes the registered variables within the same process to the `~/introspection_data` topics. By default, all State and Command interfaces in the controller_manager are registered when they are added, and are unregistered when they are removed from the ResourceManager. The state of the all the registered entities are published at the end of every update cycle of the controller_manager. For instance, In a complete synchronous ros2_control setup (with synchronous controllers and hardware components), this data in the Command interface is the command used by the hardware components to command the hardware.
 
 What gets published (message types):
 - `/controller_manager/introspection_data/full` (`pal_statistics_msgs/msg/StatisticsValues`): publishes the full introspection data, so names and values travel together for quick CLI inspection.
 - `/controller_manager/introspection_data/names` (`pal_statistics_msgs/msg/StatisticsNames`): publishes the names of the registered variables whenever interfaces are registered or removed.
 - `/controller_manager/introspection_data/values` (`pal_statistics_msgs/msg/StatisticsValues`): publishes only the changing values every update cycle when a subscriber is present (ideal for PlotJuggler).
 
-All the registered variables are still published over the 3 topics: ~/introspection_data/full, ~/introspection_data/names, and ~/introspection_data/values. The topics ~/introspection_data/full and ~/introspection_data/values are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.
+All the registered variables are still published over the 3 topics: `~/introspection_data/full`, `~/introspection_data/names`, and `~/introspection_data/values`. The topics `~/introspection_data/full` and `~/introspection_data/values` are always published on every update cycle asynchronously, provided that there is at least one subscriber to these topics.
 
-You can wire these directly into a visualization:
-- The topic ~/introspection_data/full can be used to integrate with your custom visualization tools or to track the variables from the command line.
-- The topic ~/introspection_data/names and ~/introspection_data/values are to be used for visualization tools like PlotJuggler or RQT plot to visualize the data.
-- In PlotJuggler, add the `/controller_manager/introspection_data/values` stream and expand the interface names to plot wheel commands, joint states, or controller timings in real time.
+To visualize the data in PlotJuggler, install the `plotjuggler-ros` package and run PlotJuggler:
 
 ```bash
-sudo apt install ros-jazzy-plotjuggler
+sudo apt install ros-jazzy-plotjuggler-ros
 ros2 run plotjuggler plotjuggler
 ```
 ![Plotjuggler](plotjuggler_select_topics.png)
@@ -193,7 +192,7 @@ ros2 control list_hardware_components
 
 Example output:
 
-```text
+```sh
 Hardware Component 1
         name: wbot_arm_piper_control
         type: system
