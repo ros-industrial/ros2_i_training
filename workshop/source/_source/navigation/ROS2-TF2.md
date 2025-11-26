@@ -67,7 +67,7 @@ class DynamicBroadcaster(Node):
         self.tfb_.sendTransform(tfs)
 
 def main(argv=sys.argv[1]):
-    rclpy.init(args=argv)
+    rclpy.init(args=sys.argv) #or or args=[argv]
     node = DynamicBroadcaster(sys.argv[1])
 
     try:
