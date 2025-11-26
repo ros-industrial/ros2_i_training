@@ -21,7 +21,7 @@ ros2 pkg create --build-type ament_python <package_name> --dependencies tf2_ros 
 
 Make sure the scipy library is installed:
 ```bash
-pip3 install scipy
+sudo apt install python3-scipy
 ```
 
 Copy the code shown below into the new file, save it, and build it.
@@ -148,20 +148,20 @@ entry_points={
 ### 1.3 Testing the Broadcaster
 
 First, start the turtlesim node :
-```python
+```bash
 ros2 run turtlesim turtlesim_node
 ```
 Then start the broadcaster, with your chosen name for the turtle as the only argument. Here we assume `turtle1`:
 
-```python
+```bash
 ros2 run tf2_workshop broadcaster turtle1
 ```
 If all works well, the broadcaster is now sending the TF data for turtle1. This can be verified with:
-```python
+```bash
 ros2 run tf2_ros tf2_echo turtle1 world
 ```
 or by simply running:
-```python
+```bash
 ros2 run tf2_ros tf2_monitor
 ```
 or also through rviz2 by adding the `TF` display module.
