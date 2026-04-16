@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WBot Mobile Manipulator Example &mdash; ROS2 workshop  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
 
   
@@ -185,7 +185,7 @@ ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w
 </section>
 <section id="ros2-control-configuration-reference">
 <h2>5. ros2_control configuration reference<a class="headerlink" href="#ros2-control-configuration-reference" title="Link to this heading"></a></h2>
-<p>Hardware macro snippet:</p>
+<p>Hardware macro snippet (from <code class="docutils literal notranslate"><span class="pre">wbot/wbot_description/urdf/wbot.ros2_control.xacro</span></code>):</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_ros2_control&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;</span>
 <span class="s">  name</span>
 <span class="s">  mock_hardware:=false</span>
@@ -222,7 +222,7 @@ ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w
 <span class="nt">&lt;/xacro:macro&gt;</span>
 </pre></div>
 </div>
-<p>Controller YAML (base, arm, gripper):</p>
+<p>Controller YAML (base, arm, gripper) snippet (from <code class="docutils literal notranslate"><span class="pre">wbot/wbot_bringup/config/wbot_manipulator_controllers.yaml</span></code>):</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">controller_manager</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">update_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">  </span><span class="c1"># Hz</span>

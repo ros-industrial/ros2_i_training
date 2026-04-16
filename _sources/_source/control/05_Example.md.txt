@@ -78,7 +78,7 @@ ros2 run plotjuggler plotjuggler
 
 ## 5. ros2_control configuration reference
 
-Hardware macro snippet:
+Hardware macro snippet (from `wbot/wbot_description/urdf/wbot.ros2_control.xacro`):
 
 ```xml
 <xacro:macro name="wbot_ros2_control" params="
@@ -117,7 +117,7 @@ Hardware macro snippet:
 </xacro:macro>
 ```
 
-Controller YAML (base, arm, gripper):
+Controller YAML (base, arm, gripper) snippet (from `wbot/wbot_bringup/config/wbot_manipulator_controllers.yaml`):
 
 ```yaml
 controller_manager:
