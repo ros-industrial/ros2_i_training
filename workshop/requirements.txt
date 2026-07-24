@@ -9,5 +9,5 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==2.0.0
 sphinxcontrib-serializinghtml==2.0.0
 PyYAML==6.0.2
-setuptools==79.0.0
+setuptools==83.0.0
 typeguard==4.4.2
