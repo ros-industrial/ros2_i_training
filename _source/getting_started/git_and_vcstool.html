@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git and vcstool &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Docker basics" href="docker.html" />
+    <link rel="prev" title="Networking basics" href="networking.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux_and_terminal.html">Linux and terminal basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminator.html">Terminator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking basics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Git and vcstool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker basics (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">ROS 2 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">ROS 2 control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started</a></li>
+      <li class="breadcrumb-item active">Git and vcstool</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/getting_started/git_and_vcstool.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="git-and-vcstool">
+<h1>Git and vcstool<a class="headerlink" href="#git-and-vcstool" title="Link to this heading"></a></h1>
+<p>Git records changes to files over time. It enables you to inspect history,
+develop work on branches, and collaborate through a remote service such as
+GitHub.</p>
+<section id="git-concepts">
+<h2>Git concepts<a class="headerlink" href="#git-concepts" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Repository</p></td>
+<td><p>A project and its Git history</p></td>
+</tr>
+<tr class="row-odd"><td><p>Commit</p></td>
+<td><p>A saved snapshot with a message</p></td>
+</tr>
+<tr class="row-even"><td><p>Branch</p></td>
+<td><p>A named line of development</p></td>
+</tr>
+<tr class="row-odd"><td><p>Remote</p></td>
+<td><p>A repository stored elsewhere, such as on GitHub</p></td>
+</tr>
+<tr class="row-even"><td><p>Working tree</p></td>
+<td><p>The files currently checked out</p></td>
+</tr>
+<tr class="row-odd"><td><p>Staging area</p></td>
+<td><p>Changes selected for the next commit</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="configure-your-identity">
+<h2>Configure your identity<a class="headerlink" href="#configure-your-identity" title="Link to this heading"></a></h2>
+<p>Git stores an author name and email in every commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Your Name"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"you@example.com"</span>
+</pre></div>
+</div>
+<p>Inspect the configuration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--list
+</pre></div>
+</div>
+</section>
+<section id="clone-a-repository">
+<h2>Clone a repository<a class="headerlink" href="#clone-a-repository" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ros-industrial/ros2_i_training.git
+<span class="nb">cd</span><span class="w"> </span>ros2_i_training
+</pre></div>
+</div>
+</section>
+<section id="typical-workflow">
+<h2>Typical workflow<a class="headerlink" href="#typical-workflow" title="Link to this heading"></a></h2>
+<p>Check the current state:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<p>Create and switch to a branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>workshop-notes
+</pre></div>
+</div>
+<p>Inspect unstaged changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>diff
+</pre></div>
+</div>
+<p>Select changes and create a commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>notes.txt
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add workshop notes"</span>
+</pre></div>
+</div>
+<p>Inspect the history:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--oneline
+</pre></div>
+</div>
+<p>Download changes from the remote and upload local commits:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Pushing requires permission to the remote repository. When contributing through
+a fork, push the branch to your fork and open a pull request against the
+upstream repository.</p>
+</section>
+<section id="https-and-ssh-remotes">
+<h2>HTTPS and SSH remotes<a class="headerlink" href="#https-and-ssh-remotes" title="Link to this heading"></a></h2>
+<p>An HTTPS remote looks like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://github.com/ros-industrial/ros2_i_training.git
+</pre></div>
+</div>
+<p>An SSH remote looks like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>git@github.com:ros-industrial/ros2_i_training.git
+</pre></div>
+</div>
+<p>HTTPS is simple for read-only access. SSH is convenient for regular
+authenticated pushes after an SSH key has been configured.</p>
+<p>Inspect the configured remotes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>Change the URL of the remote named <code class="docutils literal notranslate"><span class="pre">origin</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github.com:ros-industrial/ros2_i_training.git
+</pre></div>
+</div>
+</section>
+<section id="good-habits">
+<h2>Good habits<a class="headerlink" href="#good-habits" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> frequently.</p></li>
+<li><p>Work on a branch rather than directly on <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
+<li><p>Keep commits focused on one logical change.</p></li>
+<li><p>Write commit messages that explain the change.</p></li>
+<li><p>Review <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> before committing.</p></li>
+<li><p>Pull recent upstream changes before beginning new work.</p></li>
+</ul>
+</section>
+<section id="git-exercise">
+<h2>Git exercise<a class="headerlink" href="#git-exercise" title="Link to this heading"></a></h2>
+<p>This exercise uses a new local repository and does not require GitHub access:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_workshop/git_exercise
+<span class="nb">cd</span><span class="w"> </span>~/ros2_workshop/git_exercise
+git<span class="w"> </span>init
+git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>workshop-notes
+touch<span class="w"> </span>notes.txt
+git<span class="w"> </span>status
+git<span class="w"> </span>add<span class="w"> </span>notes.txt
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add workshop notes"</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+</pre></div>
+</div>
+<p>If Git refuses to create the commit, configure your author name and email as
+shown earlier on this page.</p>
+</section>
+<section id="managing-several-repositories-with-vcstool">
+<h2>Managing several repositories with vcstool<a class="headerlink" href="#managing-several-repositories-with-vcstool" title="Link to this heading"></a></h2>
+<p>A ROS 2 workspace can depend on several Git repositories. <code class="docutils literal notranslate"><span class="pre">vcstool</span></code> reads a
+<code class="docutils literal notranslate"><span class="pre">.repos</span></code> file and checks out each repository at the requested branch, tag, or
+commit.</p>
+<p>Install it if necessary:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-vcstool
+</pre></div>
+</div>
+<p>Example <code class="docutils literal notranslate"><span class="pre">dependencies.repos</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">repositories</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">example_interfaces</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/ros2/example_interfaces.git</span>
+<span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jazzy</span>
+</pre></div>
+</div>
+<p>Import the repositories into a workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>dev_ws/src
+<span class="nb">cd</span><span class="w"> </span>dev_ws
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>dependencies.repos
+</pre></div>
+</div>
+<p>Inspect their versions and local changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcs<span class="w"> </span>status<span class="w"> </span>src
+</pre></div>
+</div>
+<p>The space before <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> is optional to Bash but is kept here for readability.
+The operator redirects the contents of <code class="docutils literal notranslate"><span class="pre">dependencies.repos</span></code> into
+<code class="docutils literal notranslate"><span class="pre">vcs</span> <span class="pre">import</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="networking.html" class="btn btn-neutral float-left" title="Networking basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker.html" class="btn btn-neutral float-right" title="Docker basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

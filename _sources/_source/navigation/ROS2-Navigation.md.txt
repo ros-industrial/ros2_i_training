@@ -44,7 +44,7 @@ source: [navigataion](https://navigation.ros.org/_images/architectural_diagram.p
  You can check it using:
 
   ```bash
-  $ ros2 node list
+  ros2 node list
   ```
   The output should be empty, otherwise, there are still running processes.
 
@@ -67,9 +67,9 @@ nav_ws/
 
   `[Remote PC]`
   ```bash
-  $ cd your_workspace
-  $ touch map_server_params.yaml
-  $ nano map_server_params.yaml
+  cd your_workspace
+  touch map_server_params.yaml
+  nano map_server_params.yaml
   ```
 
   ```yaml
@@ -90,7 +90,7 @@ nav_ws/
   `[Remote PC]`
 
     ```bash
-    $ ros2 run nav2_map_server map_server \ --ros-args --params-file maps/map_server_params.yaml
+    ros2 run nav2_map_server map_server \ --ros-args --params-file maps/map_server_params.yaml
     ```
   **map_server** is  a lifecycle node and needs to be transitioned to the active state.
 
@@ -99,24 +99,24 @@ nav_ws/
 
   `[Remote PC]`
   ```bash
-  $ ros2 lifecycle list /map_server
+  ros2 lifecycle list /map_server
   ```
   Run this command to trigger **map_server**.
   ```bash
-  $ ros2 lifecycle set /map_server 1
+  ros2 lifecycle set /map_server 1
   ```
 
 
   **D. Start **rviz2** to view the map**
   Start a new terminal, source ros foxy workspace:
   ```bash
-  $ rviz2
+  rviz2
   ```
   In rviz2, choose "add", "by topic" and "/map"
 
   In other terminal, active **map_server**:
   ```bash
-  $ ros2 lifecycle set /map_server 3
+  ros2 lifecycle set /map_server 3
   ```
 
   Then you can see the map in rviz2 -->
@@ -170,25 +170,25 @@ nav_ws/
 
     * First you need to go into your workspace and source your workspace:
       ```bash
-      $ source install/setup.bash
+      source install/setup.bash
       ```
 
     * Set up Gazebo model path:
       ```bash
-      $ export GAZEBO_MODEL_PATH=`ros2 pkg \
+      export GAZEBO_MODEL_PATH=`ros2 pkg \
       prefix turtlebot3_gazebo`/share/turtlebot3_gazebo/models/
       ```
 
     * set up the robot model that you will use:
       ```bash
-      $ export TURTLEBOT3_MODEL=burger
+      export TURTLEBOT3_MODEL=burger
       ```
 
 3. Bring up Turtlebot in simulation
     ```bash
     # in the same terminal, run
 
-    $ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
     ```
 
 4. Start navigation stack
@@ -196,7 +196,7 @@ nav_ws/
     Open another terminal, source your workspace, set up the robot model that you will use, then
 
     ```bash
-    $ ros2 launch turtlebot3_navigation2 \
+    ros2 launch turtlebot3_navigation2 \
     navigation2.launch.py \
     use_sim_time:=true map:=maps/"you map name".yaml
     ```
@@ -227,17 +227,17 @@ Bring up basic packages to start TurtleBot3 applications.
 
 `[TurtleBot3]`
 ```bash
-$ source .bashrc
-$ ros2 launch turtlebot3_bringup robot.launch.py
+source .bashrc
+ros2 launch turtlebot3_bringup robot.launch.py
 ```
 
 `[Remote PC]`
 ```bash
-$ cd "your workspace"
-$ source install/setup.bash
-$ export ROS_DOMAIN_ID =
+cd "your workspace"
+source install/setup.bash
+export ROS_DOMAIN_ID =
  "same as ROS DOMAIN ID of the turtlebot you are using"
-$ ros2 launch turtlebot3_navigation2 navigation2.launch.py\
+ros2 launch turtlebot3_navigation2 navigation2.launch.py\
  map:=maps/map.yaml
 ```
 

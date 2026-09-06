@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docker basics &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROS 2 basics" href="../basics/index.html" />
+    <link rel="prev" title="Git and vcstool" href="git_and_vcstool.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux_and_terminal.html">Linux and terminal basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminator.html">Terminator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_and_vcstool.html">Git and vcstool</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docker basics (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">ROS 2 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">ROS 2 control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started</a></li>
+      <li class="breadcrumb-item active">Docker basics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/getting_started/docker.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="docker-basics">
+<h1>Docker basics<a class="headerlink" href="#docker-basics" title="Link to this heading"></a></h1>
+<p>Docker is optional for the ROS 2 exercises, but it is useful when a tool should
+run without installing all of its dependencies on the host computer. This
+repository also uses Docker Compose to export the workshop slides without
+installing Node.js locally.</p>
+<p>Follow the official <a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">Docker Engine installation instructions for
+Ubuntu</a>. Complete Docker’s
+post-installation steps if workshop commands should run without <code class="docutils literal notranslate"><span class="pre">sudo</span></code>.
+Membership in the <code class="docutils literal notranslate"><span class="pre">docker</span></code> group grants elevated privileges, so only enable it
+on a computer where that access is appropriate.</p>
+<section id="core-concepts">
+<h2>Core concepts<a class="headerlink" href="#core-concepts" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Image</p></td>
+<td><p>A read-only template containing an application and its dependencies</p></td>
+</tr>
+<tr class="row-odd"><td><p>Container</p></td>
+<td><p>A running or stopped instance of an image</p></td>
+</tr>
+<tr class="row-even"><td><p>Dockerfile</p></td>
+<td><p>Instructions for building an image</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compose file</p></td>
+<td><p>Configuration for one or more related containers</p></td>
+</tr>
+<tr class="row-even"><td><p>Volume</p></td>
+<td><p>Data or a directory mounted into a container</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="verify-docker">
+<h2>Verify Docker<a class="headerlink" href="#verify-docker" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>--version
+docker<span class="w"> </span>compose<span class="w"> </span>version
+docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</pre></div>
+</div>
+<p>The final command downloads a small test image, runs it, and removes the
+container after it exits.</p>
+</section>
+<section id="images">
+<h2>Images<a class="headerlink" href="#images" title="Link to this heading"></a></h2>
+<p>Download an image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>pull<span class="w"> </span>ubuntu:24.04
+</pre></div>
+</div>
+<p>List local images:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>images
+</pre></div>
+</div>
+<p>Build an image from a Dockerfile in the current directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>my_image<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="containers">
+<h2>Containers<a class="headerlink" href="#containers" title="Link to this heading"></a></h2>
+<p>Start an interactive Ubuntu container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>ubuntu:24.04
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--rm</span></code> option removes the container when it exits.</p>
+<p>Start and name a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>my_container<span class="w"> </span>ubuntu:24.04
+</pre></div>
+</div>
+<p>List running containers or all containers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>ps
+docker<span class="w"> </span>ps<span class="w"> </span>-a
+</pre></div>
+</div>
+<p>Start an existing stopped container and open a shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>start<span class="w"> </span>my_container
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>my_container<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>Stop and remove it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>stop<span class="w"> </span>my_container
+docker<span class="w"> </span>rm<span class="w"> </span>my_container
+</pre></div>
+</div>
+</section>
+<section id="docker-compose">
+<h2>Docker Compose<a class="headerlink" href="#docker-compose" title="Link to this heading"></a></h2>
+<p>Compose reads a <code class="docutils literal notranslate"><span class="pre">compose.yaml</span></code> file and manages its services together.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+docker<span class="w"> </span>compose<span class="w"> </span>logs
+docker<span class="w"> </span>compose<span class="w"> </span>down
+</pre></div>
+</div>
+<p>Run a one-off service and remove its container afterward:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>SERVICE_NAME
+</pre></div>
+</div>
+<p>Rebuild service images before starting:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+</pre></div>
+</div>
+</section>
+<section id="build-the-workshop-slides">
+<h2>Build the workshop slides<a class="headerlink" href="#build-the-workshop-slides" title="Link to this heading"></a></h2>
+<p>The slides provide their own Compose configuration. From the repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>slides
+<span class="nv">HOST_UID</span><span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span><span class="nv">HOST_GID</span><span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>slides
+</pre></div>
+</div>
+<p>The generated PDFs are written to the repository’s <code class="docutils literal notranslate"><span class="pre">export</span></code> directory by
+default. Node.js, Chromium, and the slide exporter remain inside the container.</p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Run an interactive <code class="docutils literal notranslate"><span class="pre">ubuntu:24.04</span></code> container.</p></li>
+<li><p>Inside the container, display the Ubuntu release information.</p></li>
+<li><p>Exit the container and confirm that it was removed.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>ubuntu:24.04
+cat<span class="w"> </span>/etc/os-release
+<span class="nb">exit</span>
+docker<span class="w"> </span>ps<span class="w"> </span>-a
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="git_and_vcstool.html" class="btn btn-neutral float-left" title="Git and vcstool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../basics/index.html" class="btn btn-neutral float-right" title="ROS 2 basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

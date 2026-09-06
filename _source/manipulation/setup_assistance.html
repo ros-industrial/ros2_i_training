@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="URDF" href="../urdf/introduction.html" />
-    <link rel="prev" title="ROS 2 Navigation" href="../navigation/ROS2-Navigation.html" /> 
+    <link rel="prev" title="ROS 2 Manipulation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,70 +45,17 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prepare">Prepare</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#moveit-and-ros-2">MoveIt and ROS 2</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">ROS 2 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ROS 2 Manipulation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MoveIt Setup Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../urdf/introduction.html">URDF introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Cartesian robot</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-start">Step 1: Start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-generate-self-collision-matrix">Step 2: Generate Self-Collision Matrix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-add-virtual-joints">Step 3: Add Virtual Joints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-4-add-planning-groups">Step 4: Add Planning Groups</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#arm-group">Arm Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#end-effector-group">End Effector Group</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-5-add-robot-poses">Step 5: Add Robot Poses</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ready-pose-for-arm">Ready Pose for Arm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#open-close-poses-for-hand">Open/Close Poses for Hand</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-6-label-end-effectors">Step 6: Label End Effectors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-7-add-passive-joints">Step 7: Add Passive Joints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-8-ros2-control-urdf-modification">Step 8: ros2_control URDF Modification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-9-ros-2-controllers">Step 9: ROS 2 Controllers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#panda-arm-controller">Panda Arm Controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hand-controller">Hand Controller</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-10-moveit-controllers">Step 10: MoveIt Controllers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#arm">Arm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hand">Hand</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#step-11-perception">Step 11: Perception</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-12-launch-files">Step 12: Launch Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-13-add-author-information">Step 13: Add Author Information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-14-generate-configuration-files">Step 14: Generate Configuration Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-and-run-the-demo">Build and Run the Demo</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../control/01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/06_Example.html">Exercise 6.6 - ROS2-Control-Example-6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">ROS 2 control</a></li>
 </ul>
 
         </div>
@@ -125,6 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 Manipulation</a></li>
       <li class="breadcrumb-item active">MoveIt Setup Assistant</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/_source/manipulation/setup_assistance.md.txt" rel="nofollow"> View page source</a>
@@ -365,7 +313,7 @@ ros2<span class="w"> </span>launch<span class="w"> </span>panda_moveit_config<sp
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../navigation/ROS2-Navigation.html" class="btn btn-neutral float-left" title="ROS 2 Navigation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="ROS 2 Manipulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../urdf/introduction.html" class="btn btn-neutral float-right" title="URDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -46,9 +46,9 @@ source: [cartographer](https://google-cartographer.readthedocs.io/en/latest/)
 
     ```bash
     # source ROS 2
-    $ source /opt/ros/foxy/setup.bash
+    source /opt/ros/foxy/setup.bash
 
-    $ ros2 pkg list |grep cartographer
+    ros2 pkg list |grep cartographer
 
     # You will get
     # cartographer_ros
@@ -60,13 +60,13 @@ If you don't have "cartographer_ros" and "cartographer_ros_msgs", you can instal
 **Before installing package, you need to make sure which ROS distribution you are using.**
 
 ```bash
-$ sudo apt install ros-$ROS_DISTRO-cartographer
+sudo apt install ros-$ROS_DISTRO-cartographer
 ```
 
 #### 3.2.2. Check if there are turtlebot3* packages
 
 ```bash
-$ ros2 pkg list | grep turtlebot3
+ros2 pkg list | grep turtlebot3
 ```
 If you don't have turtlebot3 packages, you can install debian packages or from source code.
 
@@ -81,30 +81,30 @@ B. Install from source code
 First entering your workspace
 
 ```bash
-$ wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/foxy-devel/turtlebot3.repos
+wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/foxy-devel/turtlebot3.repos
 ```
 
 Make sure you have "src" folder, then run this command to get source code for turtlebot3
 
 ```bash
-$ vcs import src<turtlebot3.repos
+vcs import src < turtlebot3.repos
 ```
 Source your ROS 2 installation workspace and install dependencies
 
 ```bash
-$ source /opt/ros/foxy/setup.bash
-$ rosdep update
-$ rosdep install --from-paths src --ignore-src --rosdistro
+source /opt/ros/foxy/setup.bash
+rosdep update
+rosdep install --from-paths src --ignore-src --rosdistro
 $ROS_DISTRO -y
 ```
 Compile codes
 
 ```bash
-$ colcon build
+colcon build
 ```
 Source your workspace
 ```bash
-$ source install/setup.bash
+source install/setup.bash
 ```
 
 
@@ -115,20 +115,20 @@ $ source install/setup.bash
 1. Set up turtlebot model
 
     ```bash
-    $ export TURTLEBOT3_MODEL=burger
+    export TURTLEBOT3_MODEL=burger
     ```
 
 2. Set up Gazebo model path
 
     ```bash
-    $ export GAZEBO_MODEL_PATH=`ros2 pkg \
+    export GAZEBO_MODEL_PATH=`ros2 pkg \
     prefix turtlebot3_gazebo`/share/turtlebot3_gazebo/models/
     ```
 
 3. Launch Gazebo with a simulation world
 
     ```bash
-    $ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
     ```
 
 
@@ -140,17 +140,17 @@ a. open a terminal and use `ssh` connect to Turtlebot3.
 
 b. bring up basic packages to start its applications.
 ```bash
-$ source .bashrc
+source .bashrc
 
-$ cd turtlebot3_ws
+cd turtlebot3_ws
 
 #Set up ROS_DOMAIN_ID
-$ export ROS_DOMAIN_ID="Your Number"
+export ROS_DOMAIN_ID="Your Number"
 # e.g. export ROS_DOMAIN_ID=11
 
-$ source install/setup.bash
+source install/setup.bash
 
-$ ros2 launch turtlebot3_bringup robot.launch.py
+ros2 launch turtlebot3_bringup robot.launch.py
 ```
 
 #### 3.3.3. Run teleoperation node
@@ -162,26 +162,26 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
 2. Set up ROS environment
 
     ```bash
-    $ source /opt/ros/foxy/setup.bash
+    source /opt/ros/foxy/setup.bash
     ```
 3. (Set up ROS_DOMAIN_ID)
 
    If you set up ROS_DOMAIN_ID for running turtlebot simulation or physical turtlebot, then you need to set the same ROS_DOMAIN_ID here.
 
     ```bash
-    $ export ROS_DOMAIN_ID="Your Number"
+    export ROS_DOMAIN_ID="Your Number"
     # e.g. export ROS_DOMAIN_ID=11
     ```
 
 4. Set up turtlebot model
 
     ```bash
-    $ export TURTLEBOT3_MODEL=burger
+    export TURTLEBOT3_MODEL=burger
     ```
 5. Run teleoperation node
 
     ```bash
-    $ ros2 run turtlebot3_teleop teleop_keyboard
+    ros2 run turtlebot3_teleop teleop_keyboard
     ```
 
 
@@ -192,7 +192,7 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
 2. Set up ROS environment
 
     ```bash
-    $ source /opt/ros/foxy/setup.bash
+    source /opt/ros/foxy/setup.bash
     ```
 
 3. (Set up ROS_DOMAIN_ID)
@@ -202,7 +202,7 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     `[Remote PC]`
 
     ```bash
-    $ export ROS_DOMAIN_ID="Your Number"
+    export ROS_DOMAIN_ID="Your Number"
     # e.g. export ROS_DOMAIN_ID=11
     ```
 
@@ -215,7 +215,7 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     `[Remote PC]`
 
     ```bash
-    $ ros2 launch turtlebot3_cartographer \
+    ros2 launch turtlebot3_cartographer \
     cartographer.launch.py \
     use_sim_time:=True
     ```
@@ -225,10 +225,10 @@ $ ros2 launch turtlebot3_bringup robot.launch.py
     `[Remote PC]`
 
     ```bash
-    $ ros2 run cartographer_ros occupancy_grid_node -resolution 0.05\
+    ros2 run cartographer_ros occupancy_grid_node -resolution 0.05\
     -publish_period_sec 1.0
 
-    $ ros2 run cartographer_ros cartographer_node\
+    ros2 run cartographer_ros cartographer_node\
     -configuration_directory]\
     install/turtlebot3_cartographer/share/turtlebot3_cartographer\
     /config -configuration_basename turtlebot3_lds_2d.lua
@@ -275,7 +275,7 @@ If you are satisfied with your map you can store it. You can save the map.
 2. run the map saver node.
 
     ```
-    $ ros2 run nav2_map_server map_saver_cli
+    ros2 run nav2_map_server map_saver_cli
     ```
 
     You also can define a name of the map by

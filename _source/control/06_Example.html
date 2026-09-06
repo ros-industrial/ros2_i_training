@@ -44,55 +44,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Filesystem.html">Exercise 1.0 - ROS-2-Filesystem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Simple-Publisher-Subscriber.html">Exercise 1.1 - ROS-2-Simple-Publisher-Subscriber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basics/ROS2-Turtlesim.html">Exercise 1.2 - ROS-2-Turtlesim</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">Exercise 3.1 - ROS2-TF2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Turtlebot.html">Exercise 3.2 - ROS2-Turtlebot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Cartographer.html">Exercise 3.3 - ROS2-Cartographer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-Navigation.html">Exercise 3.4 - ROS2-Navigation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../manipulation/setup_assistance.html">Exercise 4 - ROS2-Moveit2-Setup-Assisitance</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">ROS2 URDF_Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">Exercise 5 - Ros2-Cartesian Robot</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="01_Example.html">Exercise 6.1 - ROS2-Control-Example-1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_Example.html">Exercise 6.2 - ROS2-Control-Example-2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_Example.html">Exercise 6.3 - ROS2-Control-Example-3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_Example.html">Exercise 6.4 - ROS2-Control-Example-4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_Example.html">Exercise 6.5 - ROS2-Control-Example-5</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Exercise 6.6 - ROS2-Control-Example-6</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-you-ll-need">What you’ll need</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#robot-description-xacro">Robot description xacro</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#why-these-joint-types-matter">Why these joint types matter</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-my-own-plugin-for-hardware-components">Writing my own plugin for hardware components</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#lifecycle-of-a-hardware-component">Lifecycle of a Hardware Component</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#export-the-plugin">Export the Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#load-the-plugin-in-the-robot-xacro">Load the plugin in the robot xacro</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#controller-integration">Controller integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-launch">How to launch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#example-18-tricyclebot-steering">Example 18: TricycleBot (steering)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tutorial-steps">Tutorial steps</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#example-19-tricyclebot-drive">Example 19: TricycleBot (drive)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Tutorial steps</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#controllers-from-this-demo">Controllers from this demo</a></li>
-</ul>
-</li>
-</ul>
-</li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">ROS 2 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">ROS 2 Manipulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ROS 2 control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Example.html">RRBot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Example.html">DiffBot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Example.html">Robots with multiple interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Example.html">Industrial robot with an externally connected sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Example.html">WBot mobile manipulator</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tricycle robot setup</a></li>
 </ul>
 </li>
 </ul>
@@ -111,6 +74,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 control</a></li>
       <li class="breadcrumb-item active">How to Setup Tricycle Robot</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/_source/control/06_Example.md.txt" rel="nofollow"> View page source</a>

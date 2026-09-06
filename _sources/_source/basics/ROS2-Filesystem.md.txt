@@ -122,9 +122,9 @@ Build-from-source packages can be divided into packages provided by ROS 2 and yo
 
     ***Note: Don’t forget to source the ROS installation before build and make sure you are in the root of workspace(~/dev_ws).***
     ```bash
-    $ source /opt/ros/jazzy/setup.bash
+    source /opt/ros/jazzy/setup.bash
 
-    $ colcon build --symlink-install
+    colcon build --symlink-install
     ```
 
 * Source the overlay
@@ -135,8 +135,8 @@ Build-from-source packages can be divided into packages provided by ROS 2 and yo
     - you can start a new terminal window by   `ctl + alt +t`
 
     ```bash
-    $ cd dev_ws
-    $ source install/setup.bash
+    cd dev_ws
+    source install/setup.bash
     ```
 
 ## 5. ROS nodes

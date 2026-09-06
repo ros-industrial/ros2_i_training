@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prerequisites &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Linux and terminal basics" href="linux_and_terminal.html" />
+    <link rel="prev" title="Getting started" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting started</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux_and_terminal.html">Linux and terminal basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="terminator.html">Terminator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="networking.html">Networking basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git_and_vcstool.html">Git and vcstool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker basics (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">ROS 2 basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">ROS 2 control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Getting started</a></li>
+      <li class="breadcrumb-item active">Prerequisites</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/getting_started/prerequisites.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h1>
+<p>Prepare the computer before starting the exercises. The workshop assumes an
+Ubuntu installation with a matching ROS 2 distribution.</p>
+<section id="supported-environments">
+<h2>Supported environments<a class="headerlink" href="#supported-environments" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ubuntu</p></th>
+<th class="head"><p>ROS 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ubuntu 24.04</p></td>
+<td><p>Jazzy</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ubuntu 22.04</p></td>
+<td><p>Humble</p></td>
+</tr>
+</tbody>
+</table>
+<p>Use the ROS 2 distribution that matches your Ubuntu version. Do not source two
+ROS 2 distributions in the same terminal.</p>
+<p>Follow the official ROS 2 installation instructions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html">Install ROS 2 Jazzy on Ubuntu 24.04</a></p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html">Install ROS 2 Humble on Ubuntu 22.04</a></p></li>
+</ul>
+<p>Install the command-line tools used during the workshop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>terminator<span class="w"> </span>python3-vcstool<span class="w"> </span>python3-colcon-common-extensions
+</pre></div>
+</div>
+<p>Docker and Visual Studio Code are useful but optional:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a></p></li>
+<li><p><a class="reference external" href="https://code.visualstudio.com/docs/setup/linux">Install Visual Studio Code on Linux</a></p></li>
+</ul>
+</section>
+<section id="check-the-installation">
+<h2>Check the installation<a class="headerlink" href="#check-the-installation" title="Link to this heading"></a></h2>
+<p>Check the Ubuntu version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsb_release<span class="w"> </span>-ds
+</pre></div>
+</div>
+<p>Source the ROS 2 installation. This example uses Jazzy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+</pre></div>
+</div>
+<p>For Ubuntu 22.04 with ROS 2 Humble, use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</pre></div>
+</div>
+<p>Verify the tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>printenv<span class="w"> </span>ROS_DISTRO
+ros2<span class="w"> </span>--help
+colcon<span class="w"> </span>--help
+vcs<span class="w"> </span><span class="nb">help</span>
+git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>The first command should print the ROS 2 distribution selected above.</p>
+</section>
+<section id="configure-bash">
+<h2>Configure Bash<a class="headerlink" href="#configure-bash" title="Link to this heading"></a></h2>
+<p>ROS 2 must be sourced in every new terminal. To source it automatically, add
+the appropriate setup command to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>. Add only one ROS 2 distribution.</p>
+<p>For Jazzy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>/usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+</pre></div>
+</div>
+<p>For Humble, replace <code class="docutils literal notranslate"><span class="pre">jazzy</span></code> with <code class="docutils literal notranslate"><span class="pre">humble</span></code>.</p>
+<p>Apply changes made to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> in the current terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+</section>
+<section id="set-the-ros-domain">
+<h2>Set the ROS domain<a class="headerlink" href="#set-the-ros-domain" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code> separates independent ROS 2 systems on the same network.
+During a workshop, use the domain ID assigned by the instructor so that
+participants do not interfere with one another.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">10</span>
+</pre></div>
+</div>
+<p>Add the export to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> if it should apply to every new terminal. All
+machines that need to communicate with each other must use the same domain ID.</p>
+<p>Check the current value:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>printenv<span class="w"> </span>ROS_DOMAIN_ID
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linux_and_terminal.html" class="btn btn-neutral float-right" title="Linux and terminal basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
