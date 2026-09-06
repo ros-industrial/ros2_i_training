@@ -153,17 +153,17 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;minimal_publisher&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'minimal_publisher'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s1">'topic'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
         <span class="n">timer_period</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># seconds</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="n">timer_period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_callback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;Hello World: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">'Hello World: </span><span class="si">%d</span><span class="s1">'</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Publishing: &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Publishing: "</span><span class="si">%s</span><span class="s1">"'</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 
@@ -181,7 +181,7 @@
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -200,8 +200,8 @@
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MinimalPublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;minimal_publisher&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s1">&#39;topic&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'minimal_publisher'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s1">'topic'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
         <span class="n">timer_period</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># seconds</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="n">timer_period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_callback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
@@ -218,9 +218,9 @@ In the constructor <code class="docutils literal notranslate"><span class="pre">
 <p>This creates a timer that ticks every 0.5s (2Hz), and calls the function <code class="docutils literal notranslate"><span class="pre">timer_callback</span></code> at every tick.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
-    <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;Hello World: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">'Hello World: </span><span class="si">%d</span><span class="s1">'</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Publishing: &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Publishing: "</span><span class="si">%s</span><span class="s1">"'</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -265,8 +265,8 @@ Finally, we destroy the node and manually call shutdown.</p>
 <p>Here, edit the <code class="docutils literal notranslate"><span class="pre">maintainer</span></code>, <code class="docutils literal notranslate"><span class="pre">maintainer_email</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code> and <code class="docutils literal notranslate"><span class="pre">license</span></code> fields to assign exactly the same values as you did in <code class="docutils literal notranslate"><span class="pre">package.xml</span></code>.</p>
 <p>Next, look for the section that starts with <code class="docutils literal notranslate"><span class="pre">entry_points={</span></code>. We edit this part to declare the executable and its entry point to look like this:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s1">&#39;talker = wshop_nodes.minimal_publisher:main&#39;</span><span class="p">,</span>
+        <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">'talker = wshop_nodes.minimal_publisher:main'</span><span class="p">,</span>
         <span class="p">],</span>
 <span class="p">},</span>
 </pre></div>
@@ -292,16 +292,16 @@ Finally, we destroy the node and manually call shutdown.</p>
 <span class="k">class</span><span class="w"> </span><span class="nc">MinimalSubscriber</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;minimal_subscriber&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'minimal_subscriber'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
             <span class="n">String</span><span class="p">,</span>
-            <span class="s1">&#39;topic&#39;</span><span class="p">,</span>
+            <span class="s1">'topic'</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">listener_callback</span><span class="p">,</span>
             <span class="mi">10</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>  <span class="c1"># prevent unused variable warning</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">listener_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;I heard: &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'I heard: "</span><span class="si">%s</span><span class="s1">"'</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -318,7 +318,7 @@ Finally, we destroy the node and manually call shutdown.</p>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -328,7 +328,7 @@ Finally, we destroy the node and manually call shutdown.</p>
 <p>The part that is immediately relevant is creating the subscriber</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
     <span class="n">String</span><span class="p">,</span>
-    <span class="s1">&#39;topic&#39;</span><span class="p">,</span>
+    <span class="s1">'topic'</span><span class="p">,</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">listener_callback</span><span class="p">,</span>
     <span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -336,7 +336,7 @@ Finally, we destroy the node and manually call shutdown.</p>
 <p>The first parameter to pass to the function is the msg type, the second is the name of the topic - this should be the same as declared in the publisher, the third is the callback function for the subscriber and the last is the message buffer size.</p>
 <p>The next part to understand is the callback function.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">listener_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;I heard: &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'I heard: "</span><span class="si">%s</span><span class="s1">"'</span> <span class="o">%</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameter that is automatically passed to this function is the incoming message. In this case, it is simply printed to console.</p>
@@ -345,9 +345,9 @@ Finally, we destroy the node and manually call shutdown.</p>
 <h3>2.2 Declaring the executable<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
 <p>We need to declare a new executable for this subscriber node. We add another line to <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> similarly as before and it would look like this:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s1">&#39;talker = wshop_nodes.minimal_publisher:main&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;listener = wshop_nodes.minimal_subscriber:main&#39;</span>
+        <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">'talker = wshop_nodes.minimal_publisher:main'</span><span class="p">,</span>
+                <span class="s1">'listener = wshop_nodes.minimal_subscriber:main'</span>
         <span class="p">],</span>
 <span class="p">},</span>
 </pre></div>
@@ -410,7 +410,7 @@ source install/local_setup.bash
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -450,10 +450,10 @@ We also import the single threaded executor that we will be using to compose the
 <h3>4.2 Declaring the executable<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <p>Similarly as the previous two cases, we need to declare a third executor that points to the code we just created, and the result would look like this:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
-		<span class="s1">&#39;talker = wshop_nodes.minimal_publisher:main&#39;</span><span class="p">,</span>
-		<span class="s1">&#39;listener = wshop_nodes.minimal_subscriber:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;composed = wshop_nodes.composed_nodes:main&#39;</span>
+        <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
+		<span class="s1">'talker = wshop_nodes.minimal_publisher:main'</span><span class="p">,</span>
+		<span class="s1">'listener = wshop_nodes.minimal_subscriber:main'</span><span class="p">,</span>
+        <span class="s1">'composed = wshop_nodes.composed_nodes:main'</span>
         <span class="p">],</span>
     <span class="p">},</span>
 </pre></div>

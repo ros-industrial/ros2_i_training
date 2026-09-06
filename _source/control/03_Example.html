@@ -190,25 +190,25 @@ forward_velocity_controller<span class="o">[</span>velocity_controllers/JointGro
 <ul class="simple">
 <li><p>For <code class="docutils literal notranslate"><span class="pre">forward_position_controller</span></code>:</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"data:</span>
 <span class="s2">- 0.5</span>
-<span class="s2">- 0.5&quot;</span>
+<span class="s2">- 0.5"</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>For <code class="docutils literal notranslate"><span class="pre">forward_velocity_controller</span></code> (default):</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_velocity_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_velocity_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"data:</span>
 <span class="s2">- 5</span>
-<span class="s2">- 5&quot;</span>
+<span class="s2">- 5"</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>For <code class="docutils literal notranslate"><span class="pre">forward_acceleration_controller</span></code>:</p></li>
 </ul>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_acceleration_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_acceleration_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"data:</span>
 <span class="s2">- 10</span>
-<span class="s2">- 10&quot;</span>
+<span class="s2">- 10"</span>
 </pre></div>
 </div>
 </section>
@@ -254,7 +254,7 @@ ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfa
 <li><p><code class="docutils literal notranslate"><span class="pre">robot_controller:=forward_illegal2_controller</span></code></p></li>
 </ul>
 <p>Expected error output:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ERROR<span class="o">]</span><span class="w"> </span><span class="o">[</span>resource_manager<span class="o">]</span>:<span class="w"> </span>Component<span class="w"> </span><span class="s1">&#39;RRBotSystemMultiInterface&#39;</span><span class="w"> </span>did<span class="w"> </span>not<span class="w"> </span>accept<span class="w"> </span>new<span class="w"> </span><span class="nb">command</span><span class="w"> </span>resource<span class="w"> </span>combination:
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>ERROR<span class="o">]</span><span class="w"> </span><span class="o">[</span>resource_manager<span class="o">]</span>:<span class="w"> </span>Component<span class="w"> </span><span class="s1">'RRBotSystemMultiInterface'</span><span class="w"> </span>did<span class="w"> </span>not<span class="w"> </span>accept<span class="w"> </span>new<span class="w"> </span><span class="nb">command</span><span class="w"> </span>resource<span class="w"> </span>combination:
 <span class="w">  </span>Start<span class="w"> </span>interfaces:
 <span class="w">    </span>joint1/position
 <span class="w">  </span>Stop<span class="w"> </span>interfaces:

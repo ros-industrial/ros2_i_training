@@ -186,37 +186,37 @@ ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w
 <section id="ros2-control-configuration-reference">
 <h2>5. ros2_control configuration reference<a class="headerlink" href="#ros2-control-configuration-reference" title="Link to this heading"></a></h2>
 <p>Hardware macro snippet (from <code class="docutils literal notranslate"><span class="pre">wbot/wbot_description/urdf/wbot.ros2_control.xacro</span></code>):</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_ros2_control&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">"wbot_ros2_control"</span><span class="w"> </span><span class="na">params=</span><span class="s">"</span>
 <span class="s">  name</span>
 <span class="s">  mock_hardware:=false</span>
 <span class="s">  enable_command_limiting:=false</span>
 <span class="s">  joint_command_topic:=/joint_command_topic</span>
-<span class="s">  joint_states_topic:=/joint_states_topic&quot;</span><span class="nt">&gt;</span>
+<span class="s">  joint_states_topic:=/joint_states_topic"</span><span class="nt">&gt;</span>
 
-<span class="w">  </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"${name}"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;hardware&gt;</span>
-<span class="w">      </span><span class="nt">&lt;xacro:if</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${mock_hardware}&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;xacro:if</span><span class="w"> </span><span class="na">value=</span><span class="s">"${mock_hardware}"</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fake_sensor_commands&quot;</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;state_following_offset&quot;</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"fake_sensor_commands"</span><span class="nt">&gt;</span>false<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"state_following_offset"</span><span class="nt">&gt;</span>0.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"calculate_dynamics"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;/xacro:if&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_wheel_left_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"wbot_wheel_left_joint"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>16.00<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;wbot_wheel_right_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;min&quot;</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
-<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;max&quot;</span><span class="nt">&gt;</span>13.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"wbot_wheel_right_joint"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"min"</span><span class="nt">&gt;</span>-16.00<span class="nt">&lt;/param&gt;</span>
+<span class="w">        </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"max"</span><span class="nt">&gt;</span>13.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">      </span><span class="nt">&lt;/command_interface&gt;</span>
-<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/ros2_control&gt;</span>
 <span class="nt">&lt;/xacro:macro&gt;</span>
@@ -237,8 +237,8 @@ ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w
 
 <span class="nt">diff_drive_base_controller</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">left_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;wbot_wheel_left_joint&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;wbot_wheel_right_joint&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">left_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"wbot_wheel_left_joint"</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">right_wheel_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"wbot_wheel_right_joint"</span><span class="p p-Indicator">]</span>
 <span class="w">    </span><span class="nt">wheel_separation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.287</span>
 <span class="w">    </span><span class="nt">wheel_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.033</span>
 <span class="w">    </span><span class="nt">wheel_separation_multiplier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
@@ -336,21 +336,21 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 </pre></div>
 </div>
 <p>Send a pose:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">&quot;{</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">"{</span>
 <span class="s2">  joint_names: [wbot_arm_joint_1, wbot_arm_joint_2, wbot_arm_joint_3, wbot_arm_joint_4, wbot_arm_joint_5, wbot_arm_joint_6],</span>
 <span class="s2">  points: [</span>
 <span class="s2">    { positions: [0.0, 0.85, -0.75, 0.0, 0.5, 0.0], time_from_start: { sec: 2 } }</span>
 <span class="s2">  ]</span>
-<span class="s2">}&quot;</span><span class="w"> </span>-1
+<span class="s2">}"</span><span class="w"> </span>-1
 </pre></div>
 </div>
 <p>Return home:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">&quot;{</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/joint_trajectory_controller/joint_trajectory<span class="w"> </span>trajectory_msgs/JointTrajectory<span class="w"> </span><span class="s2">"{</span>
 <span class="s2">  joint_names: [wbot_arm_joint_1, wbot_arm_joint_2, wbot_arm_joint_3, wbot_arm_joint_4, wbot_arm_joint_5, wbot_arm_joint_6],</span>
 <span class="s2">  points: [</span>
 <span class="s2">    { positions: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], time_from_start: { sec: 1 } }</span>
 <span class="s2">  ]</span>
-<span class="s2">}&quot;</span><span class="w"> </span>-1
+<span class="s2">}"</span><span class="w"> </span>-1
 </pre></div>
 </div>
 <p><img alt="WBot Manipulator Move" src="../../_images/wbot_manipulator_move.gif" /></p>
@@ -358,9 +358,9 @@ ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </
 <section id="gripper-gripperactioncontroller">
 <h3>Gripper (GripperActionController)<a class="headerlink" href="#gripper-gripperactioncontroller" title="Link to this heading"></a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># open</span>
-ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}&quot;</span>
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">"{command: {name: [wbot_arm_gripper_joint], position: [0.03]}}"</span>
 <span class="c1">#close</span>
-ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">&quot;{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}&quot;</span>
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/gripper_controller/gripper_cmd<span class="w"> </span>control_msgs/action/ParallelGripperCommand<span class="w"> </span><span class="s2">"{command: {name: [wbot_arm_gripper_joint], position: [0.0]}}"</span>
 </pre></div>
 </div>
 <p><img alt="WBot Gripper" src="../../_images/wbot_gripper.gif" /></p>

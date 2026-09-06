@@ -218,15 +218,15 @@ from<span class="w"> </span>launch_ros.substitutions<span class="w"> </span>impo
 <h4>Step 4: Locate and process the URDF file using xacro<a class="headerlink" href="#step-4-locate-and-process-the-urdf-file-using-xacro" title="Link to this heading"></a></h4>
 <p>Use <code class="docutils literal notranslate"><span class="pre">PathJoinSubstitution</span></code> to build the path to the <code class="docutils literal notranslate"><span class="pre">cartesian_urdf.xacro</span></code> file inside the urdf folder.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nv">urdf_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PathJoinSubstitution<span class="o">([</span>
-<span class="w">        </span>FindPackageShare<span class="o">(</span><span class="s1">&#39;cartesian_robot&#39;</span><span class="o">)</span>,
-<span class="w">        </span><span class="s1">&#39;urdf&#39;</span>,
-<span class="w">        </span><span class="s1">&#39;cartesian_urdf.xacro&#39;</span>
+<span class="w">        </span>FindPackageShare<span class="o">(</span><span class="s1">'cartesian_robot'</span><span class="o">)</span>,
+<span class="w">        </span><span class="s1">'urdf'</span>,
+<span class="w">        </span><span class="s1">'cartesian_urdf.xacro'</span>
 <span class="w">    </span><span class="o">])</span>
 </pre></div>
 </div>
 <p>Then use the <code class="docutils literal notranslate"><span class="pre">xacro</span></code> command to convert it to a proper URDF string at launch time:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nv">robot_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Command<span class="o">([</span>
-<span class="w">        </span><span class="s1">&#39;xacro&#39;</span>,<span class="w"> </span><span class="s1">&#39; &#39;</span>,<span class="w"> </span>urdf_path
+<span class="w">        </span><span class="s1">'xacro'</span>,<span class="w"> </span><span class="s1">' '</span>,<span class="w"> </span>urdf_path
 <span class="w">    </span><span class="o">])</span>
 </pre></div>
 </div>
@@ -236,10 +236,10 @@ from<span class="w"> </span>launch_ros.substitutions<span class="w"> </span>impo
 <h4>Step 5: Launch the joint state publisher GUI<a class="headerlink" href="#step-5-launch-the-joint-state-publisher-gui" title="Link to this heading"></a></h4>
 <p>This node provides sliders to simulate joint positions interactively.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>Node<span class="o">(</span>
-<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
-<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
-<span class="w">        </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
-<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">'joint_state_publisher_gui'</span>,
+<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">'joint_state_publisher_gui'</span>,
+<span class="w">        </span><span class="nv">name</span><span class="o">=</span><span class="s1">'joint_state_publisher_gui'</span>,
+<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">'screen'</span>
 <span class="w">    </span><span class="o">)</span>
 </pre></div>
 </div>
@@ -248,10 +248,10 @@ from<span class="w"> </span>launch_ros.substitutions<span class="w"> </span>impo
 <h4>Step 6: Launch the robot state publisher<a class="headerlink" href="#step-6-launch-the-robot-state-publisher" title="Link to this heading"></a></h4>
 <p>This node takes the joint states and URDF and publishes the full robot state to TF.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>Node<span class="o">(</span>
-<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
-<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
-<span class="w">        </span><span class="nv">parameters</span><span class="o">=[{</span><span class="s1">&#39;robot_description&#39;</span>:<span class="w"> </span>robot_description<span class="o">}]</span>,
-<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">        </span><span class="nv">package</span><span class="o">=</span><span class="s1">'robot_state_publisher'</span>,
+<span class="w">        </span><span class="nv">executable</span><span class="o">=</span><span class="s1">'robot_state_publisher'</span>,
+<span class="w">        </span><span class="nv">parameters</span><span class="o">=[{</span><span class="s1">'robot_description'</span>:<span class="w"> </span>robot_description<span class="o">}]</span>,
+<span class="w">        </span><span class="nv">output</span><span class="o">=</span><span class="s1">'screen'</span>
 <span class="w">    </span><span class="o">)</span>
 </pre></div>
 </div>
@@ -263,10 +263,10 @@ from<span class="w"> </span>launch_ros.substitutions<span class="w"> </span>impo
 <span class="w">        </span><span class="nv">period</span><span class="o">=</span><span class="m">1</span>.0,
 <span class="w">        </span><span class="nv">actions</span><span class="o">=[</span>
 <span class="w">            </span>Node<span class="o">(</span>
-<span class="w">                </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
-<span class="w">                </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
-<span class="w">                </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
-<span class="w">                </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>
+<span class="w">                </span><span class="nv">package</span><span class="o">=</span><span class="s1">'rviz2'</span>,
+<span class="w">                </span><span class="nv">executable</span><span class="o">=</span><span class="s1">'rviz2'</span>,
+<span class="w">                </span><span class="nv">name</span><span class="o">=</span><span class="s1">'rviz2'</span>,
+<span class="w">                </span><span class="nv">output</span><span class="o">=</span><span class="s1">'screen'</span>
 <span class="w">            </span><span class="o">)</span>
 <span class="w">        </span><span class="o">]</span>
 <span class="w">    </span><span class="o">)</span>
@@ -304,24 +304,24 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 </div>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">urdf</span></code> folder now create the file <code class="docutils literal notranslate"><span class="pre">cartesian_urdf.xacro</span></code> which will define all the joints and links and which contains all the parameters that can be changed as required.</p>
 <p>Add the following line to the top of the code.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;?xml<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>?&gt;
-&lt;robot<span class="w"> </span>xmlns:xacro<span class="o">=</span><span class="s2">&quot;http://ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;cartesian_robot&quot;</span>&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;?xml<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span>?&gt;
+&lt;robot<span class="w"> </span>xmlns:xacro<span class="o">=</span><span class="s2">"http://ros.org/wiki/xacro"</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"cartesian_robot"</span>&gt;
 </pre></div>
 </div>
 <p>This declares the robot and enables Xacro macros.</p>
 </section>
 <section id="step-2-defining-colours-materials">
 <h4>Step 2: Defining colours(Materials)<a class="headerlink" href="#step-2-defining-colours-materials" title="Link to this heading"></a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>&gt;
-<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 0 1 1&quot;</span><span class="w"> </span>/&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"blue"</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">"0 0 1 1"</span><span class="w"> </span>/&gt;
 &lt;/material&gt;
 
-&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;red&quot;</span>&gt;
-<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;1 0 0 1&quot;</span><span class="w"> </span>/&gt;
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"red"</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">"1 0 0 1"</span><span class="w"> </span>/&gt;
 &lt;/material&gt;
 
-&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;green&quot;</span>&gt;
-<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 1 0 1&quot;</span><span class="w"> </span>/&gt;
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"green"</span>&gt;
+<span class="w">  </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">"0 1 0 1"</span><span class="w"> </span>/&gt;
 &lt;/material&gt;
 </pre></div>
 </div>
@@ -329,12 +329,12 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 </section>
 <section id="step-3-add-configurable-parameters">
 <h4>Step 3: Add Configurable parameters.<a class="headerlink" href="#step-3-add-configurable-parameters" title="Link to this heading"></a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;z_offset&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;4.0&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l2&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2.4&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l3&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.8&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;l4&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;width&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.2&quot;</span> <span class="o">/&gt;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"z_offset"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"l1"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"4.0"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"l2"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"2.4"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"l3"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"0.8"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"l4"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"0.2"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">xacro</span><span class="p">:</span><span class="nb">property</span> <span class="n">name</span><span class="o">=</span><span class="s2">"width"</span> <span class="n">value</span><span class="o">=</span><span class="s2">"0.2"</span> <span class="o">/&gt;</span>
 </pre></div>
 </div>
 <p>These values define:</p>
@@ -347,41 +347,41 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 </section>
 <section id="step-4-add-the-base-link">
 <h4>Step 4: Add the Base Link<a class="headerlink" href="#step-4-add-the-base-link" title="Link to this heading"></a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span><span class="w"> </span>/&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"base_link"</span><span class="w"> </span>/&gt;
 </pre></div>
 </div>
 <p>This is the root of the robot, a fixed reference point.</p>
 </section>
 <section id="step-5-defining-a-link">
 <h4>Step 5: Defining a link<a class="headerlink" href="#step-5-defining-a-link" title="Link to this heading"></a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"link1"</span>&gt;
 <span class="w">    </span>&lt;inertial&gt;
-<span class="w">     </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
-<span class="w">     </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
-<span class="w">     </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;100&quot;</span><span class="w"> </span>/&gt;
+<span class="w">     </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span>/&gt;
+<span class="w">     </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">"1"</span>/&gt;
+<span class="w">     </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">"100"</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">"0"</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">"0"</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">"100"</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">"0"</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">"100"</span><span class="w"> </span>/&gt;
 <span class="w">    </span>&lt;/inertial&gt;
 <span class="w">    </span>&lt;visual&gt;
-<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span>/&gt;
 <span class="w">      </span>&lt;geometry&gt;
-<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/&gt;
+<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>/&gt;
 <span class="w">      </span>&lt;/geometry&gt;
-<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"blue"</span><span class="w"> </span>/&gt;
 <span class="w">    </span>&lt;/visual&gt;
 <span class="w">  </span>&lt;/link&gt;
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"link2"</span>&gt;
 <span class="w">    </span>&lt;inertial&gt;
-<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
-<span class="w">      </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>/&gt;
-<span class="w">      </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;1000&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span>/&gt;
+<span class="w">      </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">"1"</span>/&gt;
+<span class="w">      </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">"1000"</span><span class="w">  </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">"0"</span><span class="w">  </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">"0"</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">"1000"</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">"0"</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">"1000"</span><span class="w"> </span>/&gt;
 <span class="w">     </span>&lt;/inertial&gt;
 <span class="w">    </span>&lt;visual&gt;
-<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 </span><span class="si">${</span><span class="nv">l2</span><span class="p">/2</span><span class="si">}</span><span class="s2"> 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"0 </span><span class="si">${</span><span class="nv">l2</span><span class="p">/2</span><span class="si">}</span><span class="s2"> 0"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span>/&gt;
 <span class="w">      </span>&lt;geometry&gt;
-<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">l2</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/&gt;
+<span class="w">        </span>&lt;box<span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">l2</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">width</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>/&gt;
 <span class="w">      </span>&lt;/geometry&gt;
-<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="w"> </span>/&gt;
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"red"</span><span class="w"> </span>/&gt;
 <span class="w">    </span>&lt;/visual&gt;
 <span class="w">  </span>&lt;/link&gt;
 </pre></div>
@@ -395,21 +395,21 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 <section id="step-6-add-joints">
 <h4>Step 6: Add Joints<a class="headerlink" href="#step-6-add-joints" title="Link to this heading"></a></h4>
 <p>Fixed joint example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;fixed_link_1&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span>&gt;
-<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 </span><span class="si">${</span><span class="nv">z_offset</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"fixed_link_1"</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">"fixed"</span>&gt;
+<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">"base_link"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">"link1"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"0 0 </span><span class="si">${</span><span class="nv">z_offset</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span>/&gt;
 <span class="w">  </span>&lt;/joint&gt;
 </pre></div>
 </div>
 <p>This attaches link1 to the base with an offset.</p>
 <p>Prismatic Joint Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;prismatic_joint_1&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;prismatic&quot;</span>&gt;
-<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="p">-l1/2</span><span class="si">}</span><span class="s2"> 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;1 0 0&quot;</span><span class="w"> </span>/&gt;
-<span class="w">    </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="w"> </span>/&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"prismatic_joint_1"</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">"prismatic"</span>&gt;
+<span class="w">    </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">"link1"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">"link2"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="p">-l1/2</span><span class="si">}</span><span class="s2"> 0 0"</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">"0 0 0"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">"1 0 0"</span><span class="w"> </span>/&gt;
+<span class="w">    </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">"0.0"</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">l1</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">"10"</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">"1.0"</span><span class="w"> </span>/&gt;
 <span class="w">  </span>&lt;/joint&gt;
 </pre></div>
 </div>

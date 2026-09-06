@@ -136,72 +136,72 @@
 <section id="robot-description-xacro">
 <h2>Robot description xacro<a class="headerlink" href="#robot-description-xacro" title="Link to this heading"></a></h2>
 <p>Start from a clean URDF/xacro description so you know exactly which joints ros2_control will expose.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">"http://www.ros.org/wiki/xacro"</span><span class="nt">&gt;</span>
 
-<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tricyclebot&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;prefix&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">"tricyclebot"</span><span class="w"> </span><span class="na">params=</span><span class="s">"prefix"</span><span class="nt">&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Root --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}base_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}base_link"</span><span class="w"> </span><span class="nt">/&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Chassis --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}chassis_link"</span><span class="nt">&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/link&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}chassis_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}base_link&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 ${base_height/2 + wheel_radius + body_clearance}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 1&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}chassis_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"fixed"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}base_link"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}chassis_link"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 0 ${base_height/2 + wheel_radius + body_clearance}"</span><span class="w"> </span><span class="na">rpy=</span><span class="s">"0 0 0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 0 1"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">"0.2"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Rear right wheel --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_right_wheel"</span><span class="nt">&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/link&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}rear_right_wheel&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_right_wheel_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"continuous"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}chassis_link"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}rear_right_wheel"</span><span class="nt">/&gt;</span>
 <span class="w">      </span><span class="nt">&lt;origin</span>
-<span class="w">        </span><span class="na">xyz=</span><span class="s">&quot;-${wheelbase/2} ${base_width/2} -${base_height/2 + wheel_radius + wheel_clearance}&quot;</span>
-<span class="w">        </span><span class="na">rpy=</span><span class="s">&quot;0 0 ${PI/2}&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;1 0 0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">&quot;100.0&quot;</span><span class="w"> </span><span class="na">velocity=</span><span class="s">&quot;100.0&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">&quot;0.2&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="na">xyz=</span><span class="s">"-${wheelbase/2} ${base_width/2} -${base_height/2 + wheel_radius + wheel_clearance}"</span>
+<span class="w">        </span><span class="na">rpy=</span><span class="s">"0 0 ${PI/2}"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;axis</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"1 0 0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;limit</span><span class="w"> </span><span class="na">effort=</span><span class="s">"100.0"</span><span class="w"> </span><span class="na">velocity=</span><span class="s">"100.0"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;dynamics</span><span class="w"> </span><span class="na">damping=</span><span class="s">"0.2"</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Rear left wheel --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_left_wheel"</span><span class="nt">&gt;</span>
 <span class="w">     </span>...
 <span class="w">    </span><span class="nt">&lt;/link&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;continuous&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}rear_left_wheel&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_left_wheel_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"continuous"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}chassis_link"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}rear_left_wheel"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 
 <span class="w">    </span><span class="cm">&lt;!-- Front steering link and wheel --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}front_steering_link"</span><span class="nt">&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/link&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;revolute&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}chassis_link&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}front_steering_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"revolute"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}chassis_link"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}front_steering_link"</span><span class="nt">/&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_wheel&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}front_wheel"</span><span class="nt">&gt;</span>
 <span class="w">     </span>...
 <span class="w">    </span><span class="nt">&lt;/link&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_wheel_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
-<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_steering_link&quot;</span><span class="nt">/&gt;</span>
-<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}front_wheel&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}front_wheel_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"fixed"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}front_steering_link"</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"${prefix}front_wheel"</span><span class="nt">/&gt;</span>
 <span class="w">      </span>...
 <span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
 
@@ -251,8 +251,8 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <span class="cp">#define ROS2_CONTROL_DEMO_EXAMPLE_18__TRICYCLE_STEERING_SYSTEM_HPP_</span>
 
 <span class="p">...</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hardware_interface/hardware_info.hpp&quot;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hardware_interface/system_interface.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"hardware_interface/hardware_info.hpp"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"hardware_interface/system_interface.hpp"</span>
 <span class="p">...</span>
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">ros2_control_demo_example_18</span>
@@ -295,10 +295,10 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <section id="export-the-plugin">
 <h2>Export the Plugin<a class="headerlink" href="#export-the-plugin" title="Link to this heading"></a></h2>
 <p>To export the plugin, create the file <code class="docutils literal notranslate"><span class="pre">example_18/ros2_control_demo_example_18.xml</span></code> with the following content:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;ros2_control_demo_example_18&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ros2_control_demo_example_18/TricycleSteeringSystemHardware&quot;</span>
-<span class="w">                 </span><span class="na">type=</span><span class="s">&quot;ros2_control_demo_example_18::TricycleSteeringSystemHardware&quot;</span>
-<span class="w">                 </span><span class="na">base_class_type=</span><span class="s">&quot;hardware_interface::SystemInterface&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;library</span><span class="w"> </span><span class="na">path=</span><span class="s">"ros2_control_demo_example_18"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;class</span><span class="w"> </span><span class="na">name=</span><span class="s">"ros2_control_demo_example_18/TricycleSteeringSystemHardware"</span>
+<span class="w">                 </span><span class="na">type=</span><span class="s">"ros2_control_demo_example_18::TricycleSteeringSystemHardware"</span>
+<span class="w">                 </span><span class="na">base_class_type=</span><span class="s">"hardware_interface::SystemInterface"</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;description&gt;</span>
 <span class="w">            </span>Tricycle<span class="w"> </span>steering<span class="w"> </span>hardware<span class="w"> </span>system<span class="w"> </span>interface<span class="w"> </span>for<span class="w"> </span>the<span class="w"> </span>ros2_control_demos<span class="w"> </span>example<span class="w"> </span>18.
 <span class="w">        </span><span class="nt">&lt;/description&gt;</span>
@@ -311,30 +311,30 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <section id="load-the-plugin-in-the-robot-xacro">
 <h2>Load the plugin in the robot xacro<a class="headerlink" href="#load-the-plugin-in-the-robot-xacro" title="Link to this heading"></a></h2>
 <p>During the build, the plugin is exported with <code class="docutils literal notranslate"><span class="pre">pluginlib_export_plugin_description_file(hardware_interface</span> <span class="pre">ros2_control_demo_example_18.xml)</span></code> and then loaded into <code class="docutils literal notranslate"><span class="pre">ros2_control.xacro</span></code>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">"http://www.ros.org/wiki/xacro"</span><span class="nt">&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tricyclebot_ros2_control&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;name prefix&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">"tricyclebot_ros2_control"</span><span class="w"> </span><span class="na">params=</span><span class="s">"name prefix"</span><span class="nt">&gt;</span>
 
-<span class="w">        </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${name}&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;ros2_control</span><span class="w"> </span><span class="na">name=</span><span class="s">"${name}"</span><span class="w"> </span><span class="na">type=</span><span class="s">"system"</span><span class="nt">&gt;</span>
 <span class="w">            </span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">                </span><span class="nt">&lt;plugin&gt;</span>ros2_control_demo_example_18/TricycleSteeringSystemHardware<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_start_duration_sec&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
-<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_param_hw_stop_duration_sec&quot;</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_hw_start_duration_sec"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/param&gt;</span>
+<span class="w">                </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"example_param_hw_stop_duration_sec"</span><span class="nt">&gt;</span>3.0<span class="nt">&lt;/param&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/hardware&gt;</span>
-<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_right_wheel_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_right_wheel_joint"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}rear_left_wheel_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;velocity&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}rear_left_wheel_joint"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"velocity"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
-<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}front_steering_joint&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
-<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;position&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"${prefix}front_steering_joint"</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;command_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;state_interface</span><span class="w"> </span><span class="na">name=</span><span class="s">"position"</span><span class="nt">/&gt;</span>
 <span class="w">            </span><span class="nt">&lt;/joint&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/ros2_control&gt;</span>
 
@@ -365,8 +365,8 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <span class="nt">tricycle_steering_controller</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">ros__parameters</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tricycle_steering_controller/TricycleSteeringController</span>
-<span class="w">        </span><span class="nt">traction_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;rear_right_wheel_joint&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;rear_left_wheel_joint&#39;</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="nt">steering_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;front_steering_joint&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">traction_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'rear_right_wheel_joint'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'rear_left_wheel_joint'</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">steering_joints_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'front_steering_joint'</span><span class="p p-Indicator">]</span>
 <span class="w">        </span><span class="nt">wheelbase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.45</span>
 <span class="w">        </span><span class="nt">traction_track_width</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.30</span>
 <span class="w">        </span><span class="nt">traction_wheels_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
@@ -389,27 +389,27 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <h2>How to launch<a class="headerlink" href="#how-to-launch" title="Link to this heading"></a></h2>
 <p>The launch file in <code class="docutils literal notranslate"><span class="pre">example_18/bringup/launch</span></code> starts <code class="docutils literal notranslate"><span class="pre">ros2_control_node</span></code>, brings up the joint state broadcaster, and loads the tricycle steering controller with an optional TF remap flag to match your tf tree in RViz.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">control_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;ros2_control_node&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"ros2_control_node"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">robot_description</span><span class="p">,</span> <span class="n">robot_controllers</span><span class="p">],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">joint_state_broadcaster_spawner</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
-    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;joint_state_broadcaster&quot;</span><span class="p">],</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"spawner"</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s2">"joint_state_broadcaster"</span><span class="p">],</span>
 <span class="p">)</span>
 
 <span class="n">tricycle_controller_spawner_remapped</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;controller_manager&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;spawner&quot;</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"controller_manager"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"spawner"</span><span class="p">,</span>
     <span class="n">arguments</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;tricycle_steering_controller&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--param-file&quot;</span><span class="p">,</span>
+        <span class="s2">"tricycle_steering_controller"</span><span class="p">,</span>
+        <span class="s2">"--param-file"</span><span class="p">,</span>
         <span class="n">robot_controllers</span><span class="p">,</span>
-        <span class="s2">&quot;--controller-ros-args&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-r /tricycle_steering_controller/tf_odometry:=/tf&quot;</span><span class="p">,</span>
+        <span class="s2">"--controller-ros-args"</span><span class="p">,</span>
+        <span class="s2">"-r /tricycle_steering_controller/tf_odometry:=/tf"</span><span class="p">,</span>
     <span class="p">],</span>
     <span class="n">condition</span><span class="o">=</span><span class="n">IfCondition</span><span class="p">(</span><span class="n">remap_odometry_tf</span><span class="p">),</span>
 <span class="p">)</span>
@@ -478,7 +478,7 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <ol class="arabic simple" start="5">
 <li><p>Send a reference command</p></li>
 </ol>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_steering_controller/reference<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_steering_controller/reference<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">"</span>
 <span class="s2">  header: auto</span>
 <span class="s2">  twist:</span>
 <span class="s2">     linear:</span>
@@ -488,7 +488,7 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <span class="s2">     angular:</span>
 <span class="s2">        x: 0.0</span>
 <span class="s2">        y: 0.0</span>
-<span class="s2">        z: 0.5&quot;</span>
+<span class="s2">        z: 0.5"</span>
 </pre></div>
 </div>
 <p>You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.</p>
@@ -545,7 +545,7 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <ol class="arabic simple" start="5">
 <li><p>Send a velocity command</p></li>
 </ol>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_controller/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">30</span><span class="w"> </span>/tricycle_controller/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">"</span>
 <span class="s2">  header: auto</span>
 <span class="s2">  twist:</span>
 <span class="s2">     linear:</span>
@@ -555,7 +555,7 @@ Simple (1 DOF) robotic hardware like motors, valves, and similar. An actuator im
 <span class="s2">     angular:</span>
 <span class="s2">        x: 0.0</span>
 <span class="s2">        y: 0.0</span>
-<span class="s2">        z: 0.4&quot;</span>
+<span class="s2">        z: 0.4"</span>
 </pre></div>
 </div>
 <p>You should see the robot turning in RViz and the hardware plugin printing updated steering angle and wheel velocity.</p>

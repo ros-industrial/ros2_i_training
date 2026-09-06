@@ -269,24 +269,24 @@ The services <code class="docutils literal notranslate"><span class="pre">/turtl
 <h3>7.3 Interacting<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/spawn</span> <span class="pre">turtlesim/srv/Spawn</span> <span class="pre">&quot;{x:</span> <span class="pre">5,y:</span> <span class="pre">5,theta:</span> <span class="pre">0}&quot;</span></code>
 <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">/reset</span> <span class="pre">std_srvs/srv/Empty</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">topic</span> <span class="n">pub</span> <span class="o">/</span><span class="n">turtle1</span><span class="o">/</span><span class="n">cmd_vel</span> <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">msg</span><span class="o">/</span><span class="n">Twist</span> <span class="s2">&quot;linear:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">topic</span> <span class="n">pub</span> <span class="o">/</span><span class="n">turtle1</span><span class="o">/</span><span class="n">cmd_vel</span> <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">msg</span><span class="o">/</span><span class="n">Twist</span> <span class="s2">"linear:</span>
   <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span>
   <span class="n">y</span><span class="p">:</span> <span class="mf">0.0</span>
   <span class="n">z</span><span class="p">:</span> <span class="mf">0.0</span>
 <span class="n">angular</span><span class="p">:</span>
   <span class="n">x</span><span class="p">:</span> <span class="mf">0.0</span>
   <span class="n">y</span><span class="p">:</span> <span class="mf">0.0</span>
-  <span class="n">z</span><span class="p">:</span> <span class="mf">0.5</span><span class="s2">&quot;</span>
+  <span class="n">z</span><span class="p">:</span> <span class="mf">0.5</span><span class="s2">"</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">topic</span> <span class="n">pub</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.5</span> <span class="o">/</span><span class="n">turtle1</span><span class="o">/</span><span class="n">cmd_vel</span> <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">msg</span><span class="o">/</span><span class="n">Twist</span> <span class="s2">&quot;linear:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">topic</span> <span class="n">pub</span> <span class="o">-</span><span class="n">r</span> <span class="mf">0.5</span> <span class="o">/</span><span class="n">turtle1</span><span class="o">/</span><span class="n">cmd_vel</span> <span class="n">geometry_msgs</span><span class="o">/</span><span class="n">msg</span><span class="o">/</span><span class="n">Twist</span> <span class="s2">"linear:</span>
   <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span>
   <span class="n">y</span><span class="p">:</span> <span class="mf">0.0</span>
   <span class="n">z</span><span class="p">:</span> <span class="mf">0.0</span>
 <span class="n">angular</span><span class="p">:</span>
   <span class="n">x</span><span class="p">:</span> <span class="mf">0.0</span>
   <span class="n">y</span><span class="p">:</span> <span class="mf">0.0</span>
-  <span class="n">z</span><span class="p">:</span> <span class="mf">0.5</span><span class="s2">&quot;</span>
+  <span class="n">z</span><span class="p">:</span> <span class="mf">0.5</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">service</span> <span class="pre">call</span> <span class="pre">-r</span> <span class="pre">0.5</span> <span class="pre">/spawn</span> <span class="pre">turtlesim/srv/Spawn</span> <span class="pre">&quot;{x:</span> <span class="pre">5,y:</span> <span class="pre">5,theta:</span> <span class="pre">0}&quot;</span></code></p>

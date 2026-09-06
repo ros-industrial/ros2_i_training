@@ -197,9 +197,9 @@ forward_position_controller<span class="o">[</span>forward_command_controller/Fo
 <section id="send-commands">
 <h3>5. Send Commands<a class="headerlink" href="#send-commands" title="Link to this heading"></a></h3>
 <p><strong>a. Using CLI:</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">&quot;data:</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/forward_position_controller/commands<span class="w"> </span>std_msgs/msg/Float64MultiArray<span class="w"> </span><span class="s2">"data:</span>
 <span class="s2">- 0.5</span>
-<span class="s2">- 0.5&quot;</span>
+<span class="s2">- 0.5"</span>
 </pre></div>
 </div>
 <p><strong>b. Using Demo Node:</strong></p>
@@ -208,8 +208,8 @@ forward_position_controller<span class="o">[</span>forward_command_controller/Fo
 </div>
 <p>You should see motion in RViz and terminal logs like:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Writing<span class="w"> </span>commands:
-<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint2/position&#39;</span>
-<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">&#39;joint1/position&#39;</span>
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">'joint2/position'</span>
+<span class="w">  </span><span class="m">0</span>.50<span class="w"> </span><span class="k">for</span><span class="w"> </span>joint<span class="w"> </span><span class="s1">'joint1/position'</span>
 </pre></div>
 </div>
 <p>To verify joint state outputs:</p>

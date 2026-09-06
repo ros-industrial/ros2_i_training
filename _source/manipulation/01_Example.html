@@ -116,8 +116,8 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
 <h3>Update <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#update-setup-py" title="Link to this heading"></a></h3>
 <p>Edit the generated <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file and update the <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> block:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s1">&#39;move_to_pose = moveit_python_demo.move_to_pose:main&#39;</span><span class="p">,</span>
+    <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">'move_to_pose = moveit_python_demo.move_to_pose:main'</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">},</span>
 </pre></div>
@@ -137,14 +137,14 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MoveToPoseDemo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;move_to_pose_demo&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'move_to_pose_demo'</span><span class="p">)</span>
         <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># ensure time is updated</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">RobotCommander</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">PlanningSceneInterface</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">MoveGroupCommander</span><span class="p">(</span><span class="s1">&#39;arm&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">MoveGroupCommander</span><span class="p">(</span><span class="s1">'arm'</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_reference_frame</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_reference_frame</span><span class="p">(</span><span class="s1">'world'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_velocity_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_acceleration_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
@@ -152,7 +152,7 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
 
     <span class="k">def</span><span class="w"> </span><span class="nf">move_to_ready_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">target_pose</span> <span class="o">=</span> <span class="n">PoseStamped</span><span class="p">()</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
+        <span class="n">target_pose</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s1">'world'</span>
         <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.4</span>
         <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.4</span>
@@ -164,9 +164,9 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
         <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">clear_pose_targets</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Motion executed successfully!&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Motion executed successfully!'</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Motion planning failed!&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Motion planning failed!'</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
@@ -174,7 +174,7 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
     <span class="n">node</span> <span class="o">=</span> <span class="n">MoveToPoseDemo</span><span class="p">()</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -189,7 +189,7 @@ ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </
 <section id="add-install-requires-to-setup-py">
 <h3>Add <code class="docutils literal notranslate"><span class="pre">install_requires</span></code> to <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#add-install-requires-to-setup-py" title="Link to this heading"></a></h3>
 <p>Make sure your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> includes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'setuptools'</span><span class="p">],</span>
 </pre></div>
 </div>
 </section>

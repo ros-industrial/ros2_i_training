@@ -170,7 +170,7 @@ joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStat
 </section>
 <section id="send-commands-to-diff-drive-controller">
 <h3>5. Send Commands to Diff Drive Controller<a class="headerlink" href="#send-commands-to-diff-drive-controller" title="Link to this heading"></a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span><span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">&quot;</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">10</span><span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/msg/TwistStamped<span class="w"> </span><span class="s2">"</span>
 <span class="s2">  header: auto</span>
 <span class="s2">  twist:</span>
 <span class="s2">    linear:</span>
@@ -180,13 +180,13 @@ joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStat
 <span class="s2">    angular:</span>
 <span class="s2">      x: 0.0</span>
 <span class="s2">      y: 0.0</span>
-<span class="s2">      z: 1.0&quot;</span>
+<span class="s2">      z: 1.0"</span>
 </pre></div>
 </div>
 <p>You should now see an orange box circling in RViz and terminal logs like:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Writing<span class="w"> </span>commands:
-<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">43</span>.33<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;left_wheel_joint&#39;</span>!
-<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">50</span>.00<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;right_wheel_joint&#39;</span>!
+<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">43</span>.33<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">'left_wheel_joint'</span>!
+<span class="w">  </span><span class="nb">command</span><span class="w"> </span><span class="m">50</span>.00<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">'right_wheel_joint'</span>!
 </pre></div>
 </div>
 </section>
@@ -228,7 +228,7 @@ joint_state_broadcaster<span class="o">[</span>joint_state_broadcaster/JointStat
 <p>This shows a different plugin was loaded. Check <code class="docutils literal notranslate"><span class="pre">diffbot.ros2_control.xacro</span></code> to see:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;hardware&gt;</span>
 <span class="w">  </span><span class="nt">&lt;plugin&gt;</span>mock_components/GenericSystem<span class="nt">&lt;/plugin&gt;</span>
-<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;calculate_dynamics&quot;</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"calculate_dynamics"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/hardware&gt;</span>
 </pre></div>
 </div>

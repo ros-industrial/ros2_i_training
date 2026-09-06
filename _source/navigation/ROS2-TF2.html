@@ -149,23 +149,23 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">DynamicBroadcaster</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turtle_name</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;dynamic_broadcaster&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'dynamic_broadcaster'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name_</span> <span class="o">=</span> <span class="n">turtle_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Broadcasting pose of : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Broadcasting pose of : </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tfb_</span> <span class="o">=</span> <span class="n">TransformBroadcaster</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sub_pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="n">Pose</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/pose&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_pose</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sub_pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="n">Pose</span><span class="p">,</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">/pose"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name_</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_pose</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">handle_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
 
         <span class="n">tfs</span> <span class="o">=</span> <span class="n">TransformStamped</span><span class="p">()</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">to_msg</span><span class="p">()</span>
-        <span class="n">tfs</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span><span class="o">=</span><span class="s2">&quot;world&quot;</span>
+        <span class="n">tfs</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span><span class="o">=</span><span class="s2">"world"</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">_child_frame_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">x</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">y</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translation</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-        <span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">msg</span><span class="o">.</span><span class="n">theta</span><span class="p">])</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s1">'xyz'</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">msg</span><span class="o">.</span><span class="n">theta</span><span class="p">])</span>
 
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_quat</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">tfs</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotation</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">as_quat</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -187,7 +187,7 @@
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 
 </pre></div>
@@ -240,8 +240,8 @@ transform can change over time to generate a dynamic motion.)</p></li>
 <h3>1.2 Declaring the executable<a class="headerlink" href="#declaring-the-executable" title="Link to this heading"></a></h3>
 <p>Now that we have our code written and dependencies setup, we need to tell our build system that the script we created should be treated as an executable. We do this in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>. Look for the section that starts with <code class="docutils literal notranslate"><span class="pre">entry_points={</span></code>. We edit this part to declare the executable and its entry point to look like this:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s1">&#39;broadcaster = tf2_workshop.broadcaster:main&#39;</span><span class="p">,</span>
+        <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">'broadcaster = tf2_workshop.broadcaster:main'</span><span class="p">,</span>
         <span class="p">],</span>
 <span class="p">},</span>
 </pre></div>
@@ -291,14 +291,14 @@ transform can change over time to generate a dynamic motion.)</p></li>
 <span class="k">class</span><span class="w"> </span><span class="nc">TfListener</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_turtle</span><span class="p">,</span> <span class="n">second_turtle</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;tf_listener&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'tf_listener'</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">first_name_</span> <span class="o">=</span> <span class="n">first_turtle</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">second_name_</span> <span class="o">=</span> <span class="n">second_turtle</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Transforming from </span><span class="si">{}</span><span class="s2"> to </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second_name_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_name_</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Transforming from </span><span class="si">{}</span><span class="s2"> to </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second_name_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_name_</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tf_buffer</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tf_listener</span> <span class="o">=</span> <span class="n">TransformListener</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tf_buffer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cmd_</span> <span class="o">=</span> <span class="n">Twist</span> <span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Twist</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/cmd_vel&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second_name_</span><span class="p">),</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Twist</span><span class="p">,</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">/cmd_vel"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second_name_</span><span class="p">),</span><span class="mi">10</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_callback</span><span class="p">)</span> <span class="c1">#30 Hz = 0.333s</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -309,7 +309,7 @@ transform can change over time to generate a dynamic motion.)</p></li>
             <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">LookupException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;failed to get transform </span><span class="si">{}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'failed to get transform </span><span class="si">{}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span>
@@ -321,7 +321,7 @@ transform can change over time to generate a dynamic motion.)</p></li>
     <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -355,7 +355,7 @@ transform can change over time to generate a dynamic motion.)</p></li>
 <h3>2.2 Testing the listener<a class="headerlink" href="#testing-the-listener" title="Link to this heading"></a></h3>
 <p>The turtlesim simulation and teleop node need to be running first.</p>
 <p>To test the application, you first need to spawn a second turtle, the name of which is assumed here to be <code class="docutils literal notranslate"><span class="pre">turtle2</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="s2">&quot;{x: 2, y: 2, theta: 0.2, name: &quot;</span>turtle2<span class="s2">&quot;}&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="s2">"{x: 2, y: 2, theta: 0.2, name: "</span>turtle2<span class="s2">"}"</span>
 </pre></div>
 </div>
 <p>The parameters indicate the starting pose and name.</p>
