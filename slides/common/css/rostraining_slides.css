@@ -4,6 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+@page {
+  size: 1210px 681px;
+  margin: 0;
+}
+
 body {
     font-family: 'Montserrat';
     color:black;

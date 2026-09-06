@@ -5,3 +5,4 @@ logs
 *.pdf
 export
 node_modules/*
+.venv

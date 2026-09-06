@@ -8,26 +8,16 @@ Slides are structured as follows for each session:
 `static`: Images, videos and other resource files
 
 ## Usage
-### Install dependencies
+### Build with Docker Compose
 
-Install Chrome (or Chromium):
-  ```
-  sudo apt install chromium-browser
-  ```
-The script `export.py` exports `html` to `pdf` files, which depends on `mume` and `decktape`
-  ```
-  cd ~/ros2_i_training/
-  npm install decktape
-  npm install @shd101wyy/mume
-  ```
-Modify Chromium and npm bin path in the `export.py` script, if necessary
-  ```
-  npm bin
-  which chromium-browser
-  ```
+Docker is the only local dependency. Node.js, Chromium, and DeckTape run inside
+the container.
 
-### Generate slides
-Run `export.py` script. It will export all html files to `export` folder in PDF format.
+From the `slides` directory, run:
+
+```bash
+HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose run --rm slides
 ```
-python3 export.py
-```
+
+The command exports all slide decks listed in `../export_list.yaml` to the
+`../export` directory, grouped into `Day1`, `Day2`, and `Day3` subdirectories.
