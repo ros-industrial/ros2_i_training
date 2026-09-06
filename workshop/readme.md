@@ -39,6 +39,11 @@ From the workshop directory:
 xdg-open build/html/index.html
 ```
 
+or simply preview the result using uv:
+```bash
+uv run python -m http.server 8000 --directory build/html
+```
+
 ### To add new content
 Place the content source in the following folders in the appropriate session.
 -  `_source`: Markup (.md) files

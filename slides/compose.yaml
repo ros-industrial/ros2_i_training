@@ -1,0 +1,12 @@
+services:
+  slides:
+    image: ghcr.io/astefanutti/decktape:3.16.1
+    user: "0:0"
+    working_dir: /workspace
+    environment:
+      HOST_UID: "${HOST_UID:-1000}"
+      HOST_GID: "${HOST_GID:-1000}"
+    volumes:
+      - ..:/workspace:ro
+      - ${SLIDES_OUTPUT_DIR:-../export}:/output
+    entrypoint: ["/bin/sh", "/workspace/slides/export_slides.sh"]
