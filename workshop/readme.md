@@ -16,16 +16,16 @@ Navigate to the workshop folder
 cd ros2_i_training/workshop
 ```
 
-Create the python environment and activate it
+Create a virtual environment with `uv` and activate it
 ```bash
-python3 -m venv sphinxEnv
-source sphinxEnv/bin/activate
+uv venv .venv
+source .venv/bin/activate
 ```
 
-install the dependencies from the requirements.txt
-````bash
-python3 -m pip install -r requirements.txt
-````
+Install the dependencies from `requirements.txt` using `uv`
+```bash
+uv pip install -r requirements.txt
+```
 
 ### Build the html doc
 From the workshop directory:
