@@ -194,16 +194,6 @@ docker<span class="w"> </span>compose<span class="w"> </span>down
 </pre></div>
 </div>
 </section>
-<section id="build-the-workshop-slides">
-<h2>Build the workshop slides<a class="headerlink" href="#build-the-workshop-slides" title="Link to this heading"></a></h2>
-<p>The slides provide their own Compose configuration. From the repository root:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>slides
-<span class="nv">HOST_UID</span><span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="w"> </span><span class="nv">HOST_GID</span><span class="o">=</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="k">)</span><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>slides
-</pre></div>
-</div>
-<p>The generated PDFs are written to the repository’s <code class="docutils literal notranslate"><span class="pre">export</span></code> directory by
-default. Node.js, Chromium, and the slide exporter remain inside the container.</p>
-</section>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
@@ -217,6 +207,10 @@ cat<span class="w"> </span>/etc/os-release
 docker<span class="w"> </span>ps<span class="w"> </span>-a
 </pre></div>
 </div>
+</section>
+<section id="using-ros-2-with-docker">
+<h2>Using ROS 2 with Docker<a class="headerlink" href="#using-ros-2-with-docker" title="Link to this heading"></a></h2>
+<p>Tutorial material: https://github.com/ipa-may/docker_ros2_tutorial</p>
 </section>
 </section>
 

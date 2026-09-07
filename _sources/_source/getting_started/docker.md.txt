@@ -112,18 +112,6 @@ Rebuild service images before starting:
 docker compose up --build
 ```
 
-## Build the workshop slides
-
-The slides provide their own Compose configuration. From the repository root:
-
-```bash
-cd slides
-HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose run --rm slides
-```
-
-The generated PDFs are written to the repository's `export` directory by
-default. Node.js, Chromium, and the slide exporter remain inside the container.
-
 ## Exercise
 
 1. Run an interactive `ubuntu:24.04` container.
@@ -136,3 +124,10 @@ cat /etc/os-release
 exit
 docker ps -a
 ```
+
+
+## Using ROS 2 with Docker
+
+Tutorial material: https://github.com/ipa-may/docker_ros2_tutorial
+
+

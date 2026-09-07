@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Jazzy CLI cheat sheet &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROS 2 GitHub examples" href="ROS2-Github_Examples.html" />
+    <link rel="prev" title="TF2 - The second generation of the transform library" href="../navigation/ROS2-TF2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.2 Publisher and subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.4 ROS 2 CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">2.5 Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.6 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 GitHub Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">4. ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
+      <li class="breadcrumb-item active">ROS 2 Jazzy CLI cheat sheet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/basics/ROS2-Basics-CheatSheet.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-jazzy-cli-cheat-sheet">
+<h1>ROS 2 Jazzy CLI cheat sheet<a class="headerlink" href="#ros-2-jazzy-cli-cheat-sheet" title="Link to this heading"></a></h1>
+<p>Quick-reference commands for ROS 2 Jazzy Jalisco.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="nodes-and-topics">
+<h2>Nodes and topics<a class="headerlink" href="#nodes-and-topics" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
+ros2<span class="w"> </span>node<span class="w"> </span>info<span class="w"> </span>/node
+
+ros2<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/topic
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/topic<span class="w"> </span>-v
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/topic
+ros2<span class="w"> </span>topic<span class="w"> </span>hz<span class="w"> </span>/topic
+ros2<span class="w"> </span>topic<span class="w"> </span>bw<span class="w"> </span>/topic
+ros2<span class="w"> </span>topic<span class="w"> </span>delay<span class="w"> </span>/topic
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/topic<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/topic<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span>
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>-r<span class="w"> </span><span class="m">10</span><span class="w"> </span>/topic<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span>
+</pre></div>
+</div>
+</section>
+<section id="services-and-actions">
+<h2>Services and actions<a class="headerlink" href="#services-and-actions" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>service<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/service
+ros2<span class="w"> </span>service<span class="w"> </span>find<span class="w"> </span>TYPE
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/service<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span>
+
+ros2<span class="w"> </span>action<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>action<span class="w"> </span>info<span class="w"> </span>/action
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/action<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span>
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/action<span class="w"> </span>TYPE<span class="w"> </span><span class="s1">'{field: value}'</span><span class="w"> </span>--feedback
+</pre></div>
+</div>
+</section>
+<section id="tf2-and-tf-visualization">
+<h2>TF2 and TF visualization<a class="headerlink" href="#tf2-and-tf-visualization" title="Link to this heading"></a></h2>
+<p>Install the TF2 command-line tools:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-tf2-ros<span class="w"> </span>ros-jazzy-tf2-tools
+</pre></div>
+</div>
+<p>Inspect transforms and generate a TF tree:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>tf2_ros<span class="w"> </span>tf2_echo<span class="w"> </span>SOURCE_FRAME<span class="w"> </span>TARGET_FRAME
+ros2<span class="w"> </span>run<span class="w"> </span>tf2_ros<span class="w"> </span>tf2_monitor
+ros2<span class="w"> </span>run<span class="w"> </span>tf2_tools<span class="w"> </span>view_frames
+ros2<span class="w"> </span>run<span class="w"> </span>tf2_ros<span class="w"> </span>static_transform_publisher<span class="w"> </span>--help
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">view_frames</span></code> writes the TF tree to a PDF file. RViz visualizes TF frames live.</p>
+</section>
+<section id="parameters-and-interfaces">
+<h2>Parameters and interfaces<a class="headerlink" href="#parameters-and-interfaces" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span>list<span class="w"> </span>/node
+ros2<span class="w"> </span>param<span class="w"> </span>get<span class="w"> </span>/node<span class="w"> </span>parameter_name
+ros2<span class="w"> </span>param<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>parameter_name<span class="w"> </span>value
+ros2<span class="w"> </span>param<span class="w"> </span>describe<span class="w"> </span>/node<span class="w"> </span>parameter_name
+ros2<span class="w"> </span>param<span class="w"> </span>dump<span class="w"> </span>/node
+ros2<span class="w"> </span>param<span class="w"> </span>load<span class="w"> </span>/node<span class="w"> </span>params.yaml
+
+ros2<span class="w"> </span>interface<span class="w"> </span>list
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>package_name/msg/Type
+ros2<span class="w"> </span>interface<span class="w"> </span>proto<span class="w"> </span>package_name/msg/Type
+</pre></div>
+</div>
+</section>
+<section id="packages-executables-and-launch-files">
+<h2>Packages, executables, and launch files<a class="headerlink" href="#packages-executables-and-launch-files" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>list
+ros2<span class="w"> </span>pkg<span class="w"> </span>executables<span class="w"> </span>package_name
+ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>package_name
+ros2<span class="w"> </span>pkg<span class="w"> </span>xml<span class="w"> </span>package_name
+ros2<span class="w"> </span>run<span class="w"> </span>package_name<span class="w"> </span>executable_name
+ros2<span class="w"> </span>launch<span class="w"> </span>package_name<span class="w"> </span>file.launch.py<span class="w"> </span>name:<span class="o">=</span>value
+</pre></div>
+</div>
+</section>
+<section id="package-creation">
+<h2>Package creation<a class="headerlink" href="#package-creation" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ros2_ws/src
+ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_cmake<span class="w"> </span>--license<span class="w"> </span>Apache-2.0<span class="w"> </span>my_pkg
+ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>--license<span class="w"> </span>Apache-2.0<span class="w"> </span>my_pkg
+ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--dependencies<span class="w"> </span>rclcpp<span class="w"> </span>std_msgs<span class="w"> </span>my_pkg
+</pre></div>
+</div>
+</section>
+<section id="workspaces-colcon-and-rosdep">
+<h2>Workspaces, colcon, and rosdep<a class="headerlink" href="#workspaces-colcon-and-rosdep" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/ros2_ws
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>-r<span class="w"> </span>-y
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>my_pkg
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-up-to<span class="w"> </span>my_pkg
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>my_pkg
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<section id="create-a-workspace-from-source">
+<h3>Create a workspace from source<a class="headerlink" href="#create-a-workspace-from-source" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>workspace_name
+<span class="nb">cd</span><span class="w"> </span>workspace_name
+mkdir<span class="w"> </span>src
+<span class="nb">cd</span><span class="w"> </span>src
+git<span class="w"> </span>clone<span class="w"> </span>&lt;some-ROS-2-package-from-GitHub&gt;
+<span class="nb">cd</span><span class="w"> </span>..
+vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>&lt;some-ROS-2-package-from-GitHub&gt;/&lt;dependency-file.repos&gt;
+rosdep<span class="w"> </span>init
+rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>-iry
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-ros-arguments-and-rosbag">
+<h2>Common ROS arguments and rosbag<a class="headerlink" href="#common-ros-arguments-and-rosbag" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--ros-args<span class="w"> </span>-r<span class="w"> </span>old:<span class="o">=</span>new
+--ros-args<span class="w"> </span>-r<span class="w"> </span>__node:<span class="o">=</span>name
+--ros-args<span class="w"> </span>-r<span class="w"> </span>__ns:<span class="o">=</span>/namespace
+--ros-args<span class="w"> </span>-p<span class="w"> </span>name:<span class="o">=</span>value
+--ros-args<span class="w"> </span>--params-file<span class="w"> </span>file.yaml
+
+ros2<span class="w"> </span>bag<span class="w"> </span>record<span class="w"> </span>-a
+ros2<span class="w"> </span>bag<span class="w"> </span>record<span class="w"> </span>/topic
+ros2<span class="w"> </span>bag<span class="w"> </span>info<span class="w"> </span>BAG
+ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </span>BAG
+</pre></div>
+</div>
+</section>
+<section id="ros2-control">
+<h2>ros2_control<a class="headerlink" href="#ros2-control" title="Link to this heading"></a></h2>
+<p>Install ros2_control and the standard controllers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-ros2-control<span class="w"> </span>ros-jazzy-ros2-controllers
+</pre></div>
+</div>
+<p>Manage controllers and inspect hardware:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>control<span class="w"> </span>list_controllers
+ros2<span class="w"> </span>control<span class="w"> </span>list_controller_types
+ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_components
+ros2<span class="w"> </span>control<span class="w"> </span>list_hardware_interfaces
+ros2<span class="w"> </span>control<span class="w"> </span>load_controller<span class="w"> </span>NAME<span class="w"> </span>PARAMS.yaml
+ros2<span class="w"> </span>control<span class="w"> </span>unload_controller<span class="w"> </span>NAME
+ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>NAME<span class="w"> </span>active
+ros2<span class="w"> </span>control<span class="w"> </span>set_controller_state<span class="w"> </span>NAME<span class="w"> </span>inactive
+ros2<span class="w"> </span>control<span class="w"> </span>switch_controllers<span class="w"> </span>--activate<span class="w"> </span>A<span class="w"> </span>--deactivate<span class="w"> </span>B
+ros2<span class="w"> </span>control<span class="w"> </span>cleanup_controller<span class="w"> </span>NAME
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">/namespace/controller_manager</span></code> when targeting a namespaced controller manager.</p>
+</section>
+<section id="gui-and-visualization-tools">
+<h2>GUI and visualization tools<a class="headerlink" href="#gui-and-visualization-tools" title="Link to this heading"></a></h2>
+<section id="rqt">
+<h3>rqt<a class="headerlink" href="#rqt" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-rqt
+rqt
+</pre></div>
+</div>
+</section>
+<section id="rqt-graph">
+<h3>rqt_graph<a class="headerlink" href="#rqt-graph" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-rqt-graph
+rqt_graph
+</pre></div>
+</div>
+</section>
+<section id="plotjuggler">
+<h3>PlotJuggler<a class="headerlink" href="#plotjuggler" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-plotjuggler-ros
+ros2<span class="w"> </span>run<span class="w"> </span>plotjuggler<span class="w"> </span>plotjuggler
+</pre></div>
+</div>
+</section>
+<section id="rviz">
+<h3>RViz<a class="headerlink" href="#rviz" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-jazzy-rviz2
+rviz2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="daemon-diagnostics-lifecycle-and-components">
+<h2>Daemon, diagnostics, lifecycle, and components<a class="headerlink" href="#daemon-diagnostics-lifecycle-and-components" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>daemon<span class="w"> </span>status
+ros2<span class="w"> </span>daemon<span class="w"> </span>start
+ros2<span class="w"> </span>daemon<span class="w"> </span>stop
+ros2<span class="w"> </span>doctor<span class="w"> </span>--report
+ros2<span class="w"> </span>wtf
+
+ros2<span class="w"> </span>lifecycle<span class="w"> </span>nodes
+ros2<span class="w"> </span>lifecycle<span class="w"> </span>get<span class="w"> </span>/node
+ros2<span class="w"> </span>lifecycle<span class="w"> </span>list<span class="w"> </span>/node
+ros2<span class="w"> </span>lifecycle<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>configure
+ros2<span class="w"> </span>lifecycle<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>activate
+ros2<span class="w"> </span>lifecycle<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>deactivate
+ros2<span class="w"> </span>lifecycle<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>cleanup
+ros2<span class="w"> </span>lifecycle<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/node<span class="w"> </span>shutdown
+
+ros2<span class="w"> </span>component<span class="w"> </span>list
+ros2<span class="w"> </span>component<span class="w"> </span>types
+ros2<span class="w"> </span>component<span class="w"> </span>load<span class="w"> </span>/container<span class="w"> </span>package_name<span class="w"> </span>Plugin
+ros2<span class="w"> </span>component<span class="w"> </span>unload<span class="w"> </span>/container<span class="w"> </span>component_id
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> to display all options for a command.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/jazzy/">ROS 2 Jazzy documentation</a></p></li>
+<li><p><a class="reference external" href="https://control.ros.org/jazzy/">ros2_control Jazzy documentation</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../navigation/ROS2-TF2.html" class="btn btn-neutral float-left" title="TF2 - The second generation of the transform library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-Github_Examples.html" class="btn btn-neutral float-right" title="ROS 2 GitHub examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
