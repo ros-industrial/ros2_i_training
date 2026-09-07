@@ -2,15 +2,21 @@
 
 ## 1. Introduction
 
-Turtlesim is the Flagship example application for ROS and ROS 2. It demonstrates in simple but effective ways the basic concepts.
+Turtlesim is a teaching application for ROS and ROS 2. It demonstrates the
+basic communication concepts with a small simulated turtle.
 
 This workshop encourages you to refer to the cheat sheet for the syntax and type the commands on your own in order to learn by trial and error. Make use of the `--help` option for commands as well. However, solutions are also provided in the end. Feel free to approach this any way as you wish.
 
-<!--## Requirements
+### Requirements
 
-`sudo apt install ros-jazzy-turtlesim`
-Make sure ROS2 is sourced in every terminal you open.   -->
+Install Turtlesim if it is not already available:
 
+```bash
+sudo apt update
+sudo apt install ros-$ROS_DISTRO-turtlesim
+```
+
+Make sure ROS 2 is sourced in every terminal you open.
 
 ## 2. Starting the Turtle simulator
 
@@ -20,7 +26,11 @@ The package name you need in this case is `turtlesim` and the nodes you need to 
 
 > Start the 2 nodes of the application
 
-Once you successfully start these nodes, you should see a window popup with a blue background and a random turtle in the middle (this is an RQT pane, if you are interested in knowing!). This little guy is going to help us understand ROS 2. We should treat it as if it is an AGV (Automated Guided Vehicle), and we observe this scene from a top down perspective.
+Once you successfully start these nodes, a Qt window should open with a blue
+background and a turtle in the middle. This turtle will help us understand ROS
+2. Treat it as an automated guided vehicle observed from above.
+
+![Turtlesim coordinate system showing x, y, and theta](../../_static/turtlesim_xytheta.png)
 
 Before moving the turtle, you might find it useful to right click on the title bar of the simulator screen and select *Always on top* (undo this when you no longer need it).
 
@@ -63,6 +73,13 @@ The topic `/turtle1/color_sensor` tells you the RGB values of the color of the t
 The topic `/turtle1/cmd_vel` is used to instruct the turtle to move. Echo this topic in a separate terminal and then use the teleop node to move the turtle to observe how velocity commands are given to it.
 The topic `/turtle1/pose` publishes the current pose of the turtle. Echo this topic to see how the pose of the turtle changes as you move it.
 
+Inspect the velocity message:
+
+```bash
+ros2 topic type /turtle1/cmd_vel
+ros2 interface show geometry_msgs/msg/Twist
+```
+
 ### 3.2 Description of services
 
 The services `/kill` and `/spawn` are used to kill and spawn turtles respectively.
@@ -95,11 +112,50 @@ You can similarly call the other services as well and observe what changes they 
 
 > Invoke all the other services as well using CLI and/or RQT.
 
+Inspect and call the empty `/clear` service:
+
+```bash
+ros2 service type /clear
+ros2 interface show std_srvs/srv/Empty
+ros2 service call /clear std_srvs/srv/Empty "{}"
+```
+
+Inspect and call `/spawn`:
+
+```bash
+ros2 service type /spawn
+ros2 interface show turtlesim/srv/Spawn
+ros2 service call /spawn turtlesim/srv/Spawn \
+  "{x: 1.0, y: 5.0, theta: 0.0, name: second_turtle}"
+```
+
+Remove the new turtle:
+
+```bash
+ros2 service call /kill turtlesim/srv/Kill \
+  "{name: second_turtle}"
+```
+
 ### 4.2 Parameters
 
 The parameter commands are fairly straightforward. Try to list the params available and see what values they have. Change the background color of the sim by setting one or more of the relevant params. The allowed range of values for this is 0 - 255.
 
 > Change background color of the same by setting a parameter
+
+```bash
+ros2 param list
+ros2 param get /turtlesim background_r
+ros2 param set /turtlesim background_r 125
+```
+
+The parameter services can also be inspected directly:
+
+```bash
+ros2 service type /turtlesim/list_parameters
+ros2 interface show rcl_interfaces/srv/ListParameters
+ros2 service call /turtlesim/list_parameters \
+  rcl_interfaces/srv/ListParameters "{prefixes: [], depth: 0}"
+```
 
 ### 4.3 Actions
 Next, you can invoke the action provided by this sim. List the actions available, find out the interface type, and then invoke the action with meaningful values.
@@ -110,18 +166,46 @@ Using the `--feedback` option with the command prints the feedback to the consol
 
 > Invoke an action call from the terminal
 
+```bash
+ros2 action send_goal /turtle1/rotate_absolute \
+  turtlesim/action/RotateAbsolute "{theta: -1.57}" --feedback
+```
+
 ### 4.4 Topics
 Finally, you can publish a velocity command on `/turtle1/cmd_vel` from CLI and RQT in a similar manner as calling a service, but of course, using the right commands for topics/messages instead. Make sure the teleop node is shut down before attempting this.
 
-   (Hint: The msg type is composite in this case, using *Vector3*. Each *Vector3* type has 3 fields: `x, y, y`. The sub-fields can be accessed with `:` Ex- `linear:x:0.5`. Play around with spaces until the command works. The solution is provided in the end.)
+   (Hint: The message type is composite in this case, using *Vector3*. Each
+   *Vector3* has three fields: `x`, `y`, and `z`. Use nested YAML mappings
+   such as `linear: {x: 0.5}`. The solution is provided at the end.)
 
 > Control the turtle from a terminal publisher
 
+```bash
+ros2 topic pub --rate 2 /turtle1/cmd_vel geometry_msgs/msg/Twist \
+  "{linear: {x: 0.5}, angular: {z: 0.5}}"
+```
+
 ## 5. Using ros2bags
 
-In a separate terminal start recording a ros2bag file with the selected topic `/turtle1/cmd_vel`. Back in your keyboard teleop terminal, give some velocity commands to make the turtle move. Go back to the ros2bag terminal and hit *ctrl+c* to kill it and stop recording.
+In a separate terminal, start recording the `/turtle1/cmd_vel` topic:
 
-Replay this ros2bag file, and you will notice the turtle moving in the same way as you recorded.
+```bash
+mkdir -p ~/dev_ws/bags
+cd ~/dev_ws/bags
+ros2 bag record /turtle1/cmd_vel -o turtle_commands
+```
+
+Back in the keyboard teleoperation terminal, give some velocity commands to
+move the turtle. Return to the rosbag terminal and press `Ctrl+C` to stop
+recording.
+
+Stop the keyboard teleoperation node before replaying the bag:
+
+```bash
+ros2 bag play ~/dev_ws/bags/turtle_commands
+```
+
+The turtle should repeat the recorded motion commands.
 
 ## 6. Advanced - Remapping and other options
 Every ROS 2 command and sub-command has a list of options that you can use to modify its behavior. The list of options can be seen with `-h` and included as desired. You can experiment with these as well and see how the commands you have already executed so far change.
@@ -183,4 +267,4 @@ width: 0
 
 ### 7.4 Using ros2bags
 
-`ros2 bag record /turtle1/pose -o velocities`
+`ros2 bag record /turtle1/cmd_vel -o turtle_commands`
