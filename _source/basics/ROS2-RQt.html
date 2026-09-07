@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 GUI tools: rqt and rqt_graph &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TF2 - The second generation of the transform library" href="../navigation/ROS2-TF2.html" />
+    <link rel="prev" title="Understanding ROS 2 with Turtlesim" href="ROS2-Turtlesim.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.2 Publisher and subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.4 ROS 2 CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">2.5 Turtlesim</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.6 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">4. ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
+      <li class="breadcrumb-item active">ROS 2 GUI tools: rqt and rqt_graph</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/basics/ROS2-RQt.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-gui-tools-rqt-and-rqt-graph">
+<h1>ROS 2 GUI tools: rqt and rqt_graph<a class="headerlink" href="#ros-2-gui-tools-rqt-and-rqt-graph" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">rqt</span></code> is a graphical framework that hosts ROS 2 tools as plugins.
+<code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code> visualizes the active nodes and the topics connecting them. These
+tools complement the ROS 2 CLI and are useful when developing or debugging a
+system.</p>
+<p>See the official <a class="reference external" href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-RQt.html">RQt overview and usage
+guide</a> for
+more information.</p>
+</section>
+<section id="install-the-tools">
+<h2>2. Install the tools<a class="headerlink" href="#install-the-tools" title="Link to this heading"></a></h2>
+<p>The ROS 2 desktop installation normally includes rqt. If the commands are
+missing, install the framework and its common plugins:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-rqt<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-rqt-common-plugins
+</pre></div>
+</div>
+</section>
+<section id="prepare-an-example-graph">
+<h2>3. Prepare an example graph<a class="headerlink" href="#prepare-an-example-graph" title="Link to this heading"></a></h2>
+<p>Start Turtlesim in one terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<p>Start keyboard control in a second terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtle_teleop_key
+</pre></div>
+</div>
+</section>
+<section id="explore-rqt">
+<h2>4. Explore rqt<a class="headerlink" href="#explore-rqt" title="Link to this heading"></a></h2>
+<p>Start the plugin framework:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rqt
+</pre></div>
+</div>
+<p>Plugins are available from the <strong>Plugins</strong> menu. Useful plugins include:</p>
+<ul class="simple">
+<li><p><strong>Introspection → Node Graph</strong></p></li>
+<li><p><strong>Services → Service Caller</strong></p></li>
+<li><p><strong>Topics → Topic Monitor</strong></p></li>
+<li><p><strong>Configuration → Dynamic Reconfigure</strong>, when supported by the node</p></li>
+</ul>
+<p>The exact menu contents depend on the rqt packages installed on the computer.</p>
+</section>
+<section id="visualize-nodes-with-rqt-graph">
+<h2>5. Visualize nodes with rqt_graph<a class="headerlink" href="#visualize-nodes-with-rqt-graph" title="Link to this heading"></a></h2>
+<p>Open the graph as a standalone tool:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rqt_graph
+</pre></div>
+</div>
+<p>Alternatively, open <strong>Introspection → Node Graph</strong> from the rqt Plugins menu.
+With Turtlesim and keyboard teleoperation running, the graph shows the
+<code class="docutils literal notranslate"><span class="pre">/teleop_turtle</span></code> and <code class="docutils literal notranslate"><span class="pre">/turtlesim</span></code> nodes connected through
+<code class="docutils literal notranslate"><span class="pre">/turtle1/cmd_vel</span></code>.</p>
+<p><img alt="rqt_graph displaying only nodes" src="../../_images/rqt_graph_nodes-only.png" /></p>
+<p>Use the controls above the graph to:</p>
+<ul class="simple">
+<li><p>refresh discovery</p></li>
+<li><p>include or hide topics</p></li>
+<li><p>filter namespaces</p></li>
+<li><p>show active connections only</p></li>
+</ul>
+<p>Move the turtle with the keyboard and compare the graph with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>info<span class="w"> </span>/teleop_turtle
+ros2<span class="w"> </span>node<span class="w"> </span>info<span class="w"> </span>/turtlesim
+</pre></div>
+</div>
+</section>
+<section id="call-a-service-from-rqt">
+<h2>6. Call a service from rqt<a class="headerlink" href="#call-a-service-from-rqt" title="Link to this heading"></a></h2>
+<p>Open <strong>Services → Service Caller</strong>. Select the <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> service and enter
+values for <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">theta</span></code>, and <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
+<p><img alt="The rqt Service Caller plugin" src="../../_images/rqt_service_call.png" /></p>
+<p>Press <strong>Call</strong> to send the request. The response contains the name of the
+created turtle.</p>
+<p><img alt="Calling the spawn service and displaying its response" src="../../_images/rqt_service_call2.png" /></p>
+<p>Compare this operation with the equivalent CLI command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{x: 2.0, y: 2.0, theta: 0.0, name: second_turtle}"</span>
+</pre></div>
+</div>
+</section>
+<section id="exercise">
+<h2>7. Exercise<a class="headerlink" href="#exercise" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Run the publisher and subscriber created in the previous exercise.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code> and locate both nodes and their shared topic.</p></li>
+<li><p>Stop the subscriber and refresh the graph.</p></li>
+<li><p>Restart it and verify that the connection returns.</p></li>
+<li><p>Use a topic-related rqt plugin to inspect the published values.</p></li>
+<li><p>Start Turtlesim and call one of its services through rqt.</p></li>
+</ol>
+<p>Use the CLI to cross-check what the GUI shows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
+ros2<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>-t
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ROS2-Turtlesim.html" class="btn btn-neutral float-left" title="Understanding ROS 2 with Turtlesim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../navigation/ROS2-TF2.html" class="btn btn-neutral float-right" title="TF2 - The second generation of the transform library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
