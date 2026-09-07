@@ -4,8 +4,8 @@ Welcome to the ROS 2 workshop!
 .. toctree::
    :maxdepth: 2
 
-   Getting started <_source/getting_started/index>
-   ROS 2 basics <_source/basics/index>
-   ROS 2 Navigation <_source/navigation/index>
-   ROS 2 Manipulation <_source/manipulation/index>
-   ROS 2 control <_source/control/index>
+   1. Getting Started <_source/getting_started/index>
+   2. ROS 2 Basics <_source/basics/index>
+   3. ROS 2 Navigation <_source/navigation/index>
+   4. ROS 2 Manipulation <_source/manipulation/index>
+   5. ROS 2 Control <_source/control/index>
