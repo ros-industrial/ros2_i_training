@@ -21,7 +21,7 @@ The following repositories provide useful examples and reference implementations
 
 ## Motion planning and manipulation
 
-- [MoveIt 2](https://github.com/moveit/moveit2) — Motion planning, manipulation, kinematics, and collision-checking framework for ROS 2.
+- [MoveIt 2](https://github.com/moveit/moveit2) — Motion planning, manipulation, kinematics, and collision-checking framework for ROS 2. 
 
 ## Tutorials
 

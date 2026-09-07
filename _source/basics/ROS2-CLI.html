@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ROS 2 command-line interface &mdash; ROS2 workshop  documentation</title>
+  <title>ROS 2 CLI and Turtlesim &mdash; ROS2 workshop  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -22,8 +22,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Understanding ROS 2 with Turtlesim" href="ROS2-Turtlesim.html" />
-    <link rel="prev" title="Simple Service in Python" href="ROS2-Simple-Service.html" /> 
+    <link rel="next" title="ROS 2 GUI tools: rqt and rqt_graph" href="ROS2-RQt.html" />
+    <link rel="prev" title="ROS 2 basics" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,15 +48,15 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.2 Publisher and subscriber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.4 ROS 2 CLI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">2.5 Turtlesim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.6 rqt and rqt_graph</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1 ROS 2 CLI and Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.2 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Bags-PlotJuggler.html">2.3 ROS 2 bags and PlotJuggler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.4 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.5 Publisher and Subscriber in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.6 Service in Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ROS2-Basics-CheatSheet.html">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 GitHub Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 Github Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
@@ -79,7 +79,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
-      <li class="breadcrumb-item active">ROS 2 command-line interface</li>
+      <li class="breadcrumb-item active">ROS 2 CLI and Turtlesim</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/_source/basics/ROS2-CLI.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,21 +89,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ros-2-command-line-interface">
-<h1>ROS 2 command-line interface<a class="headerlink" href="#ros-2-command-line-interface" title="Link to this heading"></a></h1>
+  <section id="ros-2-cli-and-turtlesim">
+<h1>ROS 2 CLI and Turtlesim<a class="headerlink" href="#ros-2-cli-and-turtlesim" title="Link to this heading"></a></h1>
 <section id="introduction">
 <h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ros2</span></code> command-line interface (CLI) lets you start nodes and inspect or
 interact with a running ROS 2 system. Its subcommands cover nodes, topics,
 services, actions, parameters, interfaces, and many other ROS 2 concepts.</p>
+<p>Turtlesim is a small teaching application that makes these concepts visible.
+In this tutorial, you will use the CLI to inspect and control a simulated
+turtle. Try to find commands with <code class="docutils literal notranslate"><span class="pre">--help</span></code> and the <a class="reference internal" href="ROS2-Basics-CheatSheet.html"><span class="std std-doc">ROS 2 basics cheat
+sheet</span></a> before consulting the solutions.</p>
 <p>The official <a class="reference external" href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools.html">ROS 2 Jazzy beginner CLI
 tutorials</a>
 provide additional examples.</p>
+<section id="requirements">
+<h3>1.1 Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h3>
+<p>Install Turtlesim if it is not already available:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-turtlesim
+</pre></div>
+</div>
 <p>Source ROS 2 in every new terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.bash
 </pre></div>
 </div>
-<p>Display the available subcommands:</p>
+<p>Display the available CLI subcommands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>--help
 </pre></div>
 </div>
@@ -113,8 +124,9 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 </pre></div>
 </div>
 </section>
-<section id="communication-patterns">
-<h2>2. Communication patterns<a class="headerlink" href="#communication-patterns" title="Link to this heading"></a></h2>
+</section>
+<section id="ros-2-communication-patterns">
+<h2>2. ROS 2 communication patterns<a class="headerlink" href="#ros-2-communication-patterns" title="Link to this heading"></a></h2>
 <p>ROS 2 uses three principal communication patterns:</p>
 <table class="docutils align-default">
 <thead>
@@ -138,129 +150,208 @@ ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</
 </tr>
 </tbody>
 </table>
-<p>Messages, services, and actions are described by interface definitions. Inspect
-an interface with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>geometry_msgs/msg/Twist
-</pre></div>
-</div>
-<p>List the interfaces currently installed:</p>
+<p>Messages, services, and actions are described by interface definitions. List
+the installed interfaces and inspect one with:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>interface<span class="w"> </span>list
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>geometry_msgs/msg/Twist
 </pre></div>
 </div>
 </section>
-<section id="run-and-inspect-nodes">
-<h2>3. Run and inspect nodes<a class="headerlink" href="#run-and-inspect-nodes" title="Link to this heading"></a></h2>
+<section id="start-turtlesim">
+<h2>3. Start Turtlesim<a class="headerlink" href="#start-turtlesim" title="Link to this heading"></a></h2>
 <p>The general form for starting an executable is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ros2 run PACKAGE EXECUTABLE
 </pre></div>
 </div>
-<p>For example:</p>
+<p>Start the simulator in one terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
 </pre></div>
 </div>
-<p>In another terminal, list running nodes:</p>
+<p>Start keyboard teleoperation in another terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtle_teleop_key
+</pre></div>
+</div>
+<p>A Qt window should open with a blue background and a turtle in the middle.
+Treat it as an automated guided vehicle observed from above.</p>
+<p><img alt="Turtlesim coordinate system showing x, y, and theta" src="../../_images/turtlesim_xytheta.png" /></p>
+<p>You can keep the simulator visible by right-clicking its title bar and enabling
+<strong>Always on top</strong>. Select the teleoperation terminal and use the arrow keys to
+move the turtle. The other listed keys set absolute orientations.</p>
+</section>
+<section id="inspect-the-ros-graph">
+<h2>4. Inspect the ROS graph<a class="headerlink" href="#inspect-the-ros-graph" title="Link to this heading"></a></h2>
+<p>With both Turtlesim nodes running, use the CLI to discover the nodes, topics,
+services, actions, parameters, and their interface types.</p>
+<section id="nodes">
+<h3>4.1 Nodes<a class="headerlink" href="#nodes" title="Link to this heading"></a></h3>
+<p>List the running nodes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
 </pre></div>
 </div>
-<p>Inspect a particular node:</p>
+<p>Inspect the simulator node:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>info<span class="w"> </span>/turtlesim
 </pre></div>
 </div>
 <p>Node names should be unique within a ROS graph. ROS 2 can start nodes with the
 same name, but doing so makes introspection and communication ambiguous.</p>
 </section>
-<section id="inspect-and-publish-topics">
-<h2>4. Inspect and publish topics<a class="headerlink" href="#inspect-and-publish-topics" title="Link to this heading"></a></h2>
-<p>With Turtlesim running, list topics and their types:</p>
+<section id="topics">
+<h3>4.2 Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h3>
+<p>List topics and their types:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span>-t
 </pre></div>
 </div>
-<p>Inspect a topic:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/turtle1/cmd_vel<span class="w"> </span>--verbose
+<p>Inspect the velocity command topic:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/turtle1/cmd_vel
+ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/turtle1/cmd_vel<span class="w"> </span>--verbose
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>geometry_msgs/msg/Twist
 </pre></div>
 </div>
-<p>Display messages:</p>
+<p>Display messages and measure their publication frequency and bandwidth:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/turtle1/pose
-</pre></div>
-</div>
-<p>Measure publishing frequency and bandwidth:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>hz<span class="w"> </span>/turtle1/pose
+ros2<span class="w"> </span>topic<span class="w"> </span>hz<span class="w"> </span>/turtle1/pose
 ros2<span class="w"> </span>topic<span class="w"> </span>bw<span class="w"> </span>/turtle1/pose
 </pre></div>
 </div>
-<p>Publish a velocity command at 2 Hz:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">2</span><span class="w"> </span>/turtle1/cmd_vel<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">"{linear: {x: 1.0}, angular: {z: 1.0}}"</span>
-</pre></div>
-</div>
-<p>Stop a continuous publisher with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code>. To publish only once, replace
-<code class="docutils literal notranslate"><span class="pre">--rate</span> <span class="pre">2</span></code> with <code class="docutils literal notranslate"><span class="pre">--once</span></code>.</p>
+<p>The main Turtlesim topics are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/turtle1/color_sensor</span></code> reports the RGB values of the trail color.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/turtle1/cmd_vel</span></code> receives commands that move the turtle. Echo this topic
+while using keyboard teleoperation to observe the velocity commands.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/turtle1/pose</span></code> reports the turtle’s current position and orientation.</p></li>
+</ul>
 </section>
-<section id="inspect-and-call-services">
-<h2>5. Inspect and call services<a class="headerlink" href="#inspect-and-call-services" title="Link to this heading"></a></h2>
+<section id="services">
+<h3>4.3 Services<a class="headerlink" href="#services" title="Link to this heading"></a></h3>
 <p>List services and their types:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>-t
 </pre></div>
 </div>
-<p>Inspect the type used by a service:</p>
+<p>Inspect a service type and its request fields:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/spawn
 ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>turtlesim/srv/Spawn
+ros2<span class="w"> </span>interface<span class="w"> </span>proto<span class="w"> </span>turtlesim/srv/Spawn
 </pre></div>
 </div>
-<p>Call the service:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">"{x: 2.0, y: 2.0, theta: 0.0, name: second_turtle}"</span>
-</pre></div>
-</div>
-<p>The request fields and their types must match the service interface.</p>
+<p>The main Turtlesim services are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/kill</span></code> and <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> remove and create turtles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/clear</span></code> removes trail lines, while <code class="docutils literal notranslate"><span class="pre">/reset</span></code> restores the initial state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/turtle1/set_pen</span></code> changes the trail color and thickness.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/turtle1/teleport_absolute</span></code> and <code class="docutils literal notranslate"><span class="pre">/turtle1/teleport_relative</span></code> move the
+turtle instantly.</p></li>
+</ul>
+<p>The services containing <code class="docutils literal notranslate"><span class="pre">parameter</span></code> in their names support the node’s
+parameter API. You can ignore them until the parameter exercise below.</p>
 </section>
-<section id="inspect-and-invoke-actions">
-<h2>6. Inspect and invoke actions<a class="headerlink" href="#inspect-and-invoke-actions" title="Link to this heading"></a></h2>
-<p>List action servers and their types:</p>
+<section id="actions">
+<h3>4.4 Actions<a class="headerlink" href="#actions" title="Link to this heading"></a></h3>
+<p>List action servers and inspect the rotate action:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>list<span class="w"> </span>-t
-</pre></div>
-</div>
-<p>Inspect an action:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>info<span class="w"> </span>/turtle1/rotate_absolute
+ros2<span class="w"> </span>action<span class="w"> </span>info<span class="w"> </span>/turtle1/rotate_absolute
 ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>turtlesim/action/RotateAbsolute
-</pre></div>
-</div>
-<p>Send a goal and display feedback:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/turtle1/rotate_absolute<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>turtlesim/action/RotateAbsolute<span class="w"> </span><span class="s2">"{theta: 1.57}"</span><span class="w"> </span>--feedback
 </pre></div>
 </div>
 <p>Actions are appropriate for operations that take time and may need feedback or
 cancellation.</p>
 </section>
-<section id="inspect-and-change-parameters">
-<h2>7. Inspect and change parameters<a class="headerlink" href="#inspect-and-change-parameters" title="Link to this heading"></a></h2>
-<p>List parameters:</p>
+<section id="parameters">
+<h3>4.5 Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>List, read, and describe parameters:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span>list
-</pre></div>
-</div>
-<p>Read and describe a parameter:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span>get<span class="w"> </span>/turtlesim<span class="w"> </span>background_r
+ros2<span class="w"> </span>param<span class="w"> </span>get<span class="w"> </span>/turtlesim<span class="w"> </span>background_r
 ros2<span class="w"> </span>param<span class="w"> </span>describe<span class="w"> </span>/turtlesim<span class="w"> </span>background_r
 </pre></div>
 </div>
-<p>Set a parameter:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/turtlesim<span class="w"> </span>background_r<span class="w"> </span><span class="m">100</span>
-</pre></div>
-</div>
-<p>Save all parameters from a node to a YAML file:</p>
+<p>Save all parameters from the node to a YAML file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span>dump<span class="w"> </span>/turtlesim
 </pre></div>
 </div>
+<p>In the next module, repeat these introspection activities with <code class="docutils literal notranslate"><span class="pre">rqt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code> and compare the graphical view with the CLI output.</p>
 </section>
-<section id="remap-names">
-<h2>8. Remap names<a class="headerlink" href="#remap-names" title="Link to this heading"></a></h2>
-<p>ROS arguments follow <code class="docutils literal notranslate"><span class="pre">--ros-args</span></code>. Rename a node at runtime:</p>
+</section>
+<section id="interact-with-turtlesim">
+<h2>5. Interact with Turtlesim<a class="headerlink" href="#interact-with-turtlesim" title="Link to this heading"></a></h2>
+<section id="publish-a-topic">
+<h3>5.1 Publish a topic<a class="headerlink" href="#publish-a-topic" title="Link to this heading"></a></h3>
+<p>Stop the keyboard teleoperation node before publishing your own velocity
+commands. The <code class="docutils literal notranslate"><span class="pre">Twist</span></code> message contains two nested <code class="docutils literal notranslate"><span class="pre">Vector3</span></code> values named
+<code class="docutils literal notranslate"><span class="pre">linear</span></code> and <code class="docutils literal notranslate"><span class="pre">angular</span></code>.</p>
+<p>Publish a velocity command at 2 Hz:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">2</span><span class="w"> </span>/turtle1/cmd_vel<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{linear: {x: 0.5}, angular: {z: 0.5}}"</span>
+</pre></div>
+</div>
+<p>Stop a continuous publisher with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code>. To publish only once, replace
+<code class="docutils literal notranslate"><span class="pre">--rate</span> <span class="pre">2</span></code> with <code class="docutils literal notranslate"><span class="pre">--once</span></code>.</p>
+</section>
+<section id="call-services">
+<h3>5.2 Call services<a class="headerlink" href="#call-services" title="Link to this heading"></a></h3>
+<p>Service request values use YAML syntax and must match the fields and types in
+the service interface. First, change the turtle’s pen color:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/turtle1/set_pen<span class="w"> </span>turtlesim/srv/SetPen<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{r: 100, g: 0, b: 0, width: 2, 'off': 0}"</span>
+</pre></div>
+</div>
+<p>Move the turtle and echo <code class="docutils literal notranslate"><span class="pre">/turtle1/color_sensor</span></code> to compare its output with the
+chosen RGB values.</p>
+<p>Inspect and call the empty <code class="docutils literal notranslate"><span class="pre">/clear</span></code> service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/clear
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>std_srvs/srv/Empty
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/clear<span class="w"> </span>std_srvs/srv/Empty<span class="w"> </span><span class="s2">"{}"</span>
+</pre></div>
+</div>
+<p>Spawn a second turtle:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{x: 1.0, y: 5.0, theta: 0.0, name: second_turtle}"</span>
+</pre></div>
+</div>
+<p>Remove the second turtle:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/kill<span class="w"> </span>turtlesim/srv/Kill<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{name: second_turtle}"</span>
+</pre></div>
+</div>
+</section>
+<section id="send-an-action-goal">
+<h3>5.3 Send an action goal<a class="headerlink" href="#send-an-action-goal" title="Link to this heading"></a></h3>
+<p>The rotate action accepts an angle in radians. Send a goal and display its
+feedback:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/turtle1/rotate_absolute<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>turtlesim/action/RotateAbsolute<span class="w"> </span><span class="s2">"{theta: -1.57}"</span><span class="w"> </span>--feedback
+</pre></div>
+</div>
+</section>
+<section id="change-parameters">
+<h3>5.4 Change parameters<a class="headerlink" href="#change-parameters" title="Link to this heading"></a></h3>
+<p>The background color parameters accept values from 0 to 255. Change one of
+them:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>param<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/turtlesim<span class="w"> </span>background_r<span class="w"> </span><span class="m">125</span>
+</pre></div>
+</div>
+<p>The parameter services can also be inspected and called directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/turtlesim/list_parameters
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>rcl_interfaces/srv/ListParameters
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/turtlesim/list_parameters<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>rcl_interfaces/srv/ListParameters<span class="w"> </span><span class="s2">"{prefixes: [], depth: 0}"</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="next-record-and-analyze-turtlesim-data">
+<h2>6. Next: record and analyze Turtlesim data<a class="headerlink" href="#next-record-and-analyze-turtlesim-data" title="Link to this heading"></a></h2>
+<p>Continue with <a class="reference internal" href="ROS2-Bags-PlotJuggler.html"><span class="std std-doc">ROS 2 bags and PlotJuggler</span></a> to record
+Turtlesim commands and poses, replay the movement, and inspect the recorded
+signals in PlotJuggler.</p>
+</section>
+<section id="remapping-and-runtime-options">
+<h2>7. Remapping and runtime options<a class="headerlink" href="#remapping-and-runtime-options" title="Link to this heading"></a></h2>
+<p>ROS-specific arguments follow <code class="docutils literal notranslate"><span class="pre">--ros-args</span></code>. Rename a node at runtime:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node<span class="w"> </span>--ros-args<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--remap<span class="w"> </span>__node:<span class="o">=</span>workshop_turtlesim
 </pre></div>
 </div>
-<p>Remap a topic for both Turtlesim nodes:</p>
+<p>Remap the command topic for both Turtlesim nodes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node<span class="w"> </span>--ros-args<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--remap<span class="w"> </span>/turtle1/cmd_vel:<span class="o">=</span>/robot/cmd_vel
 </pre></div>
@@ -272,21 +363,63 @@ ros2<span class="w"> </span>param<span class="w"> </span>describe<span class="w"
 </div>
 <p>The nodes still communicate because the original topic is mapped to the same
 new name in both processes.</p>
+<p>Every command and subcommand provides options through <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>. For
+example, <code class="docutils literal notranslate"><span class="pre">--rate</span> <span class="pre">0.5</span></code> publishes or calls at 0.5 Hz. When repeatedly calling
+<code class="docutils literal notranslate"><span class="pre">/spawn</span></code>, omit the <code class="docutils literal notranslate"><span class="pre">name</span></code> field so that Turtlesim can assign unique names.</p>
 </section>
 <section id="practice">
-<h2>9. Practice<a class="headerlink" href="#practice" title="Link to this heading"></a></h2>
-<p>Start Turtlesim and use only the CLI to:</p>
+<h2>8. Practice<a class="headerlink" href="#practice" title="Link to this heading"></a></h2>
+<p>Use only the CLI and its built-in help to complete these tasks:</p>
 <ol class="arabic simple">
 <li><p>Find the names of all running nodes.</p></li>
-<li><p>Determine the type of <code class="docutils literal notranslate"><span class="pre">/turtle1/pose</span></code>.</p></li>
+<li><p>Determine the type of <code class="docutils literal notranslate"><span class="pre">/turtle1/pose</span></code> and inspect its fields.</p></li>
 <li><p>Measure the publication rate of <code class="docutils literal notranslate"><span class="pre">/turtle1/pose</span></code>.</p></li>
-<li><p>Find the request fields of the <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> service.</p></li>
-<li><p>Spawn a second turtle.</p></li>
-<li><p>Find the goal, result, and feedback fields of the rotate action.</p></li>
+<li><p>Find the request fields of the <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> service and spawn a turtle.</p></li>
+<li><p>Change the pen color, then verify it through <code class="docutils literal notranslate"><span class="pre">/turtle1/color_sensor</span></code>.</p></li>
+<li><p>Find the goal, result, and feedback fields of the rotate action, then send a
+goal.</p></li>
 <li><p>Change one background-color parameter.</p></li>
+<li><p>Publish a velocity command at 0.5 Hz.</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">/reset</span></code> and observe the result.</p></li>
 </ol>
-<p>Use <code class="docutils literal notranslate"><span class="pre">--help</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span></code>, and tab completion when you are
-uncertain about a command.</p>
+<p>Use tab completion, <code class="docutils literal notranslate"><span class="pre">--help</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span></code>, and <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">proto</span></code>
+when you are uncertain about a command.</p>
+</section>
+<section id="solutions">
+<h2>9. Solutions<a class="headerlink" href="#solutions" title="Link to this heading"></a></h2>
+<section id="inspect-the-graph">
+<h3>9.1 Inspect the graph<a class="headerlink" href="#inspect-the-graph" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>node<span class="w"> </span>list
+ros2<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">type</span><span class="w"> </span>/turtle1/pose
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>turtlesim/msg/Pose
+ros2<span class="w"> </span>topic<span class="w"> </span>hz<span class="w"> </span>/turtle1/pose
+ros2<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>-t
+ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>turtlesim/srv/Spawn
+ros2<span class="w"> </span>interface<span class="w"> </span>proto<span class="w"> </span>turtlesim/srv/Spawn
+</pre></div>
+</div>
+</section>
+<section id="interact-with-the-turtle">
+<h3>9.2 Interact with the turtle<a class="headerlink" href="#interact-with-the-turtle" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{x: 5.0, y: 5.0, theta: 0.0}"</span>
+
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/turtle1/set_pen<span class="w"> </span>turtlesim/srv/SetPen<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{r: 100, g: 0, b: 0, width: 2, 'off': 0}"</span>
+
+ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/turtle1/rotate_absolute<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>turtlesim/action/RotateAbsolute<span class="w"> </span><span class="s2">"{theta: -1.57}"</span><span class="w"> </span>--feedback
+
+ros2<span class="w"> </span>param<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/turtlesim<span class="w"> </span>background_r<span class="w"> </span><span class="m">125</span>
+
+ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--rate<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>/turtle1/cmd_vel<span class="w"> </span>geometry_msgs/msg/Twist<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{linear: {x: 0.5}, angular: {z: 0.5}}"</span>
+
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/reset<span class="w"> </span>std_srvs/srv/Empty<span class="w"> </span><span class="s2">"{}"</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
@@ -294,8 +427,8 @@ uncertain about a command.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ROS2-Simple-Service.html" class="btn btn-neutral float-left" title="Simple Service in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ROS2-Turtlesim.html" class="btn btn-neutral float-right" title="Understanding ROS 2 with Turtlesim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="ROS 2 basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-RQt.html" class="btn btn-neutral float-right" title="ROS 2 GUI tools: rqt and rqt_graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

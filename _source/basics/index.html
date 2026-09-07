@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ROS 2 File System" href="ROS2-Filesystem.html" />
+    <link rel="next" title="ROS 2 CLI and Turtlesim" href="ROS2-CLI.html" />
     <link rel="prev" title="Docker basics" href="../getting_started/docker.html" /> 
 </head>
 
@@ -48,15 +48,15 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. ROS 2 Basics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.2 Publisher and subscriber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.4 ROS 2 CLI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">2.5 Turtlesim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.6 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.1 ROS 2 CLI and Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.2 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Bags-PlotJuggler.html">2.3 ROS 2 bags and PlotJuggler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.4 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.5 Publisher and Subscriber in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.6 Service in Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ROS2-Basics-CheatSheet.html">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 GitHub Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 Github Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
@@ -92,15 +92,15 @@
 <h1>ROS 2 basics<a class="headerlink" href="#ros-2-basics" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.2 Publisher and subscriber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-CLI.html">2.4 ROS 2 CLI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-Turtlesim.html">2.5 Turtlesim</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-RQt.html">2.6 rqt and rqt_graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-CLI.html">2.1 ROS 2 CLI and Turtlesim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-RQt.html">2.2 rqt and rqt_graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Bags-PlotJuggler.html">2.3 ROS 2 bags and PlotJuggler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Filesystem.html">2.4 File system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.5 Publisher and Subscriber in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Simple-Service.html">2.6 Service in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROS2-Basics-CheatSheet.html">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 GitHub Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 Github Examples</a></li>
 </ul>
 </div>
 </section>
@@ -110,7 +110,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../getting_started/docker.html" class="btn btn-neutral float-left" title="Docker basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ROS2-Filesystem.html" class="btn btn-neutral float-right" title="ROS 2 File System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ROS2-CLI.html" class="btn btn-neutral float-right" title="ROS 2 CLI and Turtlesim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
