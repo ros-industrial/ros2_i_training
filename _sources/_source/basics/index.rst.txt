@@ -11,5 +11,7 @@ ROS 2 basics
    2.5 Publisher and Subscriber in Python <ROS2-Simple-Publisher-Subscriber>
    2.6 Service in Python <ROS2-Simple-Service>
    2.7 TF2 <../navigation/ROS2-TF2>
+   2.8 Launch files <ROS2-Launch-Files>
    2.A Annex: ROS 2 Basics Cheat Sheet <ROS2-Basics-CheatSheet>
    2.B Annex: ROS 2 Github Examples <ROS2-Github_Examples>
+   2.C Annex: ROS 2 Basics training scripts <ROS2-Training-Scripts>
