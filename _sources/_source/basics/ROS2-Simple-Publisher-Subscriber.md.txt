@@ -1,5 +1,5 @@
 
-# Understanding ROS 2 nodes with a simple Publisher - Subscriber pair
+# Simple Publisher - Subscriber pair
 **Based on the [ROS 2 Tutorials](https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html)**
 
 ## Introduction
@@ -391,3 +391,128 @@ Similarly as the previous two cases, we need to declare a third executor that po
 
 Build the workspace and run this new executable, whose name in this case is `composed`.
 You will observe that indeed both the publisher and subscriber are running from within the same executable.
+
+
+## 5 Exercise: Use a different message type
+
+The publisher and subscriber in this tutorial use `std_msgs/msg/String`. Your
+task is to write another publisher and subscriber that communicate using a
+different ROS 2 message type.
+
+Browse the message packages in
+[ros2/common_interfaces](https://github.com/ros2/common_interfaces) and select
+a message type other than `std_msgs/msg/String).
+
+Beginner-friendly choices include:
+
+- `geometry_msgs/msg/Point`
+- `geometry_msgs/msg/Twist`
+- `sensor_msgs/msg/Temperature`
+
+### 5.1 Inspect the interface
+
+Before writing code, inspect the fields of the selected message. For example:
+
+```bash
+ros2 interface show geometry_msgs/msg/Point
+```
+
+Replace `geometry_msgs/msg/Point` with your selected interface. Identify:
+
+1. the Python package and class that must be imported
+2. the fields that the publisher must populate
+3. the fields that the subscriber should display
+
+### 5.2 Create the nodes
+
+Inside the `wshop_nodes/wshop_nodes` Python module, create:
+
+```text
+custom_publisher.py
+custom_subscriber.py
+```
+
+Use the publisher and subscriber from this tutorial as a starting point, but
+make the following changes:
+
+- import the selected message class
+- use that class when creating the publisher and subscription
+- publish on a new topic such as `custom_topic`
+- populate the message with valid, changing values
+- log meaningful fields when the subscriber receives a message
+
+The publisher and subscriber must use exactly the same message type and topic
+name.
+
+### 5.3 Add the dependency
+
+Add the package containing your selected message to `package.xml`. For
+example, when using `geometry_msgs/msg/Point` or
+`geometry_msgs/msg/Twist`:
+
+```xml
+<exec_depend>geometry_msgs</exec_depend>
+```
+
+When using `sensor_msgs/msg/Temperature`:
+
+```xml
+<exec_depend>sensor_msgs</exec_depend>
+```
+
+Use the package name from the part before `/msg/` in the interface name.
+
+### 5.4 Register the executables
+
+Add entry points for both new nodes to the `console_scripts` list in
+`setup.py`. For example:
+
+```python
+'custom_talker = wshop_nodes.custom_publisher:main',
+'custom_listener = wshop_nodes.custom_subscriber:main',
+```
+
+### 5.5 Build and run
+
+From the root of the workspace:
+
+```bash
+rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y
+colcon build --symlink-install --packages-select wshop_nodes
+source install/setup.bash
+```
+
+Run the publisher:
+
+```bash
+ros2 run wshop_nodes custom_talker
+```
+
+In another terminal, source ROS 2 and the workspace, then run the subscriber:
+
+```bash
+source /opt/ros/$ROS_DISTRO/setup.bash
+cd ~/dev_ws
+source install/setup.bash
+ros2 run wshop_nodes custom_listener
+```
+
+### 5.6 Verify the result
+
+While both nodes are running, use a third terminal to inspect the topic:
+
+```bash
+ros2 topic info /custom_topic --verbose
+ros2 topic echo /custom_topic
+```
+
+Check that:
+
+- the topic uses the message type you selected
+- one publisher and one subscriber are connected
+- the published field values change over time
+- the subscriber prints the expected values
+
+As an additional test, stop your publisher and publish one message manually
+with `ros2 topic pub --once`. Use `ros2 interface show` to determine the
+correct YAML fields for your selected message.

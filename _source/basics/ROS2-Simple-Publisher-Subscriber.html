@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Understanding ROS 2 nodes with a simple Publisher - Subscriber pair &mdash; ROS2 workshop  documentation</title>
+  <title>Simple Publisher - Subscriber pair &mdash; ROS2 workshop  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -22,7 +22,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Understanding ROS 2 with Turtlesim" href="ROS2-Turtlesim.html" />
+    <link rel="next" title="Simple Service in Python" href="ROS2-Simple-Service.html" />
     <link rel="prev" title="ROS 2 File System" href="ROS2-Filesystem.html" /> 
 </head>
 
@@ -46,17 +46,18 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">ROS 2 basics</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">File system</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Publisher and subscriber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">Turtlesim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">TF2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.1 File system</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2 Publisher and subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.3 Simple Service in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Turtlesim.html">2.4 Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.5 TF2</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">ROS 2 Navigation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">ROS 2 Manipulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../control/index.html">ROS 2 control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">4. ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
 </ul>
 
         </div>
@@ -74,7 +75,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
-      <li class="breadcrumb-item active">Understanding ROS 2 nodes with a simple Publisher - Subscriber pair</li>
+      <li class="breadcrumb-item active">Simple Publisher - Subscriber pair</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/_source/basics/ROS2-Simple-Publisher-Subscriber.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -84,8 +85,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="understanding-ros-2-nodes-with-a-simple-publisher-subscriber-pair">
-<h1>Understanding ROS 2 nodes with a simple Publisher - Subscriber pair<a class="headerlink" href="#understanding-ros-2-nodes-with-a-simple-publisher-subscriber-pair" title="Link to this heading"></a></h1>
+  <section id="simple-publisher-subscriber-pair">
+<h1>Simple Publisher - Subscriber pair<a class="headerlink" href="#simple-publisher-subscriber-pair" title="Link to this heading"></a></h1>
 <p><strong>Based on the <a class="reference external" href="https://docs.ros.org/en/foxy/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html">ROS 2 Tutorials</a></strong></p>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
@@ -431,6 +432,114 @@ We also import the single threaded executor that we will be using to compose the
 You will observe that indeed both the publisher and subscriber are running from within the same executable.</p>
 </section>
 </section>
+<section id="exercise-use-a-different-message-type">
+<h2>5 Exercise: Use a different message type<a class="headerlink" href="#exercise-use-a-different-message-type" title="Link to this heading"></a></h2>
+<p>The publisher and subscriber in this tutorial use <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/String</span></code>. Your
+task is to write another publisher and subscriber that communicate using a
+different ROS 2 message type.</p>
+<p>Browse the message packages in
+<a class="reference external" href="https://github.com/ros2/common_interfaces">ros2/common_interfaces</a> and select
+a message type other than `std_msgs/msg/String).</p>
+<p>Beginner-friendly choices include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Point</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Twist</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Temperature</span></code></p></li>
+</ul>
+<section id="inspect-the-interface">
+<h3>5.1 Inspect the interface<a class="headerlink" href="#inspect-the-interface" title="Link to this heading"></a></h3>
+<p>Before writing code, inspect the fields of the selected message. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>geometry_msgs/msg/Point
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Point</span></code> with your selected interface. Identify:</p>
+<ol class="arabic simple">
+<li><p>the Python package and class that must be imported</p></li>
+<li><p>the fields that the publisher must populate</p></li>
+<li><p>the fields that the subscriber should display</p></li>
+</ol>
+</section>
+<section id="create-the-nodes">
+<h3>5.2 Create the nodes<a class="headerlink" href="#create-the-nodes" title="Link to this heading"></a></h3>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">wshop_nodes/wshop_nodes</span></code> Python module, create:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>custom_publisher.py
+custom_subscriber.py
+</pre></div>
+</div>
+<p>Use the publisher and subscriber from this tutorial as a starting point, but
+make the following changes:</p>
+<ul class="simple">
+<li><p>import the selected message class</p></li>
+<li><p>use that class when creating the publisher and subscription</p></li>
+<li><p>publish on a new topic such as <code class="docutils literal notranslate"><span class="pre">custom_topic</span></code></p></li>
+<li><p>populate the message with valid, changing values</p></li>
+<li><p>log meaningful fields when the subscriber receives a message</p></li>
+</ul>
+<p>The publisher and subscriber must use exactly the same message type and topic
+name.</p>
+</section>
+<section id="add-the-dependency">
+<h3>5.3 Add the dependency<a class="headerlink" href="#add-the-dependency" title="Link to this heading"></a></h3>
+<p>Add the package containing your selected message to <code class="docutils literal notranslate"><span class="pre">package.xml</span></code>. For
+example, when using <code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Point</span></code> or
+<code class="docutils literal notranslate"><span class="pre">geometry_msgs/msg/Twist</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;exec_depend&gt;</span>geometry_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+</pre></div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">sensor_msgs/msg/Temperature</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;exec_depend&gt;</span>sensor_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+</pre></div>
+</div>
+<p>Use the package name from the part before <code class="docutils literal notranslate"><span class="pre">/msg/</span></code> in the interface name.</p>
+</section>
+<section id="register-the-executables">
+<h3>5.4 Register the executables<a class="headerlink" href="#register-the-executables" title="Link to this heading"></a></h3>
+<p>Add entry points for both new nodes to the <code class="docutils literal notranslate"><span class="pre">console_scripts</span></code> list in
+<code class="docutils literal notranslate"><span class="pre">setup.py</span></code>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">'custom_talker = wshop_nodes.custom_publisher:main'</span><span class="p">,</span>
+<span class="s1">'custom_listener = wshop_nodes.custom_subscriber:main'</span><span class="p">,</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>5.5 Build and run<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>From the root of the workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span><span class="nv">$ROS_DISTRO</span><span class="w"> </span>-y
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>--packages-select<span class="w"> </span>wshop_nodes
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Run the publisher:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>wshop_nodes<span class="w"> </span>custom_talker
+</pre></div>
+</div>
+<p>In another terminal, source ROS 2 and the workspace, then run the subscriber:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.bash
+<span class="nb">cd</span><span class="w"> </span>~/dev_ws
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>wshop_nodes<span class="w"> </span>custom_listener
+</pre></div>
+</div>
+</section>
+<section id="verify-the-result">
+<h3>5.6 Verify the result<a class="headerlink" href="#verify-the-result" title="Link to this heading"></a></h3>
+<p>While both nodes are running, use a third terminal to inspect the topic:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>info<span class="w"> </span>/custom_topic<span class="w"> </span>--verbose
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/custom_topic
+</pre></div>
+</div>
+<p>Check that:</p>
+<ul class="simple">
+<li><p>the topic uses the message type you selected</p></li>
+<li><p>one publisher and one subscriber are connected</p></li>
+<li><p>the published field values change over time</p></li>
+<li><p>the subscriber prints the expected values</p></li>
+</ul>
+<p>As an additional test, stop your publisher and publish one message manually
+with <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">topic</span> <span class="pre">pub</span> <span class="pre">--once</span></code>. Use <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">interface</span> <span class="pre">show</span></code> to determine the
+correct YAML fields for your selected message.</p>
+</section>
+</section>
 </section>
 
 
@@ -438,7 +547,7 @@ You will observe that indeed both the publisher and subscriber are running from 
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ROS2-Filesystem.html" class="btn btn-neutral float-left" title="ROS 2 File System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ROS2-Turtlesim.html" class="btn btn-neutral float-right" title="Understanding ROS 2 with Turtlesim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ROS2-Simple-Service.html" class="btn btn-neutral float-right" title="Simple Service in Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
