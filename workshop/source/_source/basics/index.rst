@@ -11,3 +11,5 @@ ROS 2 basics
    2.5 Turtlesim <ROS2-Turtlesim>
    2.6 rqt and rqt_graph <ROS2-RQt>
    2.7 TF2 <../navigation/ROS2-TF2>
+   2.A Annex: ROS 2 Basics Cheat Sheet <ROS2-Basics-CheatSheet>
+   2.B Annex: ROS 2 GitHub Examples <ROS2-Github_Examples>
