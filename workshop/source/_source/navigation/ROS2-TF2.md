@@ -307,3 +307,9 @@ The virtual camera is mounted +0.1 m in x-axis from view of the turtle base and 
 ### 3.1 Testing the static broadcaster
 
 The TF published is exactly of the same format as the dynamic publisher, and this can be easily verified with any of the aforementioned means.
+
+## 4. Next: start the TF2 example with a launch file
+
+Continue with [ROS 2 launch files](../basics/ROS2-Launch-Files.md) to start the
+simulator, both dynamic broadcasters, the listener, the static broadcaster, and
+the second turtle from one launch file.
