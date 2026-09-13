@@ -1,14 +1,25 @@
 ## Introduction
 
-This repository contains source of training material for `ROS 2 Foxy`. The topics covered are:
+This repository contains the source files for training material for **ROS 2 Jazzy**. The topics covered are:
+
 - ROS 2 basics
-    - Composed node, publish / subscribe, services, actions, parameters, launch system
-    - Manged nodes, Quality of Service (QoS)
+    - Node composition, publish/subscribe, services, actions, parameters, launch system
+    - Managed nodes, Quality of Service (QoS)
     - File system
 - Navigation
     - SLAM, navigation
 - Manipulation
     - Basics of manipulation
+- ROS 2 control
+    - Hardware interfaces, controllers, and sensor integration
+    - Hands-on exercises with robot arms, mobile robots, and mobile manipulators
+
+## Training material
+
+- [Slides](slides/readme.md): Presentation material that can be built into PDF slide decks.
+- [Workshop material](workshop/readme.md): Hands-on training documentation that can be built as an HTML site.
+
+See the linked READMEs for build instructions.
 
 ## Development
 
