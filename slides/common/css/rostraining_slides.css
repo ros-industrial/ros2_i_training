@@ -1,0 +1,149 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+@page {
+  size: 1210px 681px;
+  margin: 0;
+}
+
+body {
+    font-family: 'Montserrat';
+    color:black;
+    font-weight: 400;
+    font-size: 14px;
+}
+h1{
+  font-family: 'Montserrat';
+  font-weight: bolder;
+  color:  black;
+  font-size: 30px;
+}
+h2{
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 22px;
+  color: #0D355F ;
+}
+h3 {
+  font-family: 'Montserrat';
+  /*font-family: 'Yanone Kaffeesatz';
+  set by LED for h1, h2 and h3*/
+  font-weight: 300;
+  font-size: 16px;
+  color: #C2232B;
+}
+h4{
+  font-family: 'Montserrat';
+  /*font-family: 'Yanone Kaffeesatz';
+  set by LED for h1, h2 and h3*/
+  font-weight: 300;
+  color: #C2232B;
+
+}
+.remark-code{
+  font-family: 'Source Code Pro';
+  font-size: small;
+}
+
+.remark-inline-code {
+  font-family: 'Source Code Pro';
+  font-size: medium;
+  font-weight: 600;
+  color: #C2232B; }
+
+.cols {
+  display: flex;
+}
+.thirty {
+  flex: 30%;
+}
+
+.forty {
+  flex: 40%;
+}
+.fifty {
+  flex: 50%;
+}
+.sixty {
+  flex: 60%;
+}
+.seventy {
+  flex: 70%;
+}
+
+div.header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  text-align: left;
+}
+div.header img{
+  height: 40px;
+  top: 5px;
+  right: 50px;
+  position: fixed;
+}
+
+div.footer {
+  border-top: 2px solid  #0D355F;
+  font-size: 10pt;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+}
+
+div.footer p {
+    margin-top: 10px;
+    height: 30px;
+}
+
+div.footer img {
+  height: 30px;
+  bottom: 5px;
+  left: 50px;
+  position: fixed;
+}
+
+.triangle {
+position: absolute;
+bottom: 0px;
+right: 0px;
+width: 110px;
+height: 110px;
+background: linear-gradient(to bottom right,white 0%, white 50%, blue 50%, blue 100%);
+opacity: 30%;
+}
+.remark-slide-number {
+margin-right: 10px;
+}
+
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-right {
+  float: right;
+  margin-left: 10px;
+}
+
+.image-left {
+  float: left;
+  margin-right: 10px;
+}
+
+td, th {
+  padding: 4px;
+  border: 1px solid grey;
+  border-style: solid;
+}
