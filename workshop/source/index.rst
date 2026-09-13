@@ -1,6 +1,8 @@
 Welcome to the ROS 2 workshop!
 ==============================
 
+`Training slides <slides/index.html>`_
+
 .. toctree::
    :maxdepth: 2
 

@@ -8,7 +8,26 @@ Slides are structured as follows for each session:
 `static`: Images, videos and other resource files
 
 ## Usage
-### Build with Docker Compose
+### Visualize the slides in the browser
+
+The slides are already HTML files; no build or virtual environment is needed.
+From the repository root, run:
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1 --directory slides
+```
+
+Open [the slide index](http://localhost:8000/) and select a presentation.
+Internet access is required to load remark.js.
+
+### GitHub Pages
+
+The documentation workflow publishes the [slide index](index.html), slide decks,
+and their assets alongside the workshop when changes are pushed to `main`.
+On the published site, open `slides/` or follow the **Training slides** link
+from the workshop homepage.
+
+### Build the pdf slides with Docker Compose
 
 Docker is the only local dependency. Node.js, Chromium, and DeckTape run inside
 the container.
