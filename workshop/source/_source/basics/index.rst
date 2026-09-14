@@ -13,6 +13,7 @@ ROS 2 basics
    2.7 TF2 <../navigation/ROS2-TF2>
    2.8 Launch files <ROS2-Launch-Files>
    2.9 VSCode Python debugger <ROS2-VSCode-Python-Debugger>
+   2.10 ROS2 Logging <ROS2-Logging>
    2.A Annex: ROS 2 Basics Cheat Sheet <ROS2-Basics-CheatSheet>
    2.B Annex: ROS 2 Github Examples <ROS2-Github_Examples>
    2.C Annex: ROS 2 Basics training scripts <ROS2-Training-Scripts>
