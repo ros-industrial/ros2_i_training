@@ -1,7 +1,7 @@
 # Cheat sheet
 
 ###### ROS 2 package installation syntax:
-`sudo apt install ros-foxy-<pkg_name>`
+`sudo apt install ros-jazzy-<pkg_name>`
 
 ###### Basic ROS 2 command structure:
 `ros2 <main_command> <sub_command> [--options] <list_of_arguments>`
@@ -14,11 +14,11 @@ You can use `| grep <string>` to filter results using a string.
 
 ## Commonly used commands
 Sourcing ROS 2:
-* `source /opt/ros/foxy/setup.bash`
+* `source /opt/ros/jazzy/setup.bash`
 
 Alias:
 >WARNING: Use with caution!
-* `echo "alias source_foxy=source /opt/ros/foxy/setup.bash" >> .bashrc`
+* `echo "alias source_jazzy='source /opt/ros/jazzy/setup.bash'" >> ~/.bashrc`
 
 Packages introspection:
 * `ros2 pkg list` - list all available packages
@@ -72,6 +72,6 @@ Commonly used plugins: `Introspection->Node graph`, `Topics->Message publisher`,
 Ros2bags:
 * `ros2 bag record [topics list]` - record to a ros2bag.   Useful options:
     * `-a` - record all topics
-    * `-o` - define a specific name for the db3 file, defaults to timestamp instead
+    * `-o` - define the output bag directory name; defaults to a timestamp
 * `ros2 bag info <ros2bag name>` - show info about the recorded ros2bag
 * `ros2 bag play <ros2bag name>` - play the selected bag.

@@ -38,12 +38,12 @@ name: main_title
 ---
 
 ## 1.1 Installing and Sourcing ROS 2
-* Two types of installation - [Binary](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) (recommended) or [Source](https://docs.ros.org/en/foxy/Installation/Ubuntu-Development-Setup.html).
-* Live USB has ROS 2 Foxy Binary - Verify :
- `ll /opt/ros/foxy`.
+* Two types of installation - [Binary](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html) (recommended) or [Source](https://docs.ros.org/en/jazzy/Installation/Alternatives/Ubuntu-Development-Setup.html).
+* Verify the ROS 2 Jazzy installation:
+ `ll /opt/ros/jazzy`.
 * Source ROS 2 to use commands, libraries, packages etc..:
-`source /opt/ros/foxy/setup.bash`
-* Source your local workspace as needed (which source ROS as well):
+`source /opt/ros/jazzy/setup.bash`
+* Source your local workspace as needed after sourcing ROS 2:
 `source /path/to/ws/install/local_setup.bash`
 
 ---
@@ -51,9 +51,9 @@ name: main_title
 ## 1.2 Aliasing
 * Aliases are custom defined abbreviations for commands.
 * Simply type
-`source_foxy` (or any string you wish)
+`source_jazzy` (or any string you wish)
 instead of
-`source /opt/ros/foxy/setup.bash`  (or any command you wish)
+`source /opt/ros/jazzy/setup.bash`  (or any command you wish)
 * See cheat sheet for syntax.
 
 .center[!!ADVICE!!: Source ROS 2 manually everytime on Day 1 to get used to the concept. Use aliases from Day 2.]
@@ -144,7 +144,7 @@ Observe the state of the ROS 2 runtime system so far...
 ### Topics
 * To see currently running topics and their message types:
 `ros2 topic list -t`
-* To get more info about a topic (Foxy: Verbose output):
+* To get more info about a topic (verbose output):
 `ros2 topic info -v <topic_name>`<!-- Thanks AWS!!-->
 * To see what is being published on a topic:
 `ros2 topic echo <topic_name>`
@@ -299,9 +299,9 @@ or
 ## 6.3 Tools - ros2bag
 
 * Same function and similar API as rosbag from ROS 1
-    * Now installed as part of >Foxy core
+    * Available through the Jazzy rosbag2 packages
 * Record the messages being published on topics for a duration into a file. Replay later with nearly the same time characteristics.
-* Stored as *.db3 + metadata.yaml* instead of a single *.bag file.
+* Stored in a bag directory with *metadata.yaml* and *.mcap* files by default in Jazzy; SQLite3 (*.db3*) is also supported.
 
 ---
 
