@@ -81,9 +81,9 @@ name: main_title
                     distribution package name
     ```
 
-    example: ``$ sudo apt install ros-foxy-nav2-core``
+    example: ``$ sudo apt install ros-jazzy-nav2-core``
 
-    **!** package_name: **nav2_core** --> install:ros-foxy-**nav2-core**
+    **!** package_name: **nav2_core** --> install:ros-jazzy-**nav2-core**
 - Automatic installation
   - Location : /opt/ros/`<distro>`/...
   - installs all required dependencies
@@ -97,25 +97,27 @@ name: main_title
   - Do it in your source space (e.g. ~/devel_ws/src):
    `$ git clone github_link`
 
-   - example: `$ git clone https://github.com/ros/ros_tutorials.git -b foxy-devel `
+   - example: `$ git clone https://github.com/ros/ros_tutorials.git -b jazzy `
 
 - Install all dependencies of package(s)
 
   - **rosdep** :  download and install dependencies required by ROS packages.
 
     ```bash
-    $ rosdep install --from-paths src --ignore-src --rosdistro foxy -y
+    $ rosdep install --from-paths src --ignore-src --rosdistro jazzy -y
     ```
 
 - Manage multiple version-control packages: vcstool
     - A version control system (VCS) tool
     - A command-line tool to make working with multiple repositories easier.
-    For example: in your workspace(e.g. ~/devel_ws):
+    For example, importing the ROS 2 Jazzy source repositories into a separate workspace:
 
     ```bash
-    $ wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/foxy-devel/turtlebot3.repos
+    $ mkdir -p ~/jazzy_source_ws/src
+    $ cd ~/jazzy_source_ws
+    $ wget https://raw.githubusercontent.com/ros2/ros2/jazzy/ros2.repos
 
-    $ vcs import src < turtlebot3.repos
+    $ vcs import src < ros2.repos
     ```
 <!-- - Manual compilation via __colcon__ (explain later) -->
 
@@ -128,7 +130,7 @@ name: main_title
 -->
 
 <!-- setup.cfg  ros2 run can find them
-https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html -->
+https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html -->
 
 ---
 
@@ -393,7 +395,7 @@ CMakeLists.txt Example:
 ---
 
 <!--
-ament_cmake User Documentation https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html -->
+ament_cmake User Documentation https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Documentation.html -->
 
 
 ### Colcon - a universal build tool
@@ -442,7 +444,7 @@ Lint tools : Static checking of Python or C++ source code for errors and standar
  <test_depend>ament_pep257</test_depend>
  ```
 <!--https://github.com/ament/ament_lint
-https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
+https://docs.ros.org/en/jazzy/How-To-Guides/Ament-CMake-Documentation.html#linting -->
 
 - For CMake package
   - package.xml
@@ -512,7 +514,7 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
 * Go to your workspace:
     `$ cd ~/devel_ws`
 *   Source ROS 2 installation workspace
-    `$ source /opt/ros/foxy/setup.bash `
+    `$ source /opt/ros/jazzy/setup.bash `
 * Install all dependencies of package(s)
     `rosdep` :  download and install dependencies required by ROS packages.
     - For the first time, you need to run:
@@ -523,7 +525,7 @@ https://docs.ros.org/en/foxy/Guides/Ament-CMake-Documentation.html#linting -->
 * Install all dependencies of package(s)
     * Then you can use:
 ```bash
-$ rosdep install --from-paths src --ignore-src --rosdistro foxy -y
+$ rosdep install --from-paths src --ignore-src --rosdistro jazzy -y
 ```
 
 * Compile the workspace
@@ -559,7 +561,7 @@ $ cd  ~/dev_ws/
 $ cd src
 # check which folder you are in
 $ pwd
-$ git clone https://github.com/ros2/examples -b eloquent
+$ git clone https://github.com/ros2/examples -b jazzy
 # check your folder structure
 $ tree
 ```
@@ -568,8 +570,8 @@ $ tree
 Check dependencies of this package
 
 ```
-$ source /opt/ros/eloquent/setup.bash
-$ rosdep install --from-paths src --ignore-src --rosdistro eloquent -y
+$ source /opt/ros/jazzy/setup.bash
+$ rosdep install --from-paths src --ignore-src --rosdistro jazzy -y
 ```
 
 #### 3. Using colcon to build packages
@@ -654,7 +656,7 @@ $ ros2 run examples_rclpy_minimal_publisher publisher_member_function
     "node name.py"
     ``` -->
 <!--The setup.py file contains the same description, maintainer and license fields as package.xml
-https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html#what-is-a-ros-2-package -->
+https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html#what-is-a-ros-2-package -->
 
 ---
 

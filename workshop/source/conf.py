@@ -27,6 +27,7 @@ extensions = [
     'sphinx.ext.githubpages',
     'myst_parser',            # Enables Markdown support
     'sphinx_copybutton',      # Adds "copy" buttons to code blocks
+    'sphinx_design',          # Language tabs for workshop examples
 ]
 source_suffix = ['.rst', '.md']
 # The master toctree document.
