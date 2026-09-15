@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Logging &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROS 2 Jazzy CLI cheat sheet" href="ROS2-Basics-CheatSheet.html" />
+    <link rel="prev" title="Debugging ROS 2 Python nodes with VS Code" href="ROS2-VSCode-Python-Debugger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.1 ROS 2 CLI and Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.2 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Bags-PlotJuggler.html">2.3 ROS 2 bags and PlotJuggler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.4 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.5 Publisher and Subscriber in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.6 Service in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Launch-Files.html">2.8 Launch files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-VSCode-Python-Debugger.html">2.9 VSCode Python debugger</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.10 ROS2 Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Basics-CheatSheet.html">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 Github Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Training-Scripts.html">2.C Annex: ROS 2 Basics training scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">4. ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
+      <li class="breadcrumb-item active">ROS 2 Logging</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/basics/ROS2-Logging.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-logging">
+<h1>ROS 2 Logging<a class="headerlink" href="#ros-2-logging" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>When a robot does not behave as expected, logs help explain what its nodes
+are doing: starting up, receiving data, waiting for a transform, or reporting
+an error. A node’s logger identifies the source and importance of each message.</p>
+<p>For example, Turtlesim logs information when it starts and spawns a turtle.</p>
+<p>ROS logs can reach the terminal, files on disk, and other ROS tools through
+the <code class="docutils literal notranslate"><span class="pre">/rosout</span></code> topic. Ordinary <code class="docutils literal notranslate"><span class="pre">printf</span></code>, <code class="docutils literal notranslate"><span class="pre">print</span></code>, or <code class="docutils literal notranslate"><span class="pre">println!</span></code> output does
+not automatically become a ROS log message.</p>
+<p>In this exercise, run Turtlesim and keyboard teleoperation and observe their
+existing output. No source-code changes or new packages are needed.</p>
+</section>
+<section id="severity-levels">
+<h2>2. Severity levels<a class="headerlink" href="#severity-levels" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">/rosout</span></code> value</p></th>
+<th class="head"><p>Example use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DEBUG</p></td>
+<td><p>10</p></td>
+<td><p>Inspect a computed value during debugging.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INFO</p></td>
+<td><p>20</p></td>
+<td><p>Report successful startup or a state change.</p></td>
+</tr>
+<tr class="row-even"><td><p>WARN</p></td>
+<td><p>30</p></td>
+<td><p>Report an unexpected condition that permits continued operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ERROR</p></td>
+<td><p>40</p></td>
+<td><p>Report a failed operation.</p></td>
+</tr>
+<tr class="row-even"><td><p>FATAL</p></td>
+<td><p>50</p></td>
+<td><p>Report a condition that prevents useful operation.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The default threshold is <code class="docutils literal notranslate"><span class="pre">INFO</span></code>. <br />
+A threshold of <code class="docutils literal notranslate"><span class="pre">WARN</span></code> permits <code class="docutils literal notranslate"><span class="pre">WARN</span></code>, <code class="docutils literal notranslate"><span class="pre">ERROR</span></code>, and <code class="docutils literal notranslate"><span class="pre">FATAL</span></code>, while suppressing <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> and <code class="docutils literal notranslate"><span class="pre">INFO</span></code>. <br />
+A <code class="docutils literal notranslate"><span class="pre">FATAL</span></code> log call alone does not shut down a node; application code decides how to handle the failure.</p>
+<p>See the <a class="reference external" href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Logging.html">ROS 2 logging concepts</a>
+for severity filtering and logger configuration.</p>
+</section>
+<section id="start-turtlesim-and-teleop">
+<h2>3. Start Turtlesim and teleop<a class="headerlink" href="#start-turtlesim-and-teleop" title="Link to this heading"></a></h2>
+<p>In the first terminal, source ROS 2 and start the simulator:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<p>The Turtlesim window opens. Look at the startup log messages in this terminal:
+they include a severity, timestamp, logger name, and message.</p>
+<p>In a second terminal, start keyboard teleoperation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtle_teleop_key
+</pre></div>
+</div>
+<p>Keep the second terminal focused and use the arrow keys to move the turtle.
+Watch the simulator terminal for log messages. Moving the turtle does not
+necessarily produce a message for every key press. The keyboard instructions
+printed by teleop are ordinary terminal output, not necessarily ROS logs.</p>
+</section>
+<section id="change-the-logging-threshold">
+<h2>4. Change the logging threshold<a class="headerlink" href="#change-the-logging-threshold" title="Link to this heading"></a></h2>
+<p>Stop only the simulator with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code>, then restart it with a warning threshold:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node<span class="w"> </span>--ros-args<span class="w"> </span>--log-level<span class="w"> </span>turtlesim:<span class="o">=</span>WARN
+</pre></div>
+</div>
+<p>The startup <code class="docutils literal notranslate"><span class="pre">INFO</span></code> messages are now suppressed. Warnings and errors can still
+appear when those conditions occur. Teleop can stay running while you restart
+the simulator.</p>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">turtlesim</span></code> is the logger name, while <code class="docutils literal notranslate"><span class="pre">turtlesim_node</span></code> is the executable.
+Restart without the extra arguments to restore the default <code class="docutils literal notranslate"><span class="pre">INFO</span></code> threshold:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+</section>
+<section id="observe-rosout">
+<h2>5. Observe /rosout<a class="headerlink" href="#observe-rosout" title="Link to this heading"></a></h2>
+<p>In a third terminal, start an observer, then restart Turtlesim with its default
+logging threshold to observe the startup messages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rosout
+</pre></div>
+</div>
+<p>The topic carries <code class="docutils literal notranslate"><span class="pre">rcl_interfaces/msg/Log</span></code> messages. Inspect the definition:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>interface<span class="w"> </span>show<span class="w"> </span>rcl_interfaces/msg/Log
+</pre></div>
+</div>
+<p>Each message includes <code class="docutils literal notranslate"><span class="pre">stamp</span></code>, <code class="docutils literal notranslate"><span class="pre">level</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">msg</span></code>, and source-location
+fields <code class="docutils literal notranslate"><span class="pre">file</span></code>, <code class="docutils literal notranslate"><span class="pre">function</span></code>, and <code class="docutils literal notranslate"><span class="pre">line</span></code>. Available source-location details
+depend on the client library.</p>
+<p>Stop the observer with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> and try each filter separately.
+Show only the message text from Turtlesim:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rosout<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"m.name == 'turtlesim'"</span><span class="w"> </span>--field<span class="w"> </span>msg
+</pre></div>
+</div>
+<p>Show warnings and more severe messages from any logger:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>/rosout<span class="w"> </span>--filter<span class="w"> </span><span class="s2">"m.level &gt;= 30"</span>
+</pre></div>
+</div>
+<p>These filters select messages received by the observer. They cannot recover
+debug messages suppressed by the producing node’s threshold. Start the
+observer before the node to capture startup messages; <code class="docutils literal notranslate"><span class="pre">/rosout</span></code> is not a
+complete historical log archive.</p>
+</section>
+<section id="use-rqt-console">
+<h2>6. Use rqt Console<a class="headerlink" href="#use-rqt-console" title="Link to this heading"></a></h2>
+<p>Start the graphical log viewer in another sourced terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>rqt_console<span class="w"> </span>rqt_console
+</pre></div>
+</div>
+<p>Alternatively, run <code class="docutils literal notranslate"><span class="pre">rqt</span></code> and choose <strong>Plugins -&gt; Logging -&gt; Console</strong>.
+If the package is missing on Ubuntu with Jazzy, install <code class="docutils literal notranslate"><span class="pre">ros-jazzy-rqt-console</span></code>.</p>
+<p>Restart Turtlesim and locate the <code class="docutils literal notranslate"><span class="pre">turtlesim</span></code> logger in the received messages.
+Use severity and text filters to narrow the view. Compare an <code class="docutils literal notranslate"><span class="pre">INFO</span></code> run with
+a <code class="docutils literal notranslate"><span class="pre">WARN</span></code> run: the viewer only receives messages the node actually emits.</p>
+</section>
+<section id="find-log-files-and-control-destinations">
+<h2>7. Find log files and control destinations<a class="headerlink" href="#find-log-files-and-control-destinations" title="Link to this heading"></a></h2>
+<p>With the default logging backend, files normally appear under <code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code>.
+Set <code class="docutils literal notranslate"><span class="pre">ROS_LOG_DIR</span></code> before starting the node to choose an explicit directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ROS_LOG_DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/turtlesim_logs"</span>
+</pre></div>
+</div>
+<p>Restart Turtlesim from that terminal, stop it with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code>, and inspect
+that directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-lt<span class="w"> </span><span class="s2">"</span><span class="nv">$ROS_LOG_DIR</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Filenames and launch-created subdirectories vary. Open the newest relevant
+file and find the simulator’s startup messages from an <code class="docutils literal notranslate"><span class="pre">INFO</span></code> run.
+Restore the default afterward:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span><span class="w"> </span>ROS_LOG_DIR
+</pre></div>
+</div>
+<p>The following ROS arguments selectively disable destinations:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument after <code class="docutils literal notranslate"><span class="pre">--ros-args</span></code></p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-rosout-logs</span></code></p></td>
+<td><p>Stop publishing logs to <code class="docutils literal notranslate"><span class="pre">/rosout</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-external-lib-logs</span></code></p></td>
+<td><p>Disable the external backend, normally responsible for disk logs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--disable-stdout-logs</span></code></p></td>
+<td><p>Disable console logs, despite the default stream being stderr.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For example, restart the simulator with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node<span class="w"> </span>--ros-args<span class="w"> </span>--disable-rosout-logs
+</pre></div>
+</div>
+<p>Terminal logs should continue, but new messages from this node should no
+longer arrive in the <code class="docutils literal notranslate"><span class="pre">/rosout</span></code> observer.</p>
+</section>
+<section id="stop-the-example">
+<h2>8. Stop the example<a class="headerlink" href="#stop-the-example" title="Link to this heading"></a></h2>
+<p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> in the teleop and simulator terminals. Stop the
+<code class="docutils literal notranslate"><span class="pre">/rosout</span></code> observer and close rqt Console if you opened them.</p>
+</section>
+<section id="troubleshooting">
+<h2>9. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Check</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>No startup messages</p></td>
+<td><p>Restart Turtlesim with the default <code class="docutils literal notranslate"><span class="pre">INFO</span></code> threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Terminal output but no rosout messages</p></td>
+<td><p>Use ROS logging calls, keep the node alive, and check that rosout is enabled.</p></td>
+</tr>
+<tr class="row-even"><td><p>No messages from another terminal or computer</p></td>
+<td><p>Check environment setup, matching <code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code>, and network discovery.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Some startup messages are missing</p></td>
+<td><p>Start the observer first, then restart the example.</p></td>
+</tr>
+<tr class="row-even"><td><p>No log file in the expected directory</p></td>
+<td><p>Check <code class="docutils literal notranslate"><span class="pre">ROS_LOG_DIR</span></code>, <code class="docutils literal notranslate"><span class="pre">ROS_HOME</span></code>, directory permissions, and whether disk logging was disabled.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-it-works-internally">
+<h2>10. How it works internally<a class="headerlink" href="#how-it-works-internally" title="Link to this heading"></a></h2>
+<p>Client libraries expose language-specific logging calls. Underneath, the ROS logging infrastructure filters messages and routes enabled output to
+the console, the external file backend, and <code class="docutils literal notranslate"><span class="pre">/rosout</span></code> through the middleware.</p>
+<section id="how-logs-are-published-to-rosout">
+<h3>How logs are published to /rosout<a class="headerlink" href="#how-logs-are-published-to-rosout" title="Link to this heading"></a></h3>
+<p>There is a per-node rosout publisher when rosout logging is enabled.
+The client library manages its initialization and cleanup with the node’s lifecycle.
+<code class="docutils literal notranslate"><span class="pre">/rosout</span></code> is the network output destination; console and disk logging are separate destinations.</p>
+</section>
+<section id="rclcpp">
+<h3>RCLCPP<a class="headerlink" href="#rclcpp" title="Link to this heading"></a></h3>
+<p>Node initialization performs approximately the following steps. This is simplified pseudocode, not code to add to your application:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">rcl_node_init</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">rcl_logging_rosout_enabled</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="n">node_options</span><span class="p">.</span><span class="n">enable_rosout</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">rcl_logging_rosout_init_publisher_for_node</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The call to
+<a class="reference external" href="https://github.com/ros2/rclcpp/blob/2209942eb1361fdaf48ec8512b6dccf70235bccb/rclcpp/src/rclcpp/node_interfaces/node_base.cpp#L118"><code class="docutils literal notranslate"><span class="pre">rcl_logging_rosout_init_publisher_for_node</span></code></a>
+in <code class="docutils literal notranslate"><span class="pre">NodeBase</span></code> initializes the publisher for <code class="docutils literal notranslate"><span class="pre">/rosout</span></code>. With a DDS-based
+middleware, this creates the underlying DDS publisher through the ROS
+middleware layer.</p>
+<p>During node destruction, <code class="docutils literal notranslate"><span class="pre">NodeBase</span></code> calls
+<a class="reference external" href="https://github.com/ros2/rclcpp/blob/2209942eb1361fdaf48ec8512b6dccf70235bccb/rclcpp/src/rclcpp/node_interfaces/node_base.cpp#L130"><code class="docutils literal notranslate"><span class="pre">rcl_logging_rosout_fini_publisher_for_node</span></code></a>
+to clean up that rosout publisher before finalizing the node.</p>
+</section>
+<section id="rclpy">
+<h3>RCLPY<a class="headerlink" href="#rclpy" title="Link to this heading"></a></h3>
+<p>RCLPY follows the same explicit lifecycle in its underlying C++ binding:
+initialize the RCL node, initialize its rosout publisher when enabled, and finalize that publisher during node destruction.
+Python application code uses <code class="docutils literal notranslate"><span class="pre">self.get_logger()</span></code>.</p>
+</section>
+<section id="publisher-lifecycle-and-message-flow">
+<h3>Publisher lifecycle and message flow<a class="headerlink" href="#publisher-lifecycle-and-message-flow" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Node creation (rclcpp / rclpy)
+    |
+    +-- rcl_node_init()
+    |
+    +-- if rosout is enabled:
+            rcl_logging_rosout_init_publisher_for_node()
+
+Regular logging calls (rclcpp / rclpy / rclrs)
+    |
+    +-- severity filtering and output routing
+            |
+            +-- console
+            +-- disk via the external logging backend
+            +-- /rosout via the node's publisher, when enabled
+
+Node destruction (rclcpp / rclpy)
+    |
+    +-- clean up rosout publisher:
+    |       rcl_logging_rosout_fini_publisher_for_node()
+    |
+    +-- rcl_node_fini()
+</pre></div>
+</div>
+<p>Creating the publisher and emitting a log message are separate operations.
+The publisher is prepared during node initialization and used by subsequent logging calls.
+Application code should use the node’s logger rather than manually creating a <code class="docutils literal notranslate"><span class="pre">/rosout</span></code> publisher or calling these internal functions.</p>
+</section>
+</section>
+<section id="further-reading">
+<h2>11. Further reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Logging.html">ROS 2 Jazzy: Logging and logger configuration</a></p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/jazzy/Tutorials/Demos/Logging-and-logger-configuration.html">ROS 2 Jazzy: Logging demo</a></p></li>
+<li><p><a class="reference external" href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Using-Rqt-Console/Using-Rqt-Console.html">ROS 2 Jazzy: rqt Console</a></p></li>
+<li><p><a class="reference external" href="https://docs.rs/rclrs/0.7.0/rclrs/#logging">rclrs 0.7 logging macros and examples</a>. Warning: rclrs 0.7 does not publish /rosout, however next release should.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ROS2-VSCode-Python-Debugger.html" class="btn btn-neutral float-left" title="Debugging ROS 2 Python nodes with VS Code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-Basics-CheatSheet.html" class="btn btn-neutral float-right" title="ROS 2 Jazzy CLI cheat sheet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

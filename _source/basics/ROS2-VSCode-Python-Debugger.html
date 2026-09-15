@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debugging ROS 2 Python nodes with VS Code &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ROS 2 Logging" href="ROS2-Logging.html" />
+    <link rel="prev" title="ROS 2 launch files" href="ROS2-Launch-Files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. ROS 2 Basics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ROS2-CLI.html">2.1 ROS 2 CLI and Turtlesim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-RQt.html">2.2 rqt and rqt_graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Bags-PlotJuggler.html">2.3 ROS 2 bags and PlotJuggler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Filesystem.html">2.4 File system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Publisher-Subscriber.html">2.5 Publisher and Subscriber in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Simple-Service.html">2.6 Service in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../navigation/ROS2-TF2.html">2.7 TF2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Launch-Files.html">2.8 Launch files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.9 VSCode Python debugger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Logging.html">2.10 ROS2 Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Basics-CheatSheet.html">2.A Annex: ROS 2 Basics Cheat Sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Github_Examples.html">2.B Annex: ROS 2 Github Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2-Training-Scripts.html">2.C Annex: ROS 2 Basics training scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manipulation/index.html">4. ROS 2 Manipulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 basics</a></li>
+      <li class="breadcrumb-item active">Debugging ROS 2 Python nodes with VS Code</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/basics/ROS2-VSCode-Python-Debugger.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debugging-ros-2-python-nodes-with-vs-code">
+<h1>Debugging ROS 2 Python nodes with VS Code<a class="headerlink" href="#debugging-ros-2-python-nodes-with-vs-code" title="Link to this heading"></a></h1>
+<p>This guide uses the <code class="docutils literal notranslate"><span class="pre">tf2_workshop</span></code> package in this workspace as an example. It
+starts each Python node directly with the VS Code Python debugger, allowing
+breakpoints to be placed in the source files under <code class="docutils literal notranslate"><span class="pre">src/</span></code>.</p>
+<section id="install-the-vs-code-extensions">
+<h2>1. Install the VS Code extensions<a class="headerlink" href="#install-the-vs-code-extensions" title="Link to this heading"></a></h2>
+<p>Install these extensions from the VS Code Extensions view:</p>
+<ol class="arabic simple">
+<li><p><strong>Python</strong> (<code class="docutils literal notranslate"><span class="pre">ms-python.python</span></code>)</p></li>
+<li><p><strong>Python Debugger</strong> (<code class="docutils literal notranslate"><span class="pre">ms-python.debugpy</span></code>)</p></li>
+</ol>
+<p>The ROS extension is useful for working with ROS files, but it is not required
+for the Python breakpoint configuration in this guide.</p>
+<p>More info on Python debugging in VS code <a class="reference external" href="https://code.visualstudio.com/docs/python/debugging">here</a>.</p>
+</section>
+<section id="build-and-source-the-workspace">
+<h2>2. Build and source the workspace<a class="headerlink" href="#build-and-source-the-workspace" title="Link to this heading"></a></h2>
+<p>Open a terminal and run from the ROS 2 workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>tf2_workshop<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">--symlink-install</span></code> is convenient while developing Python packages.
+However, the debug configuration below runs the files under <code class="docutils literal notranslate"><span class="pre">src/</span></code> directly,
+so ordinary edits to these Python files do not require a rebuild before every
+debug session.</p>
+</section>
+<section id="start-vs-code-with-the-ros-environment">
+<h2>3. Start VS Code with the ROS environment<a class="headerlink" href="#start-vs-code-with-the-ros-environment" title="Link to this heading"></a></h2>
+<p>Start VS Code from the same sourced terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>This is important because VS Code inherits ROS environment variables such as
+<code class="docutils literal notranslate"><span class="pre">AMENT_PREFIX_PATH</span></code> and <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> from the terminal.</p>
+<p>Make sure VS Code opens the workspace folder, not only the <code class="docutils literal notranslate"><span class="pre">tf2_workshop</span></code> package directory.</p>
+</section>
+<section id="select-the-python-interpreter">
+<h2>4. Select the Python interpreter<a class="headerlink" href="#select-the-python-interpreter" title="Link to this heading"></a></h2>
+<p>In VS Code:</p>
+<ol class="arabic simple">
+<li><p>Open the Command Palette with <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>.</p></li>
+<li><p>Run <strong>Python: Select Interpreter</strong>.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">/usr/bin/python3</span></code> (Python 3.12 on this ROS 2 Jazzy system).</p></li>
+</ol>
+<p>The debug configuration also specifies <code class="docutils literal notranslate"><span class="pre">/usr/bin/python3</span></code> explicitly.</p>
+</section>
+<section id="create-the-vs-code-debug-configuration">
+<h2>5. Create the VS Code debug configuration<a class="headerlink" href="#create-the-vs-code-debug-configuration" title="Link to this heading"></a></h2>
+<section id="generate-launch-json">
+<h3>Generate <code class="docutils literal notranslate"><span class="pre">launch.json</span></code><a class="headerlink" href="#generate-launch-json" title="Link to this heading"></a></h3>
+<p>The Python Debugger extension can generate the initial VS Code debug
+configuration:</p>
+<ol class="arabic simple">
+<li><p>Open <strong>Run and Debug</strong> with <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+D</span></code>.</p></li>
+<li><p>Select <strong>create a launch.json file</strong>.</p></li>
+<li><p>Select <strong>Python Debugger</strong>.</p></li>
+<li><p>Select <strong>Python File</strong>.</p></li>
+</ol>
+<p>VS Code creates <code class="docutils literal notranslate"><span class="pre">.vscode/launch.json</span></code>.</p>
+<p>A workspace normally has one <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> containing one or more configurations.
+Once the file exists, VS Code no longer offers to create it again; new configurations are added to its <code class="docutils literal notranslate"><span class="pre">configurations</span></code> array.</p>
+<p>A generated configuration for the current Python file looks like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Python Debugger: Current File"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debugpy"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${file}"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Creating the configuration and starting it are separate actions. After the file has been generated, the green start button runs the selected configuration; it does not generate another configuration.</p>
+</section>
+<section id="understand-file">
+<h3>Understand <code class="docutils literal notranslate"><span class="pre">${file}</span></code><a class="headerlink" href="#understand-file" title="Link to this heading"></a></h3>
+<p>The value:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${file}"</span>
+</pre></div>
+</div>
+<p>means “execute the file in the currently active editor.” Therefore before pressing the green start button, open the Python file that you intend to debug and click inside its editor tab.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> is the active editor, VS Code attempts to execute the JSON file as Python and reports a <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code>. If <code class="docutils literal notranslate"><span class="pre">broadcaster.py</span></code> or <code class="docutils literal notranslate"><span class="pre">listener.py</span></code> is active, the Python file starts, but the basic generated configuration does not supply the arguments expected by these example nodes.
+They can therefore report:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>IndexError: list index out of range
+</pre></div>
+</div>
+</section>
+<section id="add-a-generated-configuration-that-asks-for-arguments">
+<h3>Add a generated configuration that asks for arguments<a class="headerlink" href="#add-a-generated-configuration-that-asks-for-arguments" title="Link to this heading"></a></h3>
+<p>Use the Command Palette to add a configuration to the existing file:</p>
+<ol class="arabic simple">
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>.</p></li>
+<li><p>Run <strong>Debug: Add Configuration…</strong>.</p></li>
+<li><p>Select <strong>Python Debugger</strong>.</p></li>
+<li><p>Select <strong>Python File with Arguments</strong>.</p></li>
+</ol>
+<p>The generated configuration should look similar to this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Python Debugger: Current File with Arguments"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debugpy"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${file}"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${command:pickArgs}"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">${command:pickArgs}</span></code> tells VS Code to ask for command-line arguments whenever the configuration starts.</p>
+<p>To debug the first broadcaster:</p>
+<ol class="arabic">
+<li><p>Open
+<code class="docutils literal notranslate"><span class="pre">src/ros2_i_training_example_scripts/tf2_workshop/tf2_workshop/broadcaster.py</span></code>.</p></li>
+<li><p>Select <strong>Python Debugger: Current File with Arguments</strong>.</p></li>
+<li><p>Press the green start button.</p></li>
+<li><p>Enter this when VS Code asks for arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>turtle1
+</pre></div>
+</div>
+</li>
+</ol>
+<p>To debug the listener, open <code class="docutils literal notranslate"><span class="pre">listener.py</span></code> and enter:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>turtle1 turtle2
+</pre></div>
+</div>
+<p>The required simulator, turtles, and other ROS nodes must also be running. The following sections show how to start them.</p>
+</section>
+</section>
+<section id="set-useful-breakpoints">
+<h2>6. Set useful breakpoints<a class="headerlink" href="#set-useful-breakpoints" title="Link to this heading"></a></h2>
+<p>Open the following source file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>src/ros2_i_training_example_scripts/tf2_workshop/tf2_workshop/broadcaster.py
+</pre></div>
+</div>
+<p>Set a breakpoint inside <code class="docutils literal notranslate"><span class="pre">DynamicBroadcaster.handle_pose()</span></code>, for example on:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tfs</span> <span class="o">=</span> <span class="n">TransformStamped</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This breakpoint is reached whenever a turtle pose message is received.</p>
+<p>Next, open:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>src/ros2_i_training_example_scripts/tf2_workshop/tf2_workshop/listener.py
+</pre></div>
+</div>
+<p>Set a breakpoint inside <code class="docutils literal notranslate"><span class="pre">TfListener.timer_callback()</span></code>, for example on:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tf_buffer</span><span class="o">.</span><span class="n">lookup_transform</span><span class="p">(</span>
+</pre></div>
+</div>
+<p>You can also place a breakpoint on:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Click in the gutter to the left of the line number, or put the cursor on a line
+and press <code class="docutils literal notranslate"><span class="pre">F9</span></code>.</p>
+</section>
+<section id="start-turtlesim">
+<h2>7. Start turtlesim<a class="headerlink" href="#start-turtlesim" title="Link to this heading"></a></h2>
+<p>Do not run the existing <code class="docutils literal notranslate"><span class="pre">turtle_tf2_demo.launch.py</span></code> for this debug session. It
+would start additional non-debug copies of the Python nodes. Instead, start
+only the simulator manually.</p>
+<p>In a new terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtlesim_node
+</pre></div>
+</div>
+<p>Leave this terminal running.</p>
+<p>Debugging listener.py without the second turtle spawned: during node construction, the create_publisher throws an exception that is not caught.</p>
+</section>
+<section id="spawn-the-second-turtle">
+<h2>8. Spawn the second turtle<a class="headerlink" href="#spawn-the-second-turtle" title="Link to this heading"></a></h2>
+<p>In another sourced terminal, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/spawn<span class="w"> </span>turtlesim/srv/Spawn<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"{x: 2.0, y: 2.0, theta: 0.2, name: 'turtle2'}"</span>
+</pre></div>
+</div>
+<p>The service response should report the name <code class="docutils literal notranslate"><span class="pre">turtle2</span></code>.</p>
+<p>If the service is not available yet, wait until the turtlesim window has
+opened and run the command again.</p>
+</section>
+<section id="start-the-debugger">
+<h2>9. Start the debugger<a class="headerlink" href="#start-the-debugger" title="Link to this heading"></a></h2>
+<p>In VS Code:</p>
+<ol class="arabic simple">
+<li><p>Open <strong>Run and Debug</strong> with <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+D</span></code>.</p></li>
+<li><p>Select <strong>tf2: debug all Python nodes</strong> from the configuration menu.</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">F5</span></code> or click the green start button.</p></li>
+</ol>
+<p>VS Code starts three debug sessions:</p>
+<ol class="arabic simple">
+<li><p>A transform broadcaster for <code class="docutils literal notranslate"><span class="pre">turtle1</span></code></p></li>
+<li><p>A transform broadcaster for <code class="docutils literal notranslate"><span class="pre">turtle2</span></code></p></li>
+<li><p>The transform listener that makes <code class="docutils literal notranslate"><span class="pre">turtle2</span></code> follow <code class="docutils literal notranslate"><span class="pre">turtle1</span></code></p></li>
+</ol>
+<p>The broadcaster breakpoints should be reached as pose messages arrive. The
+listener breakpoint is reached by its timer callback. When execution pauses,
+use the Variables, Watch, and Call Stack sections in the Run and Debug view to
+inspect values.</p>
+<p>Useful debugger controls are:</p>
+<ul class="simple">
+<li><p>Continue: <code class="docutils literal notranslate"><span class="pre">F5</span></code></p></li>
+<li><p>Step over: <code class="docutils literal notranslate"><span class="pre">F10</span></code></p></li>
+<li><p>Step into: <code class="docutils literal notranslate"><span class="pre">F11</span></code></p></li>
+<li><p>Step out: <code class="docutils literal notranslate"><span class="pre">Shift+F11</span></code></p></li>
+<li><p>Stop: <code class="docutils literal notranslate"><span class="pre">Shift+F5</span></code></p></li>
+</ul>
+<p>Because pose and timer callbacks run repeatedly, a breakpoint in either
+callback can be reached very frequently. Disable the breakpoint after the
+first useful pause if necessary.</p>
+</section>
+<section id="move-turtle1-manually">
+<h2>10. Move turtle1 manually<a class="headerlink" href="#move-turtle1-manually" title="Link to this heading"></a></h2>
+<p>To move <code class="docutils literal notranslate"><span class="pre">turtle1</span></code>, open one more sourced terminal and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>run<span class="w"> </span>turtlesim<span class="w"> </span>turtle_teleop_key
+</pre></div>
+</div>
+<p>Keep that terminal focused and use its arrow keys. After the debugger is
+continued, <code class="docutils literal notranslate"><span class="pre">turtle2</span></code> should follow <code class="docutils literal notranslate"><span class="pre">turtle1</span></code>.</p>
+</section>
+<section id="debug-only-one-node">
+<h2>Debug only one node<a class="headerlink" href="#debug-only-one-node" title="Link to this heading"></a></h2>
+<p>The three individual configurations can also be selected from the Run and
+Debug menu. For example, select <strong>tf2: listener (turtle follower)</strong> to debug
+only <code class="docutils literal notranslate"><span class="pre">listener.py</span></code>.</p>
+<p>When debugging only one node, the other required ROS nodes must already be
+running. Do not start a second copy of the same node unless that is intentional.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="a-breakpoint-is-gray-or-says-unbound-breakpoint">
+<h3>A breakpoint is gray or says “Unbound breakpoint”<a class="headerlink" href="#a-breakpoint-is-gray-or-says-unbound-breakpoint" title="Link to this heading"></a></h3>
+<p>Check all of the following:</p>
+<ol class="arabic simple">
+<li><p>The selected debug configuration uses <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">&quot;debugpy&quot;</span></code>.</p></li>
+<li><p>The Python Debugger extension is installed and enabled.</p></li>
+<li><p>The breakpoint is in a file under <code class="docutils literal notranslate"><span class="pre">src/ros2_i_training_example_scripts/</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">program</span></code> path in <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> points to that same source file.</p></li>
+<li><p>The relevant callback is actually being invoked.</p></li>
+</ol>
+<p>Do not put breakpoints in these generated or installed copies:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>build/tf2_workshop/...
+install/tf2_workshop/...
+</pre></div>
+</div>
+</section>
+<section id="modulenotfounderror-no-module-named-rclpy">
+<h3><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'rclpy'</span></code><a class="headerlink" href="#modulenotfounderror-no-module-named-rclpy" title="Link to this heading"></a></h3>
+<p>VS Code was probably started without the ROS environment. Close every VS Code
+window for this workspace, then start it again from a sourced terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Also confirm that <code class="docutils literal notranslate"><span class="pre">/usr/bin/python3</span></code> is the selected interpreter.</p>
+</section>
+<section id="indexerror-list-index-out-of-range">
+<h3><code class="docutils literal notranslate"><span class="pre">IndexError:</span> <span class="pre">list</span> <span class="pre">index</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">range</span></code><a class="headerlink" href="#indexerror-list-index-out-of-range" title="Link to this heading"></a></h3>
+<p>The example nodes read their turtle names from <code class="docutils literal notranslate"><span class="pre">sys.argv</span></code>. Start them with one
+of the configurations in this guide so the required <code class="docutils literal notranslate"><span class="pre">args</span></code> are supplied.</p>
+</section>
+<section id="turtle2-already-exists">
+<h3>Turtle2 already exists<a class="headerlink" href="#turtle2-already-exists" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">/spawn</span></code> service reports an error if <code class="docutils literal notranslate"><span class="pre">turtle2</span></code> has already been created.
+Either keep using the existing turtle or restart <code class="docutils literal notranslate"><span class="pre">turtlesim</span></code> before running the
+spawn command again.</p>
+</section>
+<section id="the-listener-repeatedly-reports-a-transform-lookup-error">
+<h3>The listener repeatedly reports a transform lookup error<a class="headerlink" href="#the-listener-repeatedly-reports-a-transform-lookup-error" title="Link to this heading"></a></h3>
+<p>Confirm that:</p>
+<ol class="arabic simple">
+<li><p>Both broadcaster debug sessions are running.</p></li>
+<li><p>Both <code class="docutils literal notranslate"><span class="pre">turtle1</span></code> and <code class="docutils literal notranslate"><span class="pre">turtle2</span></code> exist in turtlesim.</p></li>
+<li><p>Paused broadcaster breakpoints have been continued with <code class="docutils literal notranslate"><span class="pre">F5</span></code>.</p></li>
+</ol>
+<p>While execution is stopped at a broadcaster breakpoint, that node cannot
+publish new transforms. Temporary lookup failures from the listener are
+therefore normal during step-by-step debugging.</p>
+</section>
+<section id="source-changes-do-not-appear-when-using-ros2-run">
+<h3>Source changes do not appear when using <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span></code><a class="headerlink" href="#source-changes-do-not-appear-when-using-ros2-run" title="Link to this heading"></a></h3>
+<p>The configurations in this guide execute source files directly. If you switch
+back to <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span></code>, rebuild and source the workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.bash
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>tf2_workshop<span class="w"> </span>--symlink-install
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">--symlink-install</span></code>, later edits to installed Python source are normally
+visible without copying the files again. Changes to package metadata, entry
+points, or generated interfaces still require a rebuild.</p>
+</section>
+</section>
+<section id="stop-the-example">
+<h2>Stop the example<a class="headerlink" href="#stop-the-example" title="Link to this heading"></a></h2>
+<p>Stop the compound debug session with <code class="docutils literal notranslate"><span class="pre">Shift+F5</span></code>. Then stop <code class="docutils literal notranslate"><span class="pre">turtlesim</span></code> and
+<code class="docutils literal notranslate"><span class="pre">turtle_teleop_key</span></code> with <code class="docutils literal notranslate"><span class="pre">Ctrl+C</span></code> in their terminals.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ROS2-Launch-Files.html" class="btn btn-neutral float-left" title="ROS 2 launch files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROS2-Logging.html" class="btn btn-neutral float-right" title="ROS 2 Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
