@@ -17,7 +17,7 @@ The specification covers:
 - Visual representation of the robot
 - Collision model of the robot
 
-![LINk](../../_source/urdf/link.png)
+![LINk](../../../_static/manipulation/urdf/link.png)
 
 The description of a robot consists of a set of **link elements**, and a set of **joint elements** connecting the links together. So a typical robot description looks something like this:
 ``` bash
@@ -59,7 +59,7 @@ Below is an example showing a robot with name `my_robot` and its elements(joints
 
  The link element describes a rigid body with an inertia, visual features, and collision properties.
 
-![LINk](../../_source/urdf/inertial.png)
+![LINk](../../../_static/manipulation/urdf/inertial.png)
 
 
  Example:
@@ -126,7 +126,7 @@ For more details of each elements , refer [URDF Link](https://wiki.ros.org/urdf/
 
 The joint element describes the kinematics and dynamics of the joint and also specifies the safety limits of the joint.
 
-![LINk](../../_source/urdf/joint.png)
+![LINk](../../../_static/manipulation/urdf/joint.png)
 
 Example:
 ```bash

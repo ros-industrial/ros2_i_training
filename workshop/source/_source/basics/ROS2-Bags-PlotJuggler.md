@@ -155,7 +155,7 @@ The `plotjuggler-ros` package supplies the ROS 2 bag loader and message parser.
 
 1. Select **Open data file** in PlotJuggler.
 
-   ![PlotJuggler Open data file dialog](../../_static/plotjuggler_load_data.png)
+   ![PlotJuggler Open data file dialog](../../_static/basics/plotjuggler_load_data.png)
 
 2. Open `~/dev_ws/bags/turtlesim_bag/metadata.yaml`. Select `metadata.yaml`, rather than the `.mcap` or `.db3` storage file, when
 using the ROS 2 bag loader. The loader reads the metadata to locate the storage
@@ -164,12 +164,12 @@ file and determine its format.
 3. In the topic-selection dialog, select `/turtle1/cmd_vel` and
    `/turtle1/pose`, then accept the selection.
 
-   ![PlotJuggler topic-selection dialog](../../_static/plotjuggler_topic_selector.png)
+   ![PlotJuggler topic-selection dialog](../../_static/basics/plotjuggler_topic_selector.png)
 
 4. Wait for the bag to load. The decoded numeric fields appear in the curve
    list on the left. You can then drag & drop the field to the grid.
 
-   ![Dragging a field onto the PlotJuggler grid](../../_static/plotjuggler_drag_drop_field.png)
+   ![Dragging a field onto the PlotJuggler grid](../../_static/basics/plotjuggler_drag_drop_field.png)
 
 ### 7.3 Create useful plots
 

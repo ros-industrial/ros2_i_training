@@ -1,4 +1,4 @@
-# Cartesian Robot Tutorial
+# URDF-XACRO exercice: build a cartesian robot description
 
 
 ## Introduction
@@ -295,7 +295,7 @@ This is the root of the robot, a fixed reference point.
 After creating each link it can be viewed in RViz by reffering `6. Visualising the robot in RViz`.
 
 Rviz visualisation after the link1 will look like:
-![LINk](../../_source/urdf/link1.jpg)
+![LINk](../../../_static/manipulation/urdf/link1.jpg)
 
 Repeat this structure for define other links ,adjusting visual geometry and colors to match their function. After each link, it can be visualised in Rviz for better understanding.
 
@@ -351,6 +351,6 @@ ros2 launch urdf_tutorials cartesian_display.launch.py
 ```
 
 
-![LINk](../../_source/urdf/cartesian_screen.jpg)
+![LINk](../../../_static/manipulation/urdf/cartesian_screen.jpg)
 
 This will launch rviz and the joint state publisher and this allows to interact with different joints.

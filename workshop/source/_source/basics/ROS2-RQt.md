@@ -65,7 +65,7 @@ With Turtlesim and keyboard teleoperation running, the graph shows the
 `/teleop_turtle` and `/turtlesim` nodes connected through
 `/turtle1/cmd_vel`.
 
-![rqt_graph displaying only nodes](../../_static/rqt_graph_nodes-only.png)
+![rqt_graph displaying only nodes](../../_static/basics/rqt_graph_nodes-only.png)
 
 Use the controls above the graph to:
 
@@ -86,12 +86,12 @@ ros2 node info /turtlesim
 Open **Services → Service Caller**. Select the `/spawn` service and enter
 values for `x`, `y`, `theta`, and `name`.
 
-![The rqt Service Caller plugin](../../_static/rqt_service_call.png)
+![The rqt Service Caller plugin](../../_static/basics/rqt_service_call.png)
 
 Press **Call** to send the request. The response contains the name of the
 created turtle.
 
-![Calling the spawn service and displaying its response](../../_static/rqt_service_call2.png)
+![Calling the spawn service and displaying its response](../../_static/basics/rqt_service_call2.png)
 
 Compare this operation with the equivalent CLI command:
 
