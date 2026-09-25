@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example: AgileX robots &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python Move Group Tutorial" href="python_move_group_tutorial.html" />
+    <link rel="prev" title="Example: Yaskawa GP50" href="example_yaskawa_gp50.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">2. ROS 2 Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">4. ROS 2 Manipulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robot_description/index.html">4.1 Robot Description</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moveit/index.html">4.2 MoveIt</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="moveit_architecture.html">4.2.1 MoveIt Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moveit_robot_gripper_setup_assistant.html">4.2.2 Build moveit config of any manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_yaskawa_gp50.html">4.2.3 Example: Yaskawa GP50</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.4 Example: AgileX robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_move_group_tutorial.html">4.2.5 Python Move Group Tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 Manipulation</a></li>
+          <li class="breadcrumb-item"><a href="moveit/index.html">MoveIt</a></li>
+      <li class="breadcrumb-item active">Example: AgileX robots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/manipulation/example_agilex_robots.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-agilex-robots">
+<h1>Example: AgileX robots<a class="headerlink" href="#example-agilex-robots" title="Link to this heading"></a></h1>
+<p>This example creates a MoveIt configuration for an AgileX Piper H manipulator
+with its gripper. It applies the generic workflow from the previous tutorial
+and plans from a tool center point at the center of the gripper.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>This example assumes ROS 2 Humble, a workspace at <code class="docutils literal notranslate"><span class="pre">/home/ros/ros2_ws</span></code>, and the
+forked <a class="reference external" href="https://github.com/ipa-may/agx_arm_urdf">AgileX arm description packages</a>
+in the workspace source directory.</p>
+<p>Build and source the robot description:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+<span class="nb">cd</span><span class="w"> </span>/home/ros/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>agx_arm_urdf
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>agx_arm_urdf
+</pre></div>
+</div>
+<p>The last command should print the installed package path.</p>
+</section>
+<section id="add-the-piper-h-tool-center-point">
+<h2>1. Add the Piper H tool center point<a class="headerlink" href="#add-the-piper-h-tool-center-point" title="Link to this heading"></a></h2>
+<p>Open:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/agx_arm_urdf/piper_h/urdf/piper_h_with_gripper_description.xacro
+</pre></div>
+</div>
+<p>Inside the top-level <code class="docutils literal notranslate"><span class="pre">&lt;robot&gt;</span></code> element, add an empty TCP link after the existing
+<code class="docutils literal notranslate"><span class="pre">gripper_base_joint</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">"gripper_tcp"</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">"gripper_tcp_joint"</span><span class="w"> </span><span class="na">type=</span><span class="s">"fixed"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">"0 0 0.138"</span><span class="w"> </span><span class="na">rpy=</span><span class="s">"0 0 0"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">"gripper_base"</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">"gripper_tcp"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+<p>The fixed joint places the planning target at the nominal grasp center without
+adding a degree of freedom. Verify the <code class="docutils literal notranslate"><span class="pre">0.138</span></code> metre offset against the gripper
+CAD or physical robot.</p>
+<p>Validate the modified description:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xacro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/home/ros/ros2_ws/src/agx_arm_urdf/piper_h/urdf/piper_h_with_gripper_description.xacro<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>&gt;<span class="w"> </span>/tmp/piper_h_with_gripper.urdf
+
+check_urdf<span class="w"> </span>/tmp/piper_h_with_gripper.urdf
+</pre></div>
+</div>
+<p>The parsed link tree should contain <code class="docutils literal notranslate"><span class="pre">gripper_tcp</span></code> below <code class="docutils literal notranslate"><span class="pre">gripper_base</span></code>.</p>
+</section>
+<section id="configure-the-planning-groups">
+<h2>2. Configure the planning groups<a class="headerlink" href="#configure-the-planning-groups" title="Link to this heading"></a></h2>
+<p>Start the assistant and load the combined Piper H description:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>moveit_setup_assistant<span class="w"> </span>moveit_setup_assistant
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/agx_arm_urdf/piper_h/urdf/piper_h_with_gripper_description.xacro
+</pre></div>
+</div>
+<p>Create the arm planning group with:</p>
+<ul class="simple">
+<li><p><strong>Group name:</strong> <code class="docutils literal notranslate"><span class="pre">piper_h_with_gripper</span></code></p></li>
+<li><p><strong>Type:</strong> kinematic chain</p></li>
+<li><p><strong>Base link:</strong> <code class="docutils literal notranslate"><span class="pre">base_link</span></code></p></li>
+<li><p><strong>Tip link:</strong> <code class="docutils literal notranslate"><span class="pre">gripper_tcp</span></code></p></li>
+<li><p><strong>Kinematics solver:</strong> <code class="docutils literal notranslate"><span class="pre">kdl_kinematics_plugin/KDLKinematicsPlugin</span></code></p></li>
+</ul>
+<p>Create the gripper group with:</p>
+<ul class="simple">
+<li><p><strong>Group name:</strong> <code class="docutils literal notranslate"><span class="pre">piper_h_gripper</span></code></p></li>
+<li><p><strong>Links:</strong> <code class="docutils literal notranslate"><span class="pre">gripper_link</span></code>, <code class="docutils literal notranslate"><span class="pre">gripper_link1</span></code>, and <code class="docutils literal notranslate"><span class="pre">gripper_link2</span></code></p></li>
+</ul>
+<p>Create the end effector with:</p>
+<ul class="simple">
+<li><p><strong>Name:</strong> <code class="docutils literal notranslate"><span class="pre">piper_h_gripper</span></code></p></li>
+<li><p><strong>End-effector group:</strong> <code class="docutils literal notranslate"><span class="pre">piper_h_gripper</span></code></p></li>
+<li><p><strong>Parent group:</strong> <code class="docutils literal notranslate"><span class="pre">piper_h_with_gripper</span></code></p></li>
+<li><p><strong>Parent link:</strong> <code class="docutils literal notranslate"><span class="pre">gripper_tcp</span></code></p></li>
+</ul>
+<p>The corresponding SRDF structure is:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;group</span><span class="w"> </span><span class="na">name=</span><span class="s">"piper_h_with_gripper"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;chain</span><span class="w"> </span><span class="na">base_link=</span><span class="s">"base_link"</span><span class="w"> </span><span class="na">tip_link=</span><span class="s">"gripper_tcp"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/group&gt;</span>
+
+<span class="nt">&lt;end_effector</span>
+<span class="w">  </span><span class="na">name=</span><span class="s">"piper_h_gripper"</span>
+<span class="w">  </span><span class="na">parent_link=</span><span class="s">"gripper_tcp"</span>
+<span class="w">  </span><span class="na">group=</span><span class="s">"piper_h_gripper"</span>
+<span class="w">  </span><span class="na">parent_group=</span><span class="s">"piper_h_with_gripper"</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-kinematics-and-controllers">
+<h2>3. Configure kinematics and controllers<a class="headerlink" href="#configure-kinematics-and-controllers" title="Link to this heading"></a></h2>
+<p>Keep KDL assigned to the arm group:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">piper_h_with_gripper</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">kinematics_solver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kdl_kinematics_plugin/KDLKinematicsPlugin</span>
+<span class="w">  </span><span class="nt">kinematics_solver_search_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="w">  </span><span class="nt">kinematics_solver_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+</pre></div>
+</div>
+<p>Configure a trajectory controller for the arm and a gripper action controller
+for <code class="docutils literal notranslate"><span class="pre">piper_h_gripper</span></code>. The MoveIt arm-controller entry must include the action
+namespace:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">piper_h_with_gripper_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">action_ns</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">follow_joint_trajectory</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FollowJointTrajectory</span>
+</pre></div>
+</div>
+<p>Generate the package at:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/piper_h_with_gripper_moveit_config
+</pre></div>
+</div>
+<p>Check that numeric values in <code class="docutils literal notranslate"><span class="pre">joint_limits.yaml</span></code> are floating point. For
+example, use <code class="docutils literal notranslate"><span class="pre">5.0</span></code> and <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, not <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</section>
+<section id="build-and-run">
+<h2>4. Build and run<a class="headerlink" href="#build-and-run" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/ros/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>agx_arm_urdf<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>piper_h_with_gripper_moveit_config
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+
+ros2<span class="w"> </span>launch<span class="w"> </span>piper_h_with_gripper_moveit_config<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<p>In RViz, select <code class="docutils literal notranslate"><span class="pre">piper_h_with_gripper</span></code> as the planning group. The interactive
+marker should appear at <code class="docutils literal notranslate"><span class="pre">gripper_tcp</span></code>. Select <code class="docutils literal notranslate"><span class="pre">piper_h_gripper</span></code> when testing the
+gripper group; it does not have a six-dimensional IK marker.</p>
+<p>If the marker is missing, verify the planning group in RViz, the TCP link in
+the SRDF, and the KDL entry in <code class="docutils literal notranslate"><span class="pre">kinematics.yaml</span></code>. If execution fails, confirm
+that <code class="docutils literal notranslate"><span class="pre">moveit_controllers.yaml</span></code> contains both <code class="docutils literal notranslate"><span class="pre">default:</span> <span class="pre">true</span></code> and
+<code class="docutils literal notranslate"><span class="pre">action_ns:</span> <span class="pre">follow_joint_trajectory</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example_yaskawa_gp50.html" class="btn btn-neutral float-left" title="Example: Yaskawa GP50" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="python_move_group_tutorial.html" class="btn btn-neutral float-right" title="Python Move Group Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

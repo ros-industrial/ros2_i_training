@@ -25,7 +25,7 @@ The ROS 2 Navigation System is the control system that enables a robot to autono
 
 It consists of several ROS components. An overview of its interactions is depicted in the following picture:
 
-![navigation_overview](../../_static/navigation_overview.png)
+![navigation_overview](../../_static/navigation/navigation_overview.png)
 
 
 Figure 1: Navigation2 Architecture
@@ -209,9 +209,9 @@ nav_ws/
     ```
 
     If everything has started correctly, you will see the RViz and Gazebo GUIs like this.
-    ![rviz_navigation_1](../../_static/rviz_navigation_1.png)
+    ![rviz_navigation_1](../../_static/navigation/rviz_navigation_1.png)
 
-    ![gazebo_navigation_1](../../_static/gazebo_navigation_1.png)
+    ![gazebo_navigation_1](../../_static/navigation/gazebo_navigation_1.png)
 
 
 
@@ -251,7 +251,7 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py\
     It has to manually update the initial location and orientation of the TurtleBot3. This information is applied to the AMCL algorithm.
 
     This can be done graphically with RViz by the instruction below:
-    ![rviz_initial](../../_static/rviz_initial.png)
+    ![rviz_initial](../../_static/navigation/rviz_initial.png)
 
 
     * Click "2D Pose Estimate" button (in the top menu; see the picture)
@@ -263,15 +263,15 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py\
     Once you’ve set the initial pose, the tf tree will be complete and Navigation 2 is fully active and ready to go.
 
     If you are using simulation with turtlrbot_world map, it will show as below:
-    ![Navigation_is_ready_sim](../../_static/Navigation_is_ready_sim.png)
+    ![Navigation_is_ready_sim](../../_static/navigation/Navigation_is_ready_sim.png)
 
 
     As soon as the 2D Pose Estimation arrow is drawn, the pose (transformation from the map to the robot) will update. As a result the centre of the laser scan has changed, too. Check if the visualization of the live laser scan matches the contours
     of the virtual map (Illustrated in the following two pictures! The left one is the wrong robot pose and the right one is right robot pose) to confirm that the new starting pose is accurate.
 
-    ![bad](../../_static/bad.png)
+    ![bad](../../_static/navigation/bad.png)
 
-    ![good](../../_static/good.png)
+    ![good](../../_static/navigation/good.png)
 
 
 
@@ -288,9 +288,9 @@ ros2 launch turtlebot3_navigation2 navigation2.launch.py\
 
  * **Step 3: Play around**
   When the robot is on the way to the goal, you can put an obstacle in Gazebo:
-    ![nav_goal_ob_1](../../_static/nav_goal_ob_1.png)
+    ![nav_goal_ob_1](../../_static/navigation/nav_goal_ob_1.png)
 
     You can see how the robot reacts to this kind of situation:
-   ![nav_goal_ob_2](../../_static/nav_goal_ob_2.png)
+   ![nav_goal_ob_2](../../_static/navigation/nav_goal_ob_2.png)
 
     It depends on how you design the behavior tree structure. The one we are using is "navigate_w_replanning_and_recovery.xml" You can find in this [link](https://github.com/ros-planning/navigation2/blob/foxy-devel/nav2_bt_navigator/behavior_trees/navigate_w_replanning_and_recovery.xml)

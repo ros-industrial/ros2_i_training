@@ -84,7 +84,7 @@ ros2 run turtlesim turtle_teleop_key
 A Qt window should open with a blue background and a turtle in the middle.
 Treat it as an automated guided vehicle observed from above.
 
-![Turtlesim coordinate system showing x, y, and theta](../../_static/turtlesim_xytheta.png)
+![Turtlesim coordinate system showing x, y, and theta](../../_static/basics/turtlesim_xytheta.png)
 
 You can keep the simulator visible by right-clicking its title bar and enabling
 **Always on top**. Select the teleoperation terminal and use the arrow keys to

@@ -32,7 +32,7 @@ For ground-based robots, it is often sufficient to use 2D SLAM to navigate throu
 
 ## 3. Start Cartographer
 ### 3.1. Technical Overview
-![Technical Overview](../../_static/high_level_system_overview.png)
+![Technical Overview](../../_static/navigation/high_level_system_overview.png)
 
 Figure 1: Technical Overview
 
@@ -253,10 +253,10 @@ ros2 launch turtlebot3_bringup robot.launch.py
 
     Furthermore, you can visualize the transforms of the available frames by checking the box of tf. Make yourself familiar with the available modules.
 
-    ![Map at startup](../../_static/beforemap.png)
+    ![Map at startup](../../_static/navigation/beforemap.png)
     Figure 2: A incomplete map at beginning in the real work setup
 
-    ![Final Map](../../_static/aftermap2.png)
+    ![Final Map](../../_static/navigation/aftermap2.png)
     Figure 3: A complete map at beginning in the real work setup
 
 

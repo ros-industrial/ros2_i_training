@@ -24,7 +24,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="URDF" href="../urdf/introduction.html" />
+    <link rel="next" title="Robot Description" href="robot_description/index.html" />
     <link rel="prev" title="ROS 2 Navigation" href="../navigation/ROS2-Navigation.html" /> 
 </head>
 
@@ -52,10 +52,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../basics/index.html">2. ROS 2 Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. ROS 2 Manipulation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../urdf/introduction.html">4.1 URDF Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../urdf/cartesian_tutorial.html">4.2 Cartesian Robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ur_robot_cell.html">4.3 UR Robot cell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup_assistance.html">4.4 MoveIt Setup Assistant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="robot_description/index.html">4.1 Robot Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moveit/index.html">4.2 MoveIt</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
@@ -89,10 +87,20 @@
 <h1>ROS 2 Manipulation<a class="headerlink" href="#ros-2-manipulation" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/introduction.html">4.1 URDF Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../urdf/cartesian_tutorial.html">4.2 Cartesian Robot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ur_robot_cell.html">4.3 UR Robot cell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="setup_assistance.html">4.4 MoveIt Setup Assistant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_description/index.html">4.1 Robot Description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="urdf/01_urdf_introduction.html">4.1.1 URDF Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="urdf/02_urdf_xacro_exercice_cartesian_robot.html">4.1.2 Build a Cartesian robot description using URDF and Xacro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ur_robot_cell.html">4.1.3 Combine different models: example of a UR robot cell with a Schunk gripper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moveit/index.html">4.2 MoveIt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moveit_architecture.html">4.2.1 MoveIt Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moveit_robot_gripper_setup_assistant.html">4.2.2 Build moveit config of any manipulator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_yaskawa_gp50.html">4.2.3 Example: Yaskawa GP50</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_agilex_robots.html">4.2.4 Example: AgileX robots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_move_group_tutorial.html">4.2.5 Python Move Group Tutorial</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -102,7 +110,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../navigation/ROS2-Navigation.html" class="btn btn-neutral float-left" title="ROS 2 Navigation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../urdf/introduction.html" class="btn btn-neutral float-right" title="URDF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="robot_description/index.html" class="btn btn-neutral float-right" title="Robot Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

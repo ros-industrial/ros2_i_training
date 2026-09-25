@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example: Yaskawa GP50 &mdash; ROS2 workshop  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Example: AgileX robots" href="example_agilex_robots.html" />
+    <link rel="prev" title="Build moveit config of any manipulator" href="moveit_robot_gripper_setup_assistant.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/index.html">2. ROS 2 Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../navigation/index.html">3. ROS 2 Navigation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">4. ROS 2 Manipulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="robot_description/index.html">4.1 Robot Description</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moveit/index.html">4.2 MoveIt</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="moveit_architecture.html">4.2.1 MoveIt Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moveit_robot_gripper_setup_assistant.html">4.2.2 Build moveit config of any manipulator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.3 Example: Yaskawa GP50</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example_agilex_robots.html">4.2.4 Example: AgileX robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_move_group_tutorial.html">4.2.5 Python Move Group Tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../control/index.html">5. ROS 2 Control</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">ROS 2 Manipulation</a></li>
+          <li class="breadcrumb-item"><a href="moveit/index.html">MoveIt</a></li>
+      <li class="breadcrumb-item active">Example: Yaskawa GP50</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/_source/manipulation/example_yaskawa_gp50.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-yaskawa-gp50">
+<h1>Example: Yaskawa GP50<a class="headerlink" href="#example-yaskawa-gp50" title="Link to this heading"></a></h1>
+<p>This workshop creates a MoveIt configuration package for the Yaskawa Motoman
+GP50 and uses the generated package to plan motions in RViz.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>This tutorial uses ROS 2 Humble and assumes that:</p>
+<ul class="simple">
+<li><p>the workspace is located at <code class="docutils literal notranslate"><span class="pre">/home/ros/ros2_ws</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">motoman_gp50_support</span></code> is available in the workspace source directory; and</p></li>
+<li><p>MoveIt and the MoveIt Setup Assistant are installed.</p></li>
+</ul>
+</section>
+<section id="build-the-robot-support-package">
+<h2>1. Build the robot support package<a class="headerlink" href="#build-the-robot-support-package" title="Link to this heading"></a></h2>
+<p>Open a terminal and build the GP50 description and its dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+<span class="nb">cd</span><span class="w"> </span>/home/ros/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-up-to<span class="w"> </span>motoman_gp50_support
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</section>
+<section id="start-the-moveit-setup-assistant">
+<h2>2. Start the MoveIt Setup Assistant<a class="headerlink" href="#start-the-moveit-setup-assistant" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>moveit_setup_assistant<span class="w"> </span>moveit_setup_assistant
+</pre></div>
+</div>
+<p>Select <strong>Create New MoveIt Configuration Package</strong> and load this Xacro file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/motoman_ros2_support_packages/motoman_gp50_support/urdf/gp50.xacro
+</pre></div>
+</div>
+<p>The robot model should appear in the preview.</p>
+<p><img alt="Loaded GP50 robot model" src="../../_images/01_setup_assistant_load_robot_model.png" /></p>
+</section>
+<section id="generate-the-self-collision-matrix">
+<h2>3. Generate the self-collision matrix<a class="headerlink" href="#generate-the-self-collision-matrix" title="Link to this heading"></a></h2>
+<p>Open <strong>Self-Collisions</strong>, generate the collision matrix, and review the link
+pairs disabled because they are adjacent or never collide.</p>
+<p><img alt="GP50 self-collision matrix" src="../../_images/02_setup_assistant_generate_self_collision_matrix.png" /></p>
+<p>The GP50 is a fixed industrial arm. A virtual joint is unnecessary when its
+base is already fixed by the robot description.</p>
+</section>
+<section id="configure-the-planning-group">
+<h2>4. Configure the planning group<a class="headerlink" href="#configure-the-planning-group" title="Link to this heading"></a></h2>
+<p>Open <strong>Planning Groups</strong> and select <strong>Add Group</strong>.</p>
+<p><img alt="Add a GP50 planning group" src="../../_images/03_setup_assistant_add_planning_group.png" /></p>
+<p>Configure the group with:</p>
+<ul class="simple">
+<li><p>Group name: <code class="docutils literal notranslate"><span class="pre">gp50_arm</span></code></p></li>
+<li><p>Kinematic solver: <code class="docutils literal notranslate"><span class="pre">kdl_kinematics_plugin/KDLKinematicsPlugin</span></code></p></li>
+<li><p>Search resolution: <code class="docutils literal notranslate"><span class="pre">0.005</span></code></p></li>
+<li><p>Search timeout: <code class="docutils literal notranslate"><span class="pre">0.005</span></code></p></li>
+<li><p>Default planner: <code class="docutils literal notranslate"><span class="pre">RRTConnect</span></code></p></li>
+</ul>
+<p><img alt="Configure GP50 planning-group kinematics" src="../../_images/04_setup_assistant_configure_planning_group_kinematics.png" /></p>
+<p>Add a kinematic chain using:</p>
+<ul class="simple">
+<li><p>Base link: <code class="docutils literal notranslate"><span class="pre">base_link</span></code></p></li>
+<li><p>Tip link: <code class="docutils literal notranslate"><span class="pre">tool0</span></code></p></li>
+</ul>
+<p>Save the group after selecting both links.</p>
+<p><img alt="Define the GP50 kinematic chain" src="../../_images/05_setup_assistant_define_kinematic_chain.png" /></p>
+</section>
+<section id="define-robot-poses">
+<h2>5. Define robot poses<a class="headerlink" href="#define-robot-poses" title="Link to this heading"></a></h2>
+<p>Open <strong>Robot Poses</strong> and add useful named states for <code class="docutils literal notranslate"><span class="pre">gp50_arm</span></code>. Define <code class="docutils literal notranslate"><span class="pre">HOME</span></code>
+with all six joints at zero.</p>
+<p><img alt="Define the GP50 HOME pose" src="../../_images/06_setup_assistant_define_home_pose.png" /></p>
+<p>Add an <code class="docutils literal notranslate"><span class="pre">UP</span></code> pose by adjusting the joints to the required upright
+configuration.</p>
+<p><img alt="Define the GP50 UP pose" src="../../_images/07_setup_assistant_define_up_pose.png" /></p>
+<p>Review the saved <code class="docutils literal notranslate"><span class="pre">HOME</span></code>, <code class="docutils literal notranslate"><span class="pre">UP</span></code>, and <code class="docutils literal notranslate"><span class="pre">DOWN</span></code> poses before continuing.</p>
+<p><img alt="Review the GP50 robot poses" src="../../_images/08_setup_assistant_review_robot_poses.png" /></p>
+</section>
+<section id="configure-ros2-control">
+<h2>6. Configure ros2_control<a class="headerlink" href="#configure-ros2-control" title="Link to this heading"></a></h2>
+<p>Open <strong>ros2_control URDF Modifications</strong>. Add a <code class="docutils literal notranslate"><span class="pre">position</span></code> command interface
+and <code class="docutils literal notranslate"><span class="pre">position</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity</span></code> state interfaces for the six arm joints.</p>
+<p><img alt="Add GP50 ros2_control interfaces" src="../../_images/09_setup_assistant_add_ros2_control_interfaces.png" /></p>
+</section>
+<section id="configure-the-controllers">
+<h2>7. Configure the controllers<a class="headerlink" href="#configure-the-controllers" title="Link to this heading"></a></h2>
+<p>Open <strong>ROS 2 Controllers</strong> and use <strong>Auto Add JointTrajectoryController
+Controllers For Each Planning Group</strong>. This creates a trajectory controller for
+<code class="docutils literal notranslate"><span class="pre">gp50_arm</span></code>.</p>
+<p><img alt="Set up the GP50 ROS 2 controller" src="../../_images/10_setup_assistant_setup_ros2_controllers.png" /></p>
+<p>Open <strong>MoveIt Controllers</strong> and auto-add the corresponding
+<code class="docutils literal notranslate"><span class="pre">FollowJointTrajectory</span></code> controller. Confirm that <code class="docutils literal notranslate"><span class="pre">gp50_arm_controller</span></code> contains
+<code class="docutils literal notranslate"><span class="pre">joint_1</span></code> through <code class="docutils literal notranslate"><span class="pre">joint_6</span></code>.</p>
+<p><img alt="Review the GP50 MoveIt controller" src="../../_images/11_setup_assistant_review_moveit_controller.png" /></p>
+<p>Skip <strong>Perception</strong> unless the robot uses a configured 3D sensor. Add your name
+and email under <strong>Author Information</strong>.</p>
+</section>
+<section id="generate-the-configuration-package">
+<h2>8. Generate the configuration package<a class="headerlink" href="#generate-the-configuration-package" title="Link to this heading"></a></h2>
+<p>Open <strong>Launch Files</strong> and select the launch files required for the demo. The
+warehouse database launch file is optional.</p>
+<p><img alt="Configure GP50 launch files" src="../../_images/12_setup_assistant_configure_launch_files.png" /></p>
+<p>Open <strong>Configuration Files</strong> and use this output directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/yaskawa_gp50_moveit_config
+</pre></div>
+</div>
+<p>Review the generated files and select <strong>Generate Package</strong>.</p>
+<p><img alt="Generate the GP50 MoveIt configuration" src="../../_images/13_setup_assistant_generate_configuration_package.png" /></p>
+</section>
+<section id="check-the-joint-limits">
+<h2>9. Check the joint limits<a class="headerlink" href="#check-the-joint-limits" title="Link to this heading"></a></h2>
+<p>Open the generated file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/home/ros/ros2_ws/src/yaskawa_gp50_moveit_config/config/joint_limits.yaml
+</pre></div>
+</div>
+<p>MoveIt Humble expects floating-point joint-limit values. Replace integer values
+such as <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> with <code class="docutils literal notranslate"><span class="pre">2.0</span></code> or <code class="docutils literal notranslate"><span class="pre">0.0</span></code> where required.</p>
+</section>
+<section id="build-and-run-the-demo">
+<h2>10. Build and run the demo<a class="headerlink" href="#build-and-run-the-demo" title="Link to this heading"></a></h2>
+<p>Build the generated package and source the workspace again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/ros/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--packages-up-to<span class="w"> </span>yaskawa_gp50_moveit_config
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>Launch the MoveIt demo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>yaskawa_gp50_moveit_config<span class="w"> </span>demo.launch.py
+</pre></div>
+</div>
+<p>In the RViz <strong>MotionPlanning</strong> panel, select <code class="docutils literal notranslate"><span class="pre">gp50_arm</span></code> as the planning group.
+Choose one of the named states, then use <strong>Plan</strong> or <strong>Plan &amp; Execute</strong> to test
+the generated configuration.</p>
+</section>
+<section id="gp50-moveit-demonstrations">
+<h2>GP50 MoveIt demonstrations<a class="headerlink" href="#gp50-moveit-demonstrations" title="Link to this heading"></a></h2>
+<section id="demonstration-1">
+<h3>Demonstration 1<a class="headerlink" href="#demonstration-1" title="Link to this heading"></a></h3>
+<video controls style="width: 100%; max-width: 1371px;">
+  <source src="../../_static/manipulation/moveit_examples/yaskawa_gp50_moveit_2.webm" type="video/webm">
+  Your browser cannot play this video.
+  <a href="../../_static/manipulation/moveit_examples/yaskawa_gp50_moveit_2.webm">Download demonstration 1</a>.
+</video>
+</section>
+<section id="demonstration-2">
+<h3>Demonstration 2<a class="headerlink" href="#demonstration-2" title="Link to this heading"></a></h3>
+<p>Add a box as a collider:</p>
+<p><img alt="Add a box collider to the MoveIt scene" src="../../_images/moveit_add_a_box_collider.png" /></p>
+<p>And regenerate the plan:</p>
+<video controls style="width: 100%; max-width: 1371px;">
+  <source src="../../_static/manipulation/moveit_examples/yaskawa_gp50_moveit_1.webm" type="video/webm">
+  Your browser cannot play this video.
+  <a href="../../_static/manipulation/moveit_examples/yaskawa_gp50_moveit_1.webm">Download demonstration 2</a>.
+</video>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moveit_robot_gripper_setup_assistant.html" class="btn btn-neutral float-left" title="Build moveit config of any manipulator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example_agilex_robots.html" class="btn btn-neutral float-right" title="Example: AgileX robots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Fraunhofer IPA.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
