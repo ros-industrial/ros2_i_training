@@ -1,4 +1,4 @@
-# MoveIt 2 Jazzy: Python Move Group Tutorial
+# Python Move Group Tutorial
 
 This tutorial walks you through creating a Python-based MoveIt 2 interface package using ROS 2 Jazzy. You'll learn how to:
 

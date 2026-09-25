@@ -56,5 +56,4 @@ Add the workshop's heading and filepath relative to `~/ros2_i_training/workshop/
  ````
 `index.rst` is built into `index.html` in the documentation output directory `~/ros2_i_training/workshop/build/html/index.html`.
 
-![docs](/workshop/source/_static/demo_rtd.png)
-
+![docs](/workshop/source/_static/basics/demo_rtd.png)

@@ -63,14 +63,13 @@ html_static_path = ['_static']
 # Customize the theme options
 html_theme_options = {
     'logo_only': False,
-    'display_version': True,
     'prev_next_buttons_location': 'bottom',
     'style_external_links': False,
     'collapse_navigation': True,
     'sticky_navigation': False,
-    'navigation_depth': 2,
+    'navigation_depth': 3,
     'includehidden': True,
-    'titles_only': False,
+    'titles_only': True,
 }
 
 
