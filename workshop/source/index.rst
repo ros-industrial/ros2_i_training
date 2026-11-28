@@ -28,7 +28,7 @@ Welcome to the ROS 2 workshop!
 - Workspaces, packages, and launch files: :doc:`ROS 2 file system <_source/basics/ROS2-Filesystem>` and :doc:`launch files <_source/basics/ROS2-Launch-Files>`.
 - Python nodes: :doc:`publishers and subscribers <_source/basics/ROS2-Simple-Publisher-Subscriber>` and :doc:`services <_source/basics/ROS2-Simple-Service>`.
 - Data and debugging: :doc:`rosbag and PlotJuggler <_source/basics/ROS2-Bags-PlotJuggler>`, :doc:`logging <_source/basics/ROS2-Logging>`, and the :doc:`VS Code Python debugger <_source/basics/ROS2-VSCode-Python-Debugger>`.
-- Robot transforms with :doc:`TF2 <_source/navigation/ROS2-TF2>`.
+- Robot transforms with :doc:`TF2 <_source/basics/ROS2-TF2>`.
 - Reference material: :doc:`cheat sheet <_source/basics/ROS2-Basics-CheatSheet>`, :doc:`GitHub examples <_source/basics/ROS2-Github_Examples>`, and :doc:`training scripts <_source/basics/ROS2-Training-Scripts>`.
 
 3. ROS 2 Navigation

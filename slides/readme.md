@@ -3,9 +3,13 @@
 The slides are written in `Markdown` language and converter to slides using [remark](https://github.com/gnab/remark) tool. Please see the [documentation](https://github.com/gnab/remark/wiki) for further details.
 
 ## File structure
-Slides are structured as follows for each session:
+Slides are grouped by theme (`Basics`, `Navigation`, `Manipulation`). Each deck folder contains:
 `source`: html files
 `static`: Images, videos and other resource files
+
+Manipulation has one subfolder per motion planning framework, for example
+`Manipulation/MoveIt/source` and `Manipulation/MoveIt/static`.
+Decks that apply to any framework (e.g. workspace structure) are in `Manipulation/General`.
 
 ## Usage
 ### Visualize the slides in the browser
@@ -39,4 +43,5 @@ HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose run --rm slides
 ```
 
 The command exports all slide decks listed in `../export_list.yaml` to the
-`../export` directory, grouped into `Day1`, `Day2`, and `Day3` subdirectories.
+`../export` directory, grouped by theme into `Basics`, `Navigation`, and
+`Manipulation` subdirectories.

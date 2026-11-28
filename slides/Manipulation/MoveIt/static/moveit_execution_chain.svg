@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 235" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #fff; stroke: #0D355F; stroke-width: 1.5; }
+    .t { font-size: 13px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .s { font-size: 11px; fill: #333; text-anchor: middle; }
+    .lbl { font-size: 11px; fill: #C2232B; text-anchor: middle; }
+    .band { font-size: 13px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .ln { stroke: #0D355F; stroke-width: 1.5; fill: none; }
+  </style>
+
+  <rect x="3" y="18" width="590" height="122" rx="8" fill="#FDF6E3"/>
+  <text x="298" y="36" class="band">MoveIt (move_group or MoveItPy)</text>
+  <rect x="607" y="18" width="390" height="122" rx="8" fill="#E8EEF5"/>
+  <text x="802" y="36" class="band">ros2_control</text>
+
+  <rect x="11" y="50" width="170" height="74" rx="6" class="box"/>
+  <text x="96" y="74" class="t">Planner</text>
+  <text x="96" y="92" class="s">geometric path</text>
+  <text x="96" y="107" class="s">waypoints, no timing</text>
+
+  <rect x="213" y="50" width="170" height="74" rx="6" class="box"/>
+  <text x="298" y="74" class="t">Response adapter</text>
+  <text x="298" y="92" class="s">time parameterization</text>
+  <text x="298" y="107" class="s">TOTG (default) · Ruckig</text>
+
+  <rect x="415" y="50" width="170" height="74" rx="6" class="box"/>
+  <text x="500" y="74" class="t">Trajectory Execution</text>
+  <text x="500" y="90" class="t">Manager</text>
+  <text x="500" y="108" class="s">moveit_controllers.yaml</text>
+
+  <rect x="617" y="50" width="170" height="74" rx="6" class="box"/>
+  <text x="702" y="74" class="t">JointTrajectory</text>
+  <text x="702" y="90" class="t">Controller</text>
+  <text x="702" y="108" class="s">ros2_controllers.yaml</text>
+
+  <rect x="819" y="50" width="170" height="74" rx="6" class="box"/>
+  <text x="904" y="74" class="t">Hardware interface</text>
+  <text x="904" y="92" class="s">mock_components</text>
+  <text x="904" y="107" class="s">Gazebo · robot driver</text>
+
+  <line x1="181" y1="87" x2="211" y2="87" class="ln" marker-end="url(#a)"/>
+  <line x1="383" y1="87" x2="413" y2="87" class="ln" marker-end="url(#a)"/>
+  <line x1="585" y1="87" x2="615" y2="87" class="ln" marker-end="url(#a)"/>
+  <line x1="787" y1="87" x2="817" y2="87" class="ln" marker-end="url(#a)"/>
+
+  <text x="197" y="160" class="lbl">path</text>
+  <text x="399" y="160" class="lbl">RobotTrajectory</text>
+  <text x="601" y="160" class="lbl">FollowJointTrajectory action</text>
+  <text x="803" y="160" class="lbl">command interfaces</text>
+
+  <path d="M904,140 L904,195 L96,195 L96,142" class="ln" stroke-dasharray="5 4" marker-end="url(#a)"/>
+  <text x="500" y="218" class="s">/joint_states (joint_state_broadcaster) → Planning Scene Monitor → start state of the next plan</text>
+</svg>

@@ -1,17 +1,26 @@
+# Slide decks exported to PDF, grouped by theme.
+# Each theme is exported to export/<Theme>/<number>_<deck>.pdf
 export:
-  - Day: 1
+  - Theme: Basics
     slides:
       1: slides/Basics/source/Core_concepts.html
       2: slides/Basics/source/filesystem.html
+      3: slides/Basics/source/CLI.html
+      4: slides/Basics/source/Extended_Concepts.html
+      5: slides/Basics/source/TF.html
+      6: slides/Basics/source/URDF.html
 
-  - Day: 2
-    slides:
-      1: slides/Basics/source/CLI.html
-      2: slides/Basics/source/Extended_Concepts.html
-      3: slides/Navigation/source/TF.html
-      4: slides/Manipulation/source/moveit.html
-  - Day: 3
+  - Theme: Navigation
     slides:
       1: slides/Navigation/source/Basics.html
       2: slides/Navigation/source/SLAM.html
       3: slides/Navigation/source/Navigation2.html
+
+  - Theme: Manipulation
+    slides:
+      1: slides/Manipulation/General/source/workspace_structure.html
+      2: slides/Manipulation/MoveIt/source/moveit_overview.html
+      3: slides/Manipulation/MoveIt/source/moveit_configuration.html
+      4: slides/Manipulation/MoveIt/source/moveit_apis.html
+      5: slides/Manipulation/MoveIt/source/moveit_planning.html
+      6: slides/Manipulation/MoveIt/source/moveit_task_constructor.html

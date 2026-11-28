@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 310" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2E7D32"/>
+    </marker>
+  </defs>
+  <style>
+    .g { fill: #E8F5E9; stroke: #2E7D32; stroke-width: 1.8; }
+    .p { fill: #E8EEF5; stroke: #0D355F; stroke-width: 1.5; }
+    .c { fill: #FFF3E0; stroke: #C77700; stroke-width: 1.8; }
+    .k { fill: #fff; stroke: #777; stroke-width: 1.5; stroke-dasharray: 5 3; }
+    .t { font-size: 12.5px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .s { font-size: 10.5px; fill: #444; text-anchor: middle; }
+    .lg { font-size: 11px; fill: #333; }
+    .ln { stroke: #0D355F; stroke-width: 1.4; fill: none; }
+  </style>
+
+  <text x="20" y="22" class="lg" font-weight="bold" style="fill:#0D355F;font-size:13px">Task (SerialContainer)</text>
+
+  <!-- Top row: task -->
+  <rect x="20" y="34" width="125" height="52" rx="6" class="g"/>
+  <text x="82" y="56" class="t">current state</text>
+  <text x="82" y="73" class="s">CurrentState</text>
+  <rect x="157" y="34" width="125" height="52" rx="6" class="p"/>
+  <text x="219" y="56" class="t">open hand</text>
+  <text x="219" y="73" class="s">MoveTo "open"</text>
+  <rect x="294" y="34" width="125" height="52" rx="6" class="c"/>
+  <text x="356" y="56" class="t">move to pick</text>
+  <text x="356" y="73" class="s">Connect (OMPL)</text>
+  <rect x="431" y="34" width="125" height="52" rx="6" class="k"/>
+  <text x="493" y="56" class="t">pick object</text>
+  <text x="493" y="73" class="s">SerialContainer</text>
+  <rect x="568" y="34" width="125" height="52" rx="6" class="c"/>
+  <text x="630" y="56" class="t">move to place</text>
+  <text x="630" y="73" class="s">Connect (OMPL)</text>
+  <rect x="705" y="34" width="125" height="52" rx="6" class="k"/>
+  <text x="767" y="56" class="t">place object</text>
+  <text x="767" y="73" class="s">SerialContainer</text>
+  <rect x="842" y="34" width="125" height="52" rx="6" class="p"/>
+  <text x="904" y="56" class="t">return home</text>
+  <text x="904" y="73" class="s">MoveTo "ready"</text>
+
+  <line x1="145" y1="60" x2="155" y2="60" class="ln" marker-end="url(#a)"/>
+  <line x1="282" y1="60" x2="292" y2="60" class="ln" marker-end="url(#a)"/>
+  <line x1="419" y1="60" x2="429" y2="60" class="ln" marker-end="url(#a)"/>
+  <line x1="556" y1="60" x2="566" y2="60" class="ln" marker-end="url(#a)"/>
+  <line x1="693" y1="60" x2="703" y2="60" class="ln" marker-end="url(#a)"/>
+  <line x1="830" y1="60" x2="840" y2="60" class="ln" marker-end="url(#a)"/>
+
+  <!-- Zoom lines -->
+  <line x1="431" y1="86" x2="20" y2="120" stroke="#999" stroke-dasharray="3 3"/>
+  <line x1="556" y1="86" x2="980" y2="120" stroke="#999" stroke-dasharray="3 3"/>
+
+  <!-- Pick container -->
+  <rect x="20" y="120" width="960" height="125" rx="8" class="k"/>
+  <text x="34" y="140" class="lg" font-weight="bold" style="fill:#0D355F">pick object</text>
+
+  <rect x="35" y="160" width="145" height="60" rx="6" class="p"/>
+  <text x="107" y="184" class="t">approach object</text>
+  <text x="107" y="202" class="s">MoveRelative (Cartesian)</text>
+  <rect x="192" y="160" width="145" height="60" rx="6" class="g"/>
+  <text x="264" y="180" class="t">grasp pose IK</text>
+  <text x="264" y="196" class="s">ComputeIK wrapping</text>
+  <text x="264" y="210" class="s">GenerateGraspPose</text>
+  <rect x="349" y="160" width="145" height="60" rx="6" class="p"/>
+  <text x="421" y="180" class="t">allow collision</text>
+  <text x="421" y="196" class="s">hand ↔ object</text>
+  <text x="421" y="210" class="s">ModifyPlanningScene</text>
+  <rect x="506" y="160" width="145" height="60" rx="6" class="p"/>
+  <text x="578" y="184" class="t">close hand</text>
+  <text x="578" y="202" class="s">MoveTo "close"</text>
+  <rect x="663" y="160" width="145" height="60" rx="6" class="p"/>
+  <text x="735" y="180" class="t">attach object</text>
+  <text x="735" y="196" class="s">to the hand link</text>
+  <text x="735" y="210" class="s">ModifyPlanningScene</text>
+  <rect x="820" y="160" width="145" height="60" rx="6" class="p"/>
+  <text x="892" y="184" class="t">lift object</text>
+  <text x="892" y="202" class="s">MoveRelative (Cartesian)</text>
+
+  <line x1="190" y1="190" x2="182" y2="190" stroke="#2E7D32" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="337" y1="190" x2="347" y2="190" stroke="#2E7D32" stroke-width="2" marker-end="url(#r)"/>
+  <line x1="494" y1="190" x2="504" y2="190" class="ln" marker-end="url(#a)"/>
+  <line x1="651" y1="190" x2="661" y2="190" class="ln" marker-end="url(#a)"/>
+  <line x1="808" y1="190" x2="818" y2="190" class="ln" marker-end="url(#a)"/>
+  <text x="264" y="238" class="s" style="fill:#2E7D32">← propagates backward · forward →</text>
+
+  <!-- Legend -->
+  <rect x="20" y="268" width="18" height="14" rx="3" class="g"/>
+  <text x="44" y="279" class="lg">Generator: creates states (current state, grasp/place poses)</text>
+  <rect x="440" y="268" width="18" height="14" rx="3" class="p"/>
+  <text x="464" y="279" class="lg">Propagator: extends a state forward or backward</text>
+  <rect x="20" y="290" width="18" height="14" rx="3" class="c"/>
+  <text x="44" y="301" class="lg">Connector: plans a free motion between two states</text>
+  <rect x="440" y="290" width="18" height="14" rx="3" class="k"/>
+  <text x="464" y="301" class="lg">Container: groups stages (Serial, Alternatives, Fallbacks …)</text>
+</svg>

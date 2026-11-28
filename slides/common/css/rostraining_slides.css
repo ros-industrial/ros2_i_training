@@ -84,8 +84,8 @@ div.header {
   text-align: left;
 }
 div.header img{
-  height: 40px;
-  top: 5px;
+  height: 58px;
+  top: 6px;
   right: 50px;
   position: fixed;
 }
@@ -146,4 +146,25 @@ td, th {
   padding: 4px;
   border: 1px solid grey;
   border-style: solid;
+}
+
+/* Denser slides: add "class: dense" and/or "class: small-code" to a slide */
+.remark-slide-content.dense {
+  font-size: 16px;
+}
+.remark-slide-content.small-code .remark-code {
+  font-size: 11.5px;
+}
+.remark-slide-content.dense td, .remark-slide-content.dense th {
+  font-size: 14px;
+}
+.remark-slide-content.dense td .remark-inline-code {
+  font-size: 13px;
+}
+.remark-slide-content table {
+  border-collapse: collapse;
+}
+.note {
+  font-size: 13px;
+  color: #555;
 }

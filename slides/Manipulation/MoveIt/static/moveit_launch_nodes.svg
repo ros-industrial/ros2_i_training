@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 330" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #E8EEF5; stroke: #0D355F; stroke-width: 1.5; }
+    .ext { fill: #F4F4F4; stroke: #777; stroke-width: 1.2; }
+    .t { font-size: 13px; font-weight: bold; fill: #0D355F; }
+    .tc { font-size: 13px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .s { font-size: 11px; fill: #333; }
+    .sc { font-size: 11px; fill: #333; text-anchor: middle; }
+    .code { font-family: 'Source Code Pro', monospace; font-size: 11px; fill: #C2232B; }
+    .ln { stroke: #0D355F; stroke-width: 1.3; fill: none; }
+  </style>
+
+  <!-- Builder -->
+  <rect x="10" y="20" width="268" height="290" rx="8" class="ext"/>
+  <text x="144" y="44" class="tc">MoveItConfigsBuilder</text>
+  <text x="144" y="62" class="sc">reads the moveit_config package</text>
+  <text x="28" y="92" class="code">.setup_assistant</text>
+  <text x="28" y="114" class="code">config/&lt;robot&gt;.urdf.xacro</text>
+  <text x="28" y="136" class="code">config/&lt;robot&gt;.srdf</text>
+  <text x="28" y="158" class="code">config/kinematics.yaml</text>
+  <text x="28" y="180" class="code">config/joint_limits.yaml</text>
+  <text x="28" y="202" class="code">config/*_controllers.yaml</text>
+  <text x="28" y="224" class="code">config/*_planning.yaml</text>
+  <text x="28" y="240" class="s">  (+ defaults: ompl, chomp, pilz, stomp)</text>
+  <text x="28" y="262" class="code">config/pilz_cartesian_limits.yaml</text>
+  <text x="28" y="284" class="code">config/sensors_3d.yaml</text>
+
+  <line x1="278" y1="165" x2="368" y2="165" class="ln" marker-end="url(#a)"/>
+  <text x="323" y="155" class="sc">MoveItConfigs</text>
+
+  <!-- demo.launch.py -->
+  <rect x="370" y="135" width="150" height="60" rx="8" fill="#FDF6E3" stroke="#0D355F" stroke-width="2"/>
+  <text x="445" y="161" class="tc">demo.launch.py</text>
+  <text x="445" y="179" class="sc">generate_demo_launch()</text>
+
+  <!-- Nodes -->
+  <g>
+    <rect x="580" y="20" width="410" height="40" rx="6" class="box"/>
+    <text x="592" y="45" class="t">static_virtual_joint_tfs</text>
+    <text x="790" y="45" class="s">world → robot base (virtual joint)</text>
+    <rect x="580" y="68" width="410" height="40" rx="6" class="box"/>
+    <text x="592" y="93" class="t">robot_state_publisher</text>
+    <text x="790" y="93" class="code">.robot_description</text>
+    <rect x="580" y="116" width="410" height="40" rx="6" class="box" style="stroke:#C2232B;stroke-width:2"/>
+    <text x="592" y="141" class="t">move_group</text>
+    <text x="790" y="141" class="code">.to_dict()  (everything)</text>
+    <rect x="580" y="164" width="410" height="40" rx="6" class="box"/>
+    <text x="592" y="189" class="t">rviz2 (MotionPlanning)</text>
+    <text x="790" y="183" class="code">description, semantic,</text>
+    <text x="790" y="197" class="code">kinematics, pipelines, limits</text>
+    <rect x="580" y="212" width="410" height="40" rx="6" class="box"/>
+    <text x="592" y="237" class="t">ros2_control_node</text>
+    <text x="790" y="237" class="code">config/ros2_controllers.yaml</text>
+    <rect x="580" y="260" width="410" height="40" rx="6" class="box"/>
+    <text x="592" y="285" class="t">spawner (per controller)</text>
+    <text x="790" y="285" class="s">arm, hand, joint_state_broadcaster</text>
+  </g>
+  <path d="M520,165 C550,165 550,40 578,40" class="ln" marker-end="url(#a)"/>
+  <path d="M520,165 C550,165 550,88 578,88" class="ln" marker-end="url(#a)"/>
+  <path d="M520,165 C550,165 550,136 578,136" class="ln" marker-end="url(#a)"/>
+  <path d="M520,165 C550,165 550,184 578,184" class="ln" marker-end="url(#a)"/>
+  <path d="M520,165 C550,165 550,232 578,232" class="ln" marker-end="url(#a)"/>
+  <path d="M520,165 C550,165 550,280 578,280" class="ln" marker-end="url(#a)"/>
+</svg>

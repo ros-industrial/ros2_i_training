@@ -310,6 +310,6 @@ The TF published is exactly of the same format as the dynamic publisher, and thi
 
 ## 4. Next: start the TF2 example with a launch file
 
-Continue with [ROS 2 launch files](../basics/ROS2-Launch-Files.md) to start the
+Continue with [ROS 2 launch files](ROS2-Launch-Files.md) to start the
 simulator, both dynamic broadcasters, the listener, the static broadcaster, and
 the second turtle from one launch file.
