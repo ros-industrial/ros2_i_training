@@ -10,7 +10,7 @@ ROS 2 basics
    2.4 File system <ROS2-Filesystem>
    2.5 Publisher and Subscriber in Python <ROS2-Simple-Publisher-Subscriber>
    2.6 Service in Python <ROS2-Simple-Service>
-   2.7 TF2 <../navigation/ROS2-TF2>
+   2.7 TF2 <ROS2-TF2>
    2.8 Launch files <ROS2-Launch-Files>
    2.9 VSCode Python debugger <ROS2-VSCode-Python-Debugger>
    2.10 ROS2 Logging <ROS2-Logging>

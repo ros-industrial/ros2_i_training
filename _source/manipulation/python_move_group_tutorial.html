@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Move Group Tutorial &mdash; ROS2 workshop  documentation</title>
+  <title>Python MoveIt Tutorial (MoveItPy) &mdash; ROS2 workshop  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -58,7 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="moveit_robot_gripper_setup_assistant.html">4.2.2 Build moveit config of any manipulator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example_yaskawa_gp50.html">4.2.3 Example: Yaskawa GP50</a></li>
 <li class="toctree-l3"><a class="reference internal" href="example_agilex_robots.html">4.2.4 Example: AgileX robots</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.5 Python Move Group Tutorial</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">4.2.5 Python MoveIt Tutorial (MoveItPy)</a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +82,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">ROS 2 Manipulation</a></li>
           <li class="breadcrumb-item"><a href="moveit/index.html">MoveIt</a></li>
-      <li class="breadcrumb-item active">Python Move Group Tutorial</li>
+      <li class="breadcrumb-item active">Python MoveIt Tutorial (MoveItPy)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/_source/manipulation/python_move_group_tutorial.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,152 +92,415 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="python-move-group-tutorial">
-<h1>Python Move Group Tutorial<a class="headerlink" href="#python-move-group-tutorial" title="Link to this heading"></a></h1>
-<p>This tutorial walks you through creating a Python-based MoveIt 2 interface package using ROS 2 Jazzy. You’ll learn how to:</p>
+  <section id="python-moveit-tutorial-moveitpy">
+<h1>Python MoveIt Tutorial (MoveItPy)<a class="headerlink" href="#python-moveit-tutorial-moveitpy" title="Link to this heading"></a></h1>
+<p>This tutorial shows how to plan and execute robot motions from Python with <strong>MoveItPy</strong>, on ROS 2
+Jazzy. You will:</p>
 <ol class="arabic simple">
-<li><p>Create a Python ROS 2 package.</p></li>
-<li><p>Write a script that moves a robot to a specific pose.</p></li>
-<li><p>Configure the package for MoveIt.</p></li>
-<li><p>Run the motion planning script.</p></li>
+<li><p>Start a robot with mock hardware and a <code class="docutils literal notranslate"><span class="pre">move_group</span></code>, in Docker.</p></li>
+<li><p>Run the MoveItPy examples against a UR5e, a Franka FR3, a Motoman GP50 or an AgileX Piper.</p></li>
+<li><p>Understand what a MoveItPy node needs (and why it differs from MoveGroupInterface).</p></li>
+<li><p>Write and run your own MoveItPy script.</p></li>
 </ol>
+<p>The examples are in the <a class="reference external" href="https://github.com/ROS-Industrial-Session-Common/moveit_examples"><code class="docutils literal notranslate"><span class="pre">moveit_examples</span></code></a>
+repository: the same ten examples exist in C++ (<code class="docutils literal notranslate"><span class="pre">move_group_interface_examples</span></code>) and in Python
+(<code class="docutils literal notranslate"><span class="pre">moveit_py_examples</span></code>), plus MoveIt Task Constructor examples (<code class="docutils literal notranslate"><span class="pre">mtc_examples</span></code>).</p>
 <hr class="docutils" />
-<section id="step-1-create-a-python-package-for-move-group">
-<h2>Step 1: Create a Python Package for Move Group<a class="headerlink" href="#step-1-create-a-python-package-for-move-group" title="Link to this heading"></a></h2>
-<p>Open a terminal in your ROS 2 workspace <code class="docutils literal notranslate"><span class="pre">src</span></code> directory:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_moveit2/src
-ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>moveit_python_demo<span class="w"> </span>--dependencies<span class="w"> </span>rclpy<span class="w"> </span>moveit_commander<span class="w"> </span>geometry_msgs
+<section id="why-not-moveit-commander">
+<h2>Why not <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code>?<a class="headerlink" href="#why-not-moveit-commander" title="Link to this heading"></a></h2>
+<p>In ROS 1, Python programs used <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code>. It does <strong>not</strong> exist in ROS 2:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> was not a Python implementation, but a thin <code class="docutils literal notranslate"><span class="pre">boost::python</span></code> wrapper around the
+C++ <code class="docutils literal notranslate"><span class="pre">MoveGroupInterface</span></code>. It started a hidden roscpp node inside the Python process and passed
+messages across the language boundary as serialized byte strings.</p></li>
+<li><p>In ROS 2, Python (<code class="docutils literal notranslate"><span class="pre">rclpy</span></code>) and C++ (<code class="docutils literal notranslate"><span class="pre">rclcpp</span></code>) nodes do not share a process-wide node or executor,
+and <code class="docutils literal notranslate"><span class="pre">boost::python</span></code> was replaced by <code class="docutils literal notranslate"><span class="pre">pybind11</span></code>. The wrapper was never ported.</p></li>
+<li><p>MoveIt 2 provides <strong>MoveItPy</strong> instead: Python bindings of <strong>MoveItCpp</strong>, the C++ core of MoveIt.</p></li>
+</ul>
+<p>The important difference:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>MoveGroupInterface (C++)</p></th>
+<th class="head"><p>MoveItPy (Python)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Where MoveIt runs</p></td>
+<td><p>in the <code class="docutils literal notranslate"><span class="pre">move_group</span></code> node; your node is a client</p></td>
+<td><p><strong>inside your process</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Parameters your node needs</p></td>
+<td><p>none (robot model from topics)</p></td>
+<td><p><strong>all</strong> MoveIt parameters of the robot + MoveItPy settings</p></td>
+</tr>
+<tr class="row-even"><td><p>Planning scene</p></td>
+<td><p>messages to <code class="docutils literal notranslate"><span class="pre">move_group</span></code></p></td>
+<td><p>direct read/write access</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="step-1-start-a-robot">
+<h2>Step 1: Start a robot<a class="headerlink" href="#step-1-start-a-robot" title="Link to this heading"></a></h2>
+<p>The setup is split like on a real cell: one container per robot (<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>, controllers,
+<code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>, <strong>no MoveIt</strong>), one generic <code class="docutils literal notranslate"><span class="pre">move_group</span></code> container, and the example
+clients. The URDF has a single source: the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic of the robot bringup.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Robot</p></th>
+<th class="head"><p>Repository</p></th>
+<th class="head"><p>Bringup service (mock hardware)</p></th>
+<th class="head"><p>Descriptions image</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ur</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simple_ur_cell</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simple_ur_cell_mock</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simple_ur_cell_descriptions:jazzy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fr3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dual_fr3_cell</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dual_fr3_cell_mock</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dual_fr3_cell_descriptions:jazzy</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gp50</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">motoman_gp50</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gp50_mock</span></code> (<code class="docutils literal notranslate"><span class="pre">--profile</span> <span class="pre">mock</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">motoman_gp50_descriptions:jazzy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">piper</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agx_piper_h</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agx_piper_h_mock</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agx_piper_h_descriptions:jazzy</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Example with the Piper; use the other rows of the table for the other robots.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 1: the robot (mock hardware)</span>
+<span class="nb">cd</span><span class="w"> </span>agx_piper_h/docker
+docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>descriptions<span class="w"> </span>build<span class="w"> </span>agx_piper_h_descriptions<span class="w">   </span><span class="c1"># once</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>agx_piper_h_mock
 </pre></div>
 </div>
-<p>This will generate the basic Python package structure.</p>
-<section id="update-setup-py">
-<h3>Update <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#update-setup-py" title="Link to this heading"></a></h3>
-<p>Edit the generated <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file and update the <code class="docutils literal notranslate"><span class="pre">entry_points</span></code> block:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">'console_scripts'</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s1">'move_to_pose = moveit_python_demo.move_to_pose:main'</span><span class="p">,</span>
-    <span class="p">],</span>
-<span class="p">},</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 2: move_group and RViz for this robot</span>
+<span class="nb">cd</span><span class="w"> </span>move_group_server
+xhost<span class="w"> </span>+local:docker
+<span class="nv">ROBOT_DESCRIPTIONS_IMAGE</span><span class="o">=</span>agx_piper_h_descriptions:jazzy<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>rviz<span class="w"> </span>up
 </pre></div>
 </div>
-</section>
+<p>Wait for <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can</span> <span class="pre">start</span> <span class="pre">planning</span> <span class="pre">now!</span></code> in the log of <code class="docutils literal notranslate"><span class="pre">move_group</span></code>, then check RViz: the robot model
+and the MotionPlanning panel appear.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The descriptions image is a data-only image with the description packages, the MoveIt config
+package and a <code class="docutils literal notranslate"><span class="pre">robot.env</span></code> file. <code class="docutils literal notranslate"><span class="pre">move_group</span></code> mounts it read-only to load the SRDF, kinematics,
+joint limits, planning pipelines and controllers of the robot.</p>
+</div>
 </section>
 <hr class="docutils" />
-<section id="step-2-create-script-to-move-robot-to-a-pose">
-<h2>Step 2: Create Script to Move Robot to a Pose<a class="headerlink" href="#step-2-create-script-to-move-robot-to-a-pose" title="Link to this heading"></a></h2>
-<p>Create a file called <code class="docutils literal notranslate"><span class="pre">move_to_pose.py</span></code> inside the <code class="docutils literal notranslate"><span class="pre">moveit_python_demo/moveit_python_demo/</span></code> directory:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<section id="step-2-run-the-moveitpy-examples">
+<h2>Step 2: Run the MoveItPy examples<a class="headerlink" href="#step-2-run-the-moveitpy-examples" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 3: the examples</span>
+<span class="nb">cd</span><span class="w"> </span>moveit_examples/docker
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+<span class="c1"># edit .env: ROBOT=piper and ROBOT_DESCRIPTIONS_IMAGE=agx_piper_h_descriptions:jazzy</span>
+docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>examples<span class="w"> </span>build<span class="w"> </span>py_01_named_goal<span class="w">   </span><span class="c1"># once: all example services share this image</span>
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>py_01_named_goal
+</pre></div>
+</div>
+<p>Watch the robot in RViz. Then try the other examples:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Service</p></th>
+<th class="head"><p>What it shows</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">py_01_named_goal</span></code></p></td>
+<td><p>SRDF named states (<code class="docutils literal notranslate"><span class="pre">home</span></code>, <code class="docutils literal notranslate"><span class="pre">UP</span></code>, …)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">py_02_joint_goal</span></code></p></td>
+<td><p>joint-space goal: no IK</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">py_03_pose_goal</span></code></p></td>
+<td><p>pose of the tip link: the planner samples IK solutions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">py_04_planners</span></code></p></td>
+<td><p>OMPL, Pilz PTP, CHOMP, STOMP on the same goal, several pipelines in parallel, Pilz LIN</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">py_05_inverse_kinematics</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RobotState.set_from_ik</span></code>, then plan to the joint solution</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">py_06_path_constraints</span></code></p></td>
+<td><p>keep the tool pointing in the same direction during the motion</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">py_07_cartesian_path</span></code></p></td>
+<td><p>straight lines: Pilz LIN, and the <code class="docutils literal notranslate"><span class="pre">/compute_cartesian_path</span></code> service of <code class="docutils literal notranslate"><span class="pre">move_group</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">py_08_planning_scene</span></code></p></td>
+<td><p>add a box obstacle, plan around it, remove it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">py_09_attach_detach</span></code></p></td>
+<td><p>attach a part to the tool (and use the gripper), move, detach</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">py_10_allowed_collision_matrix</span></code></p></td>
+<td><p>a part touching the tool blocks planning until the ACM allows the contacts</p></td>
+</tr>
+</tbody>
+</table>
+<p>The C++ versions are the <code class="docutils literal notranslate"><span class="pre">mgi_*</span></code> services: compare both implementations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MoveItPy has its own planning scene, in the example process. Objects added by a MoveItPy example
+are therefore <strong>not</strong> shown in the RViz MotionPlanning panel, which displays the scene of
+<code class="docutils literal notranslate"><span class="pre">move_group</span></code>. The C++ examples (<code class="docutils literal notranslate"><span class="pre">mgi_*</span></code>) edit the scene of <code class="docutils literal notranslate"><span class="pre">move_group</span></code>: their objects appear in RViz.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-3-what-a-moveitpy-node-needs">
+<h2>Step 3: What a MoveItPy node needs<a class="headerlink" href="#step-3-what-a-moveitpy-node-needs" title="Link to this heading"></a></h2>
+<p>Open <code class="docutils literal notranslate"><span class="pre">moveit_py_examples/moveit_py_examples/launch_utils.py</span></code>. The launch file of every example
+builds the parameters of the node:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">MoveItConfigsBuilder</span><span class="p">(</span><span class="n">robot_name</span><span class="p">,</span> <span class="n">package_name</span><span class="o">=</span><span class="n">package</span><span class="p">)</span>      <span class="c1"># e.g. agx_piper_h_moveit_config</span>
+    <span class="o">.</span><span class="n">moveit_cpp</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">share</span> <span class="o">/</span> <span class="s2">"config"</span> <span class="o">/</span> <span class="s2">"moveit_py.yaml"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">to_moveit_configs</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">parameters</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"robot_description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># from the topic of the bringup</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">moveit_commander</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoveGroupCommander</span><span class="p">,</span> <span class="n">PlanningSceneInterface</span><span class="p">,</span> <span class="n">RobotCommander</span>
+<span class="n">Node</span><span class="p">(</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"moveit_py_examples"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="n">executable</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">parameters</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">share</span> <span class="o">/</span> <span class="s2">"config"</span> <span class="o">/</span> <span class="s2">"robots"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">robot</span><span class="si">}</span><span class="s2">.yaml"</span><span class="p">)],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config.to_dict()</span></code>: SRDF, kinematics, joint limits, planning pipelines and controllers of the
+robot, read from its MoveIt config package. MoveItPy <strong>is</strong> MoveIt: it needs all of them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_description</span></code> is removed: MoveItPy reads the URDF from the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic of
+the robot bringup, like <code class="docutils literal notranslate"><span class="pre">move_group</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/moveit_py.yaml</span></code>: the MoveItPy settings, robot independent:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">planning_scene_monitor_options</span></code>: topics of the planning scene monitor</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">planning_pipelines.pipeline_names</span></code>: the pipelines to load (<code class="docutils literal notranslate"><span class="pre">ompl</span></code>, <code class="docutils literal notranslate"><span class="pre">pilz_industrial_motion_planner</span></code>, <code class="docutils literal notranslate"><span class="pre">chomp</span></code>, <code class="docutils literal notranslate"><span class="pre">stomp</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plan_request_params</span></code>: the default plan request (pipeline, planning time, scaling)</p></li>
+<li><p>named plan requests (<code class="docutils literal notranslate"><span class="pre">ompl_rrtc</span></code>, <code class="docutils literal notranslate"><span class="pre">pilz_ptp</span></code>, <code class="docutils literal notranslate"><span class="pre">pilz_lin</span></code>, …), used with <code class="docutils literal notranslate"><span class="pre">PlanRequestParameters(robot,</span> <span class="pre">&quot;pilz_lin&quot;)</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config/robots/&lt;robot&gt;.yaml</span></code>: the robot profile of the examples (planning group, tip link, named
+states, test poses). The code contains no robot names.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-4-read-the-code">
+<h2>Step 4: Read the code<a class="headerlink" href="#step-4-read-the-code" title="Link to this heading"></a></h2>
+<section id="named-goal-and-pose-goal">
+<h3>Named goal and pose goal<a class="headerlink" href="#named-goal-and-pose-goal" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">moveit_py_examples/moveit_py_examples/named_goal.py</span></code> and <code class="docutils literal notranslate"><span class="pre">pose_goal.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moveit.planning</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoveItPy</span>
+
+<span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">MoveItPy</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s2">"moveit_py"</span><span class="p">)</span>                    <span class="c1"># loads the model, starts the scene monitor</span>
+<span class="n">arm</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_planning_component</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">planning_group</span><span class="p">)</span>  <span class="c1"># e.g. "arm" for the Piper</span>
+
+<span class="n">arm</span><span class="o">.</span><span class="n">set_start_state_to_current_state</span><span class="p">()</span>
+<span class="n">arm</span><span class="o">.</span><span class="n">set_goal_state</span><span class="p">(</span><span class="n">configuration_name</span><span class="o">=</span><span class="s2">"home"</span><span class="p">)</span>              <span class="c1"># SRDF named state</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">arm</span><span class="o">.</span><span class="n">plan</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">controllers</span><span class="o">=</span><span class="p">[])</span>       <span class="c1"># [] : MoveIt chooses the controllers</span>
+
+<span class="n">arm</span><span class="o">.</span><span class="n">set_start_state_to_current_state</span><span class="p">()</span>
+<span class="n">arm</span><span class="o">.</span><span class="n">set_goal_state</span><span class="p">(</span><span class="n">pose_stamped_msg</span><span class="o">=</span><span class="n">pose_goal</span><span class="p">,</span> <span class="n">pose_link</span><span class="o">=</span><span class="n">profile</span><span class="o">.</span><span class="n">tip_link</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">arm</span><span class="o">.</span><span class="n">plan</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MoveItPy</span></code> is the robot: model, planning scene monitor, trajectory execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PlanningComponent</span></code> is one planning group.</p></li>
+<li><p>Goals: <code class="docutils literal notranslate"><span class="pre">configuration_name</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_state</span></code>, <code class="docutils literal notranslate"><span class="pre">pose_stamped_msg</span></code> + <code class="docutils literal notranslate"><span class="pre">pose_link</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">motion_plan_constraints</span></code>.</p></li>
+</ul>
+</section>
+<section id="choosing-a-planner">
+<h3>Choosing a planner<a class="headerlink" href="#choosing-a-planner" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">planners.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">moveit.planning</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiPipelinePlanRequestParameters</span><span class="p">,</span> <span class="n">PlanRequestParameters</span>
+
+<span class="n">arm</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">single_plan_parameters</span><span class="o">=</span><span class="n">PlanRequestParameters</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="s2">"pilz_ptp"</span><span class="p">))</span>
+
+<span class="c1"># several pipelines in parallel: the best solution is returned</span>
+<span class="n">multi</span> <span class="o">=</span> <span class="n">MultiPipelinePlanRequestParameters</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="p">[</span><span class="s2">"ompl_rrtc"</span><span class="p">,</span> <span class="s2">"pilz_ptp"</span><span class="p">,</span> <span class="s2">"stomp_planner"</span><span class="p">])</span>
+<span class="n">arm</span><span class="o">.</span><span class="n">plan</span><span class="p">(</span><span class="n">multi_plan_parameters</span><span class="o">=</span><span class="n">multi</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="planning-scene">
+<h3>Planning scene<a class="headerlink" href="#planning-scene" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">planning_scene.py</span></code>: MoveItPy edits its planning scene directly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_planning_scene_monitor</span><span class="p">()</span><span class="o">.</span><span class="n">read_write</span><span class="p">()</span> <span class="k">as</span> <span class="n">scene</span><span class="p">:</span>
+    <span class="n">scene</span><span class="o">.</span><span class="n">apply_collision_object</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>    <span class="c1"># moveit_msgs/CollisionObject</span>
+    <span class="n">scene</span><span class="o">.</span><span class="n">current_state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="ending-the-program">
+<h3>Ending the program<a class="headerlink" href="#ending-the-program" title="Link to this heading"></a></h3>
+<p>All examples end with <code class="docutils literal notranslate"><span class="pre">example_utils.shutdown()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">():</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On Jazzy, MoveItPy crashes (segmentation fault) when its objects are destroyed at exit
+(<a class="reference external" href="https://github.com/moveit/moveit2/issues/3721">moveit/moveit2#3721</a>). Exiting without running the
+destructors avoids it.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-5-write-your-own-script">
+<h2>Step 5: Write your own script<a class="headerlink" href="#step-5-write-your-own-script" title="Link to this heading"></a></h2>
+<p>Create a package next to <code class="docutils literal notranslate"><span class="pre">moveit_py_examples</span></code> (in <code class="docutils literal notranslate"><span class="pre">moveit_examples/</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>my_moveit_py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dependencies<span class="w"> </span>rclpy<span class="w"> </span>moveit_py<span class="w"> </span>moveit_py_examples<span class="w"> </span>geometry_msgs
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">my_moveit_py/my_moveit_py/square.py</span></code>: move the tool along the four sides of a square with Pilz LIN.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">geometry_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">PoseStamped</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moveit.planning</span><span class="w"> </span><span class="kn">import</span> <span class="n">MoveItPy</span><span class="p">,</span> <span class="n">PlanRequestParameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MoveToPoseDemo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">'move_to_pose_demo'</span><span class="p">)</span>
-        <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># ensure time is updated</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">robot</span> <span class="o">=</span> <span class="n">RobotCommander</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">PlanningSceneInterface</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="n">MoveGroupCommander</span><span class="p">(</span><span class="s1">'arm'</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_reference_frame</span><span class="p">(</span><span class="s1">'world'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_velocity_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_max_acceleration_scaling_factor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">move_to_ready_pose</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">move_to_ready_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">target_pose</span> <span class="o">=</span> <span class="n">PoseStamped</span><span class="p">()</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s1">'world'</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.4</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.4</span>
-        <span class="n">target_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">set_pose_target</span><span class="p">(</span><span class="n">target_pose</span><span class="p">)</span>
-        <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">clear_pose_targets</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Motion executed successfully!'</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Motion planning failed!'</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moveit_py_examples.example_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span><span class="p">,</span> <span class="n">move_to_named_state</span><span class="p">,</span> <span class="n">plan_and_execute</span><span class="p">,</span> <span class="n">shutdown</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-    <span class="n">node</span> <span class="o">=</span> <span class="n">MoveToPoseDemo</span><span class="p">()</span>
-    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">"square"</span><span class="p">)</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">load_profile</span><span class="p">()</span>                  <span class="c1"># config/robots/&lt;robot&gt;.yaml</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">MoveItPy</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s2">"moveit_py"</span><span class="p">)</span>
+    <span class="n">arm</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_planning_component</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">planning_group</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">move_to_named_state</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">arm</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">named_states</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">with</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_planning_scene_monitor</span><span class="p">()</span><span class="o">.</span><span class="n">read_only</span><span class="p">()</span> <span class="k">as</span> <span class="n">scene</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">current_state</span><span class="o">.</span><span class="n">get_pose</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">tip_link</span><span class="p">)</span>    <span class="c1"># in the model frame</span>
+
+    <span class="n">lin</span> <span class="o">=</span> <span class="n">PlanRequestParameters</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="s2">"pilz_lin"</span><span class="p">)</span>
+    <span class="n">side</span> <span class="o">=</span> <span class="mf">0.05</span>                                                    <span class="c1"># m</span>
+    <span class="k">for</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">side</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="n">side</span><span class="p">,</span> <span class="n">side</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">side</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)]:</span>
+        <span class="n">goal</span> <span class="o">=</span> <span class="n">PoseStamped</span><span class="p">()</span>
+        <span class="n">goal</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_robot_model</span><span class="p">()</span><span class="o">.</span><span class="n">model_frame</span>
+        <span class="n">goal</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
+        <span class="n">goal</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
+        <span class="n">goal</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span>
+        <span class="n">goal</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">orientation</span>
+        <span class="n">arm</span><span class="o">.</span><span class="n">set_start_state_to_current_state</span><span class="p">()</span>
+        <span class="n">arm</span><span class="o">.</span><span class="n">set_goal_state</span><span class="p">(</span><span class="n">pose_stamped_msg</span><span class="o">=</span><span class="n">goal</span><span class="p">,</span> <span class="n">pose_link</span><span class="o">=</span><span class="n">profile</span><span class="o">.</span><span class="n">tip_link</span><span class="p">)</span>
+        <span class="n">plan_and_execute</span><span class="p">(</span><span class="n">robot</span><span class="p">,</span> <span class="n">arm</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"corner (</span><span class="si">{</span><span class="n">dx</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">dy</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">single_plan_parameters</span><span class="o">=</span><span class="n">lin</span><span class="p">)</span>
+
+    <span class="n">shutdown</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Make it executable:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>moveit_python_demo/moveit_python_demo/move_to_pose.py
+<p>Register the script in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">"console_scripts"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"square = my_moveit_py.square:main"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">},</span>
 </pre></div>
 </div>
-</section>
-<hr class="docutils" />
-<section id="step-3-configure-the-package">
-<h2>Step 3: Configure the Package<a class="headerlink" href="#step-3-configure-the-package" title="Link to this heading"></a></h2>
-<section id="add-install-requires-to-setup-py">
-<h3>Add <code class="docutils literal notranslate"><span class="pre">install_requires</span></code> to <code class="docutils literal notranslate"><span class="pre">setup.py</span></code><a class="headerlink" href="#add-install-requires-to-setup-py" title="Link to this heading"></a></h3>
-<p>Make sure your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> includes:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'setuptools'</span><span class="p">],</span>
+<p>and add a launch file <code class="docutils literal notranslate"><span class="pre">my_moveit_py/launch/square.launch.py</span></code> that reuses the launch description of
+the examples (MoveIt parameters of the robot + robot profile):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">moveit_py_examples.launch_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_launch</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_launch_description</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">example_launch</span><span class="p">(</span><span class="s2">"square"</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">"my_moveit_py"</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="add-an-init-py">
-<h3>Add an <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code><a class="headerlink" href="#add-an-init-py" title="Link to this heading"></a></h3>
-<p>Create an empty <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>moveit_python_demo/moveit_python_demo/__init__.py
+<p>Install the launch directory with the package (<code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">data_files</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s2">"share/"</span> <span class="o">+</span> <span class="n">package_name</span> <span class="o">+</span> <span class="s2">"/launch"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"launch/square.launch.py"</span><span class="p">]),</span>
 </pre></div>
 </div>
-</section>
-<section id="update-package-xml">
-<h3>Update <code class="docutils literal notranslate"><span class="pre">package.xml</span></code><a class="headerlink" href="#update-package-xml" title="Link to this heading"></a></h3>
-<p>Make sure your <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> includes the correct dependencies:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;exec_depend&gt;</span>moveit_commander<span class="nt">&lt;/exec_depend&gt;</span>
-<span class="nt">&lt;exec_depend&gt;</span>rclpy<span class="nt">&lt;/exec_depend&gt;</span>
-<span class="nt">&lt;exec_depend&gt;</span>geometry_msgs<span class="nt">&lt;/exec_depend&gt;</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="step-4-build-and-run-the-package">
-<h2>Step 4: Build and Run the Package<a class="headerlink" href="#step-4-build-and-run-the-package" title="Link to this heading"></a></h2>
-<p>Build your workspace:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_moveit2
-colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>moveit_python_demo
+<p>Build and run it, natively (with <code class="docutils literal notranslate"><span class="pre">ros-jazzy-moveit-py</span></code> and the robot packages in the workspace):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-up-to<span class="w"> </span>my_moveit_py
 <span class="nb">source</span><span class="w"> </span>install/setup.bash
+ros2<span class="w"> </span>launch<span class="w"> </span>my_moveit_py<span class="w"> </span>square.launch.py<span class="w"> </span>robot:<span class="o">=</span>piper
 </pre></div>
 </div>
-<p>Launch the robot simulation (if not already running):</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>panda_moveit_config<span class="w"> </span>demo.launch.py
+<p>or in the examples container, with your package mounted next to the examples of the image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>moveit_examples/docker
+docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/../my_moveit_py:/ros2_ws/src/my_moveit_py"</span><span class="w"> </span>py_01_named_goal<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"colcon build --packages-select my_moveit_py &amp;&amp; source install/setup.bash \</span>
+<span class="s2">           &amp;&amp; ros2 launch my_moveit_py square.launch.py robot:=piper"</span>
 </pre></div>
 </div>
-<p>Run your Python move group script:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>moveit_python_demo<span class="w"> </span>move_to_pose
-</pre></div>
-</div>
-<p>You should see your robot arm move to the specified pose in RViz.</p>
+</section>
+<hr class="docutils" />
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">py_04_planners</span></code> on two different robots. Which planner gives the shortest trajectory? Run it
+twice: which planners give the same result each time?</p></li>
+<li><p>In your <code class="docutils literal notranslate"><span class="pre">square.py</span></code>, use the default plan request (OMPL) instead of <code class="docutils literal notranslate"><span class="pre">pilz_lin</span></code>. What changes?</p></li>
+<li><p>Add a box obstacle in the middle of the square (see <code class="docutils literal notranslate"><span class="pre">planning_scene.py</span></code>) and plan the square with
+OMPL, then with Pilz LIN. Why does Pilz fail?</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">MultiPipelinePlanRequestParameters</span></code> with <code class="docutils literal notranslate"><span class="pre">[&quot;ompl_rrtc&quot;,</span> <span class="pre">&quot;pilz_ptp&quot;]</span></code> for the moves between
+the corners. Which pipeline wins?</p></li>
+<li><p>Compare <code class="docutils literal notranslate"><span class="pre">py_07_cartesian_path</span></code> with <code class="docutils literal notranslate"><span class="pre">mgi_07_cartesian_path</span></code>: which MoveIt interface does each one use?</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Cause and fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Could</span> <span class="pre">not</span> <span class="pre">find</span> <span class="pre">parameter</span> <span class="pre">robot_description</span> <span class="pre">and</span> <span class="pre">did</span> <span class="pre">not</span> <span class="pre">receive</span> <span class="pre">robot_description</span> <span class="pre">via</span> <span class="pre">std_msgs::msg::String</span> <span class="pre">subscription</span></code></p></td>
+<td><p>The robot bringup is not running, or another <code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code> / <code class="docutils literal notranslate"><span class="pre">RMW_IMPLEMENTATION</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Planning</span> <span class="pre">plugin</span> <span class="pre">name</span> <span class="pre">is</span> <span class="pre">empty</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">defined</span> <span class="pre">in</span> <span class="pre">namespace</span> <span class="pre">'chomp'</span></code></p></td>
+<td><p>A named plan request in <code class="docutils literal notranslate"><span class="pre">moveit_py.yaml</span></code> uses the name of a pipeline (<code class="docutils literal notranslate"><span class="pre">chomp</span></code>, <code class="docutils literal notranslate"><span class="pre">ompl</span></code>, …): rename it</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CheckStartStateCollision</span> <span class="pre">failed,</span> <span class="pre">because</span> <span class="pre">'…</span> <span class="pre">contact(s)</span> <span class="pre">detected'</span></code></p></td>
+<td><p>The robot starts in collision: objects in the scene, or SRDF collision pairs missing for links of the URDF</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">acceleration</span> <span class="pre">limit</span> <span class="pre">of</span> <span class="pre">…</span> <span class="pre">violated</span></code> (Pilz)</p></td>
+<td><p>Pilz checks the joint limits along the line: lower the scaling factors of the plan request</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Execution</span> <span class="pre">failed!</span> <span class="pre">No</span> <span class="pre">active</span> <span class="pre">controllers</span> <span class="pre">configured</span> <span class="pre">for</span> <span class="pre">group</span> <span class="pre">''</span></code></p></td>
+<td><p>A trajectory without planning group: set <code class="docutils literal notranslate"><span class="pre">trajectory.joint_model_group_name</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Segmentation fault at the end of the program</p></td>
+<td><p>MoveItPy teardown bug on Jazzy: end with <code class="docutils literal notranslate"><span class="pre">os._exit(0)</span></code> after <code class="docutils literal notranslate"><span class="pre">rclpy.shutdown()</span></code> (see Step 4)</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <hr class="docutils" />
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
-<p>You have now:</p>
 <ul class="simple">
-<li><p>Created a Python ROS 2 package.</p></li>
-<li><p>Implemented a motion planning script using MoveIt Commander.</p></li>
-<li><p>Configured and launched a robot demo.</p></li>
-<li><p>Executed a pose target command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> does not exist in ROS 2; MoveItPy runs MoveIt <strong>inside</strong> your Python process.</p></li>
+<li><p>A MoveItPy node needs the MoveIt parameters of the robot (<code class="docutils literal notranslate"><span class="pre">MoveItConfigsBuilder</span></code>) and the MoveItPy
+settings (<code class="docutils literal notranslate"><span class="pre">moveit_py.yaml</span></code>); the URDF can come from the topic of the robot bringup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PlanningComponent</span></code>: set the start state and the goal, plan, execute.</p></li>
+<li><p>Plan request parameters select the pipeline and the planner; several pipelines can plan in parallel.</p></li>
+<li><p>The planning scene of MoveItPy is local to your process.</p></li>
 </ul>
-<p>Feel free to expand the script to include waypoints, cartesian motions, or object collision handling!</p>
 </section>
 </section>
 

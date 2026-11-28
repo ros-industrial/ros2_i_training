@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #E8EEF5; stroke: #0D355F; stroke-width: 1.5; }
+    .ext { fill: #F4F4F4; stroke: #777; stroke-width: 1.2; }
+    .t { font-size: 13px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .s { font-size: 11px; fill: #333; text-anchor: middle; }
+    .lbl { font-size: 11px; fill: #555; text-anchor: middle; }
+    .ln { stroke: #0D355F; stroke-width: 1.5; fill: none; }
+  </style>
+
+  <!-- Parameters -->
+  <rect x="320" y="6" width="360" height="48" rx="6" class="ext"/>
+  <text x="500" y="25" class="t">Parameters (MoveItConfigsBuilder)</text>
+  <text x="500" y="43" class="s">URDF · SRDF · kinematics · joint limits · pipelines · controllers</text>
+  <line x1="500" y1="54" x2="500" y2="78" class="ln" marker-end="url(#a)"/>
+
+  <!-- Your application -->
+  <rect x="10" y="80" width="210" height="335" rx="10" fill="none" stroke="#777" stroke-dasharray="6 4"/>
+  <text x="115" y="102" class="t">Your application</text>
+  <rect x="25" y="115" width="180" height="56" rx="6" class="ext"/>
+  <text x="115" y="139" class="t">RViz MotionPlanning</text>
+  <text x="115" y="157" class="s">plugin</text>
+  <rect x="25" y="185" width="180" height="56" rx="6" class="ext"/>
+  <text x="115" y="209" class="t">MoveGroupInterface</text>
+  <text x="115" y="227" class="s">C++ client in your node</text>
+  <rect x="25" y="255" width="180" height="56" rx="6" class="ext"/>
+  <text x="115" y="279" class="t">Task Constructor</text>
+  <text x="115" y="297" class="s">MTC</text>
+  <rect x="25" y="325" width="180" height="56" rx="6" class="ext"/>
+  <text x="115" y="349" class="t">Any ROS 2 node</text>
+  <text x="115" y="367" class="s">actions · services · topics</text>
+
+  <text x="260" y="128" class="lbl">ROS 2</text>
+  <text x="260" y="142" class="lbl">interfaces</text>
+  <line x1="205" y1="160" x2="298" y2="160" class="ln" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="205" y1="213" x2="298" y2="213" class="ln" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="205" y1="283" x2="298" y2="283" class="ln" marker-start="url(#a)" marker-end="url(#a)"/>
+  <line x1="205" y1="353" x2="298" y2="353" class="ln" marker-start="url(#a)" marker-end="url(#a)"/>
+
+  <!-- move_group -->
+  <rect x="300" y="80" width="400" height="335" rx="10" fill="#FDF6E3" stroke="#0D355F" stroke-width="2"/>
+  <text x="500" y="102" class="t" font-size="16">move_group node</text>
+
+  <rect x="315" y="113" width="370" height="54" rx="6" class="box"/>
+  <text x="500" y="131" class="t">Capabilities (plugins)</text>
+  <text x="500" y="147" class="s">move_action · execute_trajectory · plan_kinematic_path</text>
+  <text x="500" y="161" class="s">compute_ik · compute_cartesian_path · apply_planning_scene …</text>
+
+  <rect x="315" y="178" width="370" height="96" rx="6" class="box"/>
+  <text x="500" y="195" class="t">Planning pipeline (one per planner library)</text>
+  <rect x="325" y="205" width="90" height="60" rx="5" fill="#fff" stroke="#0D355F"/>
+  <text x="370" y="228" class="s">Request</text>
+  <text x="370" y="243" class="s">adapters</text>
+  <line x1="415" y1="235" x2="428" y2="235" class="ln" marker-end="url(#a)"/>
+  <rect x="430" y="205" width="150" height="60" rx="5" fill="#fff" stroke="#C2232B" stroke-width="1.5"/>
+  <text x="505" y="222" class="t" fill="#C2232B" style="fill:#C2232B">Planner plugin</text>
+  <text x="505" y="238" class="s">OMPL · Pilz</text>
+  <text x="505" y="253" class="s">CHOMP · STOMP</text>
+  <line x1="580" y1="235" x2="593" y2="235" class="ln" marker-end="url(#a)"/>
+  <rect x="595" y="205" width="80" height="60" rx="5" fill="#fff" stroke="#0D355F"/>
+  <text x="635" y="222" class="s">Response</text>
+  <text x="635" y="237" class="s">adapters</text>
+  <text x="635" y="253" class="s">(timing)</text>
+
+  <rect x="315" y="285" width="180" height="54" rx="6" class="box"/>
+  <text x="405" y="307" class="t">Kinematics plugin</text>
+  <text x="405" y="325" class="s">KDL · pick_ik · TRAC-IK</text>
+  <rect x="505" y="285" width="180" height="54" rx="6" class="box"/>
+  <text x="595" y="307" class="t">Planning Scene Monitor</text>
+  <text x="595" y="325" class="s">robot state · objects · ACM</text>
+
+  <rect x="315" y="350" width="180" height="54" rx="6" class="box"/>
+  <text x="405" y="372" class="t">Collision checking</text>
+  <text x="405" y="390" class="s">FCL · Bullet</text>
+  <rect x="505" y="350" width="180" height="54" rx="6" class="box"/>
+  <text x="595" y="372" class="t">Trajectory Execution</text>
+  <text x="595" y="390" class="s">Manager</text>
+
+  <!-- Inputs and controllers -->
+  <rect x="770" y="270" width="220" height="74" rx="6" class="ext"/>
+  <text x="880" y="290" class="t">Robot &amp; world</text>
+  <text x="880" y="307" class="s">/joint_states · /tf</text>
+  <text x="880" y="322" class="s">point clouds · depth images</text>
+  <text x="880" y="337" class="s">collision objects</text>
+  <line x1="770" y1="312" x2="687" y2="312" class="ln" marker-end="url(#a)"/>
+
+  <rect x="770" y="354" width="220" height="61" rx="6" class="ext"/>
+  <text x="880" y="373" class="t">ros2_control</text>
+  <text x="880" y="390" class="s">FollowJointTrajectory action</text>
+  <text x="880" y="405" class="s">→ JointTrajectoryController</text>
+  <line x1="685" y1="377" x2="768" y2="384" class="ln" marker-end="url(#a)"/>
+</svg>

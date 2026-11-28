@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+  </defs>
+  <style>
+    .node { fill: #F4F4F4; stroke: #777; stroke-width: 1.2; }
+    .box { fill: #E8EEF5; stroke: #0D355F; stroke-width: 1.5; }
+    .buf { fill: #FDF6E3; stroke: #C2232B; stroke-width: 2; }
+    .t { font-size: 12px; font-weight: bold; fill: #0D355F; }
+    .tc { font-size: 12.5px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .sc { font-size: 10.5px; fill: #333; text-anchor: middle; }
+    .code { font-family: 'Source Code Pro', monospace; font-size: 11px; fill: #C2232B; text-anchor: middle; }
+    .ln { stroke: #0D355F; stroke-width: 1.4; fill: none; }
+  </style>
+
+  <!-- broadcaster node -->
+  <rect x="10" y="20" width="305" height="215" rx="8" class="node"/>
+  <text x="22" y="40" class="t">broadcasting node</text>
+  <rect x="25" y="110" width="130" height="54" rx="6" class="box"/>
+  <text x="90" y="133" class="tc">Transform</text>
+  <text x="90" y="150" class="tc">Broadcaster</text>
+  <line x1="155" y1="137" x2="173" y2="137" class="ln" marker-end="url(#a)"/>
+  <rect x="175" y="110" width="125" height="54" rx="6" class="box"/>
+  <text x="237" y="133" class="tc">Publisher</text>
+  <text x="237" y="151" class="code">TFMessage</text>
+
+  <!-- DDS -->
+  <line x1="300" y1="137" x2="343" y2="137" class="ln" marker-end="url(#a)"/>
+  <rect x="345" y="95" width="135" height="84" rx="30" fill="#FFFFFF" stroke="#0D355F" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="412" y="122" class="tc">DDS / RMW</text>
+  <text x="412" y="142" class="code">/tf</text>
+  <text x="412" y="160" class="code">/tf_static</text>
+  <line x1="480" y1="137" x2="518" y2="137" class="ln" marker-end="url(#a)"/>
+
+  <!-- listening node -->
+  <rect x="505" y="20" width="485" height="215" rx="8" class="node"/>
+  <text x="517" y="40" class="t">listening node (every node that needs transforms)</text>
+  <rect x="520" y="110" width="115" height="54" rx="6" class="box"/>
+  <text x="577" y="133" class="tc">Subscriber</text>
+  <text x="577" y="151" class="code">/tf, /tf_static</text>
+  <line x1="635" y1="137" x2="653" y2="137" class="ln" marker-end="url(#a)"/>
+  <rect x="655" y="110" width="125" height="54" rx="6" class="box"/>
+  <text x="717" y="133" class="tc">Transform</text>
+  <text x="717" y="150" class="tc">Listener</text>
+  <line x1="780" y1="137" x2="808" y2="137" class="ln" marker-end="url(#a)"/>
+  <rect x="810" y="100" width="165" height="74" rx="6" class="buf"/>
+  <text x="892" y="122" class="code" style="font-weight:bold">tf2_ros.Buffer</text>
+  <text x="892" y="141" class="sc">all edges of the tree,</text>
+  <text x="892" y="156" class="sc">timestamped history</text>
+  <text x="892" y="169" class="sc">(default 10 s)</text>
+
+  <rect x="810" y="45" width="165" height="34" rx="6" class="box"/>
+  <text x="892" y="67" class="tc">your code</text>
+  <line x1="892" y1="79" x2="892" y2="98" class="ln" marker-end="url(#a)"/>
+  <text x="884" y="93" class="code" style="text-anchor:end">lookup_transform()</text>
+  <text x="892" y="200" class="sc">computed from the local Buffer:</text>
+  <text x="892" y="215" class="sc">no request over the network</text>
+</svg>

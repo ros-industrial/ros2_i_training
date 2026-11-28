@@ -20,7 +20,7 @@ needs direct access to keyboard input.
 
 ## 2. Requirements
 
-Complete the [TF2 tutorial](../navigation/ROS2-TF2.md) first. This exercise
+Complete the [TF2 tutorial](ROS2-TF2.md) first. This exercise
 assumes that its Python package is named `tf2_workshop` and provides these
 executables:
 
