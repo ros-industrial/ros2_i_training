@@ -50,11 +50,10 @@ def export_workshops(day_dir, id, workshop):
 def export_pdf(config_yaml):
     with open(config_yaml,'r') as config_file:
         config = yaml.safe_load(config_file)
-    for day in config['export']:
-        day_id = "Day%s"%day['Day']
-        day_dir = os.path.join(export_dir, day_id)
-        os.makedirs(day_dir)
-        for id, slides in day['slides'].items():
-            export_slides(day_dir, id, slides)
+    for group in config['export']:
+        theme_dir = os.path.join(export_dir, group['Theme'])
+        os.makedirs(theme_dir)
+        for id, slides in group['slides'].items():
+            export_slides(theme_dir, id, slides)
 
 export_pdf(os.path.join(root_dir, "export_list.yaml"))

@@ -12,14 +12,14 @@ case "${HOST_UID}:${HOST_GID}" in
 esac
 
 awk '
-  $1 == "-" && $2 == "Day:" {
-    day = $3
+  $1 == "-" && $2 == "Theme:" {
+    theme = $3
     next
   }
-  day != "" && $1 ~ /^[0-9]+:$/ {
+  theme != "" && $1 ~ /^[0-9]+:$/ {
     slide_id = $1
     sub(/:$/, "", slide_id)
-    print day, slide_id, $2
+    print theme, slide_id, $2
   }
 ' /workspace/export_list.yaml > "${manifest}"
 
@@ -30,9 +30,9 @@ fi
 
 mkdir -p /output
 
-while read -r day slide_id html_path; do
+while read -r theme slide_id html_path; do
   input_path="/workspace/${html_path}"
-  output_dir="/output/Day${day}"
+  output_dir="/output/${theme}"
   filename="${html_path##*/}"
   deck_name="${filename%.html}"
   output_path="${output_dir}/${slide_id}_${deck_name}.pdf"

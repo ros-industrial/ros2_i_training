@@ -9,6 +9,7 @@
     main { max-width: 52rem; margin: 0 auto; padding: 2rem 1.25rem; }
     h1 { font-size: 2rem; line-height: 1.2; }
     h2 { font-size: 1.25rem; margin-top: 2rem; border-bottom: 1px solid #ddd; }
+    h3 { font-size: 1rem; margin: 1rem 0 0; color: #555; }
     a { color: #006b78; text-underline-offset: 0.2em; }
     a:hover { color: #923650; }
     a:focus-visible { outline: 2px solid #923650; outline-offset: 4px; }
@@ -24,17 +25,26 @@
       <li><a href="Basics/source/CLI.html">Command-line interface</a></li>
       <li><a href="Basics/source/filesystem.html">File system</a></li>
       <li><a href="Basics/source/Extended_Concepts.html">Extended concepts</a></li>
+      <li><a href="Basics/source/TF.html">Coordinate transforms (TF2): frames, broadcasters, listeners</a></li>
+      <li><a href="Basics/source/URDF.html">Robot description: URDF and xacro</a></li>
     </ul>
     <h2>Navigation</h2>
     <ul>
       <li><a href="Navigation/source/Basics.html">Navigation basics</a></li>
-      <li><a href="Navigation/source/TF.html">Coordinate transforms (TF)</a></li>
       <li><a href="Navigation/source/SLAM.html">SLAM</a></li>
       <li><a href="Navigation/source/Navigation2.html">Navigation2</a></li>
     </ul>
     <h2>Manipulation</h2>
     <ul>
-      <li><a href="Manipulation/source/moveit.html">MoveIt</a></li>
+      <li><a href="Manipulation/General/source/workspace_structure.html">Structuring a manipulation workspace: vendor packages, cell packages, composition</a></li>
+    </ul>
+    <h3>MoveIt</h3>
+    <ul>
+      <li><a href="Manipulation/MoveIt/source/moveit_overview.html">Overview: capabilities, architecture, execution, limitations</a></li>
+      <li><a href="Manipulation/MoveIt/source/moveit_configuration.html">Configuration and launch: Setup Assistant, config package, MoveItConfigsBuilder</a></li>
+      <li><a href="Manipulation/MoveIt/source/moveit_apis.html">Programming APIs: MoveGroupInterface vs MoveItPy</a></li>
+      <li><a href="Manipulation/MoveIt/source/moveit_planning.html">Motion planning in practice: planners, IK, constraints, scene, ACM</a></li>
+      <li><a href="Manipulation/MoveIt/source/moveit_task_constructor.html">MoveIt Task Constructor</a></li>
     </ul>
   </main>
 </body>

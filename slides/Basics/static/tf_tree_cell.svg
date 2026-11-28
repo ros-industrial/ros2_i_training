@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 395" font-family="Montserrat, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0D355F"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C2232B"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #E8EEF5; stroke: #0D355F; stroke-width: 1.5; }
+    .hl { fill: #FBE9EA; stroke: #C2232B; stroke-width: 2; }
+    .tc { font-family: 'Source Code Pro', monospace; font-size: 13px; font-weight: bold; fill: #0D355F; text-anchor: middle; }
+    .sc { font-size: 11px; fill: #333; text-anchor: middle; }
+    .s { font-size: 11px; fill: #333; }
+    .lbl { font-size: 10px; fill: #555; }
+    .st { stroke: #0D355F; stroke-width: 1.4; fill: none; stroke-dasharray: 6 4; }
+    .dy { stroke: #0D355F; stroke-width: 1.4; fill: none; }
+    .path { stroke: #C2232B; stroke-width: 3; fill: none; }
+  </style>
+  <line x1="300" y1="46.0" x2="110" y2="88.0" class="st" marker-end="url(#a)"/>
+  <line x1="300" y1="46.0" x2="300" y2="88.0" class="st" marker-end="url(#a)"/>
+  <line x1="300" y1="46.0" x2="490" y2="88.0" class="st" marker-end="url(#a)"/>
+  <text x="420.0" y="62.5" class="lbl">calibration</text>
+  <line x1="110" y1="121.0" x2="110" y2="163.0" class="dy" marker-end="url(#a)"/>
+  <text x="118.0" y="146.5" class="lbl">joints</text>
+  <line x1="490" y1="121.0" x2="490" y2="163.0" class="dy" marker-end="url(#a)"/>
+  <text x="498.0" y="146.5" class="lbl">perception</text>
+  <line x1="110" y1="196.0" x2="110" y2="238.0" class="dy" marker-end="url(#a)"/>
+  <line x1="110" y1="271.0" x2="110" y2="313.0" class="st" marker-end="url(#a)"/>
+  <text x="118.0" y="296.5" class="lbl">fixed</text>
+  <rect x="232.0" y="14.0" width="136" height="32" rx="16" class="box"/>
+  <text x="300" y="34.5" class="tc">world</text>
+  <rect x="42.0" y="89.0" width="136" height="32" rx="16" class="box"/>
+  <text x="110" y="109.5" class="tc">base_link</text>
+  <rect x="232.0" y="89.0" width="136" height="32" rx="16" class="box"/>
+  <text x="300" y="109.5" class="tc">table</text>
+  <rect x="422.0" y="89.0" width="136" height="32" rx="16" class="box"/>
+  <text x="490" y="109.5" class="tc">camera</text>
+  <rect x="42.0" y="164.0" width="136" height="32" rx="16" class="box"/>
+  <text x="110" y="184.5" class="tc">… arm links</text>
+  <rect x="422.0" y="164.0" width="136" height="32" rx="16" class="box"/>
+  <text x="490" y="184.5" class="tc">object</text>
+  <rect x="42.0" y="239.0" width="136" height="32" rx="16" class="box"/>
+  <text x="110" y="259.5" class="tc">flange</text>
+  <rect x="42.0" y="314.0" width="136" height="32" rx="16" class="box"/>
+  <text x="110" y="334.5" class="tc">gripper_tcp</text>
+  <line x1="250" y1="300" x2="290" y2="300" class="st"/><text x="298" y="304" class="s">/tf_static: fixed relationship</text>
+  <line x1="250" y1="325" x2="290" y2="325" class="dy"/><text x="298" y="329" class="s">/tf: moves, published repeatedly</text>
+  <text x="250" y="360" class="s">arrows: parent → child (each frame has one parent)</text>
+</svg>
